@@ -1,5 +1,7 @@
 package com.infoshareacademy.menu;
 
+import com.infoshareacademy.userInput.UserInput;
+
 public class TeacherEditorMenu {
 
     public static void show () {
