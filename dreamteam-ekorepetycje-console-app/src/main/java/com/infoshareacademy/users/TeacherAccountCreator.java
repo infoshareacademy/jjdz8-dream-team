@@ -14,7 +14,7 @@ public class TeacherAccountCreator {
         Subjects subjects = ObjectFromJsonCreator.create(new Subjects(), "subjects.json");
 
         Teacher teacher = createTeacher();
-        Subject subject =  createSubject();
+        Subject subject = createSubject();
         subject.setTeacherId(teacher.getUuid());
 
         teachers.addTeacher(teacher);

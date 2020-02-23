@@ -23,7 +23,7 @@ public class Teachers {
     }
 
     public void addTeacher(Teacher... teachers) {
-        if (teachersList.size() == 0){
+        if (teachersList.size() == 0) {
             teachersList = new ArrayList<>();
         }
         for (Teacher teacher : teachers) {
@@ -57,8 +57,6 @@ public class Teachers {
 
         return false;
     }
-
-
 
 }
 

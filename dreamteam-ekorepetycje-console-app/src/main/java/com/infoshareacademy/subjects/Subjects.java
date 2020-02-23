@@ -8,7 +8,7 @@ public class Subjects {
 
     List<Subject> subjectsList;
 
-    public Subjects(Subject...subjects) {
+    public Subjects(Subject... subjects) {
         this.subjectsList = Arrays.asList(subjects);
     }
 
@@ -21,10 +21,10 @@ public class Subjects {
     }
 
     public void addSubject(Subject... subjects) {
-        if (subjectsList.size() == 0){
+        if (subjectsList.size() == 0) {
             subjectsList = new ArrayList<>();
         }
-        for (Subject subject:subjects) {
+        for (Subject subject : subjects) {
             subjectsList.add(subject);
         }
     }
@@ -36,7 +36,7 @@ public class Subjects {
     }
 
     public Subject getSubjectByName(String name, Subjects subjects) {
-        for (Subject subject: subjects.getSubjects()) {
+        for (Subject subject : subjects.getSubjects()) {
             if (subject.getName().equals(name)) {
                 return subject;
             }

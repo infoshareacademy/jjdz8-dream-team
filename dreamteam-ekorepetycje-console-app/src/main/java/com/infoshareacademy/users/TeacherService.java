@@ -3,8 +3,8 @@ package com.infoshareacademy.users;
 public class TeacherService {
 
     public void createTeacherAccount() {
-    TeacherAccountCreator account = new TeacherAccountCreator();
-    account.create();
+        TeacherAccountCreator account = new TeacherAccountCreator();
+        account.create();
     }
 
     public void editTeacherAccount() {
