@@ -11,12 +11,12 @@ public class TeacherService {
     public void showBestRatedTeachers() {
     }
 
-    public void editTeacherNickName(Teachers teachers) {
+    public void editTeacherNickName() {
     }
 
-    public void editTeachersSubjectNAme(Teachers teachers) {
+    public void editTeachersSubjectNAme() {
     }
 
-    public void editTeachersSubjectRange(Teachers teachers) {
+    public void editTeachersSubjectRange() {
     }
 }

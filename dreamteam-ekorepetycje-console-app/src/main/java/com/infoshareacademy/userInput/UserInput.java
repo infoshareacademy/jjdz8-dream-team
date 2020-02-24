@@ -16,6 +16,7 @@ public class UserInput {
                 System.out.println("Incorrect format. Please try again");
             }
         }
+
         return userChoice;
     }
 
