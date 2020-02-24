@@ -2,25 +2,18 @@ package com.infoshareacademy.menu;
 
 public class MainMenu {
 
-    static String menu = "Main menu";
+    public static final  String menu = "Main menu";
 
-    static String[] menuOptions = {"1. Teacher! Enter your data","2. Change your data",
-            "3. Searching for subject tutoring", "4. Show teacher ranking "};
-
-    public MainMenu() {
-        showMenu();
-    }
+    static String[] menuOptions = {"Teacher! Enter your data", "Change your data",
+            "Searching for subject tutoring", "Show teacher ranking "};
 
     public static void showMenu() {
         System.out.println("---------------------------------");
-        System.out.println("------------"+menu+"------------");
+        System.out.println("------------" + menu + "------------");
         System.out.println("---------------------------------");
-        for (String option : menuOptions) {
-            System.out.println(option);
+        for (int i = 0; i < menuOptions.length; i++) {
+            System.out.println(i + 1 + ". " + menuOptions[i]);
         }
         System.out.println("---------------------------------");
     }
-
-
-
 }

@@ -8,11 +8,9 @@ import com.infoshareacademy.users.Teachers;
 
 public class MenuService {
 
-    private static final String DB_NAME = "users";
-    public static final Integer maxMenuRange = 4;
     private static Integer userChoice;
 
-    public static int uploadCorrectUserInput() {
+    public static int uploadCorrectUserInput(int maxMenuRange) {
         System.out.println("Please choose what do you want to do");
         userChoice = UserInput.upLoadInt();
         while (userChoice < 1 || userChoice > maxMenuRange) {

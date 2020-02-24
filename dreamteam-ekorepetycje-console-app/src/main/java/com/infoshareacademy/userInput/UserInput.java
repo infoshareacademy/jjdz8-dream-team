@@ -5,11 +5,13 @@ import java.util.Scanner;
 public class UserInput {
 
     public static int upLoadInt() {
-        Integer userChoice = 0;
-        while (userChoice == 0) {
+        int userChoice = 0;
+        boolean isCorrect = false;
+        while (isCorrect == false) {
             try {
                 Scanner scanner = new Scanner(System.in);
                 userChoice = scanner.nextInt();
+                isCorrect = true;
             } catch (Exception e) {
                 System.out.println("Incorrect format. Please try again");
             }
