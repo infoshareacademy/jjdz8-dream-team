@@ -31,26 +31,11 @@ public class Teachers {
         }
     }
 
-    public void printTeachers() {
-        for (Teacher teacher : this.teachersList) {
-            System.out.println(teacher);
-        }
-    }
-
-    public Teacher getTeacherByName(String name, Teachers teachers) {
-        for (Teacher teacher : teachers.getTeachers()) {
-            if (teacher.getNickName().equals(name)) {
-                return teacher;
-            }
-        }
-
-        return null;
-    }
-
     public static boolean teacherAlreadyExist(String nickName) {
         Teachers teachers = JsonReader.create(new Teachers(), "users.json");
         for (Teacher teacher : teachers.getTeachers()) {
             if (teacher.getNickName().equals(nickName)) {
+                System.out.println("NickName already exist, please try again");
                 return true;
             }
         }

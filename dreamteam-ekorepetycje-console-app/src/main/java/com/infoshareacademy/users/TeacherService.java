@@ -4,8 +4,10 @@ public class TeacherService {
 
     public void createTeacherAccount() {
         TeacherAccountCreator account = new TeacherAccountCreator();
-        account.create();
+        account.createTeacherAccount();
     }
+
+
 
     public void editTeacherAccount() {
     }
