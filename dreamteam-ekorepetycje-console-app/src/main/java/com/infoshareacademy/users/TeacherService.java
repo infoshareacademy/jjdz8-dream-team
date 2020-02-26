@@ -7,11 +7,6 @@ public class TeacherService {
         account.createTeacherAccount();
     }
 
-
-
-    public void editTeacherAccount() {
-    }
-
     public void showBestRatedTeachers() {
     }
 

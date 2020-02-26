@@ -4,15 +4,7 @@ public class TeacherFactory {
 
     private Teacher teacher;
 
-    public Teacher getTeacher() {
-        return teacher;
-    }
-
-    public void setTeacher(Teacher teacher) {
-        this.teacher = teacher;
-    }
-
-    public Teacher make (String nickname) {
+    public Teacher make(String nickname) {
         this.teacher = new Teacher();
         this.teacher.setUuid();
         this.teacher.setPassword();

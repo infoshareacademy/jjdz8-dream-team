@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.UUID;
 
 public class Subject {
-    private UUID uuid;
+    private UUID id;
 
     private UUID teacherId;
 
@@ -15,10 +15,6 @@ public class Subject {
     private String[] range;
 
     boolean isVideo;
-
-    public void setUuid(UUID uuid) {
-        this.uuid = uuid;
-    }
 
     public void setTeacherId(UUID teacherId) {
         this.teacherId = teacherId;
@@ -36,43 +32,15 @@ public class Subject {
         this.range = range;
     }
 
-    public void setVideo(boolean video) {
-        isVideo = video;
-    }
-
-    public UUID getTeacherId() {
-        return teacherId;
-    }
-
     public void setUuid() {
-        uuid = UUID.randomUUID();
+        id = UUID.randomUUID();
 
-    }
-
-    public UUID getUuid() {
-        return this.uuid;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getTopic() {
-        return topic;
-    }
-
-    public String[] getRange() {
-        return range;
-    }
-
-    public boolean isVideo() {
-        return isVideo;
     }
 
     @Override
     public String toString() {
         return "Subject{" +
-                "id=" + uuid +
+                "id=" + id +
                 ", teacherId=" + teacherId +
                 ", name='" + name + '\'' +
                 ", topic='" + topic + '\'' +

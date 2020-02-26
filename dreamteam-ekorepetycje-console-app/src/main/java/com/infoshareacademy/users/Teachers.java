@@ -14,10 +14,6 @@ public class Teachers {
         this.teachersList = Arrays.asList(teachers);
     }
 
-    public void setTeacher(Teacher teacher) {
-        this.teachersList.add(teacher);
-    }
-
     public List<Teacher> getTeachers() {
         return teachersList;
     }
@@ -42,7 +38,6 @@ public class Teachers {
 
         return false;
     }
-
 }
 
 

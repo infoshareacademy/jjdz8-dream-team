@@ -7,7 +7,6 @@ public class MenuService {
     public void appStart() {
         MenuAppearance.showMainMenu();
         MenuOption.chooseOptionMainMenu();
-        exitApplication();
     }
 
     public void exitApplication() {
@@ -16,10 +15,11 @@ public class MenuService {
         while (!choice.equalsIgnoreCase("yes") || !choice.equalsIgnoreCase("no")) {
             if (choice.equalsIgnoreCase("yes")) {
                 System.out.println("see you next time");
-                break;
+                return;
             }
             if (choice.equalsIgnoreCase("No")) {
                 returnToMainMenu();
+                return;
 
             } else {
                 System.out.println("please enter yes/no");

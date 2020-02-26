@@ -1,53 +1,45 @@
 package com.infoshareacademy.users;
 
 import com.infoshareacademy.userInput.UserInput;
+import com.infoshareacademy.userOutput.CommandPrinter;
 
 import java.util.UUID;
 
 public class Teacher {
+
     private String password;
 
-    private UUID uuid;
+    private UUID id;
 
     private String nickName;
 
     private double averageRating;
 
-    public String getPassword() {
-        return password;
-    }
-
     public void setPassword() {
-        printPasswordRules();
-
+        CommandPrinter.printPasswordRules();
         String password = UserInput.uploadString();
-        while (!isCorrectPassword(password)){
+        while (!isCorrectPassword(password)) {
             System.out.println("Incorrect format, please try again");
             password = UserInput.uploadString();
         }
         this.password = password;
 
     }
-    private boolean isCorrectPassword(String password) {
-        return password.matches("((?=.*[a-z])(?=.*\\d)(?=.*[A-Z])(?=.*[@#$%!]).{8,10})");
+
+    private boolean isCorrectPassword(String userPassword) {
+        return userPassword.matches("((?=.*[a-z])(?=.*\\d)(?=.*[A-Z])(?=.*[@#$%!]).{8,10})");
     }
-    private void printPasswordRules (){
-        System.out.println("Please enter new password: Be between 8 and 10 characters long\n" +
-                "Contain at least one digit.\n" +
-                "Contain at least one lower case character.\n" +
-                "Contain at least one upper case character.\n" +
-                "Contain at least on special character from [ @ # $ % ! . ].");
-    }
+
     public void setUuid() {
-        uuid = UUID.randomUUID();
+        id = UUID.randomUUID();
     }
 
     public void setNickName(String nickName) {
         this.nickName = nickName;
     }
 
-    public UUID getUuid() {
-        return uuid;
+    public UUID getId() {
+        return id;
     }
 
     public String getNickName() {
@@ -65,7 +57,7 @@ public class Teacher {
     @Override
     public String toString() {
         return "Teacher{" +
-                "id=" + uuid +
+                "id=" + id +
                 ", nickName='" + nickName + '\'' +
                 '}';
     }
