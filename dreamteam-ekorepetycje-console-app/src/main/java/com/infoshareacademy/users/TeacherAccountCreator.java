@@ -1,7 +1,7 @@
 package com.infoshareacademy.users;
 
-import com.infoshareacademy.FileSaver.JsonCreator;
-import com.infoshareacademy.FileSaver.ObjectFromJsonCreator;
+import com.infoshareacademy.fileOperations.JsonReader;
+import com.infoshareacademy.fileOperations.JsonSaver;
 import com.infoshareacademy.subjects.Subject;
 import com.infoshareacademy.subjects.Subjects;
 import com.infoshareacademy.userInput.UserInput;
@@ -10,18 +10,18 @@ public class TeacherAccountCreator {
 
 
     public void create() {
-        Teachers teachers = ObjectFromJsonCreator.create(new Teachers(), "users.json");
-        Subjects subjects = ObjectFromJsonCreator.create(new Subjects(), "subjects.json");
+        Teachers teachers = JsonReader.create(new Teachers(), "users.json");
+        Subjects subjects = JsonReader.create(new Subjects(), "subjects.json");
 
         Teacher teacher = createTeacher();
         Subject subject = createSubject();
         subject.setTeacherId(teacher.getUuid());
 
         teachers.addTeacher(teacher);
-        JsonCreator.createJson(teachers, "users.json");
+        JsonSaver.createJson(teachers, "users.json");
 
         subjects.addSubject(subject);
-        JsonCreator.createJson(subjects, "subjects.json");
+        JsonSaver.createJson(subjects, "subjects.json");
     }
 
     public Teacher createTeacher() {

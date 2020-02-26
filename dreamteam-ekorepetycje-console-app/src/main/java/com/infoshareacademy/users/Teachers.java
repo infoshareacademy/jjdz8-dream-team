@@ -1,6 +1,6 @@
 package com.infoshareacademy.users;
 
-import com.infoshareacademy.FileSaver.ObjectFromJsonCreator;
+import com.infoshareacademy.fileOperations.JsonReader;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -48,7 +48,7 @@ public class Teachers {
     }
 
     public static boolean teacherAlreadyExist(String nickName) {
-        Teachers teachers = ObjectFromJsonCreator.create(new Teachers(), "users.json");
+        Teachers teachers = JsonReader.create(new Teachers(), "users.json");
         for (Teacher teacher : teachers.getTeachers()) {
             if (teacher.getNickName().equals(nickName)) {
                 return true;
