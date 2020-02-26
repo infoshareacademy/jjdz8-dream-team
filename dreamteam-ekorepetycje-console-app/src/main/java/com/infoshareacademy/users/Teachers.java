@@ -8,22 +8,15 @@ import java.util.List;
 
 public class Teachers {
 
-    List<Teacher> teachersList;
-
-    public Teachers(Teacher... teachers) {
-        this.teachersList = Arrays.asList(teachers);
-    }
+    private List<Teacher> teachersList = new ArrayList<>();
 
     public List<Teacher> getTeachers() {
         return teachersList;
     }
 
     public void addTeacher(Teacher... teachers) {
-        if (teachersList.size() == 0) {
-            teachersList = new ArrayList<>();
-        }
         for (Teacher teacher : teachers) {
-            teachersList.add(teacher);
+            this.teachersList.add(teacher);
         }
     }
 
@@ -32,6 +25,7 @@ public class Teachers {
         for (Teacher teacher : teachers.getTeachers()) {
             if (teacher.getNickName().equals(nickName)) {
                 System.out.println("NickName already exist, please try again");
+
                 return true;
             }
         }

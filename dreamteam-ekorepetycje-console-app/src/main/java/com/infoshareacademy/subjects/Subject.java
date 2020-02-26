@@ -14,7 +14,15 @@ public class Subject {
 
     private String[] range;
 
-    boolean isVideo;
+    private boolean isVideo;
+
+    public boolean isVideo() {
+        return isVideo;
+    }
+
+    public void setVideo(boolean video) {
+        isVideo = video;
+    }
 
     public void setTeacherId(UUID teacherId) {
         this.teacherId = teacherId;

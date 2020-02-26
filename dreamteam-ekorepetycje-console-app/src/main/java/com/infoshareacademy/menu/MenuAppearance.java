@@ -13,22 +13,22 @@ public class MenuAppearance {
             "Add new subject "};
 
     public static void showMainMenu() {
-        System.out.println("---------------------------------");
-        System.out.println("------------" + menu + "------------");
-        System.out.println("---------------------------------");
+        System.out.println("************************************");
+        System.out.println("            " + menu );
+        System.out.println("************************************");
         for (int i = 0; i < mainMenuOptions.length; i++) {
             System.out.println(i + 1 + ". " + mainMenuOptions[i]);
         }
-        System.out.println("---------------------------------");
+        System.out.println("*************************************");
     }
 
     public static void showDataEditMenu() {
-        System.out.println("------------------------------------------------");
-        System.out.println("-------------" + dataEditMenu + "------------------");
-        System.out.println("------------------------------------------------");
+        System.out.println("***************************************");
+        System.out.println("            " + dataEditMenu);
+        System.out.println("***************************************");
         for (int i = 0; i < editMenuOptions.length; i++) {
             System.out.println(i + 1 + ". " + editMenuOptions[i]);
         }
-        System.out.println("------------------------------------------------");
+        System.out.println("****************************************");
     }
 }

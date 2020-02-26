@@ -10,7 +10,7 @@ public class MenuService {
     }
 
     public void exitApplication() {
-        System.out.println("Do you want exit application? Yes/No");
+        System.out.println("Do you really want exit application? Yes/No");
         String choice = UserInput.uploadString();
         while (!choice.equalsIgnoreCase("yes") || !choice.equalsIgnoreCase("no")) {
             if (choice.equalsIgnoreCase("yes")) {

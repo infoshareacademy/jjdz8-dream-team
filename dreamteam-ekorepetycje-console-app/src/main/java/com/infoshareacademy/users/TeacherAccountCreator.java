@@ -36,21 +36,25 @@ public class TeacherAccountCreator {
 
 
     private void decideToEnterSubject(UUID teacherId) {
+        System.out.println("***********************************");
         System.out.println("Do you want enter subject? Yes/No");
+        System.out.println("***********************************");
+
         String choice = UserInput.uploadString();
         while (!choice.equalsIgnoreCase("yes") || !choice.equalsIgnoreCase("no")) {
             if (choice.equalsIgnoreCase("yes")) {
                 addSubjectForTeacher(teacherId);
+
                 return;
             }
             if (choice.equalsIgnoreCase("No")) {
                 returnToMainMenu();
-                return;
 
-            } else {
-                System.out.println("please enter yes/no");
-                choice = UserInput.uploadString();
+                return;
             }
+
+            System.out.println("please enter yes/no");
+            choice = UserInput.uploadString();
         }
     }
 

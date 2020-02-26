@@ -5,15 +5,15 @@ import java.util.List;
 
 public class Subjects {
 
-    List<Subject> subjectsList;
+    private List<Subject> subjectsList = new ArrayList<>();
 
     public void addSubject(Subject... subjects) {
-        if (subjectsList.size() == 0) {
-            subjectsList = new ArrayList<>();
-        }
         for (Subject subject : subjects) {
-            subjectsList.add(subject);
+            this.subjectsList.add(subject);
         }
     }
 
+    public List<Subject> getSubjectsList() {
+        return subjectsList;
+    }
 }
