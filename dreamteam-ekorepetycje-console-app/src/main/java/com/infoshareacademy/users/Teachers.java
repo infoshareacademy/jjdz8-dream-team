@@ -11,7 +11,7 @@ public class Teachers {
     private List<Teacher> teachersList = new ArrayList<>();
 
     public List<Teacher> getTeachers() {
-        return teachersList;
+        return this.teachersList;
     }
 
     public void addTeacher(Teacher... teachers) {
@@ -22,7 +22,7 @@ public class Teachers {
         Teachers teachers = JsonReader.create(new Teachers(), "users.json");
         for (Teacher teacher : teachers.getTeachers()) {
             if (teacher.getNickName().equals(nickName)) {
-                System.out.println("NickName already exist, please try again");
+
 
                 return true;
             }
@@ -30,6 +30,8 @@ public class Teachers {
 
         return false;
     }
+
+
 }
 
 

@@ -1,0 +1,22 @@
+{
+  "teachersList": [
+    {
+      "password": "Kamila90!@",
+      "id": "9595f463-a41b-4180-b1af-26fb40596a24",
+      "nickName": "",
+      "averageRating": 0.0
+    },
+    {
+      "password": "Dawid90@",
+      "id": "1f2ca046-0dc7-4d81-9876-afc2de65265f",
+      "nickName": "Adam",
+      "averageRating": 0.0
+    },
+    {
+      "password": "Kamila90@",
+      "id": "5786cf2d-e818-436e-b44f-c67eab0b3546",
+      "nickName": "kamilaformela@gmail.com",
+      "averageRating": 0.0
+    }
+  ]
+}

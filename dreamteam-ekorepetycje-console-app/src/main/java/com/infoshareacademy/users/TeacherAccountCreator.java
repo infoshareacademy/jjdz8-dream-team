@@ -34,6 +34,7 @@ public class TeacherAccountCreator {
         System.out.println("Enter Nickname");
         do {
             nickName = UserInput.uploadString();
+            System.out.println("NickName already exist, please try again");
         } while (Teachers.teacherAlreadyExist(nickName));
 
 

@@ -1,0 +1,25 @@
+{
+  "subjectsList": [
+    {
+      "id": "5ec76ebe-c2b8-4f73-a677-b3f4b9c61819",
+      "teacherId": "9595f463-a41b-4180-b1af-26fb40596a24",
+      "name": "historia",
+      "topic": "swiat",
+      "range": [
+        "wojny",
+        "podroze"
+      ],
+      "isVideo": false
+    },
+    {
+      "id": "76ad4b88-6c5e-4f0d-b5a2-3c8fe61592ef",
+      "teacherId": "1f2ca046-0dc7-4d81-9876-afc2de65265f",
+      "name": "angielski",
+      "topic": "POldaf",
+      "range": [
+        "af"
+      ],
+      "isVideo": true
+    }
+  ]
+}

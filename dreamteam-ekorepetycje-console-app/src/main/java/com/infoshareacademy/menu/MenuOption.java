@@ -3,6 +3,9 @@ package com.infoshareacademy.menu;
 
 import com.infoshareacademy.subjects.SubjectService;
 import com.infoshareacademy.userInput.UserInput;
+import com.infoshareacademy.users.Teacher;
+import com.infoshareacademy.users.TeacherAccount;
+import com.infoshareacademy.users.TeacherAccountEditor;
 import com.infoshareacademy.users.TeacherService;
 
 public class MenuOption {
@@ -17,8 +20,8 @@ public class MenuOption {
                 break;
             }
             case 2: {
-                MenuAppearance.showDataEditMenu();
-                chooseDataToEdit();
+                teacherService.editTeacherAccount();
+
                 break;
             }
             case 3: {
@@ -36,20 +39,23 @@ public class MenuOption {
         }
     }
 
-    public static void chooseDataToEdit() {
+    public static void chooseDataToEdit(TeacherAccount account) {
         int userChoice = uploadCorrectUserInput(MenuAppearance.editMenuOptions.length);
-        TeacherService service = new TeacherService();
+        TeacherAccountEditor editor = new TeacherAccountEditor(account);
         switch (userChoice) {
             case 1: {
-                service.editTeacherNickName();
+                editor.editTeacherNickname(account);
                 break;
             }
-            case 2: {
-                service.editTeachersSubjectNAme();
-                break;
+            case 2 :{
+                editor.editTeacherPassword(account);
             }
             case 3: {
-                service.editTeachersSubjectRange();
+                editor.editTeachersSubjects(account);
+                break;
+            }
+            case 4: {
+                editor.addNewSubject(account);
                 break;
             }
         }

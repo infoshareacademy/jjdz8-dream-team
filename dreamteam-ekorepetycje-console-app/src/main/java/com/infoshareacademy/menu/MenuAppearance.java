@@ -9,7 +9,7 @@ public class MenuAppearance {
     public static String[] mainMenuOptions = {"Teacher! Enter your data", "Change your data",
             "Searching for subject tutoring", "Show teacher ranking ", "Exit application"};
 
-    public static String[] editMenuOptions = {"Edit nickname", "Edit subject",
+    public static String[] editMenuOptions = {"Edit nickname", "Edit password", "Edit subject",
             "Add new subject "};
 
     public static void showMainMenu() {

@@ -20,6 +20,14 @@ public class Teacher {
         this.nickName = nickName;
     }
 
+    public void setNickName(String nickName) {
+        this.nickName = nickName;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
     public void setPassword() {
         CommandPrinter.printPasswordRules();
         String password = UserInput.uploadString();
