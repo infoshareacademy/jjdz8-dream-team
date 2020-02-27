@@ -3,9 +3,8 @@ package com.infoshareacademy.users;
 public class TeacherService {
 
     public void createTeacherAccount() {
-    }
-
-    public void editTeacherAccount() {
+        TeacherAccountCreator account = new TeacherAccountCreator();
+        account.createTeacherAccount();
     }
 
     public void showBestRatedTeachers() {
@@ -19,4 +18,6 @@ public class TeacherService {
 
     public void editTeachersSubjectRange() {
     }
+
+
 }

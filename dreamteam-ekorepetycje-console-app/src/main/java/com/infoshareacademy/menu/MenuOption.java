@@ -29,6 +29,10 @@ public class MenuOption {
                 teacherService.showBestRatedTeachers();
                 break;
             }
+            case 5: {
+                MenuService menuService = new MenuService();
+                menuService.exitApplication();
+            }
         }
     }
 
