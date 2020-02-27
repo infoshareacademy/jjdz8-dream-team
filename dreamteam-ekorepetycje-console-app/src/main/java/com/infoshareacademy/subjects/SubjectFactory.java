@@ -24,12 +24,11 @@ public class SubjectFactory {
 
         System.out.println("Do you have video materials for this subject? enter yes/no");
         setIsVideo();
-
     }
 
     private void setIsVideo() {
         String choice = UserInput.uploadString();
-        while (!choice.equalsIgnoreCase("yes") || !choice.equalsIgnoreCase("no")) {
+        while (true) {
             if (choice.equalsIgnoreCase("yes")) {
                 this.subject.setVideo(true);
 

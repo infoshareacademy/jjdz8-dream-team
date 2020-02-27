@@ -23,15 +23,21 @@ public class TeacherAccountCreator {
     }
 
     private Teacher createTeacher() {
+        String teacherNickname = inputTeacherNickname();
+        Teacher teacher = new Teacher(teacherNickname);
+        teacher.setPassword();
+        return teacher;
+    }
+
+    private String inputTeacherNickname() {
         String nickName = "";
         System.out.println("Enter Nickname");
         do {
             nickName = UserInput.uploadString();
         } while (Teachers.teacherAlreadyExist(nickName));
 
-        TeacherFactory teacherFactory = new TeacherFactory();
 
-        return teacherFactory.make(nickName);
+        return nickName;
     }
 
 
@@ -41,7 +47,7 @@ public class TeacherAccountCreator {
         System.out.println("***********************************");
 
         String choice = UserInput.uploadString();
-        while (!choice.equalsIgnoreCase("yes") || !choice.equalsIgnoreCase("no")) {
+        while (true) {
             if (choice.equalsIgnoreCase("yes")) {
                 addSubjectForTeacher(teacherId);
 

@@ -15,9 +15,7 @@ public class Teachers {
     }
 
     public void addTeacher(Teacher... teachers) {
-        for (Teacher teacher : teachers) {
-            this.teachersList.add(teacher);
-        }
+        this.teachersList.addAll(Arrays.asList(teachers));
     }
 
     public static boolean teacherAlreadyExist(String nickName) {

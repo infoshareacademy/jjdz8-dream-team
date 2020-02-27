@@ -15,6 +15,11 @@ public class Teacher {
 
     private double averageRating;
 
+    public Teacher(String nickName) {
+        this.id = UUID.randomUUID();
+        this.nickName = nickName;
+    }
+
     public void setPassword() {
         CommandPrinter.printPasswordRules();
         String password = UserInput.uploadString();
@@ -30,28 +35,12 @@ public class Teacher {
         return userPassword.matches("((?=.*[a-z])(?=.*\\d)(?=.*[A-Z])(?=.*[@#$%!]).{8,10})");
     }
 
-    public void setUuid() {
-        id = UUID.randomUUID();
-    }
-
-    public void setNickName(String nickName) {
-        this.nickName = nickName;
-    }
-
     public UUID getId() {
         return id;
     }
 
     public String getNickName() {
         return nickName;
-    }
-
-    public double getAverageRating() {
-        return averageRating;
-    }
-
-    public void setAverageRating(double averageRating) {
-        this.averageRating = averageRating;
     }
 
     @Override
