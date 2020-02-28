@@ -3,7 +3,7 @@ package com.infoshareacademy.users;
 import com.infoshareacademy.fileOperations.JsonReader;
 import com.infoshareacademy.fileOperations.JsonSaver;
 import com.infoshareacademy.menu.MenuService;
-import com.infoshareacademy.subjects.SubjectAccountCreator;
+import com.infoshareacademy.lectures.SubjectAccountCreator;
 import com.infoshareacademy.userInput.UserInput;
 
 import java.util.UUID;

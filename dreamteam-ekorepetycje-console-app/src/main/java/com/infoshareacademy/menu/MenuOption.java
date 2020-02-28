@@ -1,9 +1,8 @@
 package com.infoshareacademy.menu;
 
 
-import com.infoshareacademy.subjects.SubjectService;
+import com.infoshareacademy.lectures.SubjectService;
 import com.infoshareacademy.userInput.UserInput;
-import com.infoshareacademy.users.Teacher;
 import com.infoshareacademy.users.TeacherAccount;
 import com.infoshareacademy.users.TeacherAccountEditor;
 import com.infoshareacademy.users.TeacherService;

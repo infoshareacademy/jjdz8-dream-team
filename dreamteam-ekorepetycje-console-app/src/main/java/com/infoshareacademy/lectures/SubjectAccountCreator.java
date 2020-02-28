@@ -1,4 +1,4 @@
-package com.infoshareacademy.subjects;
+package com.infoshareacademy.lectures;
 
 import com.infoshareacademy.fileOperations.JsonReader;
 import com.infoshareacademy.fileOperations.JsonSaver;
