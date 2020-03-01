@@ -43,7 +43,7 @@ public class TeacherAccountCreator {
     }
 
 
-    private void decideToEnterSubject(UUID teacherId) {
+    public void decideToEnterSubject(UUID teacherId) {
         CommandPrinter.doYouWantEnterSubject();
         String choice = UserInput.uploadString();
         while (true) {
@@ -71,7 +71,6 @@ public class TeacherAccountCreator {
 
     private void returnToMainMenu() {
         CommandPrinter.accountSuccesfullySaved();
-        MenuService service = new MenuService();
-        service.returnToMainMenu();
+        MenuService.returnToMainMenu();
     }
 }

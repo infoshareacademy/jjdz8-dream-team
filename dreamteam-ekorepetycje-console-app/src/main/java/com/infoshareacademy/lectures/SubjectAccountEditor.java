@@ -8,6 +8,7 @@ import com.infoshareacademy.menu.MenuService;
 import com.infoshareacademy.userInput.UserInput;
 import com.infoshareacademy.userOutput.CommandPrinter;
 import com.infoshareacademy.users.TeacherAccount;
+import com.infoshareacademy.users.TeacherAccountCreator;
 
 import java.util.List;
 import java.util.UUID;
@@ -17,7 +18,7 @@ public class SubjectAccountEditor {
     public void editSubjects(TeacherAccount account) {
         List<Subject> subjectList = findAllTeacherSubjects(account);
 
-        Subject editedSubject = returnSubjectToEdit(subjectList);
+        Subject editedSubject = returnSubjectToEdit(subjectList,account);
         MenuAppearance.showSubjectDataToEdit();
         MenuOption.changeInSubcject(editedSubject);
 
@@ -38,7 +39,12 @@ public class SubjectAccountEditor {
         return subjectList;
     }
 
-    public Subject returnSubjectToEdit(List<Subject> subjectList) {
+    public Subject returnSubjectToEdit(List<Subject> subjectList, TeacherAccount account) {
+        if (subjectList.size() == 0){
+            System.out.println("You have any subjects entered yet.");
+            TeacherAccountCreator creator = new TeacherAccountCreator();
+            creator.decideToEnterSubject(account.getTeacher().getId());
+        }
         System.out.println("Which subject do you want edit");
         Subject editedSubject = new Subject();
         int num = MenuOption.uploadCorrectUserInput(subjectList.size());

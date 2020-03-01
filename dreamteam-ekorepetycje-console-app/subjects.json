@@ -1,35 +1,12 @@
 {
   "subjectsList": [
     {
-      "id": "d1c0f029-18f2-4cd6-8261-a0fb4766c6c7",
-      "teacherId": "8536abfe-dd02-4154-a038-e19f0b5c6f5e",
-      "name": "Matematyka",
-      "topic": "działania na liczbach całowitych",
+      "id": "3d6ff32f-101d-4cce-abd7-8dcb57dedb4e",
+      "teacherId": "ff6190ee-6ba2-4b74-9a09-eaa52075a864",
+      "name": "HISTORIA",
+      "topic": "podróże",
       "range": [
-        "dodawanie",
-        "odejmowanie"
-      ],
-      "isVideo": false
-    },
-    {
-      "id": "91ad301b-ffe0-460a-8266-7dcec609abe9",
-      "teacherId": "8536abfe-dd02-4154-a038-e19f0b5c6f5e",
-      "name": "język angielski",
-      "topic": "gramatyka",
-      "range": [
-        "zaimki",
-        "przedimki",
-        "budowa zdania"
-      ],
-      "isVideo": false
-    },
-    {
-      "id": "bb3f8b35-86d9-4c52-8a2e-d590756fa126",
-      "teacherId": "00e51e56-2757-4893-8d39-dab6c267216f",
-      "name": "język polski",
-      "topic": "lektury - pozytywizm",
-      "range": [
-        "lalka"
+        "wielcy podróznicy, wielkie wyprawy"
       ],
       "isVideo": true
     }
