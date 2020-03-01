@@ -23,15 +23,12 @@ public class Teachers {
         for (Teacher teacher : teachers.getTeachers()) {
             if (teacher.getNickName().equals(nickName)) {
 
-
                 return true;
             }
         }
 
         return false;
     }
-
-
 }
 
 

@@ -1,10 +1,11 @@
 package com.infoshareacademy.menu;
 
 import com.infoshareacademy.userInput.UserInput;
+import com.infoshareacademy.users.TeacherAccount;
 
 public class MenuService {
 
-    public void appStart() {
+    public static void appStart() {
         MenuAppearance.showMainMenu();
         MenuOption.chooseOptionMainMenu();
     }
@@ -28,8 +29,14 @@ public class MenuService {
         }
     }
 
-    public void returnToMainMenu() {
+    public static void returnToMainMenu() {
         appStart();
     }
+
+    public static void returnToDataEditMenu(TeacherAccount account) {
+        MenuAppearance.showDataEditMenu();
+        MenuOption.chooseDataToEdit(account);
+    }
+
 
 }

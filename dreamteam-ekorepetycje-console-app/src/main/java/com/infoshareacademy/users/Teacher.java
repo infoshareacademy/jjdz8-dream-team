@@ -1,5 +1,6 @@
 package com.infoshareacademy.users;
 
+import com.infoshareacademy.hasing.PasswordCoding;
 import com.infoshareacademy.userInput.UserInput;
 import com.infoshareacademy.userOutput.CommandPrinter;
 
@@ -31,16 +32,16 @@ public class Teacher {
     public void setPassword() {
         CommandPrinter.printPasswordRules();
         String password = UserInput.uploadString();
-        while (!isCorrectPassword(password)) {
-            System.out.println("Incorrect format, please try again");
+        while (!isCorrectPasswordFormat(password)) {
+            System.out.println("Incorrect password format, please try again");
             password = UserInput.uploadString();
         }
-        this.password = password;
+        this.password = PasswordCoding.passwordHashing(password);
 
     }
 
-    private boolean isCorrectPassword(String userPassword) {
-        return userPassword.matches("((?=.*[a-z])(?=.*\\d)(?=.*[A-Z])(?=.*[@#$%!]).{8,10})");
+    private boolean isCorrectPasswordFormat(String userPassword) {
+        return userPassword.matches("((?=.*[a-z])(?=.*\\d)(?=.*[A-Z])(?=.*[@#$%!]).{8,20})");
     }
 
     public UUID getId() {

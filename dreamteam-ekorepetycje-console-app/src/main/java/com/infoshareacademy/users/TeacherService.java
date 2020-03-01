@@ -6,13 +6,9 @@ import com.infoshareacademy.menu.MenuOption;
 
 public class TeacherService {
 
-
     public void createTeacherAccount() {
         TeacherAccountCreator account = new TeacherAccountCreator();
         account.createTeacherAccount();
-    }
-
-    public void showBestRatedTeachers() {
     }
 
     public void editTeacherAccount() {
@@ -23,4 +19,7 @@ public class TeacherService {
         }
     }
 
+    public void showBestRatedTeachers() {
+
+    }
 }

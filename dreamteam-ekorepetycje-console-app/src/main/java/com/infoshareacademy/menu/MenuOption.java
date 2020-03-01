@@ -1,11 +1,12 @@
 package com.infoshareacademy.menu;
 
 
-import com.infoshareacademy.lectures.SubjectService;
+import com.infoshareacademy.lectures.*;
 import com.infoshareacademy.userInput.UserInput;
 import com.infoshareacademy.users.TeacherAccount;
 import com.infoshareacademy.users.TeacherAccountEditor;
 import com.infoshareacademy.users.TeacherService;
+
 
 public class MenuOption {
 
@@ -41,27 +42,35 @@ public class MenuOption {
     public static void chooseDataToEdit(TeacherAccount account) {
         int userChoice = uploadCorrectUserInput(MenuAppearance.editMenuOptions.length);
         TeacherAccountEditor editor = new TeacherAccountEditor(account);
+        SubjectAccountEditor subjectEditor = new SubjectAccountEditor();
         switch (userChoice) {
             case 1: {
-                editor.editTeacherNickname(account);
+                editor.editTeacherNickname();
                 break;
             }
-            case 2 :{
-                editor.editTeacherPassword(account);
+            case 2: {
+                editor.editTeacherPassword();
             }
             case 3: {
-                editor.editTeachersSubjects(account);
+                subjectEditor.editSubjects(account);
                 break;
             }
             case 4: {
-                editor.addNewSubject(account);
+                SubjectAccountCreator accountCreator = new SubjectAccountCreator();
+                accountCreator.createSubjectsAccount(account.getTeacher().getId());
+                MenuService.returnToDataEditMenu(account);
+                break;
+            }
+            case 5: {
+                MenuService service = new MenuService();
+                service.returnToMainMenu();
                 break;
             }
         }
     }
 
-    private static int uploadCorrectUserInput(int maxRange) {
-        System.out.println("Please choose what do you want to do");
+    public static int uploadCorrectUserInput(int maxRange) {
+        System.out.println("Please choose one");
         int userChoice = UserInput.upLoadInt();
         while (userChoice < 1 || userChoice > maxRange) {
             System.out.println("Incorrect choice. Try again with number between 1-" + maxRange);
@@ -71,9 +80,28 @@ public class MenuOption {
         return userChoice;
     }
 
-    public static void returnToMainMenu() {
-        MenuAppearance.showMainMenu();
-        MenuOption.chooseOptionMainMenu();
+    public static void changeInSubcject(Subject subject) {
+        int choice = MenuOption.uploadCorrectUserInput(MenuAppearance.subjectEditOptions.length);
+        SubjectAccountEditor accountEditor = new SubjectAccountEditor();
+        switch (choice) {
+            case 1: {
+                accountEditor.editSubjectName(subject);
+                break;
+            }
+            case 2: {
+                accountEditor.editSubjectTopic(subject);
+                break;
+            }
+            case 3: {
+                accountEditor.editSubjectRange(subject);
+                break;
+            }
+            case 4: {
+                accountEditor.editVideoLessonsPossibility(subject);
+                break;
+
+            }
+        }
     }
 
 }

@@ -45,11 +45,18 @@ public class Subject {
 
     }
 
+    public UUID getTeacherId() {
+        return teacherId;
+    }
+
+    public UUID getId() {
+        return id;
+    }
+
+
     @Override
     public String toString() {
         return "Subject{" +
-                "id=" + id +
-                ", teacherId=" + teacherId +
                 ", name='" + name + '\'' +
                 ", topic='" + topic + '\'' +
                 ", range=" + Arrays.toString(range) +

@@ -5,6 +5,7 @@ import com.infoshareacademy.fileOperations.JsonSaver;
 import com.infoshareacademy.menu.MenuService;
 import com.infoshareacademy.lectures.SubjectAccountCreator;
 import com.infoshareacademy.userInput.UserInput;
+import com.infoshareacademy.userOutput.CommandPrinter;
 
 import java.util.UUID;
 
@@ -23,30 +24,27 @@ public class TeacherAccountCreator {
     }
 
     private Teacher createTeacher() {
-        String teacherNickname = inputTeacherNickname();
+        String teacherNickname = uploadCorrectTeacherNickname();
         Teacher teacher = new Teacher(teacherNickname);
         teacher.setPassword();
+
         return teacher;
     }
 
-    private String inputTeacherNickname() {
-        String nickName = "";
-        System.out.println("Enter Nickname");
-        do {
-            nickName = UserInput.uploadString();
+    private String uploadCorrectTeacherNickname() {
+        CommandPrinter.enterNickname();
+        String nickName = UserInput.uploadString();
+        while (Teachers.teacherAlreadyExist(nickName)) {
             System.out.println("NickName already exist, please try again");
-        } while (Teachers.teacherAlreadyExist(nickName));
-
+            nickName = UserInput.uploadString();
+        }
 
         return nickName;
     }
 
 
     private void decideToEnterSubject(UUID teacherId) {
-        System.out.println("***********************************");
-        System.out.println("Do you want enter subject? Yes/No");
-        System.out.println("***********************************");
-
+        CommandPrinter.doYouWantEnterSubject();
         String choice = UserInput.uploadString();
         while (true) {
             if (choice.equalsIgnoreCase("yes")) {
@@ -72,7 +70,7 @@ public class TeacherAccountCreator {
     }
 
     private void returnToMainMenu() {
-        System.out.println("Your account was safely saved!!");
+        CommandPrinter.accountSuccesfullySaved();
         MenuService service = new MenuService();
         service.returnToMainMenu();
     }

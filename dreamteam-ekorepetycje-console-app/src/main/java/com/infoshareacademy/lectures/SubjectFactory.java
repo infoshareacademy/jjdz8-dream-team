@@ -10,6 +10,10 @@ public class SubjectFactory {
         return subject;
     }
 
+    public void setSubject(Subject subject) {
+        this.subject = subject;
+    }
+
     public void createSubject() {
         this.subject = new Subject();
         System.out.println("Enter subject name");
@@ -26,7 +30,7 @@ public class SubjectFactory {
         setIsVideo();
     }
 
-    private void setIsVideo() {
+    public void setIsVideo() {
         String choice = UserInput.uploadString();
         while (true) {
             if (choice.equalsIgnoreCase("yes")) {
