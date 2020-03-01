@@ -1,48 +1,37 @@
 {
   "subjectsList": [
     {
-      "id": "0b962bad-3bfd-46fb-a78e-b07225ce6295",
-      "teacherId": "c834eb9c-d9a9-45fc-8173-7045b01bebb8",
-      "name": "automatyka i robotyka",
-      "topic": "process automatizations",
-      "range": [
-        "wdscw",
-        "fwf"
-      ],
-      "isVideo": true
-    },
-    {
-      "id": "a33f7e57-ef18-484b-8d81-d246d5af11a2",
-      "teacherId": "3085dd85-1cd2-4d3d-a87e-c3030194396f",
-      "name": "matematyka podstawy",
+      "id": "d1c0f029-18f2-4cd6-8261-a0fb4766c6c7",
+      "teacherId": "8536abfe-dd02-4154-a038-e19f0b5c6f5e",
+      "name": "Matematyka",
       "topic": "działania na liczbach całowitych",
       "range": [
-        "podróznicy, bohaterzy wojenni"
+        "dodawanie",
+        "odejmowanie"
       ],
-      "isVideo": true
+      "isVideo": false
     },
     {
-      "id": "cc05d3b1-54ba-4b29-95a6-ea9e28bd79bf",
-      "teacherId": "3085dd85-1cd2-4d3d-a87e-c3030194396f",
-      "name": "Historia",
-      "topic": "historia współczesna",
-      "range": [
-        "podróznicy",
-        "twórcy",
-        "artyści"
-      ],
-      "isVideo": true
-    },
-    {
-      "id": "8b873a6b-ee8f-4d2e-baa5-096f6457bc0f",
-      "teacherId": "3085dd85-1cd2-4d3d-a87e-c3030194396f",
+      "id": "91ad301b-ffe0-460a-8266-7dcec609abe9",
+      "teacherId": "8536abfe-dd02-4154-a038-e19f0b5c6f5e",
       "name": "język angielski",
       "topic": "gramatyka",
       "range": [
         "zaimki",
-        "przedimki"
+        "przedimki",
+        "budowa zdania"
       ],
       "isVideo": false
+    },
+    {
+      "id": "bb3f8b35-86d9-4c52-8a2e-d590756fa126",
+      "teacherId": "00e51e56-2757-4893-8d39-dab6c267216f",
+      "name": "język polski",
+      "topic": "lektury - pozytywizm",
+      "range": [
+        "lalka"
+      ],
+      "isVideo": true
     }
   ]
 }
