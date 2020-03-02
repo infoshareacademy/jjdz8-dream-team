@@ -1,0 +1,30 @@
+[
+  {
+    "id": 1,
+    "subject": "matematyka",
+    "grade": 4,
+    "comment": "super",
+    "suma": 0.0
+  },
+  {
+    "id": 2,
+    "subject": "fizyka",
+    "grade": 3,
+    "comment": "zle",
+    "suma": 0.0
+  },
+  {
+    "id": 1,
+    "subject": "polski",
+    "grade": 6,
+    "comment": "w porzadku",
+    "suma": 0.0
+  },
+  {
+    "id": 1,
+    "subject": "biologia",
+    "grade": 5,
+    "comment": "niezle",
+    "suma": 0.0
+  }
+]
