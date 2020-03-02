@@ -33,8 +33,7 @@ public class MenuOption {
                 break;
             }
             case 5: {
-                MenuService menuService = new MenuService();
-                menuService.exitApplication();
+                MenuService.exitApplication();
             }
         }
     }
@@ -62,8 +61,7 @@ public class MenuOption {
                 break;
             }
             case 5: {
-                MenuService service = new MenuService();
-                service.returnToMainMenu();
+                MenuService.returnToMainMenu();
                 break;
             }
         }

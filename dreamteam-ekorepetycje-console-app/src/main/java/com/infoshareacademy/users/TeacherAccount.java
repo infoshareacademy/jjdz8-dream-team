@@ -44,30 +44,30 @@ public class TeacherAccount {
                 MenuService.returnToMainMenu();
                 break;
             }
-                System.out.println("Incorrect nickName. Please try again ");
-                nickName = UserInput.uploadString();
-                badNicknameCounter++;
+            System.out.println("Incorrect nickName. Please try again ");
+            nickName = UserInput.uploadString();
+            badNicknameCounter++;
 
         }
 
-            return nickName;
-        }
+        return nickName;
+    }
 
-        public void acceptCorrectPassword (String username){
-            String password = UserInput.uploadString();
-            String hashPassword = PasswordCoding.passwordHashing(password);
-            int badPasswordCount = 0;
-            while (!isPasswordCorrect(username, hashPassword)) {
-                if (badPasswordCount == 5) {
-                    System.out.println("You have entered 5 times incorrect password");
-                    MenuService.returnToMainMenu();
-                    break;
-                }
-                System.out.println("Incorrect password, please try again");
-                hashPassword = PasswordCoding.passwordHashing(UserInput.uploadString());
-                badPasswordCount++;
+    public void acceptCorrectPassword(String username) {
+        String password = UserInput.uploadString();
+        String hashPassword = PasswordCoding.passwordHashing(password);
+        int badPasswordCount = 0;
+        while (!isPasswordCorrect(username, hashPassword)) {
+            if (badPasswordCount == 5) {
+                System.out.println("You have entered 5 times incorrect password");
+                MenuService.returnToMainMenu();
+                break;
             }
+            System.out.println("Incorrect password, please try again");
+            hashPassword = PasswordCoding.passwordHashing(UserInput.uploadString());
+            badPasswordCount++;
         }
+    }
 
 
     public boolean isPasswordCorrect(String userNAme, String password) {

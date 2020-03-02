@@ -1,8 +1,6 @@
 package com.infoshareacademy.lectures;
 
 import com.infoshareacademy.fileOperations.JsonReader;
-import com.infoshareacademy.users.Teacher;
-import com.infoshareacademy.users.Teachers;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -27,7 +25,6 @@ public class Subjects {
         for (Subject subject : subjects.getSubjectsList()) {
             if (subject.getTeacherId().equals(teacherId)) {
                 oneTeacherSubjects.add(subject);
-
             }
         }
         return oneTeacherSubjects;

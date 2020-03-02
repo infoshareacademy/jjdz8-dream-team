@@ -18,7 +18,7 @@ public class SubjectAccountEditor {
     public void editSubjects(TeacherAccount account) {
         List<Subject> subjectList = findAllTeacherSubjects(account);
 
-        Subject editedSubject = returnSubjectToEdit(subjectList,account);
+        Subject editedSubject = returnSubjectToEdit(subjectList, account);
         MenuAppearance.showSubjectDataToEdit();
         MenuOption.changeInSubcject(editedSubject);
 
@@ -40,7 +40,7 @@ public class SubjectAccountEditor {
     }
 
     public Subject returnSubjectToEdit(List<Subject> subjectList, TeacherAccount account) {
-        if (subjectList.size() == 0){
+        if (subjectList.size() == 0) {
             System.out.println("You have any subjects entered yet.");
             TeacherAccountCreator creator = new TeacherAccountCreator();
             creator.decideToEnterSubject(account.getTeacher().getId());
@@ -69,10 +69,7 @@ public class SubjectAccountEditor {
                 subject.setName(newNAme);
             }
         }
-
         JsonSaver.createJson(subjects, "subjects.json");
-
-
     }
 
     public void editSubjectTopic(Subject editedSubject) {
@@ -84,7 +81,6 @@ public class SubjectAccountEditor {
                 subject.setTopic(newTopic);
             }
         }
-
         JsonSaver.createJson(subjects, "subjects.json");
     }
 
@@ -115,7 +111,6 @@ public class SubjectAccountEditor {
             }
         }
         JsonSaver.createJson(subjects, "subjects.json");
-
     }
 
 }

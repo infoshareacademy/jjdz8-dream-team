@@ -56,7 +56,6 @@ public class TeacherAccountEditor {
 
         CommandPrinter.yourPasswordSuccesfullyChanged();
         MenuService.returnToDataEditMenu(this.teacherAccount);
-
     }
 
     public void setNewPassword(String nickName) {

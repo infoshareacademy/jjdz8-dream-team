@@ -42,7 +42,6 @@ public class TeacherAccountCreator {
         return nickName;
     }
 
-
     public void decideToEnterSubject(UUID teacherId) {
         CommandPrinter.doYouWantEnterSubject();
         String choice = UserInput.uploadString();

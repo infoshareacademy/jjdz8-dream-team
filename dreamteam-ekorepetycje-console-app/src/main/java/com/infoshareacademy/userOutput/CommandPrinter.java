@@ -25,23 +25,24 @@ public class CommandPrinter {
         System.out.println("***************************************");
     }
 
-    public static void enterYourPassword(){
+    public static void enterYourPassword() {
         System.out.println("***************************************");
         System.out.println("Please enter password");
         System.out.println("***************************************");
     }
-    public static void enterYourOldPassword(){
+
+    public static void enterYourOldPassword() {
         System.out.println("***************************************");
         System.out.println("Please enter old password");
         System.out.println("***************************************");
     }
-
 
     public static void yourPasswordSuccesfullyChanged() {
         System.out.println("***************************************");
         System.out.println("Your password was succesfully change");
         System.out.println("***************************************");
     }
+
     public static void yourNicknameWasChange() {
         System.out.println("***************************************");
         System.out.println("Yours nickname was succesfully changed");
@@ -56,15 +57,15 @@ public class CommandPrinter {
     }
 
     public static void doYouWantEnterSubject() {
-        System.out.println("***********************************");
+        System.out.println("****************************************");
         System.out.println("Do you want enter subject? Yes/No");
-        System.out.println("***********************************");
+        System.out.println("****************************************");
     }
 
     public static void accountSuccesfullySaved() {
-    System.out.println("***************************************");
+        System.out.println("*********************************************");
         System.out.println("Your account was safely saved!!");
-        System.out.println("***************************************");
+        System.out.println("*****************************************");
     }
 
     public static void accessGranted() {
