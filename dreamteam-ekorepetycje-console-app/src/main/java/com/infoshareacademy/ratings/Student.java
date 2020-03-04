@@ -1,19 +1,42 @@
 package com.infoshareacademy.ratings;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 public class Student {
+    double[] arr5;
 
-
-
-
-    public Student(int id, int grade) {
-
+    public double[] getArr5() {
+        return arr5;
     }
 
-    public Student(double id, double grade) {
-
+    @Override
+    public String toString() {
+        return "Student{" +
+                "arr5=" + Arrays.toString(arr5) +
+                ", grades=" + grades +
+                ", name='" + name + '\'' +
+                '}';
     }
 
-    public Student(double grade, String s) {
+
+    private ArrayList<Double> grades = new ArrayList<>();
+    private String name;
+
+    public Student(String name) {
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public ArrayList<Double> getGrades() {
+        return grades;
+    }
+
+    public void addGrade(double grade) {
+        grades.add(grade);
     }
 
 
@@ -33,14 +56,25 @@ public class Student {
         this.subject = subject;
     }
 
-    public double getGrade() {
+    double[] a = new double[0];
+    double[] last;
 
-        return this.grade;
+    public Student() {
+
     }
 
-    public void setGrade(int grade) {
-        this.grade = grade;
+    public static double[] getLast() {
+        double[] a = new double[0];
+
+        return a;
     }
+
+    public static double[] getA() {
+        double[] a = new double[0];
+
+        return a;
+    }
+
 
     public String getComment() {
         return comment;
@@ -54,38 +88,4 @@ public class Student {
     private String subject;
     private int grade;
     private String comment;
-
-    public double getSuma() {
-        return getGrade();
-    }
-
-    private double suma;
-
-    public Student(int id, String subject, int grade, String comment) {
-        this.id = id;
-        this.subject = subject;
-        this.grade = grade;
-        this.comment = comment;
-    }
-
-
-
-    //public Student(int id, String subject, int grade, String comment){}
-    public Student() {
-    }
-
-    ;
-
-    @Override
-    public String toString() {
-        return "Student{" +
-                "id=" + id +
-                ", subject='" + subject + '\'' +
-                ", grade=" + grade +
-                ", comment='" + comment + '\'' +
-                '}';
-    }
-
-
 }
-

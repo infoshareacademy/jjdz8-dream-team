@@ -1,16 +1,14 @@
 package com.infoshareacademy.ratings;
 
+import java.io.IOException;
+
 public class Main {
 
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) throws IOException {
 
-            NewGson gson15 = new NewGson();
-            Student student10 = new Student();
-            gson15.GsonMethod(student10);
-            //Po odhaczeniu CurlyBraces() zapisuje do pliku filename.txt bez pierwszego nawiasu klamrowego
-        //CurlyBraces gson =new CurlyBraces();
-      // String name="";
-      // gson.CurlyBraces();
+       StandardDeviation standard= new StandardDeviation();
+       standard.StataRederJson();
+        double[] arr5 = new Student().getGrades() .stream().mapToDouble(Double::doubleValue).toArray();
 
-    }}
-
+    }
+}
