@@ -1,10 +1,12 @@
 package com.infoshareacademy.users;
 
 import com.infoshareacademy.fileOperations.JsonReader;
-import com.infoshareacademy.hasing.PasswordCoding;
+import com.infoshareacademy.security.PasswordCoding;
 import com.infoshareacademy.menu.MenuService;
 import com.infoshareacademy.userInput.UserInput;
 import com.infoshareacademy.userOutput.CommandPrinter;
+
+import static com.infoshareacademy.fileOperations.FileNames.TEACHERS_JSON;
 
 public class TeacherAccount {
 
@@ -19,18 +21,15 @@ public class TeacherAccount {
     }
 
     public boolean logIn() {
-        CommandPrinter.enterNickname();
+        CommandPrinter.enterNicknameHeader();
         String username = uploadCorrectAccount();
-        CommandPrinter.enterYourPassword();
+        CommandPrinter.enterYourPasswordHeader();
         acceptCorrectPassword(username);
 
-        Teachers teachers = JsonReader.create(new Teachers(), "users.json");
-        for (Teacher teacher : teachers.getTeachers()) {
-            if (teacher.getNickName().equals(username)) {
-                setTeacher(teacher);
-            }
-        }
-        CommandPrinter.accessGranted();
+        Teachers teachers = JsonReader.create(new Teachers(), TEACHERS_JSON);
+        setTeacher(teachers.findByNickname(username));
+
+        CommandPrinter.accessGrantedHeader();
 
         return true;
     }
@@ -47,7 +46,6 @@ public class TeacherAccount {
             System.out.println("Incorrect nickName. Please try again ");
             nickName = UserInput.uploadString();
             badNicknameCounter++;
-
         }
 
         return nickName;
@@ -69,11 +67,10 @@ public class TeacherAccount {
         }
     }
 
-
     public boolean isPasswordCorrect(String userNAme, String password) {
-        Teachers teachers = JsonReader.create(new Teachers(), "users.json");
+        Teachers teachers = JsonReader.create(new Teachers(), TEACHERS_JSON);
         for (Teacher teacher : teachers.getTeachers()) {
-            if (teacher.getPassword().equals(password)) {
+            if (teacher.getPassword().equals(password) && teacher.getNickName().equals(userNAme)) {
 
                 return true;
             }
@@ -81,6 +78,4 @@ public class TeacherAccount {
 
         return false;
     }
-
-
 }

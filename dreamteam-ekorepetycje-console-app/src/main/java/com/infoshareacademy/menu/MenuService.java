@@ -22,10 +22,9 @@ public class MenuService {
                 returnToMainMenu();
                 return;
 
-            } else {
-                System.out.println("please enter yes/no");
-                choice = UserInput.uploadString();
             }
+            System.out.println("please enter yes/no");
+            choice = UserInput.uploadString();
         }
     }
 
@@ -37,6 +36,4 @@ public class MenuService {
         MenuAppearance.showDataEditMenu();
         MenuOption.chooseDataToEdit(account);
     }
-
-
 }

@@ -7,20 +7,20 @@ import com.infoshareacademy.lectures.SubjectAccountCreator;
 import com.infoshareacademy.userInput.UserInput;
 import com.infoshareacademy.userOutput.CommandPrinter;
 
-import java.util.UUID;
+import static com.infoshareacademy.fileOperations.FileNames.TEACHERS_JSON;
 
 public class TeacherAccountCreator {
 
     public void createTeacherAccount() {
         Teacher teacher = createTeacher();
+        decideToEnterSubject(teacher);
         savingTeacher(teacher);
-        decideToEnterSubject(teacher.getId());
     }
 
     private void savingTeacher(Teacher teacher) {
-        Teachers teachers = JsonReader.create(new Teachers(), "users.json");
+        Teachers teachers = JsonReader.create(new Teachers(), TEACHERS_JSON);
         teachers.addTeacher(teacher);
-        JsonSaver.createJson(teachers, "users.json");
+        JsonSaver.createJson(teachers, TEACHERS_JSON);
     }
 
     private Teacher createTeacher() {
@@ -32,7 +32,7 @@ public class TeacherAccountCreator {
     }
 
     private String uploadCorrectTeacherNickname() {
-        CommandPrinter.enterNickname();
+        CommandPrinter.enterNicknameHeader();
         String nickName = UserInput.uploadString();
         while (Teachers.teacherAlreadyExist(nickName)) {
             System.out.println("NickName already exist, please try again");
@@ -42,16 +42,17 @@ public class TeacherAccountCreator {
         return nickName;
     }
 
-    public void decideToEnterSubject(UUID teacherId) {
-        CommandPrinter.doYouWantEnterSubject();
+    public void decideToEnterSubject(Teacher teacher) {
+        CommandPrinter.doYouWantEnterSubjectHeader();
         String choice = UserInput.uploadString();
         while (true) {
             if (choice.equalsIgnoreCase("yes")) {
-                addSubjectForTeacher(teacherId);
-
+                addSubjectForTeacher(teacher);
+                savingTeacher(teacher);
                 return;
             }
             if (choice.equalsIgnoreCase("No")) {
+                savingTeacher(teacher);
                 returnToMainMenu();
 
                 return;
@@ -62,14 +63,14 @@ public class TeacherAccountCreator {
         }
     }
 
-    public void addSubjectForTeacher(UUID teacherId) {
+    public void addSubjectForTeacher(Teacher teacher) {
         SubjectAccountCreator accountCreator = new SubjectAccountCreator();
-        accountCreator.createSubjectsAccount(teacherId);
-        decideToEnterSubject(teacherId);
+        accountCreator.createSubjectsAccount(teacher);
+        decideToEnterSubject(teacher);
     }
 
     private void returnToMainMenu() {
-        CommandPrinter.accountSuccesfullySaved();
+        CommandPrinter.accountSuccessfullySavedHeader();
         MenuService.returnToMainMenu();
     }
 }

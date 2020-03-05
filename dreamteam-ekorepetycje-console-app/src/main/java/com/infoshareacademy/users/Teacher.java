@@ -1,6 +1,6 @@
 package com.infoshareacademy.users;
 
-import com.infoshareacademy.hasing.PasswordCoding;
+import com.infoshareacademy.security.PasswordCoding;
 import com.infoshareacademy.userInput.UserInput;
 import com.infoshareacademy.userOutput.CommandPrinter;
 
@@ -30,14 +30,13 @@ public class Teacher {
     }
 
     public void setPassword() {
-        CommandPrinter.printPasswordRules();
+        CommandPrinter.showPasswordRules();
         String password = UserInput.uploadString();
         while (!isCorrectPasswordFormat(password)) {
             System.out.println("Incorrect password format, please try again");
             password = UserInput.uploadString();
         }
         this.password = PasswordCoding.passwordHashing(password);
-
     }
 
     private boolean isCorrectPasswordFormat(String userPassword) {

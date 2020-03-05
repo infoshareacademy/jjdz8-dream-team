@@ -6,6 +6,7 @@ import com.infoshareacademy.menu.MenuService;
 import com.infoshareacademy.userInput.UserInput;
 import com.infoshareacademy.userOutput.CommandPrinter;
 
+import static com.infoshareacademy.fileOperations.FileNames.TEACHERS_JSON;
 
 public class TeacherAccountEditor {
 
@@ -17,24 +18,20 @@ public class TeacherAccountEditor {
 
     public void editTeacherNickname() {
         String oldNickName = this.teacherAccount.getTeacher().getNickName();
-        CommandPrinter.enterNewNickname();
+        CommandPrinter.enterNewNicknameHeader();
 
         String newNickName = uploadCorrectNewNickname();
         setNewNickName(oldNickName, newNickName);
 
-        CommandPrinter.yourNicknameWasChange();
+        CommandPrinter.yourNicknameWasChangeHeader();
 
         MenuService.returnToDataEditMenu(teacherAccount);
     }
 
     private void setNewNickName(String nickName, String newNickName) {
-        Teachers teachers1 = JsonReader.create(new Teachers(), "users.json");
-        for (Teacher teacher : teachers1.getTeachers()) {
-            if (teacher.getNickName().equals(nickName)) {
-                teacher.setNickName(newNickName);
-            }
-        }
-        JsonSaver.createJson(teachers1, "users.json");
+        Teachers teachers = JsonReader.create(new Teachers(), TEACHERS_JSON);
+        teachers.findByNickname(nickName).setNickName(newNickName);
+        JsonSaver.createJson(teachers, TEACHERS_JSON);
     }
 
     private String uploadCorrectNewNickname() {
@@ -48,24 +45,21 @@ public class TeacherAccountEditor {
     }
 
     public void editTeacherPassword() {
-        String teacherNickname = this.teacherAccount.getTeacher().getNickName();
-        CommandPrinter.enterYourOldPassword();
+        Teachers teachers = JsonReader.create(new Teachers(), TEACHERS_JSON);
+        String teacherNickname = teachers.findById(this.teacherAccount.getTeacher().getId()).getNickName();
+
+        CommandPrinter.enterYourOldPasswordHeader();
 
         this.teacherAccount.acceptCorrectPassword(teacherNickname);
         setNewPassword(teacherNickname);
 
-        CommandPrinter.yourPasswordSuccesfullyChanged();
+        CommandPrinter.passwordChangedHeader();
         MenuService.returnToDataEditMenu(this.teacherAccount);
     }
 
     public void setNewPassword(String nickName) {
-        Teachers teachers1 = JsonReader.create(new Teachers(), "users.json");
-        for (Teacher teacher : teachers1.getTeachers()) {
-            if (teacher.getNickName().equals(nickName)) {
-                teacher.setPassword();
-            }
-        }
-        JsonSaver.createJson(teachers1, "users.json");
+        Teachers teachers = JsonReader.create(new Teachers(), TEACHERS_JSON);
+        teachers.findByNickname(nickName).setPassword();
+        JsonSaver.createJson(teachers, TEACHERS_JSON);
     }
-
 }

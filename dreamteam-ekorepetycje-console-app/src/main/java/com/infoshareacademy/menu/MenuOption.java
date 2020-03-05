@@ -1,17 +1,15 @@
 package com.infoshareacademy.menu;
 
-
 import com.infoshareacademy.lectures.*;
 import com.infoshareacademy.userInput.UserInput;
 import com.infoshareacademy.users.TeacherAccount;
 import com.infoshareacademy.users.TeacherAccountEditor;
 import com.infoshareacademy.users.TeacherService;
 
-
 public class MenuOption {
 
     public static void chooseOptionMainMenu() {
-        int userChoice = uploadCorrectUserInput(MenuAppearance.mainMenuOptions.length);
+        int userChoice = uploadCorrectUserInput(MenuAppearance.MAIN_MENU_OPTIONS.length);
         TeacherService teacherService = new TeacherService();
         SubjectService subjectService = new SubjectService();
         switch (userChoice) {
@@ -21,7 +19,6 @@ public class MenuOption {
             }
             case 2: {
                 teacherService.editTeacherAccount();
-
                 break;
             }
             case 3: {
@@ -39,7 +36,7 @@ public class MenuOption {
     }
 
     public static void chooseDataToEdit(TeacherAccount account) {
-        int userChoice = uploadCorrectUserInput(MenuAppearance.editMenuOptions.length);
+        int userChoice = uploadCorrectUserInput(MenuAppearance.EDIT_MENU_OPTIONS.length);
         TeacherAccountEditor editor = new TeacherAccountEditor(account);
         SubjectAccountEditor subjectEditor = new SubjectAccountEditor();
         switch (userChoice) {
@@ -56,7 +53,7 @@ public class MenuOption {
             }
             case 4: {
                 SubjectAccountCreator accountCreator = new SubjectAccountCreator();
-                accountCreator.createSubjectsAccount(account.getTeacher().getId());
+                accountCreator.createSubjectsAccount(account.getTeacher());
                 MenuService.returnToDataEditMenu(account);
                 break;
             }
@@ -79,7 +76,7 @@ public class MenuOption {
     }
 
     public static void changeInSubcject(Subject subject) {
-        int choice = MenuOption.uploadCorrectUserInput(MenuAppearance.subjectEditOptions.length);
+        int choice = MenuOption.uploadCorrectUserInput(MenuAppearance.SUBJECT_EDIT_OPTIONS.length);
         SubjectAccountEditor accountEditor = new SubjectAccountEditor();
         switch (choice) {
             case 1: {
@@ -98,6 +95,9 @@ public class MenuOption {
                 accountEditor.editVideoLessonsPossibility(subject);
                 break;
 
+            }
+            case 5: {
+                MenuService.returnToMainMenu();
             }
         }
     }
