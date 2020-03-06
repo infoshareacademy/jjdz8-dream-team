@@ -3,57 +3,56 @@ package com.infoshareacademy.users;
 import com.infoshareacademy.fileOperations.JsonReader;
 import com.infoshareacademy.fileOperations.JsonSaver;
 import com.infoshareacademy.menu.MenuService;
-import com.infoshareacademy.subjects.SubjectAccountCreator;
+import com.infoshareacademy.lectures.SubjectAccountCreator;
 import com.infoshareacademy.userInput.UserInput;
+import com.infoshareacademy.userOutput.CommandPrinter;
 
-import java.util.UUID;
+import static com.infoshareacademy.fileOperations.FileNames.TEACHERS_JSON;
 
 public class TeacherAccountCreator {
 
     public void createTeacherAccount() {
         Teacher teacher = createTeacher();
+        decideToEnterSubject(teacher);
         savingTeacher(teacher);
-        decideToEnterSubject(teacher.getId());
     }
 
     private void savingTeacher(Teacher teacher) {
-        Teachers teachers = JsonReader.create(new Teachers(), "users.json");
+        Teachers teachers = JsonReader.create(new Teachers(), TEACHERS_JSON);
         teachers.addTeacher(teacher);
-        JsonSaver.createJson(teachers, "users.json");
+        JsonSaver.createJson(teachers, TEACHERS_JSON);
     }
 
     private Teacher createTeacher() {
-        String teacherNickname = inputTeacherNickname();
+        String teacherNickname = uploadCorrectTeacherNickname();
         Teacher teacher = new Teacher(teacherNickname);
         teacher.setPassword();
+
         return teacher;
     }
 
-    private String inputTeacherNickname() {
-        String nickName = "";
-        System.out.println("Enter Nickname");
-        do {
+    private String uploadCorrectTeacherNickname() {
+        CommandPrinter.enterNicknameHeader();
+        String nickName = UserInput.uploadString();
+        while (Teachers.teacherAlreadyExist(nickName)) {
+            System.out.println("NickName already exist, please try again");
             nickName = UserInput.uploadString();
-        } while (Teachers.teacherAlreadyExist(nickName));
-
+        }
 
         return nickName;
     }
 
-
-    private void decideToEnterSubject(UUID teacherId) {
-        System.out.println("***********************************");
-        System.out.println("Do you want enter subject? Yes/No");
-        System.out.println("***********************************");
-
+    public void decideToEnterSubject(Teacher teacher) {
+        CommandPrinter.doYouWantEnterSubjectHeader();
         String choice = UserInput.uploadString();
         while (true) {
             if (choice.equalsIgnoreCase("yes")) {
-                addSubjectForTeacher(teacherId);
-
+                addSubjectForTeacher(teacher);
+                savingTeacher(teacher);
                 return;
             }
             if (choice.equalsIgnoreCase("No")) {
+                savingTeacher(teacher);
                 returnToMainMenu();
 
                 return;
@@ -64,15 +63,14 @@ public class TeacherAccountCreator {
         }
     }
 
-    public void addSubjectForTeacher(UUID teacherId) {
+    public void addSubjectForTeacher(Teacher teacher) {
         SubjectAccountCreator accountCreator = new SubjectAccountCreator();
-        accountCreator.createSubjectsAccount(teacherId);
-        decideToEnterSubject(teacherId);
+        accountCreator.createSubjectsAccount(teacher);
+        decideToEnterSubject(teacher);
     }
 
     private void returnToMainMenu() {
-        System.out.println("Your account was safely saved!!");
-        MenuService service = new MenuService();
-        service.returnToMainMenu();
+        CommandPrinter.accountSuccessfullySavedHeader();
+        MenuService.returnToMainMenu();
     }
 }

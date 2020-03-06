@@ -1,14 +1,15 @@
 package com.infoshareacademy.menu;
 
-
-import com.infoshareacademy.subjects.SubjectService;
+import com.infoshareacademy.lectures.*;
 import com.infoshareacademy.userInput.UserInput;
+import com.infoshareacademy.users.TeacherAccount;
+import com.infoshareacademy.users.TeacherAccountEditor;
 import com.infoshareacademy.users.TeacherService;
 
 public class MenuOption {
 
     public static void chooseOptionMainMenu() {
-        int userChoice = uploadCorrectUserInput(MenuAppearance.mainMenuOptions.length);
+        int userChoice = uploadCorrectUserInput(MenuAppearance.MAIN_MENU_OPTIONS.length);
         TeacherService teacherService = new TeacherService();
         SubjectService subjectService = new SubjectService();
         switch (userChoice) {
@@ -17,8 +18,7 @@ public class MenuOption {
                 break;
             }
             case 2: {
-                MenuAppearance.showDataEditMenu();
-                chooseDataToEdit();
+                teacherService.editTeacherAccount();
                 break;
             }
             case 3: {
@@ -30,33 +30,42 @@ public class MenuOption {
                 break;
             }
             case 5: {
-                MenuService menuService = new MenuService();
-                menuService.exitApplication();
+                MenuService.exitApplication();
             }
         }
     }
 
-    public static void chooseDataToEdit() {
-        int userChoice = uploadCorrectUserInput(MenuAppearance.editMenuOptions.length);
-        TeacherService service = new TeacherService();
+    public static void chooseDataToEdit(TeacherAccount account) {
+        int userChoice = uploadCorrectUserInput(MenuAppearance.EDIT_MENU_OPTIONS.length);
+        TeacherAccountEditor editor = new TeacherAccountEditor(account);
+        SubjectAccountEditor subjectEditor = new SubjectAccountEditor();
         switch (userChoice) {
             case 1: {
-                service.editTeacherNickName();
+                editor.editTeacherNickname();
                 break;
             }
             case 2: {
-                service.editTeachersSubjectNAme();
-                break;
+                editor.editTeacherPassword();
             }
             case 3: {
-                service.editTeachersSubjectRange();
+                subjectEditor.editSubjects(account);
+                break;
+            }
+            case 4: {
+                SubjectAccountCreator accountCreator = new SubjectAccountCreator();
+                accountCreator.createSubjectsAccount(account.getTeacher());
+                MenuService.returnToDataEditMenu(account);
+                break;
+            }
+            case 5: {
+                MenuService.returnToMainMenu();
                 break;
             }
         }
     }
 
-    private static int uploadCorrectUserInput(int maxRange) {
-        System.out.println("Please choose what do you want to do");
+    public static int uploadCorrectUserInput(int maxRange) {
+        System.out.println("Please choose one");
         int userChoice = UserInput.upLoadInt();
         while (userChoice < 1 || userChoice > maxRange) {
             System.out.println("Incorrect choice. Try again with number between 1-" + maxRange);
@@ -66,9 +75,31 @@ public class MenuOption {
         return userChoice;
     }
 
-    public static void returnToMainMenu() {
-        MenuAppearance.showMainMenu();
-        MenuOption.chooseOptionMainMenu();
+    public static void changeInSubcject(Subject subject) {
+        int choice = MenuOption.uploadCorrectUserInput(MenuAppearance.SUBJECT_EDIT_OPTIONS.length);
+        SubjectAccountEditor accountEditor = new SubjectAccountEditor();
+        switch (choice) {
+            case 1: {
+                accountEditor.editSubjectName(subject);
+                break;
+            }
+            case 2: {
+                accountEditor.editSubjectTopic(subject);
+                break;
+            }
+            case 3: {
+                accountEditor.editSubjectRange(subject);
+                break;
+            }
+            case 4: {
+                accountEditor.editVideoLessonsPossibility(subject);
+                break;
+
+            }
+            case 5: {
+                MenuService.returnToMainMenu();
+            }
+        }
     }
 
 }
