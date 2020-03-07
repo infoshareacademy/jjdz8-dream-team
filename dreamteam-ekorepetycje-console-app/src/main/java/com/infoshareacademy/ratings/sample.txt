@@ -1,0 +1,9 @@
+#
+#Sat Mar 07 18:54:08 CET 2020
+wartosc\ najwieksza=5.0
+wariancja=0.6707142857142855
+odchylenie\ standardowe=0.6707142857142855
+mediana=4
+kurtoza=1.1052639100123476
+skosnosc=-1.3011462907296354
+moda=4.6

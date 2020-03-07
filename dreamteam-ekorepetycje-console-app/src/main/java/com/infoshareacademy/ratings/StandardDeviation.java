@@ -5,12 +5,45 @@ import com.google.gson.Gson;
 
 import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.lang.reflect.Type;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
+import java.util.*;
 
-public class StandardDeviation  {
+public class StandardDeviation {
+    public static double calculateMode(double[] ints) {
+        double mode;
+        HashMap<Double, Double> hm = new HashMap<Double, Double>();
+
+        double max = 0;
+        double temp = 0;
+
+        for (int i = 0; i < ints.length; i++) {
+            if (hm.get(ints[i]) != null) {
+               double count = hm.get(ints[i]);
+                count += 1;
+                hm.put(ints[i], count);
+                if (count > max) {
+                    max = count;
+                    temp = ints[i];
+                }
+            } else {
+                hm.put(ints[i], 1.0);
+            }
+        }
+
+        if (temp == 0.0) {
+            mode = ints[0];
+        } else {
+            mode = temp;
+        }
+
+        return  mode;
+    }
+
 
 
     public static double max(double []a)
@@ -197,11 +230,10 @@ try{
     }
 
 
-    public StandardDeviation() {
-    }
 
-    public void StataRederJson(){
-        Students studentsFromFile=createReader(new Students(),"studenci.json");
+
+    public void StataRederJson() throws IOException {
+        Students studentsFromFile=createReader(new Students(),"studenci2.json");
         for(Student s:studentsFromFile.getStudents()) {
 
             Student student = new Student("Kasia");
@@ -230,21 +262,31 @@ try{
                 System.out.println("Nie znaleziono studenta o imieniu Kasia");
 
             }}}
+    public static void writeToTextFile(String fileName, String content) throws IOException {
+        Files.write(Paths.get(fileName), content.getBytes(), StandardOpenOption.CREATE);
+    }
 
+    public void StataProgram( double arr5 []) throws IOException {
 
+        Properties prop = new Properties();
 
-    public void StataProgram( double arr5 []){
+        prop.put("wartosc najwieksza", String.valueOf(max(arr5)));
+        prop.put("wariancja",String.valueOf(var(arr5)));
+        prop.put("odchylenie standardowe",String.valueOf(var(arr5)));
+        prop.put("mediana",String.valueOf(median(arr5)));
+        prop.put("moda",String.valueOf(calculateMode(arr5)));
+        prop.put("skosnosc",String.valueOf(skew(arr5)));
+        prop.put("kurtoza",String.valueOf(kurt(arr5)));
+        prop.store(new FileWriter(new File("sample.txt")), "");
 
-
-        System.out.println("wartosc najwieksza"+" "+max( (arr5)));
+    System.out.println("wartosc najwieksza"+" "+max( (arr5)));
 
        System.out.println("wariancja"+" "+var(arr5));
         System.out.println("odchylenie standardowe"+" "+stddev(arr5));
        System.out.println("mediana"+" "+median(arr5));
-        System.out.println("moda"+" "+mode(arr5));
+        System.out.println("moda"+" "+calculateMode(arr5));
         System.out.println("skosnosc"+" "+skew(arr5));
         System.out.println("kurtoza"+" "+kurt(arr5));
-
 
     int levelString=0;
         switch (levelString) {
@@ -267,7 +309,7 @@ try{
 
             }
             if (kurt(arr5)>0){
-                System.out.println("rozklad leptokurtyczn yw zbiorze danych możemy zaobserwować mniejsza liczbe wyników skrajnych ");
+                System.out.println("rozklad leptokurtyczny w zbiorze danych możemy zaobserwować mniejsza liczbe wyników skrajnych ");
 
             }
 
@@ -293,7 +335,7 @@ try{
         System.out.println("Polowa ankietownaych ocenila nauczyciela powyzej"+" "+median(arr5)+" "+"Polowa ankietowanych ocenila wykladowce ponizej"+" "+median(arr5));
         }
         case 5:StandardDeviation.mode(arr5);{
-        System.out.println("ocena występująca najczęściej "+mode(arr5));
+        System.out.println("ocena występująca najczęściej "+calculateMode(arr5));
         }
         case 6:StandardDeviation.skew(arr5);{
         if(skew(arr5)==0){System.out.println("rozklad symetryczny.Wszystkie osoby ocenialy wykladowce podobnie");

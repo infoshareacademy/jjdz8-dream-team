@@ -17,13 +17,16 @@ public class GsonExample {
         student.addGrade(3.5);
         student.addGrade(4.9);
         student.addGrade(4.6);
+        student.addGrade(4.6);
+        student.addGrade(4.6);
+        student.addGrade(5.0);
         students.addStudent(student);
-        createJson(students, "studenci.json");
+        createJson(students, "studenci2.json");
 
     }
 
         public void StataRederJson(){
-            Students studentsFromFile=createReader(new Students(),"studenci.json");
+            Students studentsFromFile=createReader(new Students(),"studenci2.json");
             for(Student s:studentsFromFile.getStudents()){
                 if (s.getName().equals("Kasia")) {
                     ArrayList<Double> grades = s.getGrades();
