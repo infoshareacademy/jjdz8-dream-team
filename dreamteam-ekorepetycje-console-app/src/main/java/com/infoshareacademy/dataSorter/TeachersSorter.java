@@ -1,4 +1,4 @@
 package com.infoshareacademy.dataSorter;
 
-public class TeachersSorter {
+public class git TeachersSorter {
 }
