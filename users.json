@@ -1,0 +1,46 @@
+{
+  "teachersList": [
+    {
+      "password": "90a28456d65ca0c40abb0c83f5d27fa9",
+      "id": "45ae5092-3c11-461e-ab4c-a431763fab66",
+      "nickName": "Kamila",
+      "averageRating": 0.0
+    },
+    {
+      "password": "90a28456d65ca0c40abb0c83f5d27fa9",
+      "id": "ec6d8c59-e6b1-4f0d-b4ff-f5eda0f0563c",
+      "nickName": "Kamila@kamila",
+      "averageRating": 0.0
+    },
+    {
+      "password": "90a28456d65ca0c40abb0c83f5d27fa9",
+      "id": "ec6d8c59-e6b1-4f0d-b4ff-f5eda0f0563c",
+      "nickName": "Kamila@kamila",
+      "averageRating": 0.0
+    },
+    {
+      "password": "90a28456d65ca0c40abb0c83f5d27fa9",
+      "id": "ec6d8c59-e6b1-4f0d-b4ff-f5eda0f0563c",
+      "nickName": "Kamila@kamila",
+      "averageRating": 0.0
+    },
+    {
+      "password": "90a28456d65ca0c40abb0c83f5d27fa9",
+      "id": "45ae5092-3c11-461e-ab4c-a431763fab66",
+      "nickName": "Kamila@kamila",
+      "averageRating": 0.0
+    },
+    {
+      "password": "90a28456d65ca0c40abb0c83f5d27fa9",
+      "id": "45ae5092-3c11-461e-ab4c-a431763fab66",
+      "nickName": "Kamila@kamila",
+      "averageRating": 0.0
+    },
+    {
+      "password": "90a28456d65ca0c40abb0c83f5d27fa9",
+      "id": "45ae5092-3c11-461e-ab4c-a431763fab66",
+      "nickName": "Kamila@kamila",
+      "averageRating": 0.0
+    }
+  ]
+}
