@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.UUID;
 
 public class Subject {
+    Subject RankingFactory;
     private UUID id;
 
     private UUID teacherId;
