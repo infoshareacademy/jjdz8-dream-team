@@ -1,6 +1,7 @@
 package com.infoshareacademy.menu;
 
 
+import com.infoshareacademy.calendar.CalendarService;
 import com.infoshareacademy.subjects.SubjectService;
 import com.infoshareacademy.userInput.UserInput;
 import com.infoshareacademy.users.TeacherService;
@@ -11,6 +12,7 @@ public class MenuOption {
         int userChoice = uploadCorrectUserInput(MenuAppearance.mainMenuOptions.length);
         TeacherService teacherService = new TeacherService();
         SubjectService subjectService = new SubjectService();
+        CalendarService calendarService = new CalendarService();
         switch (userChoice) {
             case 1: {
                 teacherService.createTeacherAccount();
@@ -30,6 +32,10 @@ public class MenuOption {
                 break;
             }
             case 5: {
+                calendarService.createTeacherTerms();
+                break;
+            }
+            case 6: {
                 MenuService menuService = new MenuService();
                 menuService.exitApplication();
             }
