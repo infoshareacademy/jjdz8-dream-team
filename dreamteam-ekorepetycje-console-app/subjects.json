@@ -1,0 +1,14 @@
+{
+  "subjectsList": [
+    {
+      "id": "b594fe53-b307-4431-af7f-594ccf3b15af",
+      "teacherId": "e85e240a-8c9c-4864-8514-0d853adecd8e",
+      "name": "HISTORIA",
+      "topic": "wojny",
+      "range": [
+        "bohaterzy"
+      ],
+      "isVideo": true
+    }
+  ]
+}

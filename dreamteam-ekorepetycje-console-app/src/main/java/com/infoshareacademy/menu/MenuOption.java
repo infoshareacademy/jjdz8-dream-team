@@ -41,11 +41,11 @@ public class MenuOption {
         SubjectAccountEditor subjectEditor = new SubjectAccountEditor();
         switch (userChoice) {
             case 1: {
-                editor.editTeacherNickname();
+                editor.editNickname();
                 break;
             }
             case 2: {
-                editor.editTeacherPassword();
+                editor.editPassword();
             }
             case 3: {
                 subjectEditor.editSubjects(account);
