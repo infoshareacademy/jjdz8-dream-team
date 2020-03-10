@@ -5,4 +5,6 @@ public class FileNames {
 
     public static final String TEACHERS_JSON = "users.json";
 
+    public static final String GRADES_JSON = "grades.json";
+
 }

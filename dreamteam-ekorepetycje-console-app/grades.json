@@ -1,0 +1,25 @@
+{
+  "gradeList": [
+    {
+      "id": "63f225eb-8016-47bc-9a28-e8dd0b5a3b59",
+      "subjectId": "943c096c-072a-402d-b4b1-ae16001119fb",
+      "teacherId": "23f601cd-767c-4661-bd83-8ded259a0cbe",
+      "grade": 6.0,
+      "comment": ""
+    },
+    {
+      "id": "d8517ff0-7533-4ba3-b1de-8a8d19037e92",
+      "subjectId": "fd305d38-ec5c-4338-b2d8-c135b8b737af",
+      "teacherId": "d3085812-e689-4c02-8260-3e788cca9347",
+      "grade": 3.0,
+      "comment": ""
+    },
+    {
+      "id": "b3ad8995-4f9f-4b6c-af6c-e7387adbebf4",
+      "subjectId": "c10552dd-235a-4976-ac11-5434e7dd39eb",
+      "teacherId": "23f601cd-767c-4661-bd83-8ded259a0cbe",
+      "grade": 5.0,
+      "comment": ""
+    }
+  ]
+}

@@ -20,6 +20,14 @@ public class Teachers {
         this.teachersList.addAll(Arrays.asList(teachers));
     }
 
+    public void printTeacherList(){
+        int count= 1;
+        for (Teacher teacher : teachersList) {
+            System.out.println(count+". "+teacher.getNickName());
+            count ++;
+        }
+    }
+
     public static boolean teacherAlreadyExist(String nickName) {
         Teachers teachers = JsonReader.create(new Teachers(), FileNames.TEACHERS_JSON);
         for (Teacher teacher : teachers.getTeachers()) {
