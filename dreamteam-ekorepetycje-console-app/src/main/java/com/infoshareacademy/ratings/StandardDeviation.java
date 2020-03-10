@@ -1,22 +1,23 @@
-package com.infoshareacademy.Kasia;
+package com.infoshareacademy.ratings;
 
 
 import com.google.gson.Gson;
+import com.infoshareacademy.fileOperations.FileNames;
+import com.infoshareacademy.fileOperations.JsonReader;
+import com.infoshareacademy.users.Teacher;
+import com.infoshareacademy.users.Teachers;
 
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.reflect.Type;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.nio.file.StandardOpenOption;
 import java.util.*;
 
 public class StandardDeviation {
     public static double calculateMode(double[] ints) {
         double mode;
-        HashMap<Double, Double> hm = new HashMap<Double, Double>();
+        HashMap<Double, Double> hm = new HashMap<>();
 
         double max = 0;
         double temp = 0;
@@ -226,32 +227,25 @@ public class StandardDeviation {
     }
 
 
-    public void StataRederJson() throws IOException {
-        Students studentsFromFile = createReader(new Students(), "studenci2.json");
-        for (Student s : studentsFromFile.getStudents()) {
-            Student student = new Student("Kasia");
-            if (student.getName().equals("Kasia")) {
-                List<Double> grades = new ArrayList<Double>();
-                grades = s.getGrades();
+    public void StataRederJson(Teacher teacher) throws IOException {
+        Grades grades = JsonReader.create(new Grades(), FileNames.GRADES_JSON);
+        List<Double> oneTeacherGrades = grades.findGradesForTeacher(teacher);
+        for (int i = 0; i < oneTeacherGrades.size(); i++) {
+            double[] arr5 = oneTeacherGrades.stream().mapToDouble(Double::doubleValue).toArray();
+        }
+        System.out.println("*********************************************************************");
+        System.out.println("Nauczyciel o imieniu" + " " + teacher.getNickName());
+        System.out.println("*********************************************************************");
+        StandardDeviation standardDev = new StandardDeviation();
+        standardDev.StataProgram(oneTeacherGrades.stream().mapToDouble(Double::doubleValue).toArray(), teacher);
 
-                for (int i = 0; i < grades.size(); i++) {
-                    double[] arr5 = grades.stream().mapToDouble(Double::doubleValue).toArray();
-                }
-                System.out.println("****************************");
-                System.out.println("Nauczyciel o imieniu" + " " + student.getName());
-                //System.out.println("Tablica" + Arrays.toString(student.getArr5()));
-                StandardDeviation standardDev = new StandardDeviation();
-                standardDev.StataProgram(grades.stream().mapToDouble(Double::doubleValue).toArray());
-
-                System.out.println("*************");
-
-            } else {
-                System.out.println("Nie znaleziono studenta o imieniu Kasia");
-
-            }}}
+        System.out.println("*************");
 
 
-    public void StataProgram(double arr5[]) throws IOException {
+    }
+
+
+    public void StataProgram(double arr5[], Teacher teacher) throws IOException {
 
         Properties prop = new Properties();
 
@@ -281,6 +275,7 @@ public class StandardDeviation {
                 StandardDeviation.mean(arr5);
             {
                 System.out.println("srednia arytemtyczna rozkladu oceniania" + " " + mean(arr5));
+                teacher.setAverageRating(mean(arr5));
             }
             case 1:
                 StandardDeviation.kurt(arr5);

@@ -1,4 +1,4 @@
-package com.infoshareacademy.Kasia;
+package com.infoshareacademy.ratings;
 
 import java.util.UUID;
 
@@ -39,7 +39,7 @@ public class Grade {
         this.teacherId = teacherId;
     }
 
-    public double getGrade() {
+    public Double getGrade() {
         return grade;
     }
 
