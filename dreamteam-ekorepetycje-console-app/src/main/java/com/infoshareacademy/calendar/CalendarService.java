@@ -44,9 +44,9 @@ public class CalendarService {
                 teacherTerm.setTeacherId(UUID.randomUUID());
             }
 
-            PrintStream var10000 = System.out;
-            String var10001 = teacher.getNickName();
-            var10000.println("Nickname from teachers: " + var10001 + ", ID from teacher: " + teacher.getId());
+//            PrintStream var10000 = System.out;
+//            String var10001 = teacher.getNickName();
+//            var10000.println("Nickname from teachers: " + var10001 + ", ID from teacher: " + teacher.getId());
         }
 
     }
