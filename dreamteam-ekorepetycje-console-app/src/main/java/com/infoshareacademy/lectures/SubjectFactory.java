@@ -1,4 +1,4 @@
-package com.infoshareacademy.subjects;
+package com.infoshareacademy.lectures;
 
 import com.infoshareacademy.userInput.UserInput;
 
@@ -8,6 +8,10 @@ public class SubjectFactory {
 
     public Subject getSubject() {
         return subject;
+    }
+
+    public void setSubject(Subject subject) {
+        this.subject = subject;
     }
 
     public void createSubject() {
@@ -26,7 +30,7 @@ public class SubjectFactory {
         setIsVideo();
     }
 
-    private void setIsVideo() {
+    public void setIsVideo() {
         String choice = UserInput.uploadString();
         while (true) {
             if (choice.equalsIgnoreCase("yes")) {
