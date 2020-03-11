@@ -54,7 +54,6 @@ public class GradesService {
             if (choice.equalsIgnoreCase("n")) {
                 MenuService.returnToMainMenu();
                 return;
-
             }
             System.out.println("please enter yes/no");
             choice = UserInput.uploadString();
