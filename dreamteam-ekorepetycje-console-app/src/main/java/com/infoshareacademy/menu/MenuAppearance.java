@@ -9,7 +9,7 @@ public class MenuAppearance {
     private static final String SUBJECT_EDIT_MENU = "Edit your subject";
 
     public static final String[] MAIN_MENU_OPTIONS = {"Teacher! Create your account", "Change your data",
-            "Searching for subject tutoring", "Show teacher ranking ", "Give a grade to the teacher", "Exit application"};
+            "Searching for subject tutoring", "Show teacher ranking ", "Enter grade for Teacher", "Exit application"};
 
     public static final String[] EDIT_MENU_OPTIONS = {"Edit nickname", "Edit password", "Edit subject",
             "Add new subject ", "Return to main menu"};
