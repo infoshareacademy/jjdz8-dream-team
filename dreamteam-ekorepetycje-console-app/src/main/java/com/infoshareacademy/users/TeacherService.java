@@ -7,7 +7,7 @@ public class TeacherService {
 
     public void createTeacherAccount() {
         TeacherAccountCreator account = new TeacherAccountCreator();
-        account.createTeacherAccount();
+        account.createAccount();
     }
 
     public void editTeacherAccount() {

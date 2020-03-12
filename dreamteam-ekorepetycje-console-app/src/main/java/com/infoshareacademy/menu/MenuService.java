@@ -16,11 +16,11 @@ public class MenuService {
         while (true) {
             if (choice.equalsIgnoreCase("yes")) {
                 System.out.println("see you next time");
-                return;
+                break;
             }
             if (choice.equalsIgnoreCase("No")) {
                 returnToMainMenu();
-                return;
+                break;
 
             }
             System.out.println("please enter yes/no");

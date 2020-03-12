@@ -25,10 +25,8 @@ public class TeacherAccount {
         String username = uploadCorrectNickname();
         CommandPrinter.enterYourPasswordHeader();
         acceptCorrectPassword(username);
-
         Teachers teachers = JsonReader.create(new Teachers(), TEACHERS_JSON);
         setTeacher(teachers.findByNickname(username));
-
         CommandPrinter.accessGrantedHeader();
 
         return true;
