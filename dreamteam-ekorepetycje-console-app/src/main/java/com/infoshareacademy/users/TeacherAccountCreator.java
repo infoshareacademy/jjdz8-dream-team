@@ -17,12 +17,6 @@ public class TeacherAccountCreator {
         savingTeacher(teacher);
     }
 
-    private void savingTeacher(Teacher teacher) {
-        Teachers teachers = JsonReader.create(new Teachers(), TEACHERS_JSON);
-        teachers.addTeacher(teacher);
-        JsonSaver.createJson(teachers, TEACHERS_JSON);
-    }
-
     private Teacher createTeacher() {
         String teacherNickname = uploadCorrectTeacherNickname();
         Teacher teacher = new Teacher(teacherNickname);
@@ -39,8 +33,10 @@ public class TeacherAccountCreator {
             nickName = UserInput.uploadString();
         }
 
+
         return nickName;
     }
+
 
     public void decideToEnterSubject(Teacher teacher) {
         CommandPrinter.doYouWantEnterSubjectHeader();
@@ -48,11 +44,9 @@ public class TeacherAccountCreator {
         while (true) {
             if (choice.equalsIgnoreCase("yes")) {
                 addSubjectForTeacher(teacher);
-                savingTeacher(teacher);
                 return;
             }
             if (choice.equalsIgnoreCase("No")) {
-                savingTeacher(teacher);
                 returnToMainMenu();
 
                 return;
@@ -68,6 +62,15 @@ public class TeacherAccountCreator {
         accountCreator.createSubjectsAccount(teacher);
         decideToEnterSubject(teacher);
     }
+
+
+    private void savingTeacher(Teacher teacher) {
+        Teachers teachers = JsonReader.create(new Teachers(), TEACHERS_JSON);
+        teachers.addTeacher(teacher);
+        JsonSaver.createJson(teachers, TEACHERS_JSON);
+    }
+
+
 
     private void returnToMainMenu() {
         CommandPrinter.accountSuccessfullySavedHeader();

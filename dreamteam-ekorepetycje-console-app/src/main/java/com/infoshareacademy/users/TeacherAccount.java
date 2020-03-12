@@ -22,7 +22,7 @@ public class TeacherAccount {
 
     public boolean logIn() {
         CommandPrinter.enterNicknameHeader();
-        String username = uploadCorrectAccount();
+        String username = uploadCorrectNickname();
         CommandPrinter.enterYourPasswordHeader();
         acceptCorrectPassword(username);
 
@@ -34,7 +34,7 @@ public class TeacherAccount {
         return true;
     }
 
-    public String uploadCorrectAccount() {
+    public String uploadCorrectNickname() {
         String nickName = UserInput.uploadString();
         int badNicknameCounter = 0;
         while (!Teachers.teacherAlreadyExist(nickName)) {

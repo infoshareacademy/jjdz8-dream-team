@@ -20,6 +20,22 @@ public class UserInput {
         return userChoice;
     }
 
+    public static double upLoadDouble() {
+        double userChoice = 0;
+        boolean isCorrect = false;
+        while (isCorrect == false) {
+            try {
+                Scanner scanner = new Scanner(System.in);
+                userChoice = scanner.nextDouble();
+                isCorrect = true;
+            } catch (Exception e) {
+                System.out.println("Incorrect format. Please try again");
+            }
+        }
+
+        return userChoice;
+    }
+
     public static String uploadString() {
         Scanner scanner = new Scanner(System.in);
 

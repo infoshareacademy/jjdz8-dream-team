@@ -25,6 +25,14 @@ public class Teacher {
         this.nickName = nickName;
     }
 
+    public void setAverageRating(double averageRating) {
+        this.averageRating = averageRating;
+    }
+
+    public double getAverageRating() {
+        return averageRating;
+    }
+
     public String getPassword() {
         return password;
     }
