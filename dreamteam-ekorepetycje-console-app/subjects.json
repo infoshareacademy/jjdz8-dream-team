@@ -1,0 +1,45 @@
+{
+  "subjectsList": [
+    {
+      "id": "fd305d38-ec5c-4338-b2d8-c135b8b737af",
+      "teacherId": "d3085812-e689-4c02-8260-3e788cca9347",
+      "name": "Matematyka",
+      "topic": "liczby calowite",
+      "range": [
+        "dodawanie"
+      ],
+      "isVideo": false
+    },
+    {
+      "id": "3d8d34f8-09df-4370-8270-d7839fb3cb91",
+      "teacherId": "d3085812-e689-4c02-8260-3e788cca9347",
+      "name": "geografia",
+      "topic": "polska",
+      "range": [
+        "wojewodztwa",
+        " duze miasta"
+      ],
+      "isVideo": true
+    },
+    {
+      "id": "c10552dd-235a-4976-ac11-5434e7dd39eb",
+      "teacherId": "23f601cd-767c-4661-bd83-8ded259a0cbe",
+      "name": "Programowanie",
+      "topic": "Java",
+      "range": [
+        "początki"
+      ],
+      "isVideo": false
+    },
+    {
+      "id": "943c096c-072a-402d-b4b1-ae16001119fb",
+      "teacherId": "23f601cd-767c-4661-bd83-8ded259a0cbe",
+      "name": "programowanie",
+      "topic": "java",
+      "range": [
+        "zaawansowane"
+      ],
+      "isVideo": false
+    }
+  ]
+}
