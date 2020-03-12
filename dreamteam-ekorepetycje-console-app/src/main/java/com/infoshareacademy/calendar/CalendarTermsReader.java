@@ -19,9 +19,6 @@ import net.fortuna.ical4j.model.Component;
 public class CalendarTermsReader {
     private List<TeacherTerm> teacherTerms = new ArrayList();
 
-  //  public CalendarTermsReader() {
-  //  }
-
     public List<TeacherTerm> getTeacherCalendars() {
         CalendarFileReader calendarFileReader = new CalendarFileReader();
         File[] listOfFiles = this.getElementsInDir("calendars");

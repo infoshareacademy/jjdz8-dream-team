@@ -7,19 +7,48 @@ package com.infoshareacademy.calendar;
 
 import com.infoshareacademy.fileOperations.JsonReader;
 import com.infoshareacademy.fileOperations.JsonSaver;
-import com.infoshareacademy.users.Teacher;
-import com.infoshareacademy.users.TeacherTerm;
-import com.infoshareacademy.users.TeacherTerms;
-import com.infoshareacademy.users.Teachers;
+import com.infoshareacademy.lectures.Subject;
+import com.infoshareacademy.menu.MenuAppearance;
+import com.infoshareacademy.menu.MenuOption;
+import com.infoshareacademy.userOutput.CommandPrinter;
+import com.infoshareacademy.users.*;
+import net.fortuna.ical4j.model.DateTime;
+import org.apache.commons.collections4.ArrayStack;
+
 import java.io.PrintStream;
-import java.util.Iterator;
-import java.util.UUID;
+import java.time.LocalDate;
+import java.util.*;
 
 public class CalendarService {
-    public CalendarService() {
+
+    public void calendarOptions() {
+        MenuAppearance.showTermsMenu();
     }
 
-    public void createTeacherTerms() {
+    public void showAllTermsOfSpecificTeacher() {
+        CommandPrinter.chooseTeacher();
+        CalendarService calendarService = new CalendarService();
+        calendarService.displayTeachers(calendarService.createTeacherTerms());
+        MenuAppearance.showTermsMenu();
+        MenuOption.chooseCalendarOptions();
+    }
+
+    public void showAllOneTermsOfSpecificSubject() {
+        CommandPrinter.enterSubject();
+        CalendarService calendarService = new CalendarService();
+        calendarService.displaySubjects(calendarService.createTeacherTerms());
+        MenuAppearance.showTermsMenu();
+        MenuOption.chooseCalendarOptions();
+    }
+
+    public void showAllTerms() {
+        CalendarService calendarService = new CalendarService();
+        displayAllTeacherTerms(calendarService.createTeacherTerms());
+        MenuAppearance.showTermsMenu();
+        MenuOption.chooseCalendarOptions();
+    }
+
+    public TeacherTerms createTeacherTerms() {
         TeacherTerms teacherTerms = new TeacherTerms();
         Iterator var2 = teacherTerms.getTeacherTerms().iterator();
 
@@ -27,13 +56,12 @@ public class CalendarService {
             TeacherTerm teacherTerm = (TeacherTerm)var2.next();
             this.addingTeacherID(teacherTerm);
             this.savingTeacherTerms(teacherTerm);
-            this.displayTeacherTerms(teacherTerm);
         }
-
+        return teacherTerms;
     }
 
     public void addingTeacherID(TeacherTerm teacherTerm) {
-        Teachers teachers = (Teachers)JsonReader.create(new Teachers(), "users.json");
+        Teachers teachers = JsonReader.create(new Teachers(), "users.json");
         Iterator var3 = teachers.getTeachers().iterator();
 
         while(var3.hasNext()) {
@@ -43,21 +71,78 @@ public class CalendarService {
             } else {
                 teacherTerm.setTeacherId(UUID.randomUUID());
             }
-
-//            PrintStream var10000 = System.out;
-//            String var10001 = teacher.getNickName();
-//            var10000.println("Nickname from teachers: " + var10001 + ", ID from teacher: " + teacher.getId());
         }
-
     }
 
     private void savingTeacherTerms(TeacherTerm teacherTerm) {
         TeacherTerms teacherTerms = new TeacherTerms();
-        teacherTerms.addTeacherTerm(new TeacherTerm[]{teacherTerm});
+        teacherTerms.addTeacherTerm(teacherTerm);
         JsonSaver.createJson(teacherTerms, "terms.json");
     }
 
-    public void displayTeacherTerms(TeacherTerm teacherTerm) {
-        System.out.println(teacherTerm.toString());
+    public void displayAllTeacherTerms(TeacherTerms teacherTerms) {
+        //TeacherTerms teacherTerms = new TeacherTerms();
+        Iterator var4 = teacherTerms.getTeacherTerms().iterator();
+
+        while(var4.hasNext()) {
+            TeacherTerm teacherTerm = (TeacherTerm) var4.next();
+            System.out.println(teacherTerm.toString());
+        }
+    }
+
+    public void displayTeachers(TeacherTerms teacherTerms) {
+        Iterator var5 = teacherTerms.getTeacherTerms().iterator();
+        int i = 1;
+        while(var5.hasNext()) {
+            TeacherTerm teacherTerm = (TeacherTerm) var5.next();
+            System.out.print(i++ + ". ");
+            System.out.println(teacherTerm.getNickName());
+        }
+        int num = MenuOption.uploadCorrectUserInput(teacherTerms.getTeacherTerms().size());
+        int choice = num - 1;
+        for (int j = 0; j < teacherTerms.getTeacherTerms().size(); j++) {
+            if (j == choice) {
+                System.out.println(teacherTerms.getTeacherTerms().get(j));
+            }
+        }
+    }
+
+    public void displaySubjects(TeacherTerms teacherTerms) {
+        Iterator var5 = teacherTerms.getTeacherTerms().iterator();
+        Set<String> subjectsSet = new HashSet<>();
+
+        while(var5.hasNext()) {
+            TeacherTerm teacherTerm = (TeacherTerm) var5.next();
+            for (Map.Entry<LocalDate, String> term : teacherTerm.getTerms().entrySet()) {
+                subjectsSet.add(term.getValue());
+            }
+        }
+            int i = 1;
+            int j = 0;
+            String[] subjectsTable = new String[subjectsSet.size()];
+            for (String subject:subjectsSet) {
+                subjectsTable[j] = subject;
+                System.out.println(i + ". " + subject);
+                i++;
+                j++;
+            }
+
+            int num = MenuOption.uploadCorrectUserInput(subjectsTable.length);
+            int choice = num - 1;
+            String subjectName = "";
+            for (j = 0; j < subjectsTable.length; j++) {
+                if (j == choice) {
+                    subjectName = subjectsTable[j];
+                }
+            }
+        Iterator var6 = teacherTerms.getTeacherTerms().iterator();
+        while(var6.hasNext()) {
+            TeacherTerm teacherTerm = (TeacherTerm) var6.next();
+            for(Map.Entry<LocalDate, String> term : teacherTerm.getTerms().entrySet()) {
+                if (subjectName.equals(term.getValue())) {
+                    System.out.println(teacherTerm.getNickName() + ": " + term.getKey() + " ");
+                }
+            }
+        }
     }
 }

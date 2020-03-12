@@ -29,7 +29,7 @@ public class TeacherTerms {
     }
 
     public static boolean teacherTermsAlreadyExist(String nickName) {
-        TeacherTerms teacherTerms = (TeacherTerms)JsonReader.create(new TeacherTerms(), "terms.json");
+        TeacherTerms teacherTerms = JsonReader.create(new TeacherTerms(), "terms.json");
         Iterator var2 = teacherTerms.getTeacherTerms().iterator();
 
         TeacherTerm teacherTerm;

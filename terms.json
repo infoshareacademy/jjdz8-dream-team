@@ -1,0 +1,35 @@
+{
+  "teacherTerms": [
+    {
+      "nickName": "PiotrSkalski",
+      "terms": {
+        "2020-04-22": "Fizyka",
+        "2020-04-21": "Matematyka"
+      }
+    },
+    {
+      "nickName": "GrzegorzJagoda",
+      "terms": {
+        "2020-03-26": "Biologia",
+        "2020-05-09": "Geografia",
+        "2020-04-03": "Biologia",
+        "2020-05-16": "Geografia"
+      }
+    },
+    {
+      "nickName": "AdamNowak",
+      "terms": {
+        "2020-03-22": "Fizyka",
+        "2020-03-21": "Matematyka"
+      }
+    },
+    {
+      "nickName": "AdamNowak",
+      "teacherId": "792251ae-076a-4546-8c55-802e37df695d",
+      "terms": {
+        "2020-03-22": "Fizyka",
+        "2020-03-21": "Matematyka"
+      }
+    }
+  ]
+}

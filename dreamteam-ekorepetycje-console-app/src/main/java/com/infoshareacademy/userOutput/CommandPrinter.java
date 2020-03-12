@@ -14,9 +14,11 @@ public class CommandPrinter {
     private static final String DECIDE_TO_ADD_SUBJECT = "Do you want enter subject? Yes/no";
     private static final String ACCOUNT_SAVED = "Your account was safely saved";
     private static final String ACCESS_GRANTED = "Welcome. Access granted.";
+    private static final String CHOOSE_TEACHER = "Choose teacher.";
+    private static final String ENTER_SUBJECT = "Enter subject.";
 
     public static void enterNicknameHeader() {
-        displayMessage("Enter Nickname");
+        displayMessage(ENTER_NICKNAME);
     }
 
     public static void showPasswordRules() {
@@ -43,9 +45,7 @@ public class CommandPrinter {
         displayMessage(NICKNAME_CHANGED);
     }
 
-    public static void enterNewNicknameHeader() {
-        displayMessage(NEW_NICKNAME);
-    }
+    public static void enterNewNicknameHeader() { displayMessage(NEW_NICKNAME); }
 
     public static void doYouWantEnterSubjectHeader() {
         displayMessage(DECIDE_TO_ADD_SUBJECT);
@@ -58,6 +58,10 @@ public class CommandPrinter {
     public static void accessGrantedHeader() {
         displayMessage(ACCESS_GRANTED);
     }
+
+    public static void chooseTeacher() { displayMessage(CHOOSE_TEACHER); }
+
+    public static void enterSubject() { displayMessage(ENTER_SUBJECT); }
 
     private static void displayMessage(String message) {
         System.out.println("*********************************************************************");
