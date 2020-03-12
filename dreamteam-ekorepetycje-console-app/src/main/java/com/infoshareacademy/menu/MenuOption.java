@@ -1,5 +1,6 @@
 package com.infoshareacademy.menu;
 
+import com.infoshareacademy.ratings.GradesService;
 import com.infoshareacademy.lectures.*;
 import com.infoshareacademy.userInput.UserInput;
 import com.infoshareacademy.users.TeacherAccount;
@@ -30,7 +31,12 @@ public class MenuOption {
                 break;
             }
             case 5: {
+                GradesService gradesService = new GradesService();
+                gradesService.setAGradeToTheTeacher();
+            }
+            case 6 : {
                 MenuService.exitApplication();
+
             }
         }
     }
