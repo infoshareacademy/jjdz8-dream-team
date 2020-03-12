@@ -20,6 +20,21 @@ public class UserInput {
         return userChoice;
     }
 
+    public static double upLoadDouble(double min, double max) {
+        double userChoice =0;
+        while (userChoice < min || userChoice > max) {
+            try {
+                Scanner scanner = new Scanner(System.in);
+                userChoice = scanner.nextDouble();
+            } catch (Exception e) {
+                System.out.println("Incorrect format. Please try again");
+            }
+            System.out.println("Please enter value between "+min+" - "+ max);
+        }
+
+        return userChoice;
+    }
+
     public static String uploadString() {
         Scanner scanner = new Scanner(System.in);
 

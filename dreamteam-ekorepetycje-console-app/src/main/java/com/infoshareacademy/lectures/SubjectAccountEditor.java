@@ -48,21 +48,26 @@ public class SubjectAccountEditor {
         if (subjectList.size() == 0) {
             System.out.println("You have any subjects entered yet.");
             TeacherAccountCreator creator = new TeacherAccountCreator();
-            creator.decideToEnterSubject(account.getTeacher());
+            creator.decideToEnterSubject();
         }
         System.out.println("Which subject do you want edit");
-        Subject editedSubject = new Subject();
-        int num = MenuOption.uploadCorrectUserInput(subjectList.size());
-        int choice = num - 1;
-        for (int j = 0; j < subjectList.size(); j++) {
-            if (j == choice) {
-                editedSubject = subjectList.get(j);
-            }
-        }
+        Subject editedSubject = uploadCorrectSubject(subjectList);
         System.out.println(editedSubject);
         System.out.println("what want you edit");
 
         return editedSubject;
+    }
+
+    public Subject uploadCorrectSubject(List<Subject> subjects){
+        Subject subject = new Subject();
+        int num = MenuOption.uploadCorrectUserInput(subjects.size());
+        int choice = num - 1;
+        for (int j = 0; j < subjects.size(); j++) {
+            if (j == choice) {
+                subject = subjects.get(j);
+            }
+        }
+        return subject;
     }
 
     public void editSubjectName(Subject editedSubject) {

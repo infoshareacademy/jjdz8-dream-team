@@ -53,6 +53,18 @@ public class Subject {
         return id;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public String getTopic() {
+        return topic;
+    }
+
+    public String[] getRange() {
+        return range;
+    }
+
     @Override
     public String toString() {
         return "Subject{" +

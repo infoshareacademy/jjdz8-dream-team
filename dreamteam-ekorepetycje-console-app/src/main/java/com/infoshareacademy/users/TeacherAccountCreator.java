@@ -9,26 +9,26 @@ import com.infoshareacademy.userOutput.CommandPrinter;
 
 import static com.infoshareacademy.fileOperations.FileNames.TEACHERS_JSON;
 
-public class TeacherAccountCreator {
+public class TeacherAccountCreator implements AccountCreationCapable {
 
-    public void createTeacherAccount() {
-        Teacher teacher = createTeacher();
-        decideToEnterSubject(teacher);
-        savingTeacher(teacher);
+    private Teacher teacher;
+
+    public void createAccount() {
+        createUser();
+        decideToEnterSubject();
+        saveAccount();
     }
 
-    private void savingTeacher(Teacher teacher) {
+    public void saveAccount() {
         Teachers teachers = JsonReader.create(new Teachers(), TEACHERS_JSON);
-        teachers.addTeacher(teacher);
+        teachers.addTeacher(this.teacher);
         JsonSaver.createJson(teachers, TEACHERS_JSON);
     }
 
-    private Teacher createTeacher() {
+    public void createUser() {
         String teacherNickname = uploadCorrectTeacherNickname();
-        Teacher teacher = new Teacher(teacherNickname);
+        this.teacher = new Teacher(teacherNickname);
         teacher.setPassword();
-
-        return teacher;
     }
 
     private String uploadCorrectTeacherNickname() {
@@ -42,17 +42,17 @@ public class TeacherAccountCreator {
         return nickName;
     }
 
-    public void decideToEnterSubject(Teacher teacher) {
+    public void decideToEnterSubject() {
         CommandPrinter.doYouWantEnterSubjectHeader();
         String choice = UserInput.uploadString();
         while (true) {
             if (choice.equalsIgnoreCase("yes")) {
-                addSubjectForTeacher(teacher);
-                savingTeacher(teacher);
+                addSubjectForTeacher();
+                saveAccount();
                 return;
             }
             if (choice.equalsIgnoreCase("No")) {
-                savingTeacher(teacher);
+                saveAccount();
                 returnToMainMenu();
 
                 return;
@@ -63,10 +63,10 @@ public class TeacherAccountCreator {
         }
     }
 
-    public void addSubjectForTeacher(Teacher teacher) {
+    public void addSubjectForTeacher() {
         SubjectAccountCreator accountCreator = new SubjectAccountCreator();
-        accountCreator.createSubjectsAccount(teacher);
-        decideToEnterSubject(teacher);
+        accountCreator.createSubjectsAccount(this.teacher);
+        decideToEnterSubject();
     }
 
     private void returnToMainMenu() {

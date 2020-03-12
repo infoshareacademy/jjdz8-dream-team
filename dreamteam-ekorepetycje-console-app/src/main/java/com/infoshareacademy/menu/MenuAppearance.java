@@ -11,7 +11,7 @@ public class MenuAppearance {
     private static final String TERMS_FROM_CALENDARS_MENU = "Term from calendars";
 
     public static final String[] MAIN_MENU_OPTIONS = {"Teacher! Create your account", "Change your data",
-            "Searching for subject tutoring", "Show teacher ranking ", "Show teachers and subjects terms", "Exit application"};
+            "Searching for subject tutoring", "Show teacher ranking ", "Enter grade for Teacher", "Show teachers and subjects terms", "Exit application"};
 
     public static final String[] EDIT_MENU_OPTIONS = {"Edit nickname", "Edit password", "Edit subject",
             "Add new subject ", "Return to main menu"};
