@@ -21,6 +21,10 @@ public class Teacher {
         this.nickName = nickName;
     }
 
+    public Teacher() {
+
+    }
+
     public void setNickName(String nickName) {
         this.nickName = nickName;
     }

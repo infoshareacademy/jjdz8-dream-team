@@ -2,7 +2,7 @@ package com.infoshareacademy.subjects;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;git
+import java.util.List;
 
 public class Subjects {
 
