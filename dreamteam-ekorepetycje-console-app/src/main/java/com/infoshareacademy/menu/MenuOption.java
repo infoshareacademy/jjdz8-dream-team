@@ -3,9 +3,7 @@ package com.infoshareacademy.menu;
 import com.infoshareacademy.ratings.GradesService;
 import com.infoshareacademy.lectures.*;
 import com.infoshareacademy.userInput.UserInput;
-import com.infoshareacademy.users.TeacherAccount;
-import com.infoshareacademy.users.TeacherAccountEditor;
-import com.infoshareacademy.users.TeacherService;
+import com.infoshareacademy.users.*;
 
 public class MenuOption {
 
@@ -27,7 +25,7 @@ public class MenuOption {
                 break;
             }
             case 4: {
-                teacherService.showBestRatedTeachers();
+                teacherService.showTeacherRanking();
                 break;
             }
             case 5: {

@@ -6,7 +6,7 @@ import com.infoshareacademy.userOutput.CommandPrinter;
 
 import java.util.UUID;
 
-public class Teacher {
+public class Teacher implements Comparable<Teacher> {
 
     private String password;
 
@@ -70,4 +70,12 @@ public class Teacher {
                 ", nickName='" + nickName + '\'' +
                 '}';
     }
+
+    @Override
+    public int compareTo(Teacher teacher) {
+        if (averageRating > teacher.getAverageRating()) return 1;
+        if (averageRating < teacher.getAverageRating()) return -1;
+        return 0;
+    }
+
 }
