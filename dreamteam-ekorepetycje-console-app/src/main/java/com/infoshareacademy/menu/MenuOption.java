@@ -31,10 +31,11 @@ public class MenuOption {
             case 5: {
                 GradesService gradesService = new GradesService();
                 gradesService.setAGradeToTheTeacher();
+                break;
             }
             case 6 : {
                 MenuService.exitApplication();
-
+                break;
             }
         }
     }
@@ -45,11 +46,12 @@ public class MenuOption {
         SubjectAccountEditor subjectEditor = new SubjectAccountEditor();
         switch (userChoice) {
             case 1: {
-                editor.editTeacherNickname();
+                editor.editNickname();
                 break;
             }
             case 2: {
-                editor.editTeacherPassword();
+                editor.editPassword();
+                break;
             }
             case 3: {
                 subjectEditor.editSubjects(account);
@@ -102,6 +104,7 @@ public class MenuOption {
             }
             case 5: {
                 MenuService.returnToMainMenu();
+                break;
             }
         }
     }

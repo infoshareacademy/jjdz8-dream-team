@@ -238,9 +238,7 @@ public class StandardDeviation {
         System.out.println("*********************************************************************");
         StandardDeviation standardDev = new StandardDeviation();
         standardDev.StataProgram(oneTeacherGrades.stream().mapToDouble(Double::doubleValue).toArray(), teacher);
-
-        System.out.println("*************");
-
+        System.out.println("**********************************************************************");
 
     }
 

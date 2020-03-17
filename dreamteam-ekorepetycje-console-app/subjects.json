@@ -34,10 +34,53 @@
     {
       "id": "943c096c-072a-402d-b4b1-ae16001119fb",
       "teacherId": "23f601cd-767c-4661-bd83-8ded259a0cbe",
-      "name": "programowanie",
-      "topic": "java",
+      "name": "PROGRAMOWANIE-JAVA",
+      "topic": "PROGRAMOWANIE",
       "range": [
         "zaawansowane"
+      ],
+      "isVideo": false
+    },
+    {
+      "id": "f5efd290-ba9c-4161-b280-39411e8865bc",
+      "teacherId": "0f5e0a80-34c5-47b4-b640-75a24fe736fb",
+      "name": "Fizyka",
+      "topic": "astronomia",
+      "range": [
+        "gwiazy",
+        "planety"
+      ],
+      "isVideo": true
+    },
+    {
+      "id": "2c865d9b-5cae-4663-920b-46872cbce12b",
+      "teacherId": "0f5e0a80-34c5-47b4-b640-75a24fe736fb",
+      "name": "Chemia",
+      "topic": "pierwsiatki",
+      "range": [
+        "metale",
+        "niemetale"
+      ],
+      "isVideo": true
+    },
+    {
+      "id": "2d8f28d1-d83d-4582-baf7-e6091cba4c4e",
+      "teacherId": "0f5e0a80-34c5-47b4-b640-75a24fe736fb",
+      "name": "Biolgia",
+      "topic": "Ryby",
+      "range": [
+        "warunki bytowe"
+      ],
+      "isVideo": false
+    },
+    {
+      "id": "1c53d59b-d50a-4f9d-8f8d-f35380495d53",
+      "teacherId": "23f601cd-767c-4661-bd83-8ded259a0cbe",
+      "name": "MATEMATYKA",
+      "topic": "SZKOŁA PODSTWAWOWA",
+      "range": [
+        "DODAWANIE",
+        "ODEJMOWANIE"
       ],
       "isVideo": false
     }

@@ -39,7 +39,7 @@ public class GradesService {
         saveGrade();
         calculateStandardDeviation();
         JsonSaver.createJson(this.teachers, FileNames.TEACHERS_JSON);
-        this.grades.printComments(this.grades.findAllCommentForTeacher(this.teacher));
+        this.grades.printComments(this.grades.findAllCommentForTeacher(this.teacher), this.subject);
         decideToEnterAnotherGrade();
     }
 
@@ -98,7 +98,7 @@ public class GradesService {
 
     private double enterGrade() {
         System.out.println("Podaj ocene- zakres od 2 do 6");
-        return UserInput.upLoadDouble();
+        return UserInput.upLoadDouble(2, 6);
     }
 
     private String enterComment() {

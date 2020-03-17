@@ -8,7 +8,7 @@ import com.infoshareacademy.userOutput.CommandPrinter;
 
 import static com.infoshareacademy.fileOperations.FileNames.TEACHERS_JSON;
 
-public class TeacherAccountEditor {
+public class TeacherAccountEditor implements Editable {
 
     private TeacherAccount teacherAccount;
 
@@ -16,19 +16,16 @@ public class TeacherAccountEditor {
         this.teacherAccount = account;
     }
 
-    public void editTeacherNickname() {
+    public void editNickname() {
         String oldNickName = this.teacherAccount.getTeacher().getNickName();
         CommandPrinter.enterNewNicknameHeader();
-
         String newNickName = uploadCorrectNewNickname();
-        setNewNickName(oldNickName, newNickName);
-
+        setNewNickname(oldNickName, newNickName);
         CommandPrinter.yourNicknameWasChangeHeader();
-
         MenuService.returnToDataEditMenu(teacherAccount);
     }
 
-    private void setNewNickName(String nickName, String newNickName) {
+    private void setNewNickname(String nickName, String newNickName) {
         Teachers teachers = JsonReader.create(new Teachers(), TEACHERS_JSON);
         teachers.findByNickname(nickName).setNickName(newNickName);
         JsonSaver.createJson(teachers, TEACHERS_JSON);
@@ -44,15 +41,12 @@ public class TeacherAccountEditor {
         return newNickName;
     }
 
-    public void editTeacherPassword() {
+    public void editPassword() {
         Teachers teachers = JsonReader.create(new Teachers(), TEACHERS_JSON);
         String teacherNickname = teachers.findById(this.teacherAccount.getTeacher().getId()).getNickName();
-
         CommandPrinter.enterYourOldPasswordHeader();
-
         this.teacherAccount.acceptCorrectPassword(teacherNickname);
         setNewPassword(teacherNickname);
-
         CommandPrinter.passwordChangedHeader();
         MenuService.returnToDataEditMenu(this.teacherAccount);
     }

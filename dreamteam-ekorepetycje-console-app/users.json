@@ -1,16 +1,22 @@
 {
   "teachersList": [
     {
+      "averageRating": 3.625,
       "password": "90a28456d65ca0c40abb0c83f5d27fa9",
       "id": "d3085812-e689-4c02-8260-3e788cca9347",
-      "nickName": "Adama",
-      "averageRating": 3.5714285714285716
+      "nickName": "Adama"
     },
     {
+      "averageRating": 3.975,
       "password": "90a28456d65ca0c40abb0c83f5d27fa9",
       "id": "23f601cd-767c-4661-bd83-8ded259a0cbe",
-      "nickName": "Kamila",
-      "averageRating": 4.027777777777778
+      "nickName": "Kamila"
+    },
+    {
+      "averageRating": 3.0,
+      "password": "90a28456d65ca0c40abb0c83f5d27fa9",
+      "id": "0f5e0a80-34c5-47b4-b640-75a24fe736fb",
+      "nickName": "MAREK"
     }
   ]
 }
