@@ -16,27 +16,11 @@ public class  TeachersSorter {
     Grades grades = JsonReader.create(new Grades(), FileNames.GRADES_JSON);
 
     public void printTeacherRanking() {
-        TeacherService teacherService = new TeacherService();
+       TeacherService teacherService = new TeacherService();
         teacherService.showTeacherRanking();
-        sortTeachersByAverageRating();
-        int count = 1;
-        for (Teacher teacher : teachers.getTeachers()) {
-            if (teacher.getAverageRating() == 0.0) {
-                System.out.println(count + ". " + teacher.getNickName() + "* This Teacher already dont have any grade");
-                count++;
-                continue;
-            }
-            List<Double> teacherGrades = grades.findGradesForTeacher(teacher);
-            System.out.println(count + ". " + teacher.getNickName() + "*  average rating: " + roundToTwoDecimals(teacher.getAverageRating())
-                    + "  from " + teacherGrades.size() + "   grades entered by students");
-            count++;
+        teacherService.sortTeachersByAverageRating();
+
         }
-    }
-
-    private void sortTeachersByAverageRating() {
-        Collections.sort(teachers.getTeachers());
-    }
-
     public String roundToTwoDecimals(double number) {
         DecimalFormat f = new DecimalFormat("##.00");
         return f.format(number);

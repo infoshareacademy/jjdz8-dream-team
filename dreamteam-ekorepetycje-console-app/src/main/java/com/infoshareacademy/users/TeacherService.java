@@ -44,7 +44,7 @@ public class TeacherService {
         }
     }
 
-    private void sortTeachersByAverageRating() {
+    public void sortTeachersByAverageRating() {
         Collections.sort(teachers.getTeachers());
     }
 
