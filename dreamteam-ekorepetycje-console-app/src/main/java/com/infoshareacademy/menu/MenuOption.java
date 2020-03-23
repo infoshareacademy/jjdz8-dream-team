@@ -1,5 +1,6 @@
 package com.infoshareacademy.menu;
 
+import com.infoshareacademy.calendar.CalendarService;
 import com.infoshareacademy.ratings.GradesService;
 import com.infoshareacademy.lectures.*;
 import com.infoshareacademy.userInput.UserInput;
@@ -13,6 +14,7 @@ public class MenuOption {
         int userChoice = uploadCorrectUserInput(MenuAppearance.MAIN_MENU_OPTIONS.length);
         TeacherService teacherService = new TeacherService();
         SubjectService subjectService = new SubjectService();
+        CalendarService calendarService = new CalendarService();
         switch (userChoice) {
             case 1: {
                 teacherService.createTeacherAccount();
@@ -35,7 +37,12 @@ public class MenuOption {
                 gradesService.setAGradeToTheTeacher();
                 break;
             }
-            case 6 : {
+            case 6: {
+                calendarService.calendarOptions();
+                chooseCalendarOptions();
+                break;
+            }
+            case 7 : {
                 MenuService.exitApplication();
                 break;
             }
@@ -66,6 +73,29 @@ public class MenuOption {
                 break;
             }
             case 5: {
+                MenuService.returnToMainMenu();
+                break;
+            }
+        }
+    }
+
+    public static void chooseCalendarOptions() {
+        int userChoice = uploadCorrectUserInput(MenuAppearance.TERMS_FROM_CALENDARS_OPTIONS.length);
+        CalendarService calendarService = new CalendarService();
+        switch (userChoice) {
+            case 1: {
+                calendarService.showAllTermsOfSpecificTeacher();
+                break;
+            }
+            case 2: {
+                calendarService.showAllOneTermsOfSpecificSubject();
+                break;
+            }
+            case 3: {
+                calendarService.showAllTerms();
+                break;
+            }
+            case 4: {
                 MenuService.returnToMainMenu();
                 break;
             }
