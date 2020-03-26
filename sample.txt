@@ -1,0 +1,9 @@
+#
+#Thu Mar 12 22:13:47 CET 2020
+wartosc\ najwieksza=6.0
+wariancja=NaN
+odchylenie\ standardowe=NaN
+mediana=6
+kurtoza=0.0
+skosnosc=0.0
+moda=6.0
