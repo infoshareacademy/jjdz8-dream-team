@@ -1,10 +1,12 @@
 package com.infoshareacademy.menu;
 
 import com.infoshareacademy.userInput.UserInput;
+import com.infoshareacademy.userOutput.CommandPrinter;
 import com.infoshareacademy.users.TeacherAccount;
 
-public class MenuService {
+import static com.infoshareacademy.menu.MenuOption.uploadCorrectUserInput;
 
+public class MenuService {
     public static void appStart() {
         MenuAppearance.showMainMenu();
         MenuOption.chooseOptionMainMenu();
@@ -21,7 +23,6 @@ public class MenuService {
             if (choice.equalsIgnoreCase("No")) {
                 returnToMainMenu();
                 break;
-
             }
             System.out.println("please enter yes/no");
             choice = UserInput.uploadString();
@@ -35,5 +36,11 @@ public class MenuService {
     public static void returnToDataEditMenu(TeacherAccount account) {
         MenuAppearance.showDataEditMenu();
         MenuOption.chooseDataToEdit(account);
+    }
+
+    public static void returnToMainMenuFromTeachersRates() {
+        CommandPrinter.returnToMainMenu();
+        uploadCorrectUserInput(1);
+        MenuService.returnToMainMenu();
     }
 }
