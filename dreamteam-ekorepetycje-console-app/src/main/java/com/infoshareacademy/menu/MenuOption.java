@@ -1,14 +1,15 @@
 package com.infoshareacademy.menu;
 
 import com.infoshareacademy.calendar.CalendarService;
-import com.infoshareacademy.dataSorter.TeachersSorter;
 import com.infoshareacademy.ratings.GradesService;
 import com.infoshareacademy.lectures.*;
 import com.infoshareacademy.userInput.UserInput;
-import com.infoshareacademy.userOutput.CommandPrinter;
-import com.infoshareacademy.users.*;
+import com.infoshareacademy.users.TeacherAccount;
+import com.infoshareacademy.users.TeacherAccountEditor;
+import com.infoshareacademy.users.TeacherService;
 
 public class MenuOption {
+
     public static void chooseOptionMainMenu() {
         int userChoice = uploadCorrectUserInput(MenuAppearance.MAIN_MENU_OPTIONS.length);
         TeacherService teacherService = new TeacherService();
@@ -28,9 +29,7 @@ public class MenuOption {
                 break;
             }
             case 4: {
-                TeachersSorter sorter = new TeachersSorter();
-                sorter.printTeacherRanking();
-                MenuService.returnToMainMenuFromTeachersRates();
+                teacherService.showTeacherRanking();
                 break;
             }
             case 5: {
@@ -43,7 +42,7 @@ public class MenuOption {
                 chooseCalendarOptions();
                 break;
             }
-            case 7: {
+            case 7 : {
                 MenuService.exitApplication();
                 break;
             }
@@ -110,6 +109,7 @@ public class MenuOption {
             System.out.println("Incorrect choice. Try again with number between 1-" + maxRange);
             userChoice = UserInput.upLoadInt();
         }
+
         return userChoice;
     }
 
@@ -132,6 +132,7 @@ public class MenuOption {
             case 4: {
                 accountEditor.editVideoLessonsPossibility(subject);
                 break;
+
             }
             case 5: {
                 MenuService.returnToMainMenu();
@@ -139,4 +140,5 @@ public class MenuOption {
             }
         }
     }
+
 }

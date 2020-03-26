@@ -7,6 +7,7 @@ import com.infoshareacademy.users.Teacher;
 import com.infoshareacademy.users.Teachers;
 
 
+import java.text.DecimalFormat;
 import java.util.Collections;
 import java.util.List;
 
@@ -32,5 +33,14 @@ public class TeachersSorter {
 
     private void sortTeachersByAverageRating() {
         Collections.sort(teachers.getTeachers());
+    }
+
+
+    public static class Calculator {
+        public static String roundToTwoDecimals(double number) {
+            DecimalFormat f = new DecimalFormat("##.00");
+            return f.format(number);
+        }
+
     }
 }

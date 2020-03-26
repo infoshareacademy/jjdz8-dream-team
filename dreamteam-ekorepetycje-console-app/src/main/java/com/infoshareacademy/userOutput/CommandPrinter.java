@@ -5,7 +5,8 @@ public class CommandPrinter {
     private static final String NEW_NICKNAME = "Enter new nickname";
     private static final String ENTER_PASSWORD = "Enter password";
     private static final String ENTER_OLD_PASSWORD = "Enter old password";
-    private static final String ENTER_NEW_PASSWORD = "Please enter new Password\n (8-20 characters,at lest one digit,lower " +
+    private static final String ENTER_NEW_PASSWORD = "Please enter new Password\n " +
+            "(8-20 characters,at lest one digit,lower " +
             "and upper chase character, special character[@,!*$...])";
     private static final String ALL_SUBJECTS = "All your subjects";
     private static final String PASSWORD_CHANGED = "Yours password was successfully changed";
