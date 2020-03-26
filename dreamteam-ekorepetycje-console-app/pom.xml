@@ -8,7 +8,6 @@
     <name>dreamteam-ekorepetycje-console-app</name>
     <url>http://maven.apache.org</url>
     <dependencies>
-<<<<<<< HEAD
         <!-- https://mvnrepository.com/artifact/backport-util-concurrent/backport-util-concurrent -->
         <dependency>
             <groupId>backport-util-concurrent</groupId>
@@ -44,15 +43,12 @@
             <artifactId>slf4j-api</artifactId>
             <version>1.7.24</version>
         </dependency>
-=======
         <!-- https://mvnrepository.com/artifact/commons-codec/commons-codec -->
         <dependency>
             <groupId>commons-codec</groupId>
             <artifactId>commons-codec</artifactId>
             <version>1.9</version>
         </dependency>
-
->>>>>>> develop
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
