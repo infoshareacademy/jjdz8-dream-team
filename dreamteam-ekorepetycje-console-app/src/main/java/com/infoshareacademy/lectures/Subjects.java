@@ -2,10 +2,7 @@ package com.infoshareacademy.lectures;
 
 import com.infoshareacademy.fileOperations.JsonReader;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 import static com.infoshareacademy.fileOperations.FileNames.SUBJECTS_JSON;
 
@@ -44,13 +41,13 @@ public class Subjects {
         return oneTeacherSubjects;
     }
 
-    public Subject findById(Subject editedSubject) {
+    public Optional<Subject> findById(Subject editedSubject) {
         for (Subject subject : this.subjectsList) {
             if (subject.getId().equals(editedSubject.getId())) {
-                return subject;
+                return Optional.of(subject);
             }
         }
-        return null;
+        return Optional.empty();
     }
 
 }
