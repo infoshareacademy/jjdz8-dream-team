@@ -1,9 +1,11 @@
 package com.infoshareacademy.menu;
 
 import com.infoshareacademy.calendar.CalendarService;
+import com.infoshareacademy.dataSorter.TeachersSorter;
 import com.infoshareacademy.ratings.GradesService;
 import com.infoshareacademy.lectures.*;
 import com.infoshareacademy.userInput.UserInput;
+import com.infoshareacademy.userOutput.CommandPrinter;
 import com.infoshareacademy.users.*;
 
 public class MenuOption {
@@ -27,7 +29,9 @@ public class MenuOption {
                 break;
             }
             case 4: {
-                teacherService.showTeacherRanking();
+                TeachersSorter sorter = new TeachersSorter();
+                sorter.printTeacherRanking();
+                MenuService.returnToMainMenuFromTeachersRates();
                 break;
             }
             case 5: {

@@ -1,7 +1,10 @@
 package com.infoshareacademy.menu;
 
 import com.infoshareacademy.userInput.UserInput;
+import com.infoshareacademy.userOutput.CommandPrinter;
 import com.infoshareacademy.users.TeacherAccount;
+
+import static com.infoshareacademy.menu.MenuOption.uploadCorrectUserInput;
 
 public class MenuService {
 
@@ -35,5 +38,11 @@ public class MenuService {
     public static void returnToDataEditMenu(TeacherAccount account) {
         MenuAppearance.showDataEditMenu();
         MenuOption.chooseDataToEdit(account);
+    }
+
+    public static void returnToMainMenuFromTeachersRates() {
+        CommandPrinter.returnToMainMenu();
+        uploadCorrectUserInput(1);
+        MenuService.returnToMainMenu();
     }
 }

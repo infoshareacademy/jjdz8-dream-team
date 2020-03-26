@@ -16,6 +16,8 @@ public class CommandPrinter {
     private static final String ACCESS_GRANTED = "Welcome. Access granted.";
     private static final String CHOOSE_TEACHER = "Choose teacher.";
     private static final String ENTER_SUBJECT = "Enter subject.";
+    private static final String ENTER_1 = "Please Enter 1 to return to main menu.";
+
 
     public static void enterNicknameHeader() {
         displayMessage(ENTER_NICKNAME);
@@ -63,9 +65,12 @@ public class CommandPrinter {
 
     public static void enterSubject() { displayMessage(ENTER_SUBJECT); }
 
+    public static void returnToMainMenu () {
+        displayMessage(ENTER_1);
+    }
     private static void displayMessage(String message) {
         System.out.println("*********************************************************************");
-        System.out.println("                          " + message);
+        System.out.println("                  " + message);
         System.out.println("*********************************************************************");
     }
 }
