@@ -1,64 +1,54 @@
 {
   "subjectsList": [
     {
-      "id": "574090eb-f7fa-4a41-b30c-c4f161b6f6bf",
-      "teacherId": "45ae5092-3c11-461e-ab4c-a431763fab66",
-      "name": "GEOGRAFIA",
-      "topic": "polska",
+      "id": "c7d008a2-9a00-4aed-bbf8-563d7226c0d6",
+      "teacherId": "208c4f37-ce37-451b-81d2-20b888b79da9",
+      "name": "Historia",
+      "topic": "ŚWiat",
       "range": [
-        "rzeki",
-        "jeziora"
+        "epidemie",
+        "pandemie"
+      ],
+      "isVideo": true
+    },
+    {
+      "id": "ca6599db-acf5-4f63-8e60-d6571936022f",
+      "teacherId": "208c4f37-ce37-451b-81d2-20b888b79da9",
+      "name": "Przyroda",
+      "topic": "Afryka",
+      "range": [
+        "fauna i flora"
+      ],
+      "isVideo": true
+    },
+    {
+      "id": "7a038ae7-509c-4296-a774-78ab1a53323f",
+      "teacherId": "e2be6036-fb1d-488e-a4df-45101ea89598",
+      "name": "MATEMATYKA",
+      "topic": "działania na liczbach całkowitych",
+      "range": [
+        "dodowanie",
+        "odejmowanie"
       ],
       "isVideo": false
     },
     {
-      "id": "cd5b9873-aee5-4f54-b4dc-43913d79a29a",
-      "teacherId": "45ae5092-3c11-461e-ab4c-a431763fab66",
-      "name": "PROGRAMOWANIE",
-      "topic": "java",
+      "id": "6ee7eab6-9658-46e9-93c2-e1ca72224ae3",
+      "teacherId": "e2be6036-fb1d-488e-a4df-45101ea89598",
+      "name": "FIZYKA",
+      "topic": "fizyka kwantowa",
       "range": [
-        "podstawy"
+        "wstęp do fizyki kwantowej"
       ],
       "isVideo": true
     },
     {
-      "id": "ed1196e6-70a6-4c69-ad64-ceb47a829ea5",
-      "teacherId": "45ae5092-3c11-461e-ab4c-a431763fab66",
-      "name": "MATEMATYKA",
-      "topic": "DZIAŁANIA NA LICZBACH CAŁKOWITYCH",
+      "id": "24b29093-21e2-4525-afb4-1118687694a1",
+      "teacherId": "e2be6036-fb1d-488e-a4df-45101ea89598",
+      "name": "PRZYRODA",
+      "topic": "AFRYKA",
       "range": [
-        "DODAWANIE",
-        "ODEJMOWANIE"
-      ],
-      "isVideo": true
-    },
-    {
-      "id": "71b70f80-a45c-49c3-975c-6a748e5cb28e",
-      "teacherId": "ec6d8c59-e6b1-4f0d-b4ff-f5eda0f0563c",
-      "name": "historia",
-      "topic": "polski",
-      "range": [
-        "wielkie bitwy, wielckie postacie"
-      ],
-      "isVideo": true
-    },
-    {
-      "id": "e34162c5-1015-4de5-87fc-b7a0cb65ed68",
-      "teacherId": "1775ce7a-60c5-4acf-8997-53a3e0eb86c0",
-      "name": "historia",
-      "topic": "polski",
-      "range": [
-        "rozbicie dzielnicowe"
-      ],
-      "isVideo": true
-    },
-    {
-      "id": "1d0f44a1-51ef-4b0d-b668-4288b9628a29",
-      "teacherId": "1775ce7a-60c5-4acf-8997-53a3e0eb86c0",
-      "name": "geografia",
-      "topic": "polski",
-      "range": [
-        "rolnictwo"
+        "FAUNA I FLORA"
       ],
       "isVideo": true
     }

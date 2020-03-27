@@ -48,6 +48,7 @@ public class SubjectAccountEditor {
         if (subjectList.size() == 0) {
             System.out.println("You have any subjects entered yet.");
             TeacherAccountCreator creator = new TeacherAccountCreator();
+            creator.setTeacher(account.getTeacher());
             creator.decideToEnterSubject();
         }
         System.out.println("Which subject do you want edit");
@@ -74,24 +75,30 @@ public class SubjectAccountEditor {
         System.out.println("Please enter new name for your subject");
         String newNAme = UserInput.uploadString();
         Subjects subjects = JsonReader.create(new Subjects(), SUBJECTS_JSON);
-        subjects.findById(editedSubject).setName(newNAme);
-        JsonSaver.createJson(subjects, SUBJECTS_JSON);
+        if (subjects.findById(editedSubject).isPresent()) {
+            subjects.findById(editedSubject).get().setName(newNAme);
+            JsonSaver.createJson(subjects, SUBJECTS_JSON);
+        }
     }
 
     public void editSubjectTopic(Subject editedSubject) {
         System.out.println("Please enter new Topic for your subject");
         String newTopic = UserInput.uploadString();
         Subjects subjects = JsonReader.create(new Subjects(), SUBJECTS_JSON);
-        subjects.findById(editedSubject).setTopic(newTopic);
-        JsonSaver.createJson(subjects, "subjects.json");
+        if (subjects.findById(editedSubject).isPresent()) {
+            subjects.findById(editedSubject).get().setTopic(newTopic);
+            JsonSaver.createJson(subjects, SUBJECTS_JSON);
+        }
     }
 
     public void editSubjectRange(Subject editedSubject) {
         System.out.println("Please enter new range, every phrase divide by /");
         String[] newRange = UserInput.uploadString().split("/");
         Subjects subjects = JsonReader.create(new Subjects(), SUBJECTS_JSON);
-        subjects.findById(editedSubject).setRange(newRange);
-        JsonSaver.createJson(subjects, "subjects.json");
+        if (subjects.findById(editedSubject).isPresent()) {
+            subjects.findById(editedSubject).get().setRange(newRange);
+            JsonSaver.createJson(subjects, SUBJECTS_JSON);
+        }
     }
 
     public void editVideoLessonsPossibility(Subject editedSubject) {
@@ -103,7 +110,9 @@ public class SubjectAccountEditor {
         boolean isVideo = factory.getSubject().isVideo();
 
         Subjects subjects = JsonReader.create(new Subjects(), SUBJECTS_JSON);
-        subjects.findById(editedSubject).setVideo(isVideo);
-        JsonSaver.createJson(subjects, "subjects.json");
+        if (subjects.findById(editedSubject).isPresent()) {
+            subjects.findById(editedSubject).get().setVideo(isVideo);
+            JsonSaver.createJson(subjects, SUBJECTS_JSON);
+        }
     }
 }

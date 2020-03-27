@@ -1,70 +1,16 @@
 {
   "teachersList": [
     {
-      "averageRating": 0.0,
+      "averageRating": 4.333333333333333,
       "password": "90a28456d65ca0c40abb0c83f5d27fa9",
-      "id": "45ae5092-3c11-461e-ab4c-a431763fab66",
+      "id": "208c4f37-ce37-451b-81d2-20b888b79da9",
       "nickName": "Kamila"
     },
     {
-      "averageRating": 0.0,
+      "averageRating": 4.0,
       "password": "90a28456d65ca0c40abb0c83f5d27fa9",
-      "id": "ec6d8c59-e6b1-4f0d-b4ff-f5eda0f0563c",
-      "nickName": "Kamila@kamila"
-    },
-    {
-      "averageRating": 0.0,
-      "password": "90a28456d65ca0c40abb0c83f5d27fa9",
-      "id": "ec6d8c59-e6b1-4f0d-b4ff-f5eda0f0563c",
-      "nickName": "Kamila@kamila"
-    },
-    {
-      "averageRating": 0.0,
-      "password": "90a28456d65ca0c40abb0c83f5d27fa9",
-      "id": "ec6d8c59-e6b1-4f0d-b4ff-f5eda0f0563c",
-      "nickName": "Kamila@kamila"
-    },
-    {
-      "averageRating": 0.0,
-      "password": "90a28456d65ca0c40abb0c83f5d27fa9",
-      "id": "45ae5092-3c11-461e-ab4c-a431763fab66",
-      "nickName": "Kamila@kamila"
-    },
-    {
-      "averageRating": 0.0,
-      "password": "90a28456d65ca0c40abb0c83f5d27fa9",
-      "id": "45ae5092-3c11-461e-ab4c-a431763fab66",
-      "nickName": "Kamila@kamila"
-    },
-    {
-      "averageRating": 0.0,
-      "password": "90a28456d65ca0c40abb0c83f5d27fa9",
-      "id": "45ae5092-3c11-461e-ab4c-a431763fab66",
-      "nickName": "Kamila@kamila"
-    },
-    {
-      "averageRating": 6.0,
-      "password": "08b58024cc961753c4aa5ec36d79dfeb",
-      "id": "1775ce7a-60c5-4acf-8997-53a3e0eb86c0",
-      "nickName": "JanNowak"
-    },
-    {
-      "averageRating": 0.0,
-      "password": "08b58024cc961753c4aa5ec36d79dfeb",
-      "id": "1775ce7a-60c5-4acf-8997-53a3e0eb86c0",
-      "nickName": "JanNowak"
-    },
-    {
-      "averageRating": 0.0,
-      "password": "08b58024cc961753c4aa5ec36d79dfeb",
-      "id": "1775ce7a-60c5-4acf-8997-53a3e0eb86c0",
-      "nickName": "JanNowak"
-    },
-    {
-      "averageRating": 0.0,
-      "password": "08b58024cc961753c4aa5ec36d79dfeb",
-      "id": "1775ce7a-60c5-4acf-8997-53a3e0eb86c0",
-      "nickName": "JanNowak"
+      "id": "e2be6036-fb1d-488e-a4df-45101ea89598",
+      "nickName": "Wojtek"
     }
   ]
 }

@@ -1,22 +1,22 @@
 {
   "teachersList": [
     {
-      "averageRating": 3.625,
-      "password": "90a28456d65ca0c40abb0c83f5d27fa9",
-      "id": "d3085812-e689-4c02-8260-3e788cca9347",
-      "nickName": "Adama"
+      "averageRating": 5.333333333333333,
+      "password": "8d50d2057c5c096fc1cbbb96718e5670",
+      "id": "040ad2e3-abc6-4768-b741-7f997d8e0ede",
+      "nickName": "Magdalena"
     },
     {
-      "averageRating": 3.975,
-      "password": "90a28456d65ca0c40abb0c83f5d27fa9",
-      "id": "23f601cd-767c-4661-bd83-8ded259a0cbe",
-      "nickName": "Kamila"
+      "averageRating": 4.5,
+      "password": "d07e82d4bab0a124131fd83938de4537",
+      "id": "9cc7bfcf-79c3-498f-a846-2562c6f016ae",
+      "nickName": "Wojtek"
     },
     {
-      "averageRating": 3.0,
-      "password": "90a28456d65ca0c40abb0c83f5d27fa9",
-      "id": "0f5e0a80-34c5-47b4-b640-75a24fe736fb",
-      "nickName": "MAREK"
+      "averageRating": 5.5,
+      "password": "1e54d16dcee3ef004b3322e6542ae7fc",
+      "id": "f88c452c-a4c9-4ac0-804f-eceb8b5dfab0",
+      "nickName": "Marek"
     }
   ]
 }

@@ -12,6 +12,7 @@ import com.infoshareacademy.menu.MenuAppearance;
 import com.infoshareacademy.menu.MenuOption;
 import com.infoshareacademy.userOutput.CommandPrinter;
 import com.infoshareacademy.users.*;
+
 import net.fortuna.ical4j.model.DateTime;
 import org.apache.commons.collections4.ArrayStack;
 

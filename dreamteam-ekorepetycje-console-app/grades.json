@@ -1,221 +1,53 @@
 {
   "gradeList": [
     {
-      "id": "63f225eb-8016-47bc-9a28-e8dd0b5a3b59",
-      "subjectId": "943c096c-072a-402d-b4b1-ae16001119fb",
-      "teacherId": "23f601cd-767c-4661-bd83-8ded259a0cbe",
+      "id": "cc50f9e3-d2c1-4120-8417-3ae7db24bdfe",
+      "subjectId": "c7a8caed-d8bb-4040-83a9-8b59a1a161d0",
+      "teacherId": "040ad2e3-abc6-4768-b741-7f997d8e0ede",
+      "grade": 4.0,
+      "comment": "zbyt szybko"
+    },
+    {
+      "id": "502989b2-4b7e-4b89-a0eb-390eec94e930",
+      "subjectId": "b5aa9069-0156-43e1-9f4f-feb874e2f863",
+      "teacherId": "040ad2e3-abc6-4768-b741-7f997d8e0ede",
       "grade": 6.0,
-      "comment": ""
+      "comment": "suoer"
     },
     {
-      "id": "d8517ff0-7533-4ba3-b1de-8a8d19037e92",
-      "subjectId": "fd305d38-ec5c-4338-b2d8-c135b8b737af",
-      "teacherId": "d3085812-e689-4c02-8260-3e788cca9347",
-      "grade": 3.0,
-      "comment": ""
-    },
-    {
-      "id": "b3ad8995-4f9f-4b6c-af6c-e7387adbebf4",
-      "subjectId": "c10552dd-235a-4976-ac11-5434e7dd39eb",
-      "teacherId": "23f601cd-767c-4661-bd83-8ded259a0cbe",
-      "grade": 5.0,
-      "comment": ""
-    },
-    {
-      "id": "9c67b6ee-3b6a-4254-9034-0100fad93cc3",
-      "subjectId": "943c096c-072a-402d-b4b1-ae16001119fb",
-      "teacherId": "23f601cd-767c-4661-bd83-8ded259a0cbe",
-      "grade": 5.0,
-      "comment": ""
-    },
-    {
-      "id": "d39d8cfe-418c-497c-882a-c9ae9f810a99",
-      "subjectId": "943c096c-072a-402d-b4b1-ae16001119fb",
-      "teacherId": "23f601cd-767c-4661-bd83-8ded259a0cbe",
-      "grade": 3.0,
-      "comment": ""
-    },
-    {
-      "id": "0ec9f424-bc07-4958-842a-a8df0fe297a6",
-      "subjectId": "943c096c-072a-402d-b4b1-ae16001119fb",
-      "teacherId": "23f601cd-767c-4661-bd83-8ded259a0cbe",
+      "id": "2be4eefa-b70f-4df6-a220-cc865d223fcc",
+      "subjectId": "c7a8caed-d8bb-4040-83a9-8b59a1a161d0",
+      "teacherId": "040ad2e3-abc6-4768-b741-7f997d8e0ede",
       "grade": 6.0,
-      "comment": ""
+      "comment": "polecam"
     },
     {
-      "id": "b8add573-eef5-4c75-bf22-f1f04e436eee",
-      "subjectId": "fd305d38-ec5c-4338-b2d8-c135b8b737af",
-      "teacherId": "d3085812-e689-4c02-8260-3e788cca9347",
-      "grade": 4.0,
-      "comment": ""
-    },
-    {
-      "id": "47564c9c-ea55-432b-8fd6-35241a482e27",
-      "subjectId": "943c096c-072a-402d-b4b1-ae16001119fb",
-      "teacherId": "23f601cd-767c-4661-bd83-8ded259a0cbe",
-      "grade": 3.0,
-      "comment": ""
-    },
-    {
-      "id": "9e092f7d-5d4f-4cb2-bb62-20a90192253e",
-      "subjectId": "943c096c-072a-402d-b4b1-ae16001119fb",
-      "teacherId": "23f601cd-767c-4661-bd83-8ded259a0cbe",
-      "grade": 3.0,
-      "comment": ""
-    },
-    {
-      "id": "66387ba3-cefa-421f-a92e-36dd4445bfa6",
-      "subjectId": "c10552dd-235a-4976-ac11-5434e7dd39eb",
-      "teacherId": "23f601cd-767c-4661-bd83-8ded259a0cbe",
-      "grade": 3.0,
-      "comment": ""
-    },
-    {
-      "id": "959dbb80-6e6c-4a4e-9f4c-12b77d07b5ea",
-      "subjectId": "fd305d38-ec5c-4338-b2d8-c135b8b737af",
-      "teacherId": "d3085812-e689-4c02-8260-3e788cca9347",
-      "grade": 3.0,
-      "comment": "not bad but it can be better"
-    },
-    {
-      "id": "b2f7dbcd-1cd0-4e78-a40b-1d60a4e5a355",
-      "subjectId": "3d8d34f8-09df-4370-8270-d7839fb3cb91",
-      "teacherId": "d3085812-e689-4c02-8260-3e788cca9347",
-      "grade": 4.0,
-      "comment": "fajnie"
-    },
-    {
-      "id": "8a41f173-fbbf-462f-a002-a19396d56adf",
-      "subjectId": "943c096c-072a-402d-b4b1-ae16001119fb",
-      "teacherId": "23f601cd-767c-4661-bd83-8ded259a0cbe",
-      "grade": 3.0,
-      "comment": "dsfe"
-    },
-    {
-      "id": "d4ab5262-1f5e-4325-a518-d800d88a095d",
-      "subjectId": "fd305d38-ec5c-4338-b2d8-c135b8b737af",
-      "teacherId": "d3085812-e689-4c02-8260-3e788cca9347",
-      "grade": 2.0,
-      "comment": "nflafe"
-    },
-    {
-      "id": "af432a91-f944-495d-b8fb-464b77e53fe3",
-      "subjectId": "943c096c-072a-402d-b4b1-ae16001119fb",
-      "teacherId": "23f601cd-767c-4661-bd83-8ded259a0cbe",
-      "grade": 4.0,
-      "comment": "jdjjdew"
-    },
-    {
-      "id": "9901d2f4-3f59-4850-8c88-ff1cfffe4655",
-      "subjectId": "943c096c-072a-402d-b4b1-ae16001119fb",
-      "teacherId": "23f601cd-767c-4661-bd83-8ded259a0cbe",
-      "grade": 3.0,
-      "comment": "moglobyc lepiej"
-    },
-    {
-      "id": "2ce44717-6243-4a8a-b300-0a62adf58b4e",
-      "subjectId": "943c096c-072a-402d-b4b1-ae16001119fb",
-      "teacherId": "23f601cd-767c-4661-bd83-8ded259a0cbe",
-      "grade": 3.0,
-      "comment": "super"
-    },
-    {
-      "id": "99797d28-3973-4bf4-8176-ec6842925913",
-      "subjectId": "943c096c-072a-402d-b4b1-ae16001119fb",
-      "teacherId": "23f601cd-767c-4661-bd83-8ded259a0cbe",
-      "grade": 4.0,
-      "comment": "extra"
-    },
-    {
-      "id": "806a6ec9-88ee-42b5-b009-e325f5b8dfcc",
-      "subjectId": "943c096c-072a-402d-b4b1-ae16001119fb",
-      "teacherId": "23f601cd-767c-4661-bd83-8ded259a0cbe",
-      "grade": 4.0,
-      "comment": "podobalo mi sie"
-    },
-    {
-      "id": "e10a68aa-af9a-412f-baea-51528608c6fe",
-      "subjectId": "943c096c-072a-402d-b4b1-ae16001119fb",
-      "teacherId": "23f601cd-767c-4661-bd83-8ded259a0cbe",
-      "grade": 5.5,
-      "comment": "chce wiecej"
-    },
-    {
-      "id": "7f00faf1-b1e1-41b0-b58f-d612436e5c88",
-      "subjectId": "c10552dd-235a-4976-ac11-5434e7dd39eb",
-      "teacherId": "23f601cd-767c-4661-bd83-8ded259a0cbe",
-      "grade": 4.0,
-      "comment": "bylo spoko"
-    },
-    {
-      "id": "e03d004e-0c1f-4458-9d12-4d2957e64483",
-      "subjectId": "943c096c-072a-402d-b4b1-ae16001119fb",
-      "teacherId": "23f601cd-767c-4661-bd83-8ded259a0cbe",
+      "id": "3b3dfebd-8733-40f8-a8b7-2f96a5482215",
+      "subjectId": "ae552d23-d49d-4db1-9edb-336a90c324c7",
+      "teacherId": "9cc7bfcf-79c3-498f-a846-2562c6f016ae",
       "grade": 5.0,
-      "comment": "extra"
+      "comment": "calkiem fajne zajęcia"
     },
     {
-      "id": "76dafa7a-d67b-445a-b217-cc80631cb87f",
-      "subjectId": "fd305d38-ec5c-4338-b2d8-c135b8b737af",
-      "teacherId": "d3085812-e689-4c02-8260-3e788cca9347",
+      "id": "fff8747e-f3d4-4c91-b7a4-a01ad4305cea",
+      "subjectId": "5283943a-ca95-4f09-b0ec-faecd0a00bc1",
+      "teacherId": "9cc7bfcf-79c3-498f-a846-2562c6f016ae",
       "grade": 4.0,
-      "comment": "dobrze"
+      "comment": "niezbyt ciekawie"
     },
     {
-      "id": "ed98e04f-3cc1-4dae-bd7f-fdcf11d758ed",
-      "subjectId": "fd305d38-ec5c-4338-b2d8-c135b8b737af",
-      "teacherId": "d3085812-e689-4c02-8260-3e788cca9347",
-      "grade": 5.0,
-      "comment": "EXTRA!!!!!!!!!!!!!!"
-    },
-    {
-      "id": "b5436b2d-9b3d-4a25-826c-e5b9220c1fe8",
-      "subjectId": "943c096c-072a-402d-b4b1-ae16001119fb",
-      "teacherId": "23f601cd-767c-4661-bd83-8ded259a0cbe",
-      "grade": 3.0,
-      "comment": "calkiem fajnie"
-    },
-    {
-      "id": "6494de43-a243-4837-9a92-0344df78502c",
-      "subjectId": "943c096c-072a-402d-b4b1-ae16001119fb",
-      "teacherId": "23f601cd-767c-4661-bd83-8ded259a0cbe",
-      "grade": 4.0,
-      "comment": "I very like it"
-    },
-    {
-      "id": "32c07f94-cd1d-4249-b94d-a486ecf768ca",
-      "subjectId": "2c865d9b-5cae-4663-920b-46872cbce12b",
-      "teacherId": "0f5e0a80-34c5-47b4-b640-75a24fe736fb",
-      "grade": 0.0,
-      "comment": "1"
-    },
-    {
-      "id": "a11b2d69-8dc1-4dae-841d-6a7c78c476de",
-      "subjectId": "2d8f28d1-d83d-4582-baf7-e6091cba4c4e",
-      "teacherId": "0f5e0a80-34c5-47b4-b640-75a24fe736fb",
+      "id": "a5e0beea-c005-4e53-a5fc-460f47c49eff",
+      "subjectId": "08b71e73-4dec-4edd-a1f2-844f253b40bd",
+      "teacherId": "f88c452c-a4c9-4ac0-804f-eceb8b5dfab0",
       "grade": 6.0,
-      "comment": "Extra!"
+      "comment": "extra!gorąco polecam zajęcia i nauczyciela!"
     },
     {
-      "id": "bd486077-e4c2-47cd-8f32-a33c8050dd5c",
-      "subjectId": "2d8f28d1-d83d-4582-baf7-e6091cba4c4e",
-      "teacherId": "0f5e0a80-34c5-47b4-b640-75a24fe736fb",
-      "grade": 3.0,
-      "comment": "NOt bad"
-    },
-    {
-      "id": "04e6b903-0956-4eb1-8619-622367a1c91a",
-      "subjectId": "1c53d59b-d50a-4f9d-8f8d-f35380495d53",
-      "teacherId": "23f601cd-767c-4661-bd83-8ded259a0cbe",
-      "grade": 3.0,
-      "comment": "mogłobyć lepiej"
-    },
-    {
-      "id": "5d87bea8-970f-4aef-9252-a78d8bcdf737",
-      "subjectId": "fd305d38-ec5c-4338-b2d8-c135b8b737af",
-      "teacherId": "d3085812-e689-4c02-8260-3e788cca9347",
-      "grade": 4.0,
-      "comment": "Extra"
+      "id": "bff31cc3-bfee-4d5b-8cdf-b133befd0181",
+      "subjectId": "08b71e73-4dec-4edd-a1f2-844f253b40bd",
+      "teacherId": "f88c452c-a4c9-4ac0-804f-eceb8b5dfab0",
+      "grade": 5.0,
+      "comment": "Świetnie ale za szybko"
     }
   ]
 }

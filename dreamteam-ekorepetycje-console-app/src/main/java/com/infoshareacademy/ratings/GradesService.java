@@ -63,7 +63,9 @@ public class GradesService {
     private void calculateStandardDeviation() {
         StandardDeviation standard = new StandardDeviation();
         try {
-            standard.StataRederJson(this.teachers.findById(this.teacher.getId()));
+            if (this.teachers.findById(this.teacher.getId()).isPresent()) {
+                standard.StataRederJson(this.teachers.findById(this.teacher.getId()).get());
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -83,10 +85,13 @@ public class GradesService {
 
     private void showAllTeachersSubjects(String nickName) {
         System.out.println("All teacher's subjects: ");
-        this.teacher = teachers.findByNickname(nickName);
-        Subjects subjects = JsonReader.create(new Subjects(), FileNames.SUBJECTS_JSON);
-        this.oneTeacherSubjects = subjects.findSubjectsForOneTeacher(teacher.getId());
-        subjects.printSubjectsList(this.oneTeacherSubjects);
+        if (teachers.findByNickname(nickName).isPresent()) {
+            this.teacher = teachers.findByNickname(nickName).get();
+
+            Subjects subjects = JsonReader.create(new Subjects(), FileNames.SUBJECTS_JSON);
+            this.oneTeacherSubjects = subjects.findSubjectsForOneTeacher(teacher.getId());
+            subjects.printSubjectsList(this.oneTeacherSubjects);
+        }
     }
 
     private void chooseSubjectToAsses() {

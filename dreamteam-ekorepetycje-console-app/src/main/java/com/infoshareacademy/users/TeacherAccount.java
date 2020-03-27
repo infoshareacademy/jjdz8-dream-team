@@ -26,10 +26,13 @@ public class TeacherAccount {
         CommandPrinter.enterYourPasswordHeader();
         acceptCorrectPassword(username);
         Teachers teachers = JsonReader.create(new Teachers(), TEACHERS_JSON);
-        setTeacher(teachers.findByNickname(username));
-        CommandPrinter.accessGrantedHeader();
+        if (teachers.findByNickname(username).isPresent()) {
+            setTeacher(teachers.findByNickname(username).get());
+            CommandPrinter.accessGrantedHeader();
 
-        return true;
+            return true;
+        }
+        return false;
     }
 
     public String uploadCorrectNickname() {

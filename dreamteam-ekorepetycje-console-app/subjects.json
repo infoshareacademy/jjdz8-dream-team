@@ -1,86 +1,60 @@
 {
   "subjectsList": [
     {
-      "id": "fd305d38-ec5c-4338-b2d8-c135b8b737af",
-      "teacherId": "d3085812-e689-4c02-8260-3e788cca9347",
-      "name": "Matematyka",
-      "topic": "liczby calowite",
+      "id": "c7a8caed-d8bb-4040-83a9-8b59a1a161d0",
+      "teacherId": "040ad2e3-abc6-4768-b741-7f997d8e0ede",
+      "name": "Historia",
+      "topic": "Świat",
       "range": [
-        "dodawanie"
+        "druga wojna światowa",
+        "ważne bitwy",
+        "bohaterzy"
       ],
-      "isVideo": false
+      "isVideo": true
     },
     {
-      "id": "3d8d34f8-09df-4370-8270-d7839fb3cb91",
-      "teacherId": "d3085812-e689-4c02-8260-3e788cca9347",
+      "id": "b5aa9069-0156-43e1-9f4f-feb874e2f863",
+      "teacherId": "040ad2e3-abc6-4768-b741-7f997d8e0ede",
       "name": "geografia",
-      "topic": "polska",
+      "topic": "Polska",
       "range": [
-        "wojewodztwa",
-        " duze miasta"
+        "rzeki",
+        "jeziora"
       ],
       "isVideo": true
     },
     {
-      "id": "c10552dd-235a-4976-ac11-5434e7dd39eb",
-      "teacherId": "23f601cd-767c-4661-bd83-8ded259a0cbe",
-      "name": "Programowanie",
-      "topic": "Java",
-      "range": [
-        "początki"
-      ],
-      "isVideo": false
-    },
-    {
-      "id": "943c096c-072a-402d-b4b1-ae16001119fb",
-      "teacherId": "23f601cd-767c-4661-bd83-8ded259a0cbe",
-      "name": "PROGRAMOWANIE-JAVA",
-      "topic": "PROGRAMOWANIE",
-      "range": [
-        "zaawansowane"
-      ],
-      "isVideo": false
-    },
-    {
-      "id": "f5efd290-ba9c-4161-b280-39411e8865bc",
-      "teacherId": "0f5e0a80-34c5-47b4-b640-75a24fe736fb",
-      "name": "Fizyka",
-      "topic": "astronomia",
-      "range": [
-        "gwiazy",
-        "planety"
-      ],
-      "isVideo": true
-    },
-    {
-      "id": "2c865d9b-5cae-4663-920b-46872cbce12b",
-      "teacherId": "0f5e0a80-34c5-47b4-b640-75a24fe736fb",
+      "id": "ae552d23-d49d-4db1-9edb-336a90c324c7",
+      "teacherId": "9cc7bfcf-79c3-498f-a846-2562c6f016ae",
       "name": "Chemia",
-      "topic": "pierwsiatki",
+      "topic": "wstęp do chemi organicznej",
       "range": [
-        "metale",
-        "niemetale"
+        "alkohole wielowodorotlenowe"
       ],
       "isVideo": true
     },
     {
-      "id": "2d8f28d1-d83d-4582-baf7-e6091cba4c4e",
-      "teacherId": "0f5e0a80-34c5-47b4-b640-75a24fe736fb",
-      "name": "Biolgia",
-      "topic": "Ryby",
+      "id": "5283943a-ca95-4f09-b0ec-faecd0a00bc1",
+      "teacherId": "9cc7bfcf-79c3-498f-a846-2562c6f016ae",
+      "name": "Biologia",
+      "topic": "stawonogi",
       "range": [
-        "warunki bytowe"
+        "układ pokarmowy",
+        "układ nerwowy"
       ],
-      "isVideo": false
+      "isVideo": true
     },
     {
-      "id": "1c53d59b-d50a-4f9d-8f8d-f35380495d53",
-      "teacherId": "23f601cd-767c-4661-bd83-8ded259a0cbe",
-      "name": "MATEMATYKA",
-      "topic": "SZKOŁA PODSTWAWOWA",
+      "id": "08b71e73-4dec-4edd-a1f2-844f253b40bd",
+      "teacherId": "f88c452c-a4c9-4ac0-804f-eceb8b5dfab0",
+      "name": "Język niemiecki",
+      "topic": "gramatyka",
       "range": [
-        "DODAWANIE",
-        "ODEJMOWANIE"
+        "zaimki",
+        "przedimiki",
+        "czasowniki",
+        "rzeczowniki",
+        "budowa zdania"
       ],
       "isVideo": false
     }

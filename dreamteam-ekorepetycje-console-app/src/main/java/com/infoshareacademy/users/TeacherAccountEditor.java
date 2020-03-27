@@ -27,7 +27,7 @@ public class TeacherAccountEditor implements Editable {
 
     private void setNewNickname(String nickName, String newNickName) {
         Teachers teachers = JsonReader.create(new Teachers(), TEACHERS_JSON);
-        teachers.findByNickname(nickName).setNickName(newNickName);
+        teachers.findByNickname(nickName).get().setNickName(newNickName);
         JsonSaver.createJson(teachers, TEACHERS_JSON);
     }
 
@@ -43,17 +43,22 @@ public class TeacherAccountEditor implements Editable {
 
     public void editPassword() {
         Teachers teachers = JsonReader.create(new Teachers(), TEACHERS_JSON);
-        String teacherNickname = teachers.findById(this.teacherAccount.getTeacher().getId()).getNickName();
-        CommandPrinter.enterYourOldPasswordHeader();
-        this.teacherAccount.acceptCorrectPassword(teacherNickname);
-        setNewPassword(teacherNickname);
-        CommandPrinter.passwordChangedHeader();
-        MenuService.returnToDataEditMenu(this.teacherAccount);
+        if (teachers.findById(this.teacherAccount.getTeacher().getId()).isPresent()) {
+            String teacherNickname = teachers.findById(this.teacherAccount.getTeacher().getId()).get().getNickName();
+            CommandPrinter.enterYourOldPasswordHeader();
+            this.teacherAccount.acceptCorrectPassword(teacherNickname);
+            setNewPassword(teacherNickname);
+            CommandPrinter.passwordChangedHeader();
+            MenuService.returnToDataEditMenu(this.teacherAccount);
+        }
+
     }
 
     public void setNewPassword(String nickName) {
         Teachers teachers = JsonReader.create(new Teachers(), TEACHERS_JSON);
-        teachers.findByNickname(nickName).setPassword();
-        JsonSaver.createJson(teachers, TEACHERS_JSON);
+        if (teachers.findByNickname(nickName).isPresent()) {
+            teachers.findByNickname(nickName).get().setPassword();
+            JsonSaver.createJson(teachers, TEACHERS_JSON);
+        }
     }
 }

@@ -133,7 +133,6 @@ public class MenuOption {
             case 4: {
                 accountEditor.editVideoLessonsPossibility(subject);
                 break;
-
             }
             case 5: {
                 MenuService.returnToMainMenu();

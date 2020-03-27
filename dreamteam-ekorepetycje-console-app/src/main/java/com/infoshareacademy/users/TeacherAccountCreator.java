@@ -13,6 +13,11 @@ public class TeacherAccountCreator implements AccountCreationCapable {
 
     private Teacher teacher;
 
+    public void setTeacher(Teacher teacher) {
+        this.teacher = teacher;
+    }
+
+    @Override
     public void createAccount() {
         createUser();
         decideToEnterSubject();
@@ -48,7 +53,7 @@ public class TeacherAccountCreator implements AccountCreationCapable {
         while (true) {
             if (choice.equalsIgnoreCase("yes")) {
                 addSubjectForTeacher();
-                saveAccount();
+
                 return;
             }
             if (choice.equalsIgnoreCase("No")) {

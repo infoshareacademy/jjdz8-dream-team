@@ -14,6 +14,7 @@ import java.util.List;
 public class TeachersSorter {
 
     Teachers teachers = JsonReader.create(new Teachers(), FileNames.TEACHERS_JSON);
+
     Grades grades = JsonReader.create(new Grades(), FileNames.GRADES_JSON);
 
     public void printTeacherRanking() {
