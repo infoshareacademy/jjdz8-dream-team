@@ -49,6 +49,7 @@ public class SubjectAccountEditor {
         if (subjectList.size() == 0) {
             System.out.println("You have any subjects entered yet.");
             TeacherAccountCreator creator = new TeacherAccountCreator();
+            creator.setTeacher(account.getTeacher());
             creator.decideToEnterSubject();
         }
         System.out.println("Which subject do you want edit");

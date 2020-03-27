@@ -1,0 +1,14 @@
+{
+  "subjectsList": [
+    {
+      "id": "4d7ca409-02f8-4f43-b5ad-bb109b369d82",
+      "teacherId": "8a9beb24-3703-46b8-ad99-c32ba5045558",
+      "name": "Matematyka",
+      "topic": "róœnanai",
+      "range": [
+        "dziłąnia"
+      ],
+      "isVideo": false
+    }
+  ]
+}
