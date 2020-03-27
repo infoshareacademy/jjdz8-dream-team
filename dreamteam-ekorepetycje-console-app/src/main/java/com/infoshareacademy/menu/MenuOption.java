@@ -1,12 +1,11 @@
 package com.infoshareacademy.menu;
 
 import com.infoshareacademy.calendar.CalendarService;
+import com.infoshareacademy.dataSorter.TeachersSorter;
 import com.infoshareacademy.ratings.GradesService;
 import com.infoshareacademy.lectures.*;
 import com.infoshareacademy.userInput.UserInput;
-import com.infoshareacademy.users.TeacherAccount;
-import com.infoshareacademy.users.TeacherAccountEditor;
-import com.infoshareacademy.users.TeacherService;
+import com.infoshareacademy.users.*;
 
 public class MenuOption {
 
@@ -29,7 +28,9 @@ public class MenuOption {
                 break;
             }
             case 4: {
-                teacherService.showBestRatedTeachers();
+                TeachersSorter sorter = new TeachersSorter();
+                sorter.printTeacherRanking();
+                MenuService.returnToMainMenuFromTeachersRates();
                 break;
             }
             case 5: {
@@ -132,7 +133,6 @@ public class MenuOption {
             case 4: {
                 accountEditor.editVideoLessonsPossibility(subject);
                 break;
-
             }
             case 5: {
                 MenuService.returnToMainMenu();

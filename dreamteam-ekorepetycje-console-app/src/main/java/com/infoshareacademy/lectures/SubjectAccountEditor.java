@@ -1,6 +1,5 @@
 package com.infoshareacademy.lectures;
 
-import com.infoshareacademy.fileOperations.FileNames;
 import com.infoshareacademy.fileOperations.JsonReader;
 import com.infoshareacademy.fileOperations.JsonSaver;
 import com.infoshareacademy.menu.MenuAppearance;

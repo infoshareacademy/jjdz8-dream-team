@@ -3,6 +3,7 @@ package com.infoshareacademy.users;
 import com.infoshareacademy.menu.MenuAppearance;
 import com.infoshareacademy.menu.MenuOption;
 
+
 public class TeacherService {
 
     public void createTeacherAccount() {
@@ -17,7 +18,6 @@ public class TeacherService {
             MenuOption.chooseDataToEdit(account);
         }
     }
-
-    public void showBestRatedTeachers() {
-    }
 }
+
+
