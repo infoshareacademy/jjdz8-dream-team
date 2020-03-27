@@ -53,6 +53,7 @@ public class TeacherAccountCreator implements AccountCreationCapable {
         while (true) {
             if (choice.equalsIgnoreCase("yes")) {
                 addSubjectForTeacher();
+
                 return;
             }
             if (choice.equalsIgnoreCase("No")) {
