@@ -1,8 +1,8 @@
 package com.infoshareacademy.menu;
 
 import com.infoshareacademy.userInput.UserInput;
-import com.infoshareacademy.userOutput.CommandPrinter;
 import com.infoshareacademy.users.TeacherAccount;
+import com.infoshareacademy.userOutput.CommandPrinter;
 
 import static com.infoshareacademy.menu.MenuOption.uploadCorrectUserInput;
 
@@ -24,7 +24,6 @@ public class MenuService {
             if (choice.equalsIgnoreCase("No")) {
                 returnToMainMenu();
                 break;
-
             }
             System.out.println("please enter yes/no");
             choice = UserInput.uploadString();

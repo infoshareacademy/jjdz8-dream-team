@@ -5,7 +5,6 @@ import com.infoshareacademy.dataSorter.TeachersSorter;
 import com.infoshareacademy.ratings.GradesService;
 import com.infoshareacademy.lectures.*;
 import com.infoshareacademy.userInput.UserInput;
-import com.infoshareacademy.userOutput.CommandPrinter;
 import com.infoshareacademy.users.*;
 
 public class MenuOption {

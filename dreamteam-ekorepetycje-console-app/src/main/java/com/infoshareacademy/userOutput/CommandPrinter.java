@@ -47,7 +47,9 @@ public class CommandPrinter {
         displayMessage(NICKNAME_CHANGED);
     }
 
-    public static void enterNewNicknameHeader() { displayMessage(NEW_NICKNAME); }
+    public static void enterNewNicknameHeader() {
+        displayMessage(NEW_NICKNAME);
+    }
 
     public static void doYouWantEnterSubjectHeader() {
         displayMessage(DECIDE_TO_ADD_SUBJECT);
@@ -61,13 +63,18 @@ public class CommandPrinter {
         displayMessage(ACCESS_GRANTED);
     }
 
-    public static void chooseTeacher() { displayMessage(CHOOSE_TEACHER); }
+    public static void chooseTeacher() {
+        displayMessage(CHOOSE_TEACHER);
+    }
 
-    public static void enterSubject() { displayMessage(ENTER_SUBJECT); }
+    public static void enterSubject() {
+        displayMessage(ENTER_SUBJECT);
+    }
 
-    public static void returnToMainMenu () {
+    public static void returnToMainMenu() {
         displayMessage(ENTER_1);
     }
+
     private static void displayMessage(String message) {
         System.out.println("*********************************************************************");
         System.out.println("                  " + message);
