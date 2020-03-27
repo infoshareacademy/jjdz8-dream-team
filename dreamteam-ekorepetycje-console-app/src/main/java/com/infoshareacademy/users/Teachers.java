@@ -13,8 +13,19 @@ public class Teachers {
         return this.teachersList;
     }
 
-    public void addTeacher(Teacher... teachers) {
-        this.teachersList.addAll(Arrays.asList(teachers));
+    public void addTeacher(Teacher teacher) {
+        if (!isTeacherInTeachers(teacher)) {
+            this.teachersList.add(teacher);
+        }
+    }
+
+    public boolean isTeacherInTeachers(Teacher newTeacher) {
+        for (Teacher teacher: this.teachersList){
+            if (teacher.getId().equals(newTeacher.getId())){
+                return true;
+            }
+        }
+        return false;
     }
 
     public void printTeacherList(){

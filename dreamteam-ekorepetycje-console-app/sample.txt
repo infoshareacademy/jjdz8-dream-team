@@ -1,9 +1,9 @@
 #
-#Thu Mar 26 13:11:46 CET 2020
-wartosc\ najwieksza=3.0
+#Fri Mar 27 13:04:41 CET 2020
+wartosc\ najwieksza=4.0
 wariancja=NaN
 odchylenie\ standardowe=NaN
-mediana=3
+mediana=4
 kurtoza=0.0
 skosnosc=0.0
-moda=3.0
+moda=4.0

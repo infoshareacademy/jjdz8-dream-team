@@ -21,6 +21,7 @@ public class TeacherAccountCreator implements AccountCreationCapable {
     public void createAccount() {
         createUser();
         decideToEnterSubject();
+        saveAccount();
     }
 
     public void saveAccount() {
@@ -52,7 +53,6 @@ public class TeacherAccountCreator implements AccountCreationCapable {
         while (true) {
             if (choice.equalsIgnoreCase("yes")) {
                 addSubjectForTeacher();
-               saveAccount();
                 return;
             }
             if (choice.equalsIgnoreCase("No")) {
