@@ -1,7 +1,7 @@
 target/
 .idea
 *.iml
-dreamteam-ekorepetycje-console-app/out
+consoleapp/out
 consoleapp/src/test/com/
 consoleapp/src/test/production/
 
