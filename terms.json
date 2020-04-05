@@ -24,11 +24,31 @@
       }
     },
     {
-      "nickName": "AdamNowak",
-      "teacherId": "095a0c22-2c06-4e66-bc64-55769da59889",
+      "nickName": "MarekKowal",
       "terms": {
-        "2020-03-22": "Fizyka",
-        "2020-03-21": "Matematyka"
+        "2020-03-27": "Fizyka",
+        "2020-04-03": "Fizyka",
+        "2020-05-19": "Geografia",
+        "2020-05-18": "Geografia"
+      }
+    },
+    {
+      "nickName": "MarekKowalski",
+      "terms": {
+        "2020-03-27": "Fizyka",
+        "2020-04-03": "Fizyka",
+        "2020-05-19": "Geografia",
+        "2020-05-18": "Geografia"
+      }
+    },
+    {
+      "nickName": "MarekKowalski",
+      "teacherId": "83e5c9ca-6681-4ec8-83fc-98878da44d42",
+      "terms": {
+        "2020-03-27": "Fizyka",
+        "2020-04-03": "Fizyka",
+        "2020-05-19": "Geografia",
+        "2020-05-18": "Geografia"
       }
     }
   ]
