@@ -9,7 +9,7 @@
   <version>1.0-SNAPSHOT</version>
   <packaging>war</packaging>
 
-  <name>webapp Maven Webapp</name>
+  <name>dreamteam-ekorepetycje-web-app</name>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -18,11 +18,22 @@
   </properties>
 
   <dependencies>
-
+    <dependency>
+      <groupId>javax</groupId>
+      <artifactId>javaee-api</artifactId>
+      <version>8.0.1</version>
+    </dependency>
   </dependencies>
 
   <build>
     <finalName>webapp</finalName>
-
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-war-plugin</artifactId>
+        <version>3.2.3</version>
+<!--        <version>4.0.0</version>-->
+      </plugin>
+    </plugins>
   </build>
 </project>
