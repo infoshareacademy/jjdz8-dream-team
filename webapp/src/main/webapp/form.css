@@ -1,0 +1,35 @@
+.contact-from {
+    padding: 15px;
+}
+
+.form input {
+    width: 100%;
+    border: 1px solid black;
+    border-radius: 5px;
+}
+.form textarea {
+    width: 100%;
+    border: 1px solid black;
+    border-radius: 5px;
+}
+.form:not(:last-child) {
+    padding: 2vh 0;
+}
+.form:last-child {
+    border-bottom: 2px solid black;
+    padding-bottom: 2vh;
+    margin-bottom: 2vh;
+    padding: 2vh 0 4vh 0;
+}
+.form > label {
+    display: block;
+}
+
+@media screen and (min-width: 992px) {
+    .form input {
+        max-width: 80%;
+    }
+    .form textarea {
+        max-width: 90%;
+    }
+}
