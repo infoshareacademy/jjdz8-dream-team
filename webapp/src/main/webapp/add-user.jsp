@@ -13,41 +13,15 @@
     </head>
 
     <body>
-        <nav>
-            <a class="logo" href="index.jsp">E-learning by Dream Team</a>
-            <div>
-                <ul>
-                    <li>
-                        <a href="index.jsp">Main</a>
-                    </li>
-                    <li>
-                        <a href="add-user.html">Add-user</a>
-                    </li>
-                    <li>
-                        <a href="edit-user.html">Edit user</a>
-                    </li>
-                    <li>
-                        <a href="search.html">Search</a>
-                    </li>
-                    <li>
-                        <a href="ratings.html">Ratings</a>
-                    </li>
-                    <li>
-                        <a href="contact.html">Contact</a>
-                    </li>
-                </ul>
-            </div>
-        </nav>
-
+    <jsp:include page="menu.jsp"/>
         <header>
             <h1>Add an user</h1>
             <p>
                 Use bellow form.
             </p>
         </header>
-
         <main>
-            <form action="action" method="post" class="contact-from">
+            <form method="post" action="/user" class="contact-from">
                 <div class="form">
                     <label for="nickname">Nickname:</label>
                     <input type="text" name="name" id="nickname" required />

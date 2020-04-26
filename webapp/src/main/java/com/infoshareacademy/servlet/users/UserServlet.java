@@ -18,4 +18,12 @@ public class UserServlet extends HttpServlet {
         PrintWriter writer = resp.getWriter();
         writer.println("From user!");
     }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        //super.doPost(req, resp);
+        resp.setContentType("text/html;charset=UTF-8");
+        PrintWriter writer = resp.getWriter();
+        writer.println("From form!");
+    }
 }
