@@ -15,7 +15,7 @@
 </head>
 <body>
     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-        <a class="navbar-brand logo" href="index.html">FunnyPhoto</a>
+        <a class="navbar-brand logo" href="index.jsp">E-Learning by DREAM-TEAM</a>
         <button
                 class="navbar-toggler"
                 type="button"
@@ -29,20 +29,12 @@
                 <li class="nav-item active">
                     <a class="nav-link" href="index.jsp">Main</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="add-user.jsp">Add user</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="edit-user.jsp">Edit user</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="search.jsp">Search</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="ratings.jsp">Ratings</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="contact.jsp">Contact</a>
+                <li class="nav-item"><a class="nav-link" href="add-user.jsp">Login</a></li>
+                <li class="nav-item"><a class="nav-link" href="add-user.jsp">Login</a></li>
+                <li class="nav-item"><a class="nav-link" href="edit-user.jsp">Edit user</a></li>
+                <li class="nav-item"><a class="nav-link" href="search.jsp">Search</a></li>
+                <li class="nav-item"><a class="nav-link" href="ratings.jsp">Ratings</a></li>
+                <li class="nav-item"><a class="nav-link" href="contact.jsp">Contact</a>
                 </li>
             </ul>
         </div>
