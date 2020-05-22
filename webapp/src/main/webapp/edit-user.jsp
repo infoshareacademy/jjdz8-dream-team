@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <meta
             name="description"
             content="Edit user: teacher or student"
     />
     <title>Add-user</title>
-    <link href="styles.css" rel="stylesheet" />
-    <link href="form.css" rel="stylesheet" />
+    <link href="styles.css" rel="stylesheet"/>
+    <link href="form.css" rel="stylesheet"/>
 </head>
 
 <body>
@@ -24,11 +24,11 @@
     <form method="post" action="/user" class="contact-from">
         <div class="form">
             <label for="nickname">Nickname:</label>
-            <input type="text" name="name" id="nickname" required />
+            <input type="text" name="name" id="nickname" required/>
         </div>
         <div class="form">
             <label for="email">Email:</label>
-            <input type="email" name="email" id="email" required />
+            <input type="email" name="email" id="email" required/>
         </div>
         <div class="form">
             <label for="services">User type:</label>

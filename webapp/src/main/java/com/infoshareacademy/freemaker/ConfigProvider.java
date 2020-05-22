@@ -1,7 +1,12 @@
 package com.infoshareacademy.freemaker;
 
-public class ConfigProvider {
-    @ApplicationScoped
+import freemarker.template.Configuration;
+import freemarker.template.TemplateExceptionHandler;
+
+import javax.enterprise.context.ApplicationScoped;
+
+
+   @ApplicationScoped
     public class ConfigProvider {
         private Configuration configuration;
         public Configuration getConfiguration() {
@@ -15,4 +20,3 @@ public class ConfigProvider {
             return configuration;
         }
     }
-}
