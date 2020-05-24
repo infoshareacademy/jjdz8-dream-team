@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+         pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -21,63 +23,38 @@
     </p>
 </header>
 <main>
-    <form method="post" action="/user" class="contact-from">
-        <div class="form">
-            <label for="nickname">Nickname:</label>
-            <input type="text" name="name" id="nickname" required />
-        </div>
-        <div class="form">
-            <label for="email">Email:</label>
-            <input type="email" name="email" id="email" required />
-        </div>
-        <div class="form">
-            <label for="services">User type:</label>
-            <select id="services">
-                <option value="teacher">Teacher</option>
-                <option value="student">Student</option>
-            </select>
-        </div>
-        <div class="form">
-            <label for="description">Massage:</label>
-            <textarea name="description"></textarea>
-        </div>
-        <div class="form">
-            <button type="submit">
-                Create account
-            </button>
-        </div>
-    </form>
-    <div>
-        <div>
-            <p>
-                Donec id elit non mi porta gravida at eget metus. Fusce dapibus,
-                tellus ac cursus commodo, tortor mauris condimentum nibh, ut
-                fermentum massa justo sit amet risus.
-            </p>
-            <a href="tel:111222333">
-                Call us
-            </a>
-        </div>
-        <div>
-            <p>
-                Donec id elit non mi porta gravida at eget metus. Fusce dapibus,
-                tellus ac cursus commodo, tortor mauris condimentum nibh, ut
-                fermentum massa justo sit amet risus.
-            </p>
-            <a href="mailto:some@email.com">
-                Write email
-            </a>
-        </div>
-        <div>
-            <p>
-                Donec id elit non mi porta gravida at eget metus. Fusce dapibus,
-                tellus ac cursus commodo, tortor mauris condimentum nibh, ut
-                fermentum massa justo sit amet risus.
-            </p>
-            <a href="https://facebook.com/company"> Facebook</a>
-        </div>
-    </div>
-</main>
+    <table class="table">
+        <thead class="thead-dark">
+        <tr>
+            <th>#</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Username</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <th scope="row">1</th>
+            <td>Mark</td>
+            <td>Otto</td>
+            <td>@mdo</td>
+        </tr>
+        <tr>
+            <th scope="row">2</th>
+            <td>Jacob</td>
+            <td>Thornton</td>
+            <td>@fat</td>
+        </tr>
+        <tr>
+            <th scope="row">3</th>
+            <td>Larry</td>
+            <td>the Bird</td>
+            <td>@twitter</td>
+        </tr>
+        </tbody>
+    </table>
+
+    </main>
 <footer>
     <p>E-learning web app - all rights reserved;-)</p>
 </footer>

@@ -30,7 +30,7 @@
     </button>
     <div class="collapse navbar-collapse" id="navigation">
         <ul class="navbar-nav mr-auto">
-            <li class="nav-item active ">
+            <li class="nav-item active">
                 <a class="nav-link col-sm-4 col-md-2" href="index.jsp">O nas</a>
             </li>
 
@@ -47,7 +47,7 @@
             </li>
 
             <li class="nav-item col-sm-3 col-md-2"><a class="nav-link" href="edit-user.jsp">Nasze projekty</a></li>
-            <li class="nav-item col-sm-3 col-md-3"><a class="nav-link" href="search.jsp">Uczą dla na na najlepsi</a>
+            <li class="nav-item col-sm-3 col-md-3"><a class="nav-link" href="search.jsp">Uczą dla nas  najlepsi</a>
             </li>
             <li class="nav-item col-sm-3 col-md-2"><a class="nav-link" href="ratings.jsp">Postepy uczniów</a></li>
             <li class="nav-item col-sm-3 col-md-2">
@@ -56,9 +56,9 @@
                    data-toggle="dropdown" role="button" aria-expanded="false"
                    id="submenu2" aria-haspopup="true" href="newAccount.jsp">Logowanie</a>
 
-                <div class="dropdown-menu navbar-dark fixed-left bg-dark" aria-labelledby="submenu">
-                    <a href="dropdown-item" href="#">Zaloguj</a><br>
-                <a href="dropdown-item" href="#">utwórz konto</a></div>
+                <div class="dropdown-menu navbar-dark  bg-dark" aria-labelledby="submenu">
+                    <a href="logout.jsp">Zaloguj</a><br>
+                <a href="newAccount.jsp">utwórz konto</a></div>
             </li>
 
 
