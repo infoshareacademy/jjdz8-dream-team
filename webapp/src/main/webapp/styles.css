@@ -1,10 +1,11 @@
-body{
+body {
     background-color: whitesmoke;
 }
+
 main {
     min-height: 90vh;
     background: whitesmoke;
-    padding:30px;
+    padding: 30px;
 }
 
 footer {
@@ -26,27 +27,31 @@ footer {
     opacity: 0.8;
     transition: opacity 0.1s ease-in-out;
 }
-#dropdown-menu
-{
+
+#dropdown-menu {
     text-align: left;
     text-decoration: none;
 }
+
 .bg-jumpers {
-    background-color: black!important;
+    background-color: black !important;
 
 }
+
 a {
     color: white;
-padding-left: 0px;
- font-size:12px;
+
+    font-size: 14px;
 
 }
 
 a:hover {
     text-decoration: none;
     color: rgb(158, 190, 190);
-    background-color:#2F3336 ;
+    background-color: #2F3336;
 }
-.title{
-    padding:20px;
+
+.title {
+    padding: 20px;
 }
+
