@@ -34,38 +34,24 @@
                 <#if user ?? >
                 <h1> Hello <strong>${user.nickName}!</strong></h1>
                 <div class="form">
-                    <form method="post" action="http://localhost:8080/edit-teacher-account">
-                        <#if emptyNickname ??><p style="color: crimson">nickname cannot be empty</p>
-                            NickName: <input type="text" name="nickName" value=""/><br/><br/>
-                            <br/><br/>
-                        <#else> NickName: <input type="text" name="nickName" value="${user.nickName}"><br/><br/>
-                        </#if>
-
-                        <#if emptyEmail ??><p style="color: crimson">email cannot be empty</p>
-                            email: <input type="text" name="email" value=""/><br/><br/>
-                            <br/><br/>
-                        <#else> email: <input type="text" name="email" value="${user.email}"><br/><br/>
-                        </#if>
-
-                        <#if emptyPassword ??><p style="color: crimson">password cannot be empty<br>(8-20 characters,at
-                            lest one digit,<br>lower
-                            and upper chase character, special character[@,!*$...]</p>
-                            password: <input type="password" name="password" value=""/><br/><br/>
-                            <br/><br/>
-                        <#else> password: <input type="password" name="password" value=""><br/><br/>
-                        </#if>
-
+                    <form method="post" action="http://localhost:8080/edit-student-account">
+                        NickName: <input type="text" name="nickName"  value="${user.nickName}" /><br/><br/>
+                        email: <input type="text" name="email"  value="${user.email}"/><br/><br/>
+                        Password: <input type="password" name="password"  value="" /><br/><br/>
                         <input type="submit" name="save" value="edit"/><br/><br/>
+                        <button class="delete-user" id="${user.id}" type="submit" value="${user.id}">delete account
+                        </button>
                     </form>
-                    <a href="/logout"> <input type="button" value="Logout"/></a>
-
                 </div>
             </div>
         </div>
-        </#if>
-    </div>
-    </div>
-    </div>
+        <div class="row">
+                <a href="/logout">
+                    <input type="button" value="logout"/>
+                </a>
+                </#if>
+            </div>
+        </div>
 </main>
 
 <script src="../../delete.js"></script>

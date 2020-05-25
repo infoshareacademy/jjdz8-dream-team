@@ -4,7 +4,7 @@ import java.math.BigInteger;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 
-public class PasswordCoding {
+public class PasswordResolver {
 
     public static String passwordHashing(String Password) {
         try {
@@ -19,7 +19,7 @@ public class PasswordCoding {
         return null;
     }
 
-    public boolean isCorrectPasswordFormat(String userPassword) {
+    public static boolean isCorrectPasswordFormat(String userPassword) {
         return userPassword.matches("((?=.*[a-z])(?=.*\\d)(?=.*[A-Z])(?=.*[@#$%!]).{8,20})");
     }
 }

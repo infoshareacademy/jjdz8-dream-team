@@ -18,7 +18,7 @@
     <h1><strong>Hello user please login </strong></h1>
     <form method="post" action="http://localhost:8080/teacher">
         NickName: <input type="text" name="nickName"/><br/><br/>
-        <input type="submit" name="login" value="login"/><br/><br/>
+        <input type="submit" name="login" value="login as teacher"/><br/><br/>
     </form>
 </div>
 <footer class="footer">

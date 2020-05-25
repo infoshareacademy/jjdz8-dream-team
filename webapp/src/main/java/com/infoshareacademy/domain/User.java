@@ -7,16 +7,12 @@ import java.util.UUID;
 
 public class User {
 
-    @NotNull(message = "password cannot be null")
     private String password;
 
     private UUID id;
 
-    @NotNull(message = "nickName cannot be empty")
     private String nickName;
 
-    @Email(message = "Email should be valid")
-    @NotNull(message = "email cannot be empty")
     private String email;
 
 
@@ -27,7 +23,6 @@ public class User {
     public void setEmail(String email) {
         this.email = email;
     }
-
 
     public User(){
 

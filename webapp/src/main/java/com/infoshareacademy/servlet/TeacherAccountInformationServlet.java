@@ -1,10 +1,10 @@
-package com.infoshareacademy.servlet.users;
+package com.infoshareacademy.servlet;
 
 import com.infoshareacademy.domain.Subject;
 import com.infoshareacademy.domain.User;
 import com.infoshareacademy.freemarker.TemplateProvider;
 import com.infoshareacademy.service.SubjectService;
-import com.infoshareacademy.service.UserService;
+import com.infoshareacademy.service.TeacherService;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 
@@ -29,7 +29,8 @@ public class TeacherAccountInformationServlet extends HttpServlet {
     private TemplateProvider provider;
 
     @Inject
-    UserService service;
+    TeacherService service;
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html;charset=UTF-8");
@@ -39,32 +40,30 @@ public class TeacherAccountInformationServlet extends HttpServlet {
         Map<String, Object> dataModel = new HashMap<>();
         String massage;
 
-        HttpSession session=req.getSession(false);
+        HttpSession session = req.getSession(false);
         UUID id;
         Optional<User> user;
 
-        if(session.getAttribute("id")!=null){
-            id = (UUID) session.getAttribute("id");
-            user = service.findById(id);
-            List<Subject> subjects;
-            if (user.isEmpty()) {
-                resp.sendError(HttpServletResponse.SC_BAD_REQUEST);
-                return;
-            }
-            subjects = subjectService.findAllSubjectsForTeacher(user.get().getId());
-            dataModel.put("user", user.get());
-            dataModel.put("userPassword", hiddenPassword(user.get().getPassword()));
-
-            if (subjects.size()>0){
-                dataModel.put("subjects",subjects);
-            }
-
+        if (session == null || session.getAttribute("id") == null) {
+            dataModel.put("message", "please login first");
+            return;
         }
-        else{
-            massage = "Please login first";
-            printWriter.println(massage);
-            dataModel.put("message", massage);
+
+        id = (UUID) session.getAttribute("id");
+        user = service.findById(id);
+        List<Subject> subjects;
+        if (user.isEmpty()) {
+            resp.sendError(HttpServletResponse.SC_BAD_REQUEST);
+            return;
         }
+        subjects = subjectService.findAllSubjectsForTeacher(user.get().getId());
+        dataModel.put("user", user.get());
+        dataModel.put("userPassword", hiddenPassword(user.get().getPassword()));
+
+        if (subjects.size() > 0) {
+            dataModel.put("subjects", subjects);
+        }
+
         try {
             template.process(dataModel, printWriter);
             resp.setStatus(HttpServletResponse.SC_ACCEPTED);
@@ -74,9 +73,9 @@ public class TeacherAccountInformationServlet extends HttpServlet {
 
     }
 
-    private String hiddenPassword(String password){
-        String hidden="";
-        for (char sign: password.toCharArray()){
+    private String hiddenPassword(String password) {
+        String hidden = "";
+        for (char sign : password.toCharArray()) {
             hidden = hidden + "*";
         }
 

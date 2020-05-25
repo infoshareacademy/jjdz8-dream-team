@@ -24,40 +24,39 @@
             <div class="col-6">
                 <#if message ??>
                     <h1>You have to login or registry first</h1>
-                    <a href="http://localhost:8080/temporary-login.jsp">
+                    <a href="http://localhost:8080/chooseWhoIsLogin.jsp">
                         <input type="button" value="login"/>
                     </a>
                     <a href="http://localhost:8080/add-user.jsp">
-                        <input type="button" value="registry"/>
+                        <input type="button" value="register"/>
                     </a>
                 </#if>
                 <#if user ?? >
                 <h1> Hello <strong>${user.nickName}!</strong></h1>
                 <div class="form">
-                    <form method="post" action="http://localhost:8080/edit-teacher-account">
+                    <form method="post" action="http://localhost:8080/edit-student-account">
                         <#if emptyNickname ??><p style="color: crimson">nickname cannot be empty</p>
-                            NickName: <input type="text" name="nickName" value=""/><br/><br/>
+                            NickName: <input type="text"  name="nickName" value=""/><br/><br/>
                             <br/><br/>
                         <#else> NickName: <input type="text" name="nickName" value="${user.nickName}"><br/><br/>
                         </#if>
 
                         <#if emptyEmail ??><p style="color: crimson">email cannot be empty</p>
-                            email: <input type="text" name="email" value=""/><br/><br/>
+                            email: <input type="text" name="email"  value=""/><br/><br/>
                             <br/><br/>
                         <#else> email: <input type="text" name="email" value="${user.email}"><br/><br/>
                         </#if>
 
-                        <#if emptyPassword ??><p style="color: crimson">password cannot be empty<br>(8-20 characters,at
-                            lest one digit,<br>lower
+                        <#if emptyPassword ??><p style="color: crimson">password cannot be empty<br>(8-20 characters,at lest one digit,<br>lower
                             and upper chase character, special character[@,!*$...]</p>
-                            password: <input type="password" name="password" value=""/><br/><br/>
+                            password: <input type="password" name="password"  value=""/><br/><br/>
                             <br/><br/>
                         <#else> password: <input type="password" name="password" value=""><br/><br/>
                         </#if>
 
                         <input type="submit" name="save" value="edit"/><br/><br/>
                     </form>
-                    <a href="/logout"> <input type="button" value="Logout"/></a>
+                    <a href="/logout" > <input type="button" value="Logout"/></a>
 
                 </div>
             </div>

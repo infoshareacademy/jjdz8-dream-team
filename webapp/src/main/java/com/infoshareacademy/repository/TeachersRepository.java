@@ -8,11 +8,13 @@ import com.infoshareacademy.fileOperations.JsonReader;
 import com.infoshareacademy.fileOperations.JsonSaver;
 
 import javax.enterprise.context.RequestScoped;
+import javax.inject.Named;
 import java.util.Optional;
 import java.util.UUID;
 
 @RequestScoped
-public class TeacherRepository implements Repository{
+@Named("TeachersRepository")
+public class TeachersRepository implements Repository {
 
     private final Teachers teachers = JsonReader.create(new Teachers(),FileNames.TEACHERS_JSON);
 
@@ -53,16 +55,19 @@ public class TeacherRepository implements Repository{
         return false;
     }
 
+    @Override
     public void updateUserPassword(User user){
         teachers.getTeachers().forEach(teacher -> {if (teacher.getId().equals(user.getId())) teacher.setPassword(user.getPassword());});
         JsonSaver.createJson(teachers,FileNames.TEACHERS_JSON);
     }
 
+    @Override
     public void updateNickname(User user){
         teachers.getTeachers().forEach(teacher -> {if (teacher.getId().equals(user.getId())) teacher.setNickName(user.getNickName());});
         JsonSaver.createJson(teachers,FileNames.TEACHERS_JSON);
     }
 
+    @Override
     public void updateEmail(User user){
         teachers.getTeachers().forEach(teacher -> {if (teacher.getId().equals(user.getId())) teacher.setEmail(user.getEmail());});
         JsonSaver.createJson(teachers,FileNames.TEACHERS_JSON);

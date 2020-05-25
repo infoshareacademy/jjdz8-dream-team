@@ -34,38 +34,20 @@
                 <#if user ?? >
                 <h1> Hello <strong>${user.nickName}!</strong></h1>
                 <div class="form">
-                    <form method="post" action="http://localhost:8080/edit-teacher-account">
-                    NickName: <input type="text" name="nickName" value="${user.nickName}"/><br/><br/>
-                        email: <input type="text" name="email" value="${user.email}"/><br/><br/>
-                        Password: <input type="password" name="password" value=""/><br/><br/>
-                        <input type="submit" name="save" value="edit"/><br/><br/>
+                        NickName: <input type="text" name="nickName"  value="${user.nickName}" disabled/><br/><br/>
+                        email: <input type="text" name="email"  value="${user.email}"disabled/><br/><br/>
+                        Password: <input type="password" name="password"  value="password" disabled/><br/><br/>
+                        <a href="/student-account-information-servlet"><input type="button" value="edit"></a>
                         <button class="delete-user" id="${user.id}" type="submit" value="${user.id}">delete account
                         </button>
-                    </form>
                 </div>
             </div>
         </div>
         <div class="row">
-            <div class="col-6">
-                <#if subjects??>
-                    <#list subjects as subject>
-                        <form method="post" action="http://localhost:8080/subject">
-                            <input type="hidden" name="id" value="${subject.id}">
-                            <p>${subject.name}
-                                <a href="http://localhost:8080/subject?id=${subject.id}">
-                                    <input type="button" value="show details"/>
-                                </a>
-                        </form>
-                    </#list>
-                </#if>
-                <a href="http://localhost:8080/add-subject.html">
-                    <input type="button" value="add new subject"/>
-                </a>
-                <a href="/logout">
-                    <input type="button" value="logout"/>
-                </a>
-                </#if>
-            </div>
+            <a href="/logout">
+                <input type="button" value="logout"/>
+            </a>
+            </#if>
         </div>
     </div>
 </main>

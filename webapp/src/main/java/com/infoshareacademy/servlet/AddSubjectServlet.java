@@ -1,13 +1,8 @@
-package com.infoshareacademy.servlet.users;
+package com.infoshareacademy.servlet;
 
-import com.infoshareacademy.domain.User;
 import com.infoshareacademy.freemarker.TemplateProvider;
 import com.infoshareacademy.service.SubjectService;
-import com.infoshareacademy.service.UserService;
-import freemarker.template.Template;
-import freemarker.template.TemplateException;
 
-import javax.faces.event.WebsocketEvent;
 import javax.inject.Inject;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -15,12 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.swing.text.html.Option;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
 import java.util.UUID;
 
 @WebServlet("/add-subject")

@@ -1,4 +1,4 @@
-package com.infoshareacademy.servlet.users;
+package com.infoshareacademy.servlet;
 
 import com.infoshareacademy.domain.Subject;
 import com.infoshareacademy.freemarker.TemplateProvider;
@@ -30,6 +30,11 @@ public class SubjectServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html;charset=UTF-8");
         PrintWriter out = resp.getWriter();
+        HttpSession session = req.getSession(false);
+        if (session.getAttribute("id") == null) {
+            out.write("Please login firts");
+            return;
+        }
         String id = req.getParameter("id");
         processRequest(resp, out, UUID.fromString(id));
         req.getSession().setAttribute("subjectId", UUID.fromString(id));
@@ -39,11 +44,10 @@ public class SubjectServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html;charset=UTF-8");
         PrintWriter out = resp.getWriter();
+
         HttpSession session = req.getSession(false);
-        String errorMassage;
-        if (session.getAttribute("id") == null) {
-            errorMassage = "Please login first";
-            out.write(errorMassage);
+        if (session==null || session.getAttribute("id") == null) {
+            out.write("please login first");
             return;
         }
         String id = req.getParameter("id");

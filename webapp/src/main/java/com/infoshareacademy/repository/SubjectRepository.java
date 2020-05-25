@@ -15,16 +15,16 @@ import java.util.UUID;
 @RequestScoped
 public class SubjectRepository implements SubjectRepositoryInterface {
 
+    private final Subjects subjects = JsonReader.create(new Subjects(), FileNames.SUBJECTS_JSON);
+
     @Override
     public void add(Subject subject) {
-        Subjects subjects = JsonReader.create(new Subjects(), FileNames.SUBJECTS_JSON);
         subjects.addSubject(subject);
         JsonSaver.createJson(subjects, FileNames.SUBJECTS_JSON);
     }
 
     @Override
     public void delete(Subject subject) {
-        Subjects subjects = JsonReader.create(new Subjects(), FileNames.SUBJECTS_JSON);
         subjects.deleteSubject(subject);
         JsonSaver.createJson(subjects, FileNames.SUBJECTS_JSON);
     }
@@ -32,19 +32,16 @@ public class SubjectRepository implements SubjectRepositoryInterface {
     @Override
     public boolean contains(Optional<Subject> subject) {
         if (subject.isEmpty()) return false;
-        Subjects subjects = JsonReader.create(new Subjects(), FileNames.SUBJECTS_JSON);
         return subjects.getSubjects().contains(subject.get());
     }
 
     @Override
     public Optional<Subject> findById(UUID id) {
-        Subjects subjects = JsonReader.create(new Subjects(), FileNames.SUBJECTS_JSON);
         return Optional.ofNullable(subjects.getSubjects().stream().filter(s -> s.getId().equals(id)).findFirst().orElse(null));
     }
 
     @Override
     public List<Subject> findByName(String name) {
-        Subjects subjects = JsonReader.create(new Subjects(), FileNames.SUBJECTS_JSON);
         List<Subject> suitableSubjects = new ArrayList<>();
         subjects.getSubjects().forEach(s -> {
             if (s.getName().equalsIgnoreCase(name))
@@ -55,7 +52,6 @@ public class SubjectRepository implements SubjectRepositoryInterface {
 
     @Override
     public List<Subject> findByTopic(String topic) {
-        Subjects subjects = JsonReader.create(new Subjects(), FileNames.SUBJECTS_JSON);
         List<Subject> suitableSubjects = new ArrayList<>();
         subjects.getSubjects().forEach(s -> {
             if (s.getTopic().equalsIgnoreCase(topic))
@@ -66,7 +62,6 @@ public class SubjectRepository implements SubjectRepositoryInterface {
 
     @Override
     public List<Subject> findAllSubjectForTeacher(UUID id) {
-        Subjects subjects = JsonReader.create(new Subjects(), FileNames.SUBJECTS_JSON);
         List<Subject> suitableSubjects = new ArrayList<>();
         subjects.getSubjects().forEach(s -> {
             if (s.getTeacherId().equals(id))
@@ -77,7 +72,6 @@ public class SubjectRepository implements SubjectRepositoryInterface {
 
     @Override
     public void updateSubjectName(Subject subject) {
-        Subjects subjects = JsonReader.create(new Subjects(), FileNames.SUBJECTS_JSON);
         subjects.getSubjects().forEach(s -> {
             if (s.getId().equals(subject.getId())) s.setName(subject.getName());
         });
@@ -86,7 +80,6 @@ public class SubjectRepository implements SubjectRepositoryInterface {
 
     @Override
     public void updateSubjectTopic(Subject subject) {
-        Subjects subjects = JsonReader.create(new Subjects(), FileNames.SUBJECTS_JSON);
         subjects.getSubjects().forEach(s -> {
             if (s.getId().equals(subject.getId())) s.setTopic(subject.getTopic());
         });
@@ -95,7 +88,6 @@ public class SubjectRepository implements SubjectRepositoryInterface {
 
     @Override
     public void updateSubjectDescription(Subject subject) {
-        Subjects subjects = JsonReader.create(new Subjects(), FileNames.SUBJECTS_JSON);
         subjects.getSubjects().forEach(s -> {
             if (s.getId().equals(subject.getId())) s.setDescription(subject.getDescription());
         });
@@ -104,7 +96,6 @@ public class SubjectRepository implements SubjectRepositoryInterface {
 
     @Override
     public void updateSubjectIsVideo(Subject subject) {
-        Subjects subjects = JsonReader.create(new Subjects(), FileNames.SUBJECTS_JSON);
         subjects.getSubjects().forEach(s -> {
             if (s.getId().equals(subject.getId())) s.setVideo(subject.isVideo());
         });

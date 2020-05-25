@@ -1,4 +1,4 @@
-package com.infoshareacademy.servlet.users;
+package com.infoshareacademy.servlet;
 
 import com.infoshareacademy.domain.Subject;
 import com.infoshareacademy.freemarker.TemplateProvider;
@@ -43,7 +43,7 @@ public class EditSubjectServlet extends HttpServlet {
         PrintWriter out = resp.getWriter();
 
         HttpSession session = req.getSession(false);
-        if (session.getAttribute("id") == null) {
+        if (session==null || session.getAttribute("id") == null) {
             resp.getWriter().write("Please login first");
             return;
         }

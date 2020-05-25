@@ -1,10 +1,11 @@
-package com.infoshareacademy.servlet.users;
+package com.infoshareacademy.servlet;
 
 
 import com.infoshareacademy.domain.User;
 import com.infoshareacademy.freemarker.TemplateProvider;
-import com.infoshareacademy.service.UserEditService;
-import com.infoshareacademy.service.UserService;
+import com.infoshareacademy.security.PasswordResolver;
+import com.infoshareacademy.service.TeacherEditService;
+import com.infoshareacademy.service.TeacherService;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 
@@ -23,10 +24,10 @@ public class TeacherAccountEditorServlet extends HttpServlet {
     private TemplateProvider provider;
 
     @Inject
-    private UserEditService userEditService;
+    private TeacherEditService userEditService;
 
     @Inject
-    private UserService userService;
+    private TeacherService userService;
 
     public static final String EMPTY_NICKNAME = "emptyNickname";
 
@@ -45,7 +46,7 @@ public class TeacherAccountEditorServlet extends HttpServlet {
         Map<String, Object> dataModel = new HashMap<>();
 
         HttpSession session = req.getSession(false);
-        if (session.getAttribute("id") == null) {
+        if (session==null || session.getAttribute("id") == null) {
             dataModel.put("message", getAttributeValue(session, LOGIN_ERROR));
         }
         Optional<User> user = findCorrectUser(session, "id");
@@ -129,9 +130,8 @@ public class TeacherAccountEditorServlet extends HttpServlet {
             userEditService.editEmail(user, email);
         }
 
-        if (isIncorrectCorrectParameter(password)) {
+        if (!PasswordResolver.isCorrectPasswordFormat(password) || isIncorrectCorrectParameter(password)) {
             session.setAttribute(EMPTY_PASSWORD,"password cannot be empty");
-
         } else {
             userEditService.editPassword(user, password);
         }

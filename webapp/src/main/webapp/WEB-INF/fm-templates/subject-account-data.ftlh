@@ -24,7 +24,7 @@
         <div class="row">
             <div class="col-6">
                 <#if subject??>
-                    <h1><strong>${subject.name}!</strong></h1>
+                    <h1><strong>${subject.name}</strong></h1>
                     <form method="post" action="http://localhost:8080/edit-subject">
                         <#if emptyName ??><p style="color: crimson">Name cannot be empty</p>
                             name: <input type="text"  name="name" value=""/><br/><br/>

@@ -1,16 +1,12 @@
-package com.infoshareacademy.servlet.users;
+package com.infoshareacademy.servlet;
 
 import com.infoshareacademy.domain.Subject;
-import com.infoshareacademy.domain.Teacher;
 import com.infoshareacademy.domain.User;
 import com.infoshareacademy.freemarker.TemplateProvider;
-import com.infoshareacademy.repository.Repository;
 import com.infoshareacademy.repository.SubjectRepositoryInterface;
-import com.infoshareacademy.repository.TeacherRepository;
-import com.infoshareacademy.service.UserService;
+import com.infoshareacademy.service.TeacherService;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
-import jdk.dynalink.linker.LinkerServices;
 
 import javax.inject.Inject;
 import javax.servlet.ServletException;
@@ -19,8 +15,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.*;
@@ -34,7 +28,7 @@ public class TeacherServlet extends HttpServlet {
     TemplateProvider provider;
 
     @Inject
-    private UserService service;
+    private TeacherService service;
 
     @Inject
     private SubjectRepositoryInterface subjectRepository;
@@ -42,14 +36,13 @@ public class TeacherServlet extends HttpServlet {
     private static final Logger logger = Logger.getLogger(TeacherServlet.class.getName());
 
 
-
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html;charset=UTF-8");
         PrintWriter printWriter = resp.getWriter();
-        HttpSession session=req.getSession(false);
+        HttpSession session = req.getSession(false);
         String errorMassage;
-        if(session.getAttribute("id") == null) {
+        if (session.getAttribute("id") == null) {
             errorMassage = "Please login first";
             printWriter.write(errorMassage);
             return;
@@ -62,25 +55,23 @@ public class TeacherServlet extends HttpServlet {
         UUID id;
         Optional<User> user;
 
-        if(session.getAttribute("id")!=null){
-            id = (UUID) session.getAttribute("id");
-            user = service.findById(id);
-            List<Subject> subjects;
-            if (user.isEmpty()) {
-                resp.sendError(HttpServletResponse.SC_BAD_REQUEST);
-                return;
-            }
-            subjects = subjectRepository.findAllSubjectForTeacher(user.get().getId());
-            dataModel.put("user", user.get());
-            if (subjects.size()>0){
-                dataModel.put("subjects",subjects);
-            }
+        if (session == null || session.getAttribute("id") == null) {
+            dataModel.put("message", "please login first");
+            return;
         }
-        else{
-            massage = "Please login first";
-            printWriter.println(massage);
-            dataModel.put("message", massage);
+        id = (UUID) session.getAttribute("id");
+        user = service.findById(id);
+        List<Subject> subjects;
+        if (user.isEmpty()) {
+            resp.sendError(HttpServletResponse.SC_BAD_REQUEST);
+            return;
         }
+        subjects = subjectRepository.findAllSubjectForTeacher(user.get().getId());
+        dataModel.put("user", user.get());
+        if (subjects.size() > 0) {
+            dataModel.put("subjects", subjects);
+        }
+
         try {
             template.process(dataModel, printWriter);
             resp.setStatus(HttpServletResponse.SC_ACCEPTED);
@@ -94,35 +85,35 @@ public class TeacherServlet extends HttpServlet {
         resp.setContentType("text/html;charset=UTF-8");
 
         String nickName = req.getParameter("nickName");
-        if (nickName==null || nickName.isEmpty()){
+        if (nickName == null || nickName.isEmpty()) {
             resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             return;
         }
         Optional<User> user = service.findByNickName(nickName);
-        if (user.isEmpty()){
+        if (user.isEmpty()) {
             resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             return;
         }
         HttpSession session = req.getSession(true);
         session.setAttribute("id", user.get().getId());
-        resp.sendRedirect("/teacher");
+        resp.sendRedirect("/teacher-account-information");
     }
 
     @Override
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        HttpSession session=req.getSession(false);
-        if(session==null) {
+        HttpSession session = req.getSession(false);
+        if (session == null) {
             String errorMassage = "Please login first";
             resp.getWriter().write(errorMassage);
             return;
         }
-        String id =req.getParameter("id");
-        if (id==null || id.isEmpty()){
+        String id = req.getParameter("id");
+        if (id == null || id.isEmpty()) {
             resp.setStatus(HttpServletResponse.SC_NOT_FOUND);
             return;
         }
         Optional<User> user = service.findById(UUID.fromString(id));
-        if (user.isEmpty()){
+        if (user.isEmpty()) {
             resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             return;
         }
