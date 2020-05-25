@@ -20,7 +20,7 @@
     <div class="container">
         <div class="row">
             <div class="col-12">
-                <h3 class="display-5">Nasze usługi</h3>
+                <h3 class="display-9">Nasze usługi</h3>
             </div>
         </div>
 
@@ -32,13 +32,13 @@
             </ol>
             <div class="carousel-inner">
                 <div class="carousel-item active">
-                    <img class="d-block w-120" src="jpg/Red_Kitten_01.jpg" alt="First slide">
+                    <img class="d-block col-md-9 rounded mx-auto" src="jpg/Red_Kitten_01.jpg" alt="First slide">
                 </div>
                 <div class="carousel-item">
-                    <img class="d-block w-120" src="jpg/Red_Kitten_01.jpg" alt="Second slide">
+                    <img class="d-block col-md-9 rounded mx-auto" src="jpg/Red_Kitten_01.jpg" alt="Second slide">
                 </div>
                 <div class="carousel-item">
-                    <img class="d-block w-120" src="jpg/minion.jpg" alt="Third slide">
+                    <img class="d-block col-md-11 rounded mx-auto" src="jpg/minion.jpg" alt="Third slide">
                 </div>
             </div>
             <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
@@ -50,8 +50,6 @@
                 <span class="sr-only">Next</span>
             </a>
         </div>
-    </div>
-    </div>
     </div>
 </main>
 <footer class="container">

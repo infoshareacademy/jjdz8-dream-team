@@ -42,10 +42,7 @@
             <label for="description">Massage:</label>
             <textarea name="description"></textarea>
         </div>
-        <div class="form">
-            <button type="submit">
-                Send
-            </button>
+        <button type="submit  " class="btn btn-dark">Send</button>
         </div>
     </form>
 </main>
