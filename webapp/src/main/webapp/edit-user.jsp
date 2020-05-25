@@ -78,8 +78,10 @@
         </div>
     </div>
 </main>
-<footer>
-    <p>E-learning web app - all rights reserved;-)</p>
-</footer>
+
+    <footer class="container">
+        <p>E-learning web app - all rights reserved;-)</p>
+    </footer>
+
 </body>
 </html>

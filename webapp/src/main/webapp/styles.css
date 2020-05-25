@@ -31,6 +31,7 @@ footer {
 #dropdown-menu {
     text-align: left;
     text-decoration: none;
+    padding: 30px;
 }
 
 .bg-jumpers {
@@ -41,7 +42,6 @@ footer {
 a {
     color: white;
     text-decoration: none;
-
     font-size: 14px;
 
 }
@@ -55,4 +55,7 @@ a:hover {
 .title {
     padding: 20px;
 }
-
+#input-group
+{
+    padding: 30px;
+}

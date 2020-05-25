@@ -3,17 +3,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <meta
             name="description"
             content="Ratings of teaschers"
     />
     <title>Add-user</title>
-    <link href="styles.css" rel="stylesheet" />
-    <link href="form.css" rel="stylesheet" />
+    <link href="styles.css" rel="stylesheet"/>
+    <link href="form.css" rel="stylesheet"/>
 </head>
-
+<main>
 <body>
 <jsp:include page="menu.jsp"/>
 <header>
@@ -22,7 +22,7 @@
         Use bellow form.
     </p>
 </header>
-<main>
+
     <table class="table">
         <thead class="thead-dark">
         <tr>
@@ -54,7 +54,7 @@
         </tbody>
     </table>
 
-    </main>
+</main>
 <footer>
     <p>E-learning web app - all rights reserved;-)</p>
 </footer>

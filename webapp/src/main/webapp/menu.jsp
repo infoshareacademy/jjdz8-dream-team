@@ -31,7 +31,7 @@
     <div class="collapse navbar-collapse" id="navigation">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-                <a class="nav-link col-sm-4 col-md-2" href="index.jsp">O nas</a>
+                <a class="nav-link col-sm-4 col-lg-4" href="index.jsp">O nas</a>
             </li>
 
             <li class="nav-item dropdown col-sm-3 col-md-2">
@@ -47,7 +47,8 @@
             </li>
 
             <li class="nav-item col-sm-3 col-md-2"><a class="nav-link" href="edit-user.jsp">Nasze projekty</a></li>
-            <li class="nav-item col-sm-3 col-md-3"><a class="nav-link" href="search.jsp">Uczą dla nas  najlepsi</a>
+
+            <li class="nav-item col-sm-3 col-md-2"><a class="nav-link" href="search.jsp">Wyszukiwanie</a>
             </li>
             <li class="nav-item col-sm-3 col-md-2"><a class="nav-link" href="ratings.jsp">Postepy uczniów</a></li>
             <li class="nav-item col-sm-3 col-md-2">

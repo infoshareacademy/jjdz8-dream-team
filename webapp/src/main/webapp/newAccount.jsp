@@ -67,5 +67,8 @@
     <button type="submit  " class="btn btn-dark">Utwórz</button>
 </form>
 </main>
+<footer class="container">
+    <p>E-learning web app - all rights reserved;-)</p>
+</footer>
 </body>
 </html>
