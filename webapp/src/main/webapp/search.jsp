@@ -13,7 +13,7 @@
 </head>
 
 <body>
-<jsp:include page="menu.jsp"/>
+<jsp:include page="menu.html"/>
 <header>
     <h1>Search</h1>
     <p>
