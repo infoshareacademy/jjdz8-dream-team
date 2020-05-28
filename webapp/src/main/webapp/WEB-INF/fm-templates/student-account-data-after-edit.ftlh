@@ -47,17 +47,29 @@
                         <#else> email: <input type="text" name="email" value="${user.email}"><br/><br/>
                         </#if>
 
-                        <#if emptyPassword ??><p style="color: crimson">password cannot be empty<br>(8-20 characters,at lest one digit,<br>lower
-                            and upper chase character, special character[@,!*$...]</p>
-                            password: <input type="password" name="password"  value=""/><br/><br/>
+                        <#if wrongPassword ??><p style="color: crimson">wrong password,please try again</p><br>
+                            <label>Please enter old password to confirm</label>
+                            old password: <input type="password" name="oldPassword" value=""/><br/><br/>
                             <br/><br/>
-                        <#else> password: <input type="password" name="password" value=""><br/><br/>
+                        <#else><label>please enter old password to confirm</label>
+                            old password: <input type="password" name="oldPassword" value=""/><br/><br/>
+                            <br/><br/>
+                        </#if>
+
+                        <#if wrongPasswordFormat ??>
+                            <p style="color: crimson">wrong format(8-20 characters,at
+                                lest one digit,<br>lower
+                                and upper chase character, special character[@,!*$...]</p>
+                            new password: <input type="password" name="newPassword" value=""/><br/><br/>
+                            <br/><br/>
+                        <#else>
+                            <label>enter new password if you want change</label>
+                            new password: <input type="password" name="newPassword" value=""><br/><br/>
                         </#if>
 
                         <input type="submit" name="save" value="edit"/><br/><br/>
                     </form>
                     <a href="/logout" > <input type="button" value="Logout"/></a>
-
                 </div>
             </div>
         </div>
@@ -67,8 +79,8 @@
     </div>
 </main>
 
-<script src="../../delete.js"></script>
-<script src="../../delete-user.js"></script>
+<script src="../../delete-subject.js"></script>
+<script src="../../delete-teacher.js"></script>
 <#include "jsScripts.ftlh">
 </body>
 </html>

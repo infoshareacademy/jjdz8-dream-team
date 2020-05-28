@@ -37,25 +37,54 @@
                     <form method="post" action="http://localhost:8080/edit-student-account">
                         NickName: <input type="text" name="nickName"  value="${user.nickName}" /><br/><br/>
                         email: <input type="text" name="email"  value="${user.email}"/><br/><br/>
-                        Password: <input type="password" name="password"  value="" /><br/><br/>
-                        <input type="submit" name="save" value="edit"/><br/><br/>
-                        <button class="delete-user" id="${user.id}" type="submit" value="${user.id}">delete account
-                        </button>
+                        <label>Enter old password to confirm changes</label><br>
+                        old password: <input type="password" name="oldPassword" value=""/><br/><br/>
+                        <label>Enter new password if you want change password</label>
+                        <p style="color: crimson">format(8-20 characters,at
+                            lest one digit,<br>lower
+                            and upper chase character, special character[@,!*$...]</p><br>
+                        new password: <input type="password" name="newPassword" value=""/><br/><br/>
+                        <input class="btn btn-primary" type="submit" name="save" value="edit"/><br/><br/>
                     </form>
+                </div>
+            </div>
+        </div>
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+            Delete account
+        </button>
+
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">delete account</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        If you are sure about delete this account please click on confirm button
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button id="delete-user" type="button" value="${user.id}" class="btn btn-primary">Confirm</button>
+                    </div>
                 </div>
             </div>
         </div>
         <div class="row">
                 <a href="/logout">
-                    <input type="button" value="logout"/>
+                    <input type="button" class="btn btn-primary" value="logout"/>
                 </a>
                 </#if>
             </div>
         </div>
 </main>
 
-<script src="../../delete.js"></script>
-<script src="../../delete-user.js"></script>
+<script src="../../delete-student.js"></script>
 <#include "jsScripts.ftlh">
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 </body>
 </html>

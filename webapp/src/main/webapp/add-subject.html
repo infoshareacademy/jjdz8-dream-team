@@ -3,30 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <title>add-subject</title>
-    <link href="../../range.css">
-    <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet" id="bootstrap-css">
-    <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
-    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <link href="netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+    <script src="code.jquery.com/jquery-1.11.1.min.js"></script>
 </head>
 <body>
 <form method="post" action="http://localhost:8080/add-subject">
     name: <input type="text" name="name" /><br/><br/>
     topic: <input type="text" name="topic" /><br/><br/>
-    <input type="hidden" name="count" value="1" />
-    <div class="control-group" id="fields">
-        <label class="control-label" for="field1">Add new range</label>
-        <div class="controls" id="profs">
-            <div id="field"><input autocomplete="off" class="input" id="field1" name="rangeElement" type="text" placeholder="Type something" data-items="8"/><button id="b1" class="btn add-more" type="button">+</button></div>
-            <br>
-            <small>Press + to add another form field :)</small>
-        </div>
-    </div>
+    description: <input type="text" name="description" /><br/><br/>
     <select id="isVideo" name="isVideo">
         <option value="true">yes</option>
         <option value="false">no</option>
     </select>
-    <input type="submit" name="save" value="edit"/><br/><br/>
+    <input type="submit" name="save" value="save"/><br/><br/>
 </form>
-<script src="../../forAddedendDeletedsubjectrange.js"></script>
 </body>
 </html>

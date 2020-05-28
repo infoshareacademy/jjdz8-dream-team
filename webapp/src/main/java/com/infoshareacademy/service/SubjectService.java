@@ -1,6 +1,5 @@
 package com.infoshareacademy.service;
 
-
 import com.infoshareacademy.domain.Subject;
 import com.infoshareacademy.repository.SubjectRepository;
 
@@ -24,13 +23,17 @@ public class SubjectService {
         repository.delete(subject);
     }
 
-    public void addNewSubject(String name, String topic, String description, boolean isVideo, UUID teacherId) {
+    public Subject createSubject(String name, String topic, String description, boolean isVideo, UUID teacherId) {
         Subject subject = new Subject();
         subject.setName(name);
+        subject.setTeacherId(teacherId);
         subject.setTopic(topic);
         subject.setDescription(description);
-        subject.setTeacherId(teacherId);
         subject.setVideo(isVideo);
+        return subject;
+    }
+
+    public void addNewSubject(Subject subject) {
         repository.add(subject);
     }
 

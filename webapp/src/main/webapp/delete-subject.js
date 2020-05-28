@@ -1,13 +1,13 @@
-$(".delete-user").each(function () {
+$("#delete-subject").each(function () {
     $(this).on('click', function () {
-        const id = $('.delete-user').val();
+        const id = $('#delete-subject').val();
         console.log(id);
         $.ajax({
-            "url": '/teacher?id='+id,
+            "url": '/subject?id='+id,
             "method": 'DELETE',
             "success": function () {
-                alert('your account succesfully deleted');
-                location.replace("/logout");
+                alert('user succesfully deleted');
+                location.replace("/teacher");
             },
             "error": function (error) {
                 alert(error);

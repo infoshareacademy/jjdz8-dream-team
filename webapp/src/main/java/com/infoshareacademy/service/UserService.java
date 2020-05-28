@@ -3,28 +3,35 @@ package com.infoshareacademy.service;
 import com.infoshareacademy.domain.User;
 import com.infoshareacademy.repository.Repository;
 
-import javax.enterprise.context.RequestScoped;
-import javax.inject.Inject;
-import javax.inject.Named;
 import java.util.Optional;
 import java.util.UUID;
 
-@RequestScoped
-public class StudentsService {
+public abstract class UserService implements Service{
 
-    @Inject
-    @Named("StudentsRepository")
-    private Repository repository;
+    private final Repository repository;
 
+    public UserService(Repository repository){
+        this.repository=repository;
+    }
+
+    @Override
     public Optional<User> findByNickName(String nickName){
         return repository.findByNickName(nickName);
     }
 
+    @Override
     public Optional<User> findById(UUID id) {
         return repository.findByID(id);
     }
 
+    @Override
     public void delete(User user) {
         repository.deleteUser(user);
     }
+
+    @Override
+    public boolean isCorrectPassword(User user, String password){
+        return repository.isCorrectPassword(user,password);
+    }
+
 }

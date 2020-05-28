@@ -2,11 +2,12 @@ package com.infoshareacademy.servlet;
 
 import com.infoshareacademy.domain.User;
 import com.infoshareacademy.freemarker.TemplateProvider;
-import com.infoshareacademy.service.StudentsService;
+import com.infoshareacademy.service.Service;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -24,7 +25,8 @@ import java.util.UUID;
 public class StudentAccountInformationServlet extends HttpServlet {
 
     @Inject
-    private StudentsService service;
+    @Named("StudentService")
+    private Service service;
 
     @Inject
     private TemplateProvider provider;

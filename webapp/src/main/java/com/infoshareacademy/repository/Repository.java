@@ -22,9 +22,11 @@ public interface Repository {
 
      boolean contains(Optional<User> user);
 
-     void updateUserPassword(User user);
+     void updateUserPassword(UUID id, String password);
 
-     void updateNickname(User user);
+     void updateNickname(UUID id, String nickname);
 
-     void updateEmail(User user);
+     void updateEmail(UUID id, String email);
+
+     boolean isCorrectPassword (User user, String password);
 }

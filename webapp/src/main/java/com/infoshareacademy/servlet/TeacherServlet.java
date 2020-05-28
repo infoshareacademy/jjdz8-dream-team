@@ -4,11 +4,13 @@ import com.infoshareacademy.domain.Subject;
 import com.infoshareacademy.domain.User;
 import com.infoshareacademy.freemarker.TemplateProvider;
 import com.infoshareacademy.repository.SubjectRepositoryInterface;
+import com.infoshareacademy.service.Service;
 import com.infoshareacademy.service.TeacherService;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -28,7 +30,8 @@ public class TeacherServlet extends HttpServlet {
     TemplateProvider provider;
 
     @Inject
-    private TeacherService service;
+    @Named("TeacherService")
+    private Service service;
 
     @Inject
     private SubjectRepositoryInterface subjectRepository;
@@ -68,6 +71,7 @@ public class TeacherServlet extends HttpServlet {
         }
         subjects = subjectRepository.findAllSubjectForTeacher(user.get().getId());
         dataModel.put("user", user.get());
+
         if (subjects.size() > 0) {
             dataModel.put("subjects", subjects);
         }
@@ -118,5 +122,6 @@ public class TeacherServlet extends HttpServlet {
             return;
         }
         service.delete(user.get());
+        req.getSession(false).invalidate();
     }
 }

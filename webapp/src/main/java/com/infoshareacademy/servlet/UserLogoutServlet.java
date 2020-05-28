@@ -19,8 +19,10 @@ public class UserLogoutServlet extends HttpServlet {
         PrintWriter out=resp.getWriter();
 
         HttpSession session = req.getSession(false);
+        session.removeAttribute("id");
         session.invalidate();
 
         out.close();
+        resp.sendRedirect("page-after-logout.jsp");
     }
 }

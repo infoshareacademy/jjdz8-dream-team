@@ -34,14 +34,38 @@
 
                         <a href="/edit-subject?id=${subject.id}"> <input type="button" value="Edit"/></a>
 
-                        <button class="delete-subject" id="${subject.id}" type="submit" value="${subject.id}">delete
+                        <!-- Button trigger modal -->
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                            Delete account
                         </button>
+
+                        <!-- Modal -->
+                        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">delete account</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        If you are sure about delete this account please click on confirm button
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                        <button id="delete-subject" type="button" value="${subject.id}" class="btn btn-primary">Confirm</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </#if>
             </div>
         </div>
     </div>
 </main>
+<script src="../../delete-subject.js"></script>
 <script src="../../forAddedendDeletedsubjectrange.js"></script>
 <#include "jsScripts.ftlh">
 </body>

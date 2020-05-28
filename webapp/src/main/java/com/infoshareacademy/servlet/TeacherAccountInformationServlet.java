@@ -3,12 +3,14 @@ package com.infoshareacademy.servlet;
 import com.infoshareacademy.domain.Subject;
 import com.infoshareacademy.domain.User;
 import com.infoshareacademy.freemarker.TemplateProvider;
+import com.infoshareacademy.service.Service;
 import com.infoshareacademy.service.SubjectService;
 import com.infoshareacademy.service.TeacherService;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -29,7 +31,8 @@ public class TeacherAccountInformationServlet extends HttpServlet {
     private TemplateProvider provider;
 
     @Inject
-    TeacherService service;
+    @Named("TeacherService")
+    Service service;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -38,7 +41,6 @@ public class TeacherAccountInformationServlet extends HttpServlet {
 
         Template template = provider.getTemplate(getServletContext(), "teacher-account-information-page.ftlh");
         Map<String, Object> dataModel = new HashMap<>();
-        String massage;
 
         HttpSession session = req.getSession(false);
         UUID id;
@@ -57,8 +59,8 @@ public class TeacherAccountInformationServlet extends HttpServlet {
             return;
         }
         subjects = subjectService.findAllSubjectsForTeacher(user.get().getId());
+        subjects.stream().forEach(e-> System.out.println(e.getName()));
         dataModel.put("user", user.get());
-        dataModel.put("userPassword", hiddenPassword(user.get().getPassword()));
 
         if (subjects.size() > 0) {
             dataModel.put("subjects", subjects);

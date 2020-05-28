@@ -1,0 +1,41 @@
+package com.infoshareacademy.servlet;
+
+import com.infoshareacademy.domain.User;
+
+import javax.servlet.http.HttpSession;
+import java.util.Map;
+import java.util.Optional;
+import java.util.UUID;
+
+public class HelperForServlets {
+
+    public static boolean isIncorrectCorrectParameter(String parameter) {
+        return (parameter == null || parameter.isEmpty());
+    }
+
+    public static boolean isValidDoPostSession(HttpSession session) {
+        return session.getAttribute("id") != null;
+    }
+
+    public static void invalidateAttributes(HttpSession session, String... attributeNames) {
+        for (String attributeName : attributeNames) {
+            if (session.getAttribute(attributeName) != null) {
+                session.removeAttribute(attributeName);
+            }
+        }
+    }
+
+    public static void putCorrectDataToDataModel(String modelKey, String modelValue, Map<String, Object> dataModel) {
+        if (!modelValue.isEmpty()) {
+            dataModel.put(modelKey, modelValue);
+        }
+    }
+
+    public static String getAttributeValue(HttpSession session, String attributeName) {
+        String attribute = "";
+        if (session.getAttribute(attributeName) != null) {
+            attribute = (String) session.getAttribute(attributeName);
+        }
+        return attribute;
+    }
+}

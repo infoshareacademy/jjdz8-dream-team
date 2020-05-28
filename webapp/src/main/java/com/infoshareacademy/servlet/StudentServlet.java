@@ -1,13 +1,14 @@
 package com.infoshareacademy.servlet;
 
-import com.infoshareacademy.domain.Subject;
 import com.infoshareacademy.domain.User;
 import com.infoshareacademy.freemarker.TemplateProvider;
-import com.infoshareacademy.service.StudentsService;
+import com.infoshareacademy.service.Service;
+import com.infoshareacademy.service.StudentService;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -22,7 +23,8 @@ import java.util.*;
 public class StudentServlet extends HttpServlet {
 
     @Inject
-    private StudentsService service;
+    @Named("StudentService")
+    private Service service;
 
     @Inject
     private TemplateProvider provider;
@@ -83,4 +85,28 @@ public class StudentServlet extends HttpServlet {
         session.setAttribute("id", user.get().getId());
         resp.sendRedirect("/student");
     }
+
+    @Override
+    protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        HttpSession session = req.getSession(false);
+        if (session == null) {
+            String errorMassage = "Please login first";
+            resp.getWriter().write(errorMassage);
+            return;
+        }
+        String id = req.getParameter("id");
+        if (id == null || id.isEmpty()) {
+            resp.setStatus(HttpServletResponse.SC_NOT_FOUND);
+            return;
+        }
+        Optional<User> user = service.findById(UUID.fromString(id));
+        if (user.isEmpty()) {
+            resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            return;
+        }
+        service.delete(user.get());
+        req.getSession(false).invalidate();
+    }
+
+
 }

@@ -50,9 +50,8 @@
                         </select>
                         <input type="hidden" name="id" value="${subject.id}"/><br/><br/>
                         <input type="submit" name="edit" value="edit"/><br/><br/>
-                        <button class="delete-subject" id="${subject.id}" type="submit" value="${subject.id}">delete
-                        </button>
                     </form>
+
                 </#if>
             </div>
         </div>

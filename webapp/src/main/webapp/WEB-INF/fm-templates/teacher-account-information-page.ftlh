@@ -38,7 +38,7 @@
                     <div class="form">
                         NickName: <input type="text" name="nickName" value=${user.nickName} readonly></br>
                         Email: <input type="text" name="email" value=${user.email} readonly></br>
-                        Password: <input type="password" name="password" value=${user.password} readonly><br>
+                        Password: <input type="password" name="password" value="password" readonly><br>
                     </div>
                 </div>
             </div>
@@ -49,9 +49,9 @@
                     <#if subjects??>
                         <#list subjects as subject>
                             <h1><strong>${subject.name}</strong></h1>
-                            name: <input type="text" name="name" value=${subject.name} readonly></br>
-                            topic: <input type="text" name="topic" value=${subject.topic} readonly></br>
-                            description: <input type="text" name="description" value=${subject.description} readonly></br>
+                            name: <input type="text" name="name" value="${subject.name}" readonly></br>
+                            topic: <input type="text" name="topic" value="${subject.topic}" readonly></br>
+                            description: <input type="text" name="description" value="${subject.description}" readonly></br>
                         <#--      <span>video lessons: "${subject.isVideo?boolean?s}"</span></br>-->
                         </#list>
                     </#if>
@@ -68,8 +68,8 @@
     </div>
 </main>
 
-<script src="../../delete.js"></script>
-<script src="../../delete-user.js"></script>
+<script src="../../delete-subject.js"></script>
+<script src="../../delete-teacher.js"></script>
 <#include "jsScripts.ftlh">
 </body>
 </html>

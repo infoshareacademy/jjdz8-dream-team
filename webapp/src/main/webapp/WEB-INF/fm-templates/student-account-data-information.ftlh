@@ -38,8 +38,6 @@
                         email: <input type="text" name="email"  value="${user.email}"disabled/><br/><br/>
                         Password: <input type="password" name="password"  value="password" disabled/><br/><br/>
                         <a href="/student-account-information-servlet"><input type="button" value="edit"></a>
-                        <button class="delete-user" id="${user.id}" type="submit" value="${user.id}">delete account
-                        </button>
                 </div>
             </div>
         </div>
@@ -52,8 +50,8 @@
     </div>
 </main>
 
-<script src="../../delete.js"></script>
-<script src="../../delete-user.js"></script>
+<script src="../../delete-subject.js"></script>
+<script src="../../delete-teacher.js"></script>
 <#include "jsScripts.ftlh">
 </body>
 </html>

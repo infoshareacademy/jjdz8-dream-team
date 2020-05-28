@@ -85,4 +85,15 @@ public class Subject {
         return Objects.hash(getId(), getTeacherId(), getName(), getTopic(), getDescription(), isVideo());
     }
 
+    @Override
+    public String toString() {
+        return "Subject{" +
+                "id=" + id +
+                ", teacherId=" + teacherId +
+                ", name='" + name + '\'' +
+                ", topic='" + topic + '\'' +
+                ", description='" + description + '\'' +
+                ", isVideo=" + isVideo +
+                '}';
+    }
 }

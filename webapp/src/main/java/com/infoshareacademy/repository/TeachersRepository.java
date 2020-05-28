@@ -6,6 +6,7 @@ import com.infoshareacademy.domain.User;
 import com.infoshareacademy.fileOperations.FileNames;
 import com.infoshareacademy.fileOperations.JsonReader;
 import com.infoshareacademy.fileOperations.JsonSaver;
+import com.infoshareacademy.security.PasswordResolver;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
@@ -16,12 +17,12 @@ import java.util.UUID;
 @Named("TeachersRepository")
 public class TeachersRepository implements Repository {
 
-    private final Teachers teachers = JsonReader.create(new Teachers(),FileNames.TEACHERS_JSON);
+    private final Teachers teachers = JsonReader.create(new Teachers(), FileNames.TEACHERS_JSON);
 
     @Override
     public void addUser(User user) {
         teachers.addTeacher((Teacher) user);
-        JsonSaver.createJson(teachers, FileNames.TEACHERS_JSON );
+        JsonSaver.createJson(teachers, FileNames.TEACHERS_JSON);
     }
 
     @Override
@@ -43,7 +44,7 @@ public class TeachersRepository implements Repository {
     @Override
     public void deleteUser(User user) {
         teachers.deleteTeacher(user.getId());
-        JsonSaver.createJson(teachers,FileNames.TEACHERS_JSON);
+        JsonSaver.createJson(teachers, FileNames.TEACHERS_JSON);
     }
 
     @Override
@@ -56,20 +57,39 @@ public class TeachersRepository implements Repository {
     }
 
     @Override
-    public void updateUserPassword(User user){
-        teachers.getTeachers().forEach(teacher -> {if (teacher.getId().equals(user.getId())) teacher.setPassword(user.getPassword());});
-        JsonSaver.createJson(teachers,FileNames.TEACHERS_JSON);
+    public void updateUserPassword(UUID id, String password) {
+        teachers.getTeachers().forEach(teacher -> {
+            if (teacher.getId().equals(id)) teacher.setPassword(password);
+        });
+        JsonSaver.createJson(teachers, FileNames.TEACHERS_JSON);
     }
 
     @Override
-    public void updateNickname(User user){
-        teachers.getTeachers().forEach(teacher -> {if (teacher.getId().equals(user.getId())) teacher.setNickName(user.getNickName());});
-        JsonSaver.createJson(teachers,FileNames.TEACHERS_JSON);
+    public void updateNickname(UUID id, String nickname) {
+        teachers.getTeachers().forEach(teacher -> {
+            if (teacher.getId().equals(id)) teacher.setNickName(nickname);
+        });
+        JsonSaver.createJson(teachers, FileNames.TEACHERS_JSON);
     }
 
     @Override
-    public void updateEmail(User user){
-        teachers.getTeachers().forEach(teacher -> {if (teacher.getId().equals(user.getId())) teacher.setEmail(user.getEmail());});
-        JsonSaver.createJson(teachers,FileNames.TEACHERS_JSON);
+    public void updateEmail(UUID id, String email) {
+        teachers.getTeachers().forEach(teacher -> {
+            if (teacher.getId().equals(id)) teacher.setEmail(email);
+        });
+        JsonSaver.createJson(teachers, FileNames.TEACHERS_JSON);
+    }
+
+    @Override
+    public boolean isCorrectPassword(User user, String password) {
+        String oldPassword = PasswordResolver.passwordHashing(password);
+        User checkingUser = teachers.getTeachers().stream()
+                .filter(e -> e.getId().equals(user.getId()))
+                .findFirst().get();
+        if (checkingUser.getPassword().equals(oldPassword) && user.getNickName().equals(checkingUser.getNickName())) {
+            return true;
+        }
+
+        return false;
     }
 }
