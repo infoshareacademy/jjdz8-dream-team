@@ -5,6 +5,7 @@ import freemarker.template.Configuration;
 import freemarker.template.TemplateExceptionHandler;
 
 import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Inject;
 
 @ApplicationScoped
 public class ConfigProvider {

@@ -1,5 +1,9 @@
 package Servlet;
 
+import freemarker.TemplateProvider;
+import freemarker.template.Template;
+import freemarker.template.TemplateException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -7,9 +11,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
-@WebServlet( name = "UserServlet",
-        urlPatterns = {"/users2"})
+import java.util.Map;
+
+@WebServlet( name = "UserServlet", urlPatterns = {"/users2"})
 public class HelloServlet extends HttpServlet {
 
         private static final long serialVersionUID = 1L;
@@ -24,15 +30,25 @@ public class HelloServlet extends HttpServlet {
             userList.add(new User("Adam", 2));
             userList.add(new User("Beata", 2.4));
 
-    }@Override
+    }
+
+    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+            Template template = new TemplateProvider().getTemplate(getServletContext(), "template.ftlh");
 
-        request.setAttribute("users2", userList);
+            Map<String, Object> model = new HashMap<>();
+        try {
+            template.process(model, response.getWriter());
+        } catch (TemplateException e) {
+            e.printStackTrace();
+        }
+        //request.setAttribute("users2", userList);
 
-        request.getRequestDispatcher("/template.ftlh").forward(request, response);
+        // request.getRequestDispatcher("/template.ftlh").forward(request, response);
 
-    }@Override
+    }
+    @Override
         protected void doPost(HttpServletRequest request, HttpServletResponse response)
                 throws ServletException, IOException {
 

@@ -13,7 +13,6 @@ import java.io.IOException;
 public class TemplateProvider {
 
   private final String TEMPLATES_DIRECTORY_PATH = "WEB-INF/fm-templates";
-
   private Configuration configuration;
 
   @Inject
