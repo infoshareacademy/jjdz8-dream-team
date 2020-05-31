@@ -41,7 +41,7 @@ public class StudentServlet extends HttpServlet {
             return;
         }
 
-        Template template = provider.getTemplate(getServletContext(), "student-account-data-information.ftlh");
+        Template template = provider.getTemplate(getServletContext(), "student-account-information-page-new.ftlh");
         Map<String, Object> dataModel = new HashMap<>();
         String massage;
         UUID id;
