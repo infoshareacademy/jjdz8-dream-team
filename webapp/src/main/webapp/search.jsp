@@ -44,10 +44,8 @@
             Materiał wideo
         </label>
     </div>
-    <button type="submit  " class="btn btn-dark">Szukaj</button>
+    <button type="submit" class="btn btn-dark">Szukaj</button>
 </main>
-<footer class="container">
-    <p>E-learning web app - all rights reserved;-)</p>
-</footer>
+<jsp:include page="footer.jsp"/>
 </body>
 </html>

@@ -1,5 +1,5 @@
 .contact-from {
-    padding: 30px;
+    padding: 20px;
 }
 
 .form input {
@@ -25,24 +25,29 @@
     padding: 2vh 0 4vh 0;
 }
 
-.form>label {
+.form > label {
     display: block;
 }
 
 
- @media screen and (min-width: 992px) {
+@media screen and (min-width: 992px) {
     .form input {
         max-width: 80%;
     }
+
     .form textarea {
         max-width: 80%;
     }
 }
-.form-control
-{
+
+.form-control {
     margin-bottom: 3%;
 }
-.carousel slide
-{
+
+.carousel slide {
     height: 60vh;
+}
+
+#jumbotron{
+    padding-top: 15px;
 }

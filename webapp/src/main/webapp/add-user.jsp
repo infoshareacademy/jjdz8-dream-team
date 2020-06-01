@@ -14,6 +14,7 @@
 
     <body>
     <jsp:include page="menu.jsp"/>
+
         <header>
             <h1>Add an user</h1>
             <p>

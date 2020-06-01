@@ -29,7 +29,7 @@
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navigation">
-        <ul class="navbar-nav mr-auto">
+        <ul class="navbar-nav text-secondary">
             <li class="nav-item active">
                 <a class="nav-link col-sm-4 col-lg-4" href="index.jsp">O nas</a>
             </li>
@@ -39,11 +39,11 @@
                    data-toggle="dropdown" role="button" aria-expanded="false"
                    id="submenu" aria-haspopup="true">Nasze usługi</a>
 
-                <div class="dropdown-menu avbar-dark fixed-left bg-dark" aria-labelledby="submenu">
-                    <a href="dropdown-item" href="#">Nauka w grupach</a><br>
-                    <a href="dropdown-item" href="#">Nauka Indywidualna</a><br>
-                    <a href="dropdown-item" href="#">Nauczanie specjalne</a><br>
-                    <a href="dropdown-item" href="#">Indywidualne programy nauczania</a></div>
+                <div class="dropdown-menu avbar-dark  bg-dark text-light " aria-labelledby="submenu">
+                    <a class="alink text-light" href="dropdown-item" href="#">Nauka w grupach</a><br>
+                    <a class="alink text-light" href="dropdown-item" href="#">Nauka Indywidualna</a><br>
+                    <a class="alink text-light" href="dropdown-item" href="#">Nauczanie specjalne</a><br>
+                    <a class="alink text-light" href="dropdown-item" href="#">Indywidualne programy nauczania</a></div>
             </li>
 
             <li class="nav-item col-sm-3 col-md-2"><a class="nav-link" href="edit-user.jsp">Nasze projekty</a></li>
@@ -57,9 +57,10 @@
                    data-toggle="dropdown" role="button" aria-expanded="false"
                    id="submenu2" aria-haspopup="true" href="newAccount.jsp">Logowanie</a>
 
-                <div class="dropdown-menu navbar-dark  bg-dark" aria-labelledby="submenu">
-                    <a href="logout.jsp">Zaloguj</a><br>
-                <a href="newAccount.jsp">utwórz konto</a></div>
+                <div class="dropdown-menu navbar-dark bg-dark text-light" aria-labelledby="submenu">
+                    <a class="alink text-light"  href="logout.jsp">Zaloguj</a><br>
+                <a class="alink text-light"  href="newAccount.jsp">utwórz konto</a>
+                </div>
             </li>
 
 
@@ -70,7 +71,7 @@
 </nav>
 <header class="jumbotron">
     <div class="container">
-        <h5 class="display-6">E-learning web app by Dream Team!</h5>
+        <h5 class="display-5">E-learning web app by Dream Team!</h5>
     </div>
 </header>
 <script
