@@ -8,6 +8,7 @@ module javafx{
     requires java.desktop;
     requires java.logging;
     requires javafx.swing;
+    requires com.google.gson;
     exports com.infoshareacademy.Wykresy;
 
 }
