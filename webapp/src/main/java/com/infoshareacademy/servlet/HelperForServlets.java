@@ -1,20 +1,19 @@
 package com.infoshareacademy.servlet;
 
-import com.infoshareacademy.domain.User;
-
 import javax.servlet.http.HttpSession;
 import java.util.Map;
-import java.util.Optional;
-import java.util.UUID;
 
 public class HelperForServlets {
+
+    public static final String ERROR_MESSAGE ="please login first";
+
 
     public static boolean isIncorrectCorrectParameter(String parameter) {
         return (parameter == null || parameter.isEmpty());
     }
 
-    public static boolean isValidDoPostSession(HttpSession session) {
-        return session.getAttribute("id") != null;
+    public static boolean isValidSession(HttpSession session, String attributeName) {
+        return session.getAttribute(attributeName) != null && !attributeName.isEmpty();
     }
 
     public static void invalidateAttributes(HttpSession session, String... attributeNames) {

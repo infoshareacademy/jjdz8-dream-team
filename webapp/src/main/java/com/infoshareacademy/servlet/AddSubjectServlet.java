@@ -3,12 +3,8 @@ package com.infoshareacademy.servlet;
 import com.infoshareacademy.domain.Subject;
 import com.infoshareacademy.domain.User;
 import com.infoshareacademy.freemarker.TemplateProvider;
-import com.infoshareacademy.security.PasswordResolver;
 import com.infoshareacademy.service.Service;
-import com.infoshareacademy.service.SubjectEditService;
 import com.infoshareacademy.service.SubjectService;
-import com.infoshareacademy.service.TeacherService;
-import com.infoshareacademy.validation.ParameterValidator;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 
@@ -27,6 +23,7 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
 
+import static com.infoshareacademy.servlet.HelperForServlets.*;
 import static com.infoshareacademy.validation.ParameterValidator.isIncorrectCorrectParameter;
 
 @WebServlet("/add-subject")
@@ -37,9 +34,6 @@ public class AddSubjectServlet extends HttpServlet {
 
     @Inject
     SubjectService service;
-
-    @Inject
-    SubjectEditService editService;
 
     @Inject
     @Named("TeacherService")
@@ -53,6 +47,7 @@ public class AddSubjectServlet extends HttpServlet {
 
     public static final String LOGIN_ERROR = "loginError";
 
+    private static final String SESSION_ATTRIBUTE = "teacherID";
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -60,7 +55,7 @@ public class AddSubjectServlet extends HttpServlet {
         PrintWriter printWriter = resp.getWriter();
 
         HttpSession session = req.getSession(false);
-        if (session == null || session.getAttribute("id") == null) {
+        if (!isValidSession(session, SESSION_ATTRIBUTE)) {
             String errorMassage = "Please login first";
             printWriter.write(errorMassage);
             return;
@@ -68,8 +63,8 @@ public class AddSubjectServlet extends HttpServlet {
         String name = req.getParameter("name");
         String topic = req.getParameter("topic");
         String description = req.getParameter("description");
-        boolean isVideo = Boolean.valueOf(req.getParameter("isVideo"));
-        UUID teacherId = (UUID) session.getAttribute("id");
+        boolean isVideo = Boolean.parseBoolean(req.getParameter("isVideo"));
+        UUID teacherId = (UUID) session.getAttribute(SESSION_ATTRIBUTE);
         System.out.println(teacherId);
 
         if (isIncorrectCorrectParameter(name)) {
@@ -112,12 +107,11 @@ public class AddSubjectServlet extends HttpServlet {
         Map<String, Object> dataModel = new HashMap<>();
 
         HttpSession session = req.getSession(false);
-        if (session == null || session.getAttribute("id") == null) {
+        if (!isValidSession(session, SESSION_ATTRIBUTE)) {
             dataModel.put("message", getAttributeValue(session, LOGIN_ERROR));
         }
 
-        Optional<User> user = findCorrectUser(session, "id");
-        user.ifPresent(value -> dataModel.put("user", value));
+        findCorrectUser(session, SESSION_ATTRIBUTE).ifPresent(user -> dataModel.put("user", user));
 
         putCorrectDataToDataModel(EMPTY_NAME, getAttributeValue(session, EMPTY_NAME), dataModel);
         putCorrectDataToDataModel("name", getAttributeValue(session, "name"), dataModel);
@@ -162,26 +156,4 @@ public class AddSubjectServlet extends HttpServlet {
         }
         return attribute;
     }
-
-    /*@Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.setContentType("text/html;charset=UTF-8");
-        PrintWriter printWriter = resp.getWriter();
-        UUID id = (UUID) req.getSession().getAttribute("id");
-        Optional<User> user =service.findById(id);
-        if (user.isEmpty()){
-            resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-            return;
-        }
-
-        Template template = provider.getTemplate(getServletContext(), "add-subject.ftlh");
-        Map<String, Object> dataModel = new HashMap<>();
-        dataModel.put("user",user.get());
-        try {
-            template.process(dataModel, printWriter);
-            resp.setStatus(HttpServletResponse.SC_ACCEPTED);
-        } catch (TemplateException e) {
-            e.printStackTrace();
-        }
-    }*/
 }

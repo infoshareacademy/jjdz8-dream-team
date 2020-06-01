@@ -3,7 +3,6 @@ package com.infoshareacademy.servlet;
 import com.infoshareacademy.domain.User;
 import com.infoshareacademy.freemarker.TemplateProvider;
 import com.infoshareacademy.service.Service;
-import com.infoshareacademy.service.StudentService;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 
@@ -19,6 +18,8 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.*;
 
+import static com.infoshareacademy.servlet.HelperForServlets.*;
+
 @WebServlet("/student")
 public class StudentServlet extends HttpServlet {
 
@@ -29,35 +30,27 @@ public class StudentServlet extends HttpServlet {
     @Inject
     private TemplateProvider provider;
 
+    private static final String SESSION_ATTRIBUTE ="studentID";
+
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html;charset=UTF-8");
         PrintWriter printWriter = resp.getWriter();
-        HttpSession session = req.getSession(false);
-        String errorMassage;
-        if (session==null || session.getAttribute("id") == null) {
-            errorMassage = "Please login first";
-            printWriter.write(errorMassage);
-            return;
-        }
 
         Template template = provider.getTemplate(getServletContext(), "student-account-information-page-new.ftlh");
         Map<String, Object> dataModel = new HashMap<>();
-        String massage;
-        UUID id;
-        Optional<User> user;
 
-        id = (UUID) session.getAttribute("id");
-        System.out.println(id);
-        user = service.findById(id);
-        System.out.println(user.get().getNickName());
-        if (user.isPresent()) {
-            dataModel.put("user", user.get());
-        } else {
-            massage = "Please login first";
-            printWriter.println(massage);
-            dataModel.put("message", massage);
+        HttpSession session = req.getSession(false);
+        if (isValidSession(session, SESSION_ATTRIBUTE)) {
+            dataModel.put("errorMessage", ERROR_MESSAGE);
+            return;
         }
+
+        UUID id = (UUID) session.getAttribute(SESSION_ATTRIBUTE);
+        service.findById(id).ifPresentOrElse(user -> dataModel.put("user", user),
+                () -> dataModel.put("errorMessage", ERROR_MESSAGE));
+
         try {
             template.process(dataModel, printWriter);
             resp.setStatus(HttpServletResponse.SC_ACCEPTED);
@@ -71,7 +64,7 @@ public class StudentServlet extends HttpServlet {
         resp.setContentType("text/html;charset=UTF-8");
         String nickName = req.getParameter("nickName");
 
-        if (nickName == null || nickName.isEmpty()) {
+        if (isIncorrectCorrectParameter(nickName)) {
             resp.sendError(HttpServletResponse.SC_BAD_REQUEST, "student not exist");
             return;
         }
@@ -82,20 +75,19 @@ public class StudentServlet extends HttpServlet {
             return;
         }
         HttpSession session = req.getSession(true);
-        session.setAttribute("id", user.get().getId());
+        session.setAttribute(SESSION_ATTRIBUTE, user.get().getId());
         resp.sendRedirect("/student");
     }
 
     @Override
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession(false);
-        if (session == null) {
-            String errorMassage = "Please login first";
-            resp.getWriter().write(errorMassage);
+        if (!isValidSession(session, SESSION_ATTRIBUTE)) {
+            resp.getWriter().write(ERROR_MESSAGE);
             return;
         }
         String id = req.getParameter("id");
-        if (id == null || id.isEmpty()) {
+        if (isIncorrectCorrectParameter(id)) {
             resp.setStatus(HttpServletResponse.SC_NOT_FOUND);
             return;
         }
@@ -107,6 +99,4 @@ public class StudentServlet extends HttpServlet {
         service.delete(user.get());
         req.getSession(false).invalidate();
     }
-
-
 }

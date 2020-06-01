@@ -34,6 +34,8 @@ public class TeacherAccountInformationServlet extends HttpServlet {
     @Named("TeacherService")
     Service service;
 
+    private static final String SESSION_ATTRIBUTE ="teacherID";
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html;charset=UTF-8");
@@ -46,12 +48,12 @@ public class TeacherAccountInformationServlet extends HttpServlet {
         UUID id;
         Optional<User> user;
 
-        if (session == null || session.getAttribute("id") == null) {
+        if (session == null || session.getAttribute(SESSION_ATTRIBUTE) == null) {
             dataModel.put("message", "please login first");
             return;
         }
 
-        id = (UUID) session.getAttribute("id");
+        id = (UUID) session.getAttribute(SESSION_ATTRIBUTE);
         user = service.findById(id);
         List<Subject> subjects;
         if (user.isEmpty()) {
@@ -59,7 +61,7 @@ public class TeacherAccountInformationServlet extends HttpServlet {
             return;
         }
         subjects = subjectService.findAllSubjectsForTeacher(user.get().getId());
-        subjects.stream().forEach(e-> System.out.println(e.getName()));
+        subjects.forEach(e-> System.out.println(e.getName()));
         dataModel.put("user", user.get());
 
         if (subjects.size() > 0) {
@@ -73,14 +75,5 @@ public class TeacherAccountInformationServlet extends HttpServlet {
             e.printStackTrace();
         }
 
-    }
-
-    private String hiddenPassword(String password) {
-        String hidden = "";
-        for (char sign : password.toCharArray()) {
-            hidden = hidden + "*";
-        }
-
-        return hidden;
     }
 }

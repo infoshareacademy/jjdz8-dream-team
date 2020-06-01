@@ -45,6 +45,8 @@ public abstract class UserEditServlet extends HttpServlet {
 
     private String templateFile;
 
+    private String sessionAttribute;
+
     protected void doGetMethod(HttpServletRequest req, HttpServletResponse resp, Service userService) throws ServletException, IOException {
         resp.setContentType("text/html;charset=UTF-8");
         PrintWriter printWriter = resp.getWriter();
@@ -53,11 +55,10 @@ public abstract class UserEditServlet extends HttpServlet {
         Map<String, Object> dataModel = new HashMap<>();
 
         HttpSession session = req.getSession(false);
-        if (session == null || session.getAttribute("id") == null) {
+        if (session == null || session.getAttribute(sessionAttribute) == null) {
             dataModel.put("message", getAttributeValue(session, LOGIN_ERROR));
         }
-        Optional<User> user = findCorrectUser(session, "id", userService);
-        user.ifPresent(value -> dataModel.put("user", value));
+        findCorrectUser(session, sessionAttribute, userService).ifPresent(value -> dataModel.put("user", value));
 
         putCorrectDataToDataModel(EMPTY_NICKNAME, getAttributeValue(session, EMPTY_NICKNAME), dataModel);
         putCorrectDataToDataModel(EMPTY_EMAIL, getAttributeValue(session, EMPTY_EMAIL), dataModel);
@@ -78,12 +79,12 @@ public abstract class UserEditServlet extends HttpServlet {
         resp.setContentType("text/html;charset=UTF-8");
         HttpSession session = req.getSession(false);
 
-        if (!isValidDoPostSession(session)) {
+        if (!isValidSession(session, sessionAttribute)) {
             session.setAttribute(LOGIN_ERROR, "you have to login first");
             return;
         }
 
-        Optional<User> user = findCorrectUser(req.getSession(), "id", userService);
+        Optional<User> user = findCorrectUser(req.getSession(), sessionAttribute, userService);
         if (user.isEmpty()) {
             resp.sendError(HttpServletResponse.SC_BAD_REQUEST, "Something goes wrong");
             return;
@@ -144,5 +145,9 @@ public abstract class UserEditServlet extends HttpServlet {
 
     public void setTemplateFile(String templateFile) {
         this.templateFile = templateFile;
+    }
+
+    public void setSessionAttribute(String sessionAttribute) {
+        this.sessionAttribute = sessionAttribute;
     }
 }

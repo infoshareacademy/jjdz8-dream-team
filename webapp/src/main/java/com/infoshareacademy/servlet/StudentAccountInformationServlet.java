@@ -18,8 +18,9 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Optional;
 import java.util.UUID;
+
+import static com.infoshareacademy.servlet.HelperForServlets.*;
 
 @WebServlet("/student-account-information-servlet")
 public class StudentAccountInformationServlet extends HttpServlet {
@@ -31,35 +32,27 @@ public class StudentAccountInformationServlet extends HttpServlet {
     @Inject
     private TemplateProvider provider;
 
+    private static final String SESSION_ATTRIBUTE ="studentID";
+
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html;charset=UTF-8");
         PrintWriter printWriter = resp.getWriter();
-        HttpSession session = req.getSession(false);
-        String errorMassage;
-        if (session==null || session.getAttribute("id") == null) {
-            errorMassage = "Please login first";
-            printWriter.write(errorMassage);
-            return;
-        }
 
         Template template = provider.getTemplate(getServletContext(), "student-account-data-form-new.ftlh");
         Map<String, Object> dataModel = new HashMap<>();
-        String massage;
-        UUID id;
-        Optional<User> user;
 
-        id = (UUID) session.getAttribute("id");
-        System.out.println(id);
-        user = service.findById(id);
-        System.out.println(user.get().getNickName());
-        if (user.isPresent()) {
-            dataModel.put("user", user.get());
-        } else {
-            massage = "Please login first";
-            printWriter.println(massage);
-            dataModel.put("message", massage);
+        HttpSession session = req.getSession(false);
+        if (!isValidSession(session, SESSION_ATTRIBUTE)) {
+            printWriter.write(ERROR_MESSAGE);
+            return;
         }
+
+        UUID id = (UUID) session.getAttribute(SESSION_ATTRIBUTE);
+        service.findById(id).ifPresentOrElse(user -> dataModel.put("user", user),
+                () -> dataModel.put("errorMessage", ERROR_MESSAGE));
+
         try {
             template.process(dataModel, printWriter);
             resp.setStatus(HttpServletResponse.SC_ACCEPTED);

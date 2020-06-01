@@ -22,6 +22,9 @@ import java.io.PrintWriter;
 import java.util.*;
 import java.util.logging.Logger;
 
+import static com.infoshareacademy.servlet.HelperForServlets.ERROR_MESSAGE;
+import static com.infoshareacademy.servlet.HelperForServlets.isValidSession;
+
 @WebServlet("/teacher")
 public class TeacherServlet extends HttpServlet {
 
@@ -38,6 +41,7 @@ public class TeacherServlet extends HttpServlet {
 
     private static final Logger logger = Logger.getLogger(TeacherServlet.class.getName());
 
+    private static final String SESSION_ATTRIBUTE ="teacherID";
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -45,7 +49,7 @@ public class TeacherServlet extends HttpServlet {
         PrintWriter printWriter = resp.getWriter();
         HttpSession session = req.getSession(false);
         String errorMassage;
-        if (session.getAttribute("id") == null) {
+        if (!isValidSession(session, SESSION_ATTRIBUTE)) {
             errorMassage = "Please login first";
             printWriter.write(errorMassage);
             return;
@@ -53,29 +57,23 @@ public class TeacherServlet extends HttpServlet {
 
         Template template = provider.getTemplate(getServletContext(), "teacher-account-data-form.ftlh");
         Map<String, Object> dataModel = new HashMap<>();
-        String massage;
 
-        UUID id;
-        Optional<User> user;
-
-        if (session == null || session.getAttribute("id") == null) {
-            dataModel.put("message", "please login first");
-            return;
+        if (!isValidSession(session, SESSION_ATTRIBUTE)) {
+            dataModel.put("message", ERROR_MESSAGE);
+        } else {
+            UUID id = (UUID) session.getAttribute("id");
+            Optional<User> user = service.findById(id);
+            List<Subject> subjects;
+            if (user.isEmpty()) {
+                resp.sendError(HttpServletResponse.SC_BAD_REQUEST);
+                return;
+            }
+            subjects = subjectRepository.findAllSubjectForTeacher(user.get().getId());
+            dataModel.put("user", user.get());
+            if (subjects.size() > 0) {
+                dataModel.put("subjects", subjects);
+            }
         }
-        id = (UUID) session.getAttribute("id");
-        user = service.findById(id);
-        List<Subject> subjects;
-        if (user.isEmpty()) {
-            resp.sendError(HttpServletResponse.SC_BAD_REQUEST);
-            return;
-        }
-        subjects = subjectRepository.findAllSubjectForTeacher(user.get().getId());
-        dataModel.put("user", user.get());
-
-        if (subjects.size() > 0) {
-            dataModel.put("subjects", subjects);
-        }
-
         try {
             template.process(dataModel, printWriter);
             resp.setStatus(HttpServletResponse.SC_ACCEPTED);
@@ -99,7 +97,7 @@ public class TeacherServlet extends HttpServlet {
             return;
         }
         HttpSession session = req.getSession(true);
-        session.setAttribute("id", user.get().getId());
+        session.setAttribute(SESSION_ATTRIBUTE, user.get().getId());
         resp.sendRedirect("/teacher-account-information");
     }
 
@@ -107,8 +105,7 @@ public class TeacherServlet extends HttpServlet {
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession(false);
         if (session == null) {
-            String errorMassage = "Please login first";
-            resp.getWriter().write(errorMassage);
+            resp.getWriter().write(ERROR_MESSAGE);
             return;
         }
         String id = req.getParameter("id");

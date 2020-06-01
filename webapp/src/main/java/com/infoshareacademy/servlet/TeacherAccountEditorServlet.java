@@ -21,14 +21,18 @@ public class TeacherAccountEditorServlet extends UserEditServlet {
     @Named("TeacherService")
     private Service userService;
 
+    private static final String SESSION_ATTRIBUTE ="teacherID";
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        setSessionAttribute(SESSION_ATTRIBUTE);
         setTemplateFile("teacher-account-data-after-edit.ftlh");
         doGetMethod(req, resp, userService);
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        setSessionAttribute(SESSION_ATTRIBUTE);
         setRedirectAfterCorrectForm("/teacher-account-information");
         setRedirectAfterInCorrectForm("/edit-teacher-account");
         doPostMethod(req, resp, userService, userEditService);

@@ -17,22 +17,26 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.*;
 
+import static com.infoshareacademy.servlet.HelperForServlets.*;
+import static com.infoshareacademy.servlet.HelperForServlets.isValidSession;
+
 @WebServlet("/subject")
 public class SubjectServlet extends HttpServlet {
 
     @Inject
-    SubjectService service;
+    private SubjectService service;
     @Inject
-    TemplateProvider provider;
+    private TemplateProvider provider;
 
+    private static final String SESSION_ATTRIBUTE ="teacherID";
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html;charset=UTF-8");
         PrintWriter out = resp.getWriter();
         HttpSession session = req.getSession(false);
-        if (session.getAttribute("id") == null) {
-            out.write("Please login firts");
+        if (!isValidSession(session,SESSION_ATTRIBUTE)) {
+            out.write(ERROR_MESSAGE);
             return;
         }
         String id = req.getParameter("id");
@@ -46,12 +50,13 @@ public class SubjectServlet extends HttpServlet {
         PrintWriter out = resp.getWriter();
 
         HttpSession session = req.getSession(false);
-        if (session==null || session.getAttribute("id") == null) {
-            out.write("please login first");
+        if (!isValidSession(session, SESSION_ATTRIBUTE)) {
+            out.write(ERROR_MESSAGE);
             return;
         }
+
         String id = req.getParameter("id");
-        if (id == null || id.isEmpty()) {
+        if (isIncorrectCorrectParameter(id)) {
             resp.sendError(HttpServletResponse.SC_BAD_REQUEST, "something goes wrong");
             return;
         }
@@ -80,8 +85,14 @@ public class SubjectServlet extends HttpServlet {
 
     @Override
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        HttpSession session = req.getSession(false);
+        if (!isValidSession(session, SESSION_ATTRIBUTE)) {
+            resp.getWriter().write(ERROR_MESSAGE);
+            return;
+        }
+
         String id = req.getParameter("id");
-        if (id == null || id.isEmpty()) {
+        if (isIncorrectCorrectParameter(id)) {
             resp.setStatus(HttpServletResponse.SC_NOT_FOUND);
             return;
         }
