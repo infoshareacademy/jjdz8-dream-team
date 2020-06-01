@@ -135,7 +135,6 @@ public class AddSubjectServlet extends HttpServlet {
                 session.removeAttribute(attributeName);
             }
         }
-
     }
 
     private Optional<User> findCorrectUser(HttpSession session, String attribute) {

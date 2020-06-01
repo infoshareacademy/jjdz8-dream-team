@@ -60,13 +60,13 @@
                         <div class="form-row">
 
                             <div class="form-group col-md-6">
-                                <label for="inputPassword4">old password</label>
+                                <label for="inputPassword4">enter old password to confirm changes</label>
                                 <input type="password" class="form-control" id="inputPassword4" name="oldPassword">
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="form-group col-md-6">
-                                <label for="inputPassword4">new password</label>
+                                <label for="inputPassword4">new password (enter if you want to change)</label>
                                 <input type="password" class="form-control" id="inputPassword4" name="newPassword" placeholder="Password" >
                             </div>
                             <div class="form-group col-md-6">

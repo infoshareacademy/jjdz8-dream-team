@@ -27,7 +27,7 @@
                 <div class="col-md-4">
                 <#if message ??>
                     <h1>You have to login or registry first</h1>
-                    <a href="http://localhost:8080/temporary-login.jsp">
+                    <a href="http://localhost:8080/chooseWhoIsLogin.jsp">
                         <input type="button" value="login"/>
                     </a>
                     <a href="http://localhost:8080/add-user.jsp">

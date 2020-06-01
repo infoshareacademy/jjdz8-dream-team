@@ -42,12 +42,13 @@ public class StudentServlet extends HttpServlet {
         Map<String, Object> dataModel = new HashMap<>();
 
         HttpSession session = req.getSession(false);
-        if (isValidSession(session, SESSION_ATTRIBUTE)) {
-            dataModel.put("errorMessage", ERROR_MESSAGE);
+        if (!isValidSession(session, SESSION_ATTRIBUTE)) {
+            dataModel.put("message", ERROR_MESSAGE);
             return;
         }
 
         UUID id = (UUID) session.getAttribute(SESSION_ATTRIBUTE);
+        System.out.println(service.findById(id));
         service.findById(id).ifPresentOrElse(user -> dataModel.put("user", user),
                 () -> dataModel.put("errorMessage", ERROR_MESSAGE));
 
@@ -74,9 +75,12 @@ public class StudentServlet extends HttpServlet {
             resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             return;
         }
+
         HttpSession session = req.getSession(true);
         session.setAttribute(SESSION_ATTRIBUTE, user.get().getId());
+        System.out.println(user.get().getId());
         resp.sendRedirect("/student");
+
     }
 
     @Override
