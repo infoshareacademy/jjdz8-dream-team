@@ -50,11 +50,18 @@
                         <div class="form-row">
                             <div class="form-group col-md-6">
                                 <label for="inputEmail4">nickname</label>
-                                <input type="text" class="form-control" id="inputEmail4" name="nickName" placeholder="${user.nickName}">
+                                <#if emptyNickname ??><p style="color: crimson">nickname cannot be empty</p>
+                                    NickName: <input type="text" class="form-control" id="inputEmail4" name="nickName" placeholder="enter nickname"><br/><br/>
+                                    <br/><br/>
+                                <#else> <input type="text" class="form-control" id="inputEmail4" name="nickName" placeholder="enter nickname">><br/><br/>
+                                </#if>
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="inputEmail4">Email</label>
-                                <input type="email" class="form-control" id="inputEmail4" name="email" placeholder="${user.email}" >
+                                <#if emptyEmail ??><p style="color: crimson">nickname cannot be empty</p>
+                                <input type="email" class="form-control" id="inputEmail4" name="email" placeholder="enter email">
+                                <#else> <input type="email" class="form-control" id="inputEmail4" name="email" placeholder="${user.email}"><br/><br/>
+                            </#if>
                             </div>
                         </div>
                         <div class="form-row">

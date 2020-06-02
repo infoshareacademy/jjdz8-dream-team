@@ -103,6 +103,7 @@ public abstract class UserEditServlet extends HttpServlet {
         String email = req.getParameter("email");
         String oldPassword = req.getParameter("oldPassword");
         String newPassword = req.getParameter("newPassword");
+        String repeatedPassword = req.getParameter("repeatedPassword");
 
         HttpSession session = req.getSession(false);
 
@@ -125,9 +126,13 @@ public abstract class UserEditServlet extends HttpServlet {
             session.setAttribute(WRONG_PASSWORD_FORMAT, "wrong password format");
             return;
         }
-        if (!isIncorrectCorrectParameter(newPassword))
+        if (!isIncorrectCorrectParameter(newPassword) && !isIncorrectCorrectParameter(repeatedPassword)
+                && newPassword.equals(repeatedPassword)) {
             userEditService.editPassword(user, PasswordResolver.passwordHashing(newPassword));
-
+        } else {
+            session.setAttribute(WRONG_PASSWORD_FORMAT, "wrong password format");
+            return;
+        }
     }
 
     private Optional<User> findCorrectUser(HttpSession session, String attribute, Service userService) {
