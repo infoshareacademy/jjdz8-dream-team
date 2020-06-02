@@ -58,8 +58,11 @@ public abstract class UserEditServlet extends HttpServlet {
         if (session == null || session.getAttribute(sessionAttribute) == null) {
             dataModel.put("message", getAttributeValue(session, LOGIN_ERROR));
         }
-        findCorrectUser(session, sessionAttribute, userService).ifPresent(value -> dataModel.put("user", value));
+        Optional<User> user = findCorrectUser(session,sessionAttribute,userService);
+        user.ifPresent(value -> dataModel.put("user", value));
 
+        putCorrectDataToDataModel("nickName", getAttributeValue(session, "nickName"), dataModel);
+        putCorrectDataToDataModel("email", getAttributeValue(session, "email"), dataModel);
         putCorrectDataToDataModel(EMPTY_NICKNAME, getAttributeValue(session, EMPTY_NICKNAME), dataModel);
         putCorrectDataToDataModel(EMPTY_EMAIL, getAttributeValue(session, EMPTY_EMAIL), dataModel);
         putCorrectDataToDataModel(WRONG_PASSWORD, getAttributeValue(session, WRONG_PASSWORD), dataModel);
@@ -110,28 +113,29 @@ public abstract class UserEditServlet extends HttpServlet {
         if (isIncorrectCorrectParameter(nickName)) {
             session.setAttribute(EMPTY_NICKNAME, "nickName cannot be empty");
             return;
-        }
+        } else session.setAttribute("nickName", nickName);
+
         if (isIncorrectCorrectParameter(email)) {
             session.setAttribute(EMPTY_EMAIL, "email cannot be empty");
             return;
-        }
+        }else session.setAttribute("email", email);
+
         if (isIncorrectCorrectParameter(oldPassword) || !userService.isCorrectPassword(user, oldPassword)) {
             session.setAttribute(WRONG_PASSWORD, "wrong password");
             return;
-        } else {
+        } else if (isIncorrectCorrectParameter(newPassword)){
             userEditService.editNickname(user, nickName);
             userEditService.editEmail(user, email);
         }
-        if (newPassword != null && !newPassword.isEmpty() && !PasswordResolver.isCorrectPasswordFormat(newPassword)) {
-            session.setAttribute(WRONG_PASSWORD_FORMAT, "wrong password format");
-            return;
-        }
-        if (!isIncorrectCorrectParameter(newPassword) && !isIncorrectCorrectParameter(repeatedPassword)
-                && newPassword.equals(repeatedPassword)) {
+        if (isIncorrectCorrectParameter(newPassword)) return;
+
+        if (!isIncorrectCorrectParameter(newPassword) && PasswordResolver.isCorrectPasswordFormat(newPassword)
+                && !isIncorrectCorrectParameter(repeatedPassword) && newPassword.equals(repeatedPassword)) {
+            userEditService.editNickname(user, nickName);
+            userEditService.editEmail(user, email);
             userEditService.editPassword(user, PasswordResolver.passwordHashing(newPassword));
         } else {
             session.setAttribute(WRONG_PASSWORD_FORMAT, "wrong password format");
-            return;
         }
     }
 

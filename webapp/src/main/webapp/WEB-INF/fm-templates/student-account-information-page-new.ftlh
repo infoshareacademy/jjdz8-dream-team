@@ -1,4 +1,4 @@
-<#include "index.ftlh">
+<#include "base.ftlh">
 <#macro content>
     <div class="card">
         <div class="card-header">
@@ -53,8 +53,7 @@
                     </div>
                 </form>
                 <br>
-                <a href="/student-account-information-servlet"><input class="btn btn-primary" type="button"
-                                                                      value="edit account"></a>
+                <a href="/student-account-information-servlet"><input class="btn btn-primary" type="button" value="edit account"></a>
             </div>
             </#if>
         </div>
