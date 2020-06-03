@@ -10,42 +10,18 @@
             name="description"
             content="Contact"
     />
-    <title>Add-user</title>
+    <title>Contact</title>
+<link href="contact.css" rel="stylesheet">
     <link href="styles.css" rel="stylesheet"/>
     <link href="form.css" rel="stylesheet"/>
 </head>
-
 <body>
-<jsp:include page="menu.jsp"/>
-<header>
-
-</header>
+<jsp:include page="menu1.jsp"/>
 <main>
-    <div class="contact-from">
-        <h1>Contact</h1>
-        <p>
-            Use bellow form.
-        </p>
-    </div>
-    <form method="post" action="/user" class="contact-from">
-        <div class="form">
-            <label for="nickname">Nickname:</label>
-            <input type="text" name="name" id="nickname" required/>
-        </div>
-        <div class="form">
-            <label for="email">Email:</label>
-            <input type="email" name="email" id="email" required/>
-        </div>
-
-        </div>
-        <div class="form">
-            <label for="description">Massage:</label>
-            <textarea name="description"></textarea>
-        </div>
-        <button type="submit  " class="btn btn-dark">Send</button>
-        </div>
-    </form>
+    <jsp:include page="contact-form.jsp"/>
 </main>
+<jsp:include page="footer.jsp"/>
+</body>
 <footer class="container">
     <p>E-learning web app - all rights reserved;-)</p>
 </footer>

@@ -6,7 +6,7 @@
             <form>
                 <input type="text" id="login" class="fadeIn second" name="login" placeholder="login">
                 <input type="text" id="password" class="fadeIn third" name="login" placeholder="password">
-                <input type="submit" class="fadeIn fourth bg-dark" value="Log In">
+                <input type="submit" class="fadeIn bg-jumpers" value="Log In">
             </form>
 
             <!-- Remind Passowrd -->

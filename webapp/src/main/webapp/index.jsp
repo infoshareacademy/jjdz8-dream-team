@@ -8,56 +8,53 @@
     <meta name="description" content="E-learning web app"/>
     <br>
     <title>E-learning web app by Dream Team</title>
-
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js">
+    </script>
     <link href="styles.css" rel="stylesheet"/>
     <link href="form.css" rel="stylesheet"/>
 </head>
 
 <body>
-<jsp:include page="menu.jsp"/>
-<main role="main">
+<jsp:include page="menu1.jsp"/>
+<main>
     <div class="container">
-        <div class="row">
-
-        </div>
-
-        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-            <ol class="carousel-indicators">
-                <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-                <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-                <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-            </ol>
-            <div class="carousel-inner">
-                <div class="carousel-item active">
-                    <img class="d-block col-md-10 rounded mx-auto" src="jpg/77522.jpg" alt="First slide">
-                    <div class="carousel-caption">
-                        <h3>"KAŻDA PORAŻKA JEST SZANSĄ, ŻEBY SPRÓBOWAĆ JESZCZE RAZ.</h3>
-                        <H2>TYLKO MĄDRZEJ."</H2>
-                        <p>HENRY FORD</p>
+        <div class="jumpotron"> <h2>Aplikacja Internetowa Drem-Team</h2></div>
+        <div class="carousel slide center" id="mycarousel" data-ride="carousel">
+                <ol class="carousel-indicators">
+                    <li data-target="#mycarousel" data-slide="0" class="active"></li>
+                    <li data-target="#mycarousel" data-slide="1"></li>
+                </ol>
+                <div class="carousel-inner img-fluid">
+                    <div class="item active img-fluid">
+                        <img src="jpg/77522.jpg" alt="">
+                        <!-- Opis slajdu -->
+                        <div class="carousel-caption">
+                            <h3>"KAŻDA PORAŻKA JEST SZANSĄ, ŻEBY SPRÓBOWAĆ JESZCZE RAZ.</h3>
+                            <H2>TYLKO MĄDRZEJ."</H2>
+                            <p>HENRY FORD</p>
+                        </div>
                     </div>
-                </div>
-                <div class="carousel-item">
-                    <img class="d-block col-md-10 rounded mx-auto" src="jpg/pexels-1786955.jpg" alt="Second slide">
-                    <div class="carousel-caption">
-                        <h3>"JESTLI JEST CIĘZKO, TO ZNACZY, ŻE IDZIESZ W DOBRYM KIERUNKU." </h3>
-                    </div>
-                </div>
-                <div class="carousel-item">
-                    <img class="d-block  col-md-8 rounded mx-auto" src="jpg/minion.jpg" alt="Third slide">
+                    <div class="item img-fluid">
+                        <img src="jpg/pexels-1786955.jpg    " alt="">
+                            <!-- Opis slajdu -->
+                            <div class="carousel-caption">
+                                <h3>"JESTLI JEST CIĘZKO, TO ZNACZY, ŻE IDZIESZ W DOBRYM KIERUNKU." </h3>
+                            </div>
+                        </div>
+                    </a>
+                    <a class="right carousel-control" href="#mycarousel" data-slide="next">
+                        <span class="glyphicon glyphicon-chevron-right"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
                 </div>
             </div>
-            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="sr-only">Previous</span>
-            </a>
-            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="sr-only">Next</span>
-            </a>
         </div>
     </div>
 </main>
-<jsp:include page="footer.jsp"/>
-</body>
 
+</body>
+<jsp:include page="footer.jsp"/>
 </html>

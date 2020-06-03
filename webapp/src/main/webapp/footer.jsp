@@ -1,12 +1,8 @@
-<!DOCTYPE HTML>
-<html lang="pl">
-
-    <script type="text/javascript" src="timer.js"></script>
-
+<footer>
 <body onload="timer();">
 
 <div id="zegar"></div>
-<div id="podpis"> &copy;Drem Team Corporation</div>
-
+<div id="podpis">&copy;Drem Team Corporation</div>
 </body>
-</html>
+    <script type="text/javascript" src="timer.js"></script>
+</footer>

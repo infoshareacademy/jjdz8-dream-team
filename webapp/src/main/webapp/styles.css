@@ -4,13 +4,12 @@ body {
 }
 
 main {
-    height: 70vh;
-    background-image: conic-gradient(beige);
+    height: 85vh;
+    background-color: #f6f6f6;
 }
 
 footer {
-    margin-top: 10vh;
-
+    /*margin-top: 5vh;*/
     padding-top: 2vh;
 
 }
@@ -36,17 +35,11 @@ footer {
 }
 
 .bg-jumpers {
-    background-color: black !important;
+    background-color: #2F3336 !important;
+
+
 
 }
-
-#alink {
-    color: white;
-    text-decoration: none;
-    font-size: 14px;
-
-}
-
 a:hover {
     text-decoration: none;
     color: rgb(158, 190, 190);
@@ -62,13 +55,32 @@ a:hover {
 }
 #zegar {
     border-top: 2px solid black;
-    font-size: 30px;
+    font-size: 20px;
     float: left;
 }
 
 #podpis {
-    font-size: 30px;
+    font-size: 20px;
     border-top: 2px solid black;
 
+}
+slide {
+    opacity: 0;
+    z-index: 0;
+    position: relative;
+    transition:2s all;
+}
+.slide .title {
+    left: -2rem;
+    opacity: 0;
+}
 
+/* poprzez dodatkową klasę zmieniam właściwości elementu i jego dzieci */
+.slide.active {
+    opacity: 1;
+    z-index: 1;
+}
+.slide.active .title {
+    left: 0;
+    opacity: 1;
 }
