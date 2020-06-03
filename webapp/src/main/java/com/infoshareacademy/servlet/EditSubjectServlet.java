@@ -68,7 +68,6 @@ public class EditSubjectServlet extends HttpServlet {
             resp.sendError(HttpServletResponse.SC_BAD_REQUEST);
             return;
         }
-        /*processPostRequest(req, resp, session);*/
         String name = req.getParameter("name");
         String topic = req.getParameter("topic");
         String description = req.getParameter("description");
@@ -98,7 +97,7 @@ public class EditSubjectServlet extends HttpServlet {
         }
         if (session.getAttribute(EMPTY_NAME) != null || session.getAttribute(EMPTY_TOPIC) != null
                 || session.getAttribute(EMPTY_DESCRIPTION) != null) {
-            resp.sendRedirect("/add-subject");
+            resp.sendRedirect("/subject-after-edit?id="+subject.get().getId());
             return;
         }
 
@@ -122,16 +121,6 @@ public class EditSubjectServlet extends HttpServlet {
         Map<String, Object> dataModel = new HashMap<>();
         dataModel.put("subject", subject.get());
         dataModel.put("isVideo", String.valueOf(subject.get().isVideo()));
-        /*
-
-        putCorrectDataToDataModel(EMPTY_NAME, getAttributeValue(session, EMPTY_NAME), dataModel);
-        putCorrectDataToDataModel("name", getAttributeValue(session, "name"), dataModel);
-        putCorrectDataToDataModel(EMPTY_TOPIC, getAttributeValue(session, EMPTY_TOPIC), dataModel);
-        putCorrectDataToDataModel("topic", getAttributeValue(session, "topic"), dataModel);
-        putCorrectDataToDataModel(EMPTY_DESCRIPTION, getAttributeValue(session, EMPTY_DESCRIPTION), dataModel);
-        putCorrectDataToDataModel("description", getAttributeValue(session, "description"), dataModel);
-*/
-
         try {
             template.process(dataModel, out);
             resp.setStatus(HttpServletResponse.SC_ACCEPTED);
@@ -139,52 +128,6 @@ public class EditSubjectServlet extends HttpServlet {
             e.printStackTrace();
         }
 
-        /*   invalidateAttributes(session, EMPTY_NAME, EMPTY_TOPIC, EMPTY_DESCRIPTION, "name", "description", "topic");*/
-    }
-
-    private void processPostRequest(HttpServletRequest req, HttpServletResponse resp, HttpSession session) throws ServletException, IOException {
-        String name = req.getParameter("name");
-        String topic = req.getParameter("topic");
-        String description = req.getParameter("description");
-        String isVideo = req.getParameter("isVideo");
-        String id = req.getParameter("id");
-
-        Optional<Subject> subject = service.findById(UUID.fromString(id));
-        System.out.println(id);
-        if (subject.isEmpty()){
-            resp.sendError(HttpServletResponse.SC_BAD_REQUEST);
-        }
-
-        if (isIncorrectCorrectParameter(name)) {
-            session.setAttribute(EMPTY_NAME, "Name cannot be empty");
-            return;
-        } else {
-            session.setAttribute("name", name);
-        }
-        if (isIncorrectCorrectParameter(topic)) {
-            session.setAttribute(EMPTY_TOPIC, "Topic cannot be empty");
-            return;
-        } else {
-            session.setAttribute("topic", topic);
-        }
-        if (isIncorrectCorrectParameter(description)) {
-            session.setAttribute(EMPTY_DESCRIPTION, "description cannot be empty");
-            return;
-        } else {
-            session.setAttribute("description", description);
-        }
-        System.out.println(session.getAttributeNames());
-        if (session.getAttribute(EMPTY_NAME) != null || session.getAttribute(EMPTY_TOPIC) != null
-                || session.getAttribute(EMPTY_DESCRIPTION) != null) {
-            resp.sendRedirect("/add-subject");
-            return;
-        }
-
-        editService.editDescription(subject.get(), description);
-        editService.editTopic(subject.get(), topic);
-        editService.editName(subject.get(), name);
-        editService.editIsVideo(subject.get(), isVideo);
-        resp.sendRedirect("/subject?id="+id);
 
     }
 

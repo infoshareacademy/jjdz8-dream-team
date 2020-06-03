@@ -18,7 +18,7 @@
                 <#if user ?? >
             </div>
             <div class="col-md-6">
-                <form  method="post" action="http://http://localhost:8080/add-subject">
+                <form  method="post" action="http://localhost:8080/add-subject">
                     <#if emptyName ??>
                     <div class="form-group col-md-6">
                         <p style="color: crimson">name cannot be empty</p>
@@ -44,7 +44,7 @@
                     <#if emptyDescription ??>
                           <div class="form-group col-md-6">
                         <p style="color: crimson">description cannot be empty</p>
-                        description: <input type="text" name="description" value=""/><br/><br/>
+                              description: <textarea type="text" name="description" ></textarea><br/><br/>
                           </div>
                     <#elseif description ??>
                     <div class="form-group col-md-6">

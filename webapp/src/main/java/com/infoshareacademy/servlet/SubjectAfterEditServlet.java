@@ -4,6 +4,7 @@ import com.infoshareacademy.domain.Subject;
 import com.infoshareacademy.domain.User;
 import com.infoshareacademy.freemarker.TemplateProvider;
 import com.infoshareacademy.service.Service;
+import com.infoshareacademy.service.SubjectEditService;
 import com.infoshareacademy.service.SubjectService;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
@@ -23,11 +24,10 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
 
-import static com.infoshareacademy.servlet.HelperForServlets.*;
-import static com.infoshareacademy.validation.ParameterValidator.isIncorrectCorrectParameter;
+import static com.infoshareacademy.servlet.HelperForServlets.isValidSession;
 
-@WebServlet("/add-subject")
-public class AddSubjectServlet extends HttpServlet {
+@WebServlet("/subject-after-edit")
+public class SubjectAfterEditServlet extends HttpServlet {
 
     @Inject
     TemplateProvider provider;
@@ -38,6 +38,10 @@ public class AddSubjectServlet extends HttpServlet {
     @Inject
     @Named("TeacherService")
     Service userService;
+
+    @Inject
+    private SubjectEditService editService;
+
 
     public static final String EMPTY_NAME = "emptyName";
 
@@ -50,68 +54,25 @@ public class AddSubjectServlet extends HttpServlet {
     private static final String SESSION_ATTRIBUTE = "teacherID";
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.setContentType("text/html;charset=UTF-8");
-        PrintWriter printWriter = resp.getWriter();
-
-        HttpSession session = req.getSession(false);
-        if (!isValidSession(session, SESSION_ATTRIBUTE)) {
-            String errorMassage = "Please login first";
-            printWriter.write(errorMassage);
-            return;
-        }
-        String name = req.getParameter("name");
-        String topic = req.getParameter("topic");
-        String description = req.getParameter("description");
-        boolean isVideo = Boolean.parseBoolean(req.getParameter("isVideo"));
-        UUID teacherId = (UUID) session.getAttribute(SESSION_ATTRIBUTE);
-        System.out.println(teacherId);
-
-        if (isIncorrectCorrectParameter(name)) {
-            session.setAttribute(EMPTY_NAME, "Name cannot be empty");
-        } else {
-            session.setAttribute("name", name);
-        }
-        if (isIncorrectCorrectParameter(topic)) {
-            session.setAttribute(EMPTY_TOPIC, "Topic cannot be empty");
-        } else {
-            session.setAttribute("topic", topic);
-        }
-        if (isIncorrectCorrectParameter(description)) {
-            session.setAttribute(EMPTY_DESCRIPTION, "description cannot be empty");
-        } else {
-            session.setAttribute("description", description);
-        }
-
-        System.out.println(session.getAttribute(EMPTY_DESCRIPTION));
-        System.out.println(session.getAttribute(EMPTY_NAME));
-        System.out.println(session.getAttribute(EMPTY_TOPIC));
-
-        if (session.getAttribute(EMPTY_NAME) != null || session.getAttribute(EMPTY_TOPIC) != null
-                || session.getAttribute(EMPTY_DESCRIPTION) != null) {
-            resp.sendRedirect("/add-subject");
-            return;
-        }
-
-        Subject subject = service.createSubject(name, topic, description, isVideo, teacherId);
-        service.addNewSubject(subject);
-        resp.sendRedirect("/teacher-account-information");
-    }
-
-    @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html;charset=UTF-8");
         PrintWriter printWriter = resp.getWriter();
+        String id = req.getParameter("id");
+        if (HelperForServlets.isIncorrectCorrectParameter(id)){
+            resp.sendError(HttpServletResponse.SC_BAD_REQUEST);
+            return;
+        }
 
-        Template template = provider.getTemplate(getServletContext(), "subject-after-added-icorect-data.ftlh");
+        Template template = provider.getTemplate(getServletContext(), "subject-after-edit-servlet.ftlh");
         Map<String, Object> dataModel = new HashMap<>();
 
         HttpSession session = req.getSession(false);
         if (!isValidSession(session, SESSION_ATTRIBUTE)) {
             dataModel.put("message", getAttributeValue(session, LOGIN_ERROR));
+
         } else {
 
-            findCorrectUser(session, SESSION_ATTRIBUTE).ifPresent(user -> dataModel.put("user", user));
+            service.findById(UUID.fromString(id)).ifPresent(subject -> dataModel.put("subject", subject));
 
             putCorrectDataToDataModel(EMPTY_NAME, getAttributeValue(session, EMPTY_NAME), dataModel);
             putCorrectDataToDataModel("name", getAttributeValue(session, "name"), dataModel);
@@ -137,9 +98,9 @@ public class AddSubjectServlet extends HttpServlet {
         }
     }
 
-    private Optional<User> findCorrectUser(HttpSession session, String attribute) {
+    private Optional<Subject> findCorrectSubject(HttpSession session, String attribute) {
         UUID id = (UUID) session.getAttribute(attribute);
-        return userService.findById(id);
+        return service.findById(id);
     }
 
     private void putCorrectDataToDataModel(String modelKey, String modelValue, Map<String, Object> dataModel) {
@@ -155,4 +116,5 @@ public class AddSubjectServlet extends HttpServlet {
         }
         return attribute;
     }
+
 }
