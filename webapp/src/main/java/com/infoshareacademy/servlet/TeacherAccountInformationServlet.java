@@ -34,14 +34,14 @@ public class TeacherAccountInformationServlet extends HttpServlet {
     @Named("TeacherService")
     Service service;
 
-    private static final String SESSION_ATTRIBUTE ="teacherID";
+    private static final String SESSION_ATTRIBUTE = "teacherID";
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html;charset=UTF-8");
         PrintWriter printWriter = resp.getWriter();
 
-        Template template = provider.getTemplate(getServletContext(), "teacher-account-information-page.ftlh");
+        Template template = provider.getTemplate(getServletContext(), "teacher-account-information-page-new.ftlh");
         Map<String, Object> dataModel = new HashMap<>();
 
         HttpSession session = req.getSession(false);
@@ -50,22 +50,20 @@ public class TeacherAccountInformationServlet extends HttpServlet {
 
         if (session == null || session.getAttribute(SESSION_ATTRIBUTE) == null) {
             dataModel.put("message", "please login first");
-            return;
-        }
-
-        id = (UUID) session.getAttribute(SESSION_ATTRIBUTE);
-        user = service.findById(id);
-        List<Subject> subjects;
-        if (user.isEmpty()) {
-            resp.sendError(HttpServletResponse.SC_BAD_REQUEST);
-            return;
-        }
-        subjects = subjectService.findAllSubjectsForTeacher(user.get().getId());
-        subjects.forEach(e-> System.out.println(e.getName()));
-        dataModel.put("user", user.get());
-
-        if (subjects.size() > 0) {
-            dataModel.put("subjects", subjects);
+        } else {
+            id = (UUID) session.getAttribute(SESSION_ATTRIBUTE);
+            user = service.findById(id);
+            List<Subject> subjects;
+            if (user.isEmpty()) {
+                resp.sendError(HttpServletResponse.SC_BAD_REQUEST);
+                return;
+            }
+            subjects = subjectService.findAllSubjectsForTeacher(user.get().getId());
+            subjects.forEach(e -> System.out.println(e.getName()));
+            dataModel.put("user", user.get());
+            if (subjects.size() > 0) {
+                dataModel.put("subjects", subjects);
+            }
         }
 
         try {

@@ -16,11 +16,11 @@
                     </a>
                 </#if>
                 <#if user ?? >
-              <#include "user-card-with-picture.ftlh">
+                <#include "user-card-with-picture.ftlh">
             </div>
             <div class="col-md-6">
-                <form method="post" action="http://localhost:8080/edit-student-account">
-             <#include "user-form-content-before-edit.ftlh">
+                <form method="post" action="http://localhost:8080/edit-teacher-account">
+                    <#include "user-form-content-before-edit.ftlh">
                 </form>
             </div>
             </#if>

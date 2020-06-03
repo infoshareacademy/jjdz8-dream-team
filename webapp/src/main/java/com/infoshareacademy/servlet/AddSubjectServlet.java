@@ -95,7 +95,7 @@ public class AddSubjectServlet extends HttpServlet {
 
         Subject subject = service.createSubject(name, topic, description, isVideo, teacherId);
         service.addNewSubject(subject);
-        resp.sendRedirect("/teacher");
+        resp.sendRedirect("/teacher-account-information");
     }
 
     @Override
@@ -103,23 +103,23 @@ public class AddSubjectServlet extends HttpServlet {
         resp.setContentType("text/html;charset=UTF-8");
         PrintWriter printWriter = resp.getWriter();
 
-        Template template = provider.getTemplate(getServletContext(), "subject-account-after-edit.ftlh");
+        Template template = provider.getTemplate(getServletContext(), "subject-account-after-edit-new.ftlh");
         Map<String, Object> dataModel = new HashMap<>();
 
         HttpSession session = req.getSession(false);
         if (!isValidSession(session, SESSION_ATTRIBUTE)) {
             dataModel.put("message", getAttributeValue(session, LOGIN_ERROR));
+        } else {
+
+            findCorrectUser(session, SESSION_ATTRIBUTE).ifPresent(user -> dataModel.put("user", user));
+
+            putCorrectDataToDataModel(EMPTY_NAME, getAttributeValue(session, EMPTY_NAME), dataModel);
+            putCorrectDataToDataModel("name", getAttributeValue(session, "name"), dataModel);
+            putCorrectDataToDataModel(EMPTY_TOPIC, getAttributeValue(session, EMPTY_TOPIC), dataModel);
+            putCorrectDataToDataModel("topic", getAttributeValue(session, "topic"), dataModel);
+            putCorrectDataToDataModel(EMPTY_DESCRIPTION, getAttributeValue(session, EMPTY_DESCRIPTION), dataModel);
+            putCorrectDataToDataModel("description", getAttributeValue(session, "description"), dataModel);
         }
-
-        findCorrectUser(session, SESSION_ATTRIBUTE).ifPresent(user -> dataModel.put("user", user));
-
-        putCorrectDataToDataModel(EMPTY_NAME, getAttributeValue(session, EMPTY_NAME), dataModel);
-        putCorrectDataToDataModel("name", getAttributeValue(session, "name"), dataModel);
-        putCorrectDataToDataModel(EMPTY_TOPIC, getAttributeValue(session, EMPTY_TOPIC), dataModel);
-        putCorrectDataToDataModel("topic", getAttributeValue(session, "topic"), dataModel);
-        putCorrectDataToDataModel(EMPTY_DESCRIPTION, getAttributeValue(session, EMPTY_DESCRIPTION), dataModel);
-        putCorrectDataToDataModel("description", getAttributeValue(session, "description"), dataModel);
-
         try {
             template.process(dataModel, printWriter);
             resp.setStatus(HttpServletResponse.SC_ACCEPTED);

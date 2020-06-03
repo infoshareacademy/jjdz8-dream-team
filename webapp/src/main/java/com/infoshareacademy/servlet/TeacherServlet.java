@@ -48,18 +48,12 @@ public class TeacherServlet extends HttpServlet {
         resp.setContentType("text/html;charset=UTF-8");
         PrintWriter printWriter = resp.getWriter();
         HttpSession session = req.getSession(false);
-        String errorMassage;
-        if (!isValidSession(session, SESSION_ATTRIBUTE)) {
-            errorMassage = "Please login first";
-            printWriter.write(errorMassage);
-            return;
-        }
 
         Template template = provider.getTemplate(getServletContext(), "teacher-account-data-form.ftlh");
         Map<String, Object> dataModel = new HashMap<>();
 
         if (!isValidSession(session, SESSION_ATTRIBUTE)) {
-            dataModel.put("message", ERROR_MESSAGE);
+            dataModel.put("message","please login first");
         } else {
             UUID id = (UUID) session.getAttribute("id");
             Optional<User> user = service.findById(id);

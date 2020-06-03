@@ -23,8 +23,9 @@ import java.util.Optional;
 import java.util.UUID;
 
 import static com.infoshareacademy.servlet.HelperForServlets.*;
+import static com.infoshareacademy.validation.ParameterValidator.isIncorrectCorrectParameter;
 
-@WebServlet("edit-subject")
+@WebServlet("/edit-subject")
 public class EditSubjectServlet extends HttpServlet {
 
     @Inject
@@ -40,7 +41,7 @@ public class EditSubjectServlet extends HttpServlet {
     public static final String EMPTY_TOPIC = "emptyTopic";
     public static final String EMPTY_DESCRIPTION = "emptyDescription";
 
-    private static final String SESSION_ATTRIBUTE ="teacherID";
+    private static final String SESSION_ATTRIBUTE = "teacherID";
 
 
     @Override
@@ -49,7 +50,7 @@ public class EditSubjectServlet extends HttpServlet {
         PrintWriter out = resp.getWriter();
 
         HttpSession session = req.getSession(false);
-        if (!isValidSession(session,SESSION_ATTRIBUTE)) {
+        if (!isValidSession(session, SESSION_ATTRIBUTE)) {
             resp.getWriter().write(ERROR_MESSAGE);
             return;
         }
@@ -63,19 +64,51 @@ public class EditSubjectServlet extends HttpServlet {
         resp.setContentType("text/html;charset=UTF-8");
 
         HttpSession session = req.getSession(false);
-        if (!isValidSession(session,SESSION_ATTRIBUTE)) {
-            resp.getWriter().write(ERROR_MESSAGE);
+        if (!isValidSession(session, SESSION_ATTRIBUTE)) {
+            resp.sendError(HttpServletResponse.SC_BAD_REQUEST);
             return;
         }
-        processPostRequest(req, resp, session);
+        /*processPostRequest(req, resp, session);*/
+        String name = req.getParameter("name");
+        String topic = req.getParameter("topic");
+        String description = req.getParameter("description");
+        String isVideo = req.getParameter("isVideo");
+        String id = req.getParameter("id");
 
+        Optional<Subject> subject = service.findById(UUID.fromString(id));
+        System.out.println(id);
+        if (subject.isEmpty()){
+            resp.sendError(HttpServletResponse.SC_BAD_REQUEST);
+        }
+
+        if (isIncorrectCorrectParameter(name)) {
+            session.setAttribute(EMPTY_NAME, "Name cannot be empty");
+        } else {
+            session.setAttribute("name", name);
+        }
+        if (isIncorrectCorrectParameter(topic)) {
+            session.setAttribute(EMPTY_TOPIC, "Topic cannot be empty");
+        } else {
+            session.setAttribute("topic", topic);
+        }
+        if (isIncorrectCorrectParameter(description)) {
+            session.setAttribute(EMPTY_DESCRIPTION, "description cannot be empty");
+        } else {
+            session.setAttribute("description", description);
+        }
         if (session.getAttribute(EMPTY_NAME) != null || session.getAttribute(EMPTY_TOPIC) != null
                 || session.getAttribute(EMPTY_DESCRIPTION) != null) {
-            resp.sendRedirect("/edit-subject?id=" + session.getAttribute("subjectId"));
+            resp.sendRedirect("/add-subject");
             return;
         }
 
-        resp.sendRedirect("/subject?id=" + session.getAttribute("subjectId"));
+        editService.editDescription(subject.get(), description);
+        editService.editTopic(subject.get(), topic);
+        editService.editName(subject.get(), name);
+        editService.editIsVideo(subject.get(), isVideo);
+        resp.sendRedirect("/subject?id="+id);
+
+
 
     }
 
@@ -85,17 +118,19 @@ public class EditSubjectServlet extends HttpServlet {
             resp.sendError(HttpServletResponse.SC_NOT_FOUND);
             return;
         }
-        Template template = provider.getTemplate(getServletContext(), "subject-account-data.ftlh");
+        Template template = provider.getTemplate(getServletContext(), "subject-account-data-form-new.ftlh");
         Map<String, Object> dataModel = new HashMap<>();
-
         dataModel.put("subject", subject.get());
         dataModel.put("isVideo", String.valueOf(subject.get().isVideo()));
-
-        HttpSession session = req.getSession(false);
+        /*
 
         putCorrectDataToDataModel(EMPTY_NAME, getAttributeValue(session, EMPTY_NAME), dataModel);
+        putCorrectDataToDataModel("name", getAttributeValue(session, "name"), dataModel);
         putCorrectDataToDataModel(EMPTY_TOPIC, getAttributeValue(session, EMPTY_TOPIC), dataModel);
+        putCorrectDataToDataModel("topic", getAttributeValue(session, "topic"), dataModel);
         putCorrectDataToDataModel(EMPTY_DESCRIPTION, getAttributeValue(session, EMPTY_DESCRIPTION), dataModel);
+        putCorrectDataToDataModel("description", getAttributeValue(session, "description"), dataModel);
+*/
 
         try {
             template.process(dataModel, out);
@@ -104,7 +139,7 @@ public class EditSubjectServlet extends HttpServlet {
             e.printStackTrace();
         }
 
-        invalidateAttributes(session, EMPTY_NAME, EMPTY_TOPIC, EMPTY_DESCRIPTION);
+        /*   invalidateAttributes(session, EMPTY_NAME, EMPTY_TOPIC, EMPTY_DESCRIPTION, "name", "description", "topic");*/
     }
 
     private void processPostRequest(HttpServletRequest req, HttpServletResponse resp, HttpSession session) throws ServletException, IOException {
@@ -115,33 +150,42 @@ public class EditSubjectServlet extends HttpServlet {
         String id = req.getParameter("id");
 
         Optional<Subject> subject = service.findById(UUID.fromString(id));
-        if (subject.isEmpty()) {
-            resp.sendError(HttpServletResponse.SC_NOT_FOUND);
+        System.out.println(id);
+        if (subject.isEmpty()){
+            resp.sendError(HttpServletResponse.SC_BAD_REQUEST);
+        }
+
+        if (isIncorrectCorrectParameter(name)) {
+            session.setAttribute(EMPTY_NAME, "Name cannot be empty");
+            return;
+        } else {
+            session.setAttribute("name", name);
+        }
+        if (isIncorrectCorrectParameter(topic)) {
+            session.setAttribute(EMPTY_TOPIC, "Topic cannot be empty");
+            return;
+        } else {
+            session.setAttribute("topic", topic);
+        }
+        if (isIncorrectCorrectParameter(description)) {
+            session.setAttribute(EMPTY_DESCRIPTION, "description cannot be empty");
+            return;
+        } else {
+            session.setAttribute("description", description);
+        }
+        System.out.println(session.getAttributeNames());
+        if (session.getAttribute(EMPTY_NAME) != null || session.getAttribute(EMPTY_TOPIC) != null
+                || session.getAttribute(EMPTY_DESCRIPTION) != null) {
+            resp.sendRedirect("/add-subject");
             return;
         }
 
-        session.setAttribute("subjectId", subject.get().getId());
-
-        if (isIncorrectCorrectParameter(name)) {
-            session.setAttribute(EMPTY_NAME, "name cannot be empty");
-        } else {
-            editService.editName(subject.get(), name);
-        }
-
-        if (isIncorrectCorrectParameter(topic)) {
-            session.setAttribute(EMPTY_TOPIC, "topic cannot be empty");
-        } else {
-            editService.editTopic(subject.get(), topic);
-        }
-
-        if (isIncorrectCorrectParameter(description)) {
-            session.setAttribute(EMPTY_DESCRIPTION, "description cannot be empty");
-
-        } else {
-            editService.editDescription(subject.get(), description);
-        }
-
+        editService.editDescription(subject.get(), description);
+        editService.editTopic(subject.get(), topic);
+        editService.editName(subject.get(), name);
         editService.editIsVideo(subject.get(), isVideo);
+        resp.sendRedirect("/subject?id="+id);
+
     }
 
     private boolean isIncorrectCorrectParameter(String parameter) {

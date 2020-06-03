@@ -8,7 +8,7 @@
 <#include "headhtml.ftlh">
     <body>
     <#include "menuWithLogout.ftlh" >
-    <#include "headerJambutron.ftlh">
+ <#include "headerJambutron.ftlh">
     <main role="main">
         <div class="container">
          <@content/>

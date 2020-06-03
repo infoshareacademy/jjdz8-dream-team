@@ -70,10 +70,9 @@ public class SubjectServlet extends HttpServlet {
             resp.sendError(HttpServletResponse.SC_NOT_FOUND);
             return;
         }
-        Template template = provider.getTemplate(getServletContext(), "subject-information-page.ftlh");
+        Template template = provider.getTemplate(getServletContext(), "subject-information-page-new.ftlh");
         Map<String, Object> dataModel = new HashMap<>();
         dataModel.put("subject", subject.get());
-        dataModel.put("range", subject.get().getDescription());
         dataModel.put("isVideo", String.valueOf(subject.get().isVideo()));
         try {
             template.process(dataModel, out);

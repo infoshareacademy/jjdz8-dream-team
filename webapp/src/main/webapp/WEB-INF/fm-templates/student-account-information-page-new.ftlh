@@ -1,4 +1,4 @@
-<#include "base.ftlh">
+<#include "base-login-user.ftlh">
 <#macro content>
     <div class="card">
         <div class="card-header">
@@ -16,44 +16,13 @@
                     </a>
                 </#if>
                 <#if user ?? >
-                <div class="card" style="width: 18rem;">
-                    <img src="https://bootdey.com/img/Content/avatar/avatar1.png" class="card-img-top"
-                         alt="Daniel Adams">
-                    <div class="card-body">
-                        <h5 class="card-title">${user.nickName}</h5>
-                        <span class="author-card-info"> date of joining</span><br><br>
-                        <h5 class="author-card-details">Shortly about me</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk
-                            of the
-                            card's content.</p>
-                    </div>
-                </div>
+                <#include "user-card-with-picture.ftlh">
             </div>
             <div class="col-md-6">
-                <form>
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label for="inputEmail4">nickname</label>
-                            <input type="text" class="form-control" id="inputEmail4" name="nickName"
-                                   placeholder="${user.nickName}" disabled>
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label for="inputEmail4">Email</label>
-                            <input type="email" class="form-control" id="inputEmail4" name="email"
-                                   placeholder="${user.email}" disabled>
-                        </div>
-                    </div>
-                    <div class="form-row">
-
-                        <div class="form-group col-md-6">
-                            <label for="inputPassword4">Password</label>
-                            <input type="password" class="form-control" id="inputPassword4" name="password"
-                                   placeholder="Password" disabled>
-                        </div>
-                    </div>
-                </form>
+                <#include "information-about-user-form-read-only.ftlh">
                 <br>
-                <a href="/student-account-information-servlet"><input class="btn btn-primary" type="button" value="edit account"></a>
+                <a href="/student-account-information-servlet"><input class="btn btn-primary" type="button"
+                                                                      value="edit account"></a>
             </div>
             </#if>
         </div>

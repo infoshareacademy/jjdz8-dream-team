@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-    <a class="navbar-brand logo" href="index.html">FunnyPhoto</a>
+    <a class="navbar-brand logo" href="index.html">E-learning</a>
     <button
             class="navbar-toggler"
             type="button"

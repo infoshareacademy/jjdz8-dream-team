@@ -24,34 +24,51 @@
         <div class="row">
             <div class="col-6">
                 <#if subject??>
-                    <h1><strong>${subject.name}</strong></h1>
                     <form method="post" action="http://localhost:8080/edit-subject">
-                        <#if emptyName ??><p style="color: crimson">Name cannot be empty</p>
-                            name: <input type="text"  name="name" value=""/><br/><br/>
-                            <br/><br/>
-                        <#else> name: <input type="text" name="name" value="${subject.name}"><br/><br/>
+                        <#if emptyName ??>
+                            <div class="form-group col-md-6">
+                                <p style="color: crimson">name cannot be empty</p>
+                                Name: <input type="text" class="form-control"  name="name">
+                            </div>
+                        <#elseif name ??>
+                            <div class="form-group col-md-6">
+                                name: <input type="text" name="name" value="${name}"><br/><br/>
+                            </div>
                         </#if>
 
-                        <#if emptyTopic ??><p style="color: crimson">Topic cannot be empty</p>
-                            topic: <input type="text"  name="topic" value=""/><br/><br/>
-                            <br/><br/>
-                        <#else> topic: <input type="text" name="topic" value="${subject.topic}"><br/><br/>
+                        <#if emptyTopic ??>
+                            <div class="form-group col-md-6">
+                                <p style="color: crimson">topic cannot be empty</p>
+                                topic: <input type="text" name="topic" value=""/><br/><br/>
+                            </div>
+                        <#elseif topic ??>
+                            <div class="form-group col-md-6">
+                                topic: <input type="text" name="topic" value="${topic}"><br/><br/>
+                            </div>
                         </#if>
 
-                        <#if emptyDescription ??><p style="color: crimson">Description cannot be empty</p>
-                            description: <input type="text"  name="description" value=""/><br/><br/>
-                            <br/><br/>
-                        <#else> description: <input type="text" name="description" value="${subject.description}"><br/><br/>
+                        <#if emptyDescription ??>
+                            <div class="form-group col-md-6">
+                                <p style="color: crimson">description cannot be empty</p>
+                                description: <input type="text" name="description" value=""/><br/><br/>
+                            </div>
+                        <#elseif description ??>
+                            <div class="form-group col-md-6">
+                                description: <textarea type="text" name="description" value="${description}"></textarea><br/><br/>
+                            </div>
                         </#if>
-                        <p>Viedeo materials: ${isVideo}</p>
-                        <select id="isVideo" name="isVideo">
-                            <option value="true">yes</option>
-                            <option value="false">no</option>
-                        </select>
+                        <div class="form-group col-md-6">
+                            <p>video materials</p>
+                            <select id="isVideo" name="isVideo">
+                                <option value="true">yes</option>
+                                <option value="false">no</option>
+                            </select>
+                        </div>
                         <input type="hidden" name="id" value="${subject.id}"/><br/><br/>
-                        <input type="submit" name="edit" value="edit"/><br/><br/>
+                        <div class="form-group col-md-6">
+                            <input class="btn btn-primary" type="submit" name="save" value="edit"/><br/><br/>
+                        </div>
                     </form>
-
                 </#if>
             </div>
         </div>

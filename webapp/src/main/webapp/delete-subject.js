@@ -5,13 +5,9 @@ $("#delete-subject").each(function () {
         $.ajax({
             "url": '/subject?id='+id,
             "method": 'DELETE',
-            "success": function () {
-                alert('user succesfully deleted');
-                location.replace("/teacher");
+            success: function () {
+                location.replace("http://localhost:8080/teacher-account-information");
             },
-            "error": function (error) {
-                alert(error);
-            }
         })
     });
 })
