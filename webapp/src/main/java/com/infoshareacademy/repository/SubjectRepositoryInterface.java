@@ -10,6 +10,8 @@ import java.util.UUID;
 @Local
 public interface SubjectRepositoryInterface {
 
+    List<Subject> findAll();
+
     void add(Subject subject);
 
     void delete(Subject subject);

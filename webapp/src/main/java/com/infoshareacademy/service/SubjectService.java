@@ -15,6 +15,10 @@ public class SubjectService {
     @Inject
     private SubjectRepository repository;
 
+    public List<Subject> findAll(){
+        return repository.findAll();
+    }
+
     public Optional<Subject> findById(UUID id) {
         return repository.findById(id);
     }

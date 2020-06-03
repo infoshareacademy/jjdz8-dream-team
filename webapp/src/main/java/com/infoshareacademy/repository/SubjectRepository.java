@@ -18,6 +18,10 @@ public class SubjectRepository implements SubjectRepositoryInterface {
     private final Subjects subjects = JsonReader.create(new Subjects(), FileNames.SUBJECTS_JSON);
 
     @Override
+    public List<Subject> findAll(){
+        return subjects.getSubjects();
+    }
+    @Override
     public void add(Subject subject) {
         subjects.addSubject(subject);
         JsonSaver.createJson(subjects, FileNames.SUBJECTS_JSON);
