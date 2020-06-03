@@ -32,8 +32,7 @@ public class StudentAccountInformationServlet extends HttpServlet {
     @Inject
     private TemplateProvider provider;
 
-    private static final String SESSION_ATTRIBUTE ="studentID";
-
+    private static final String SESSION_ATTRIBUTE = "studentID";
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

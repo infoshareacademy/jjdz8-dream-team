@@ -14,7 +14,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.ws.rs.HEAD;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
@@ -23,7 +22,6 @@ import java.util.Optional;
 import java.util.UUID;
 
 import static com.infoshareacademy.servlet.HelperForServlets.*;
-import static com.infoshareacademy.validation.ParameterValidator.isIncorrectCorrectParameter;
 
 @WebServlet("/edit-subject")
 public class EditSubjectServlet extends HttpServlet {
@@ -38,7 +36,9 @@ public class EditSubjectServlet extends HttpServlet {
     private TemplateProvider provider;
 
     public static final String EMPTY_NAME = "emptyName";
+
     public static final String EMPTY_TOPIC = "emptyTopic";
+
     public static final String EMPTY_DESCRIPTION = "emptyDescription";
 
     private static final String SESSION_ATTRIBUTE = "teacherID";
@@ -55,14 +55,15 @@ public class EditSubjectServlet extends HttpServlet {
             return;
         }
         String id = req.getParameter("id");
-        processGetRequest(req, resp, out, UUID.fromString(id));
+        processGetRequest(resp, out, UUID.fromString(id));
     }
 
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html;charset=UTF-8");
-
+        resp.setCharacterEncoding("UTF8");
+        resp.setContentType("application/json");
         HttpSession session = req.getSession(false);
         if (!isValidSession(session, SESSION_ATTRIBUTE)) {
             resp.sendError(HttpServletResponse.SC_BAD_REQUEST);
@@ -76,8 +77,9 @@ public class EditSubjectServlet extends HttpServlet {
 
         Optional<Subject> subject = service.findById(UUID.fromString(id));
         System.out.println(id);
-        if (subject.isEmpty()){
+        if (subject.isEmpty()) {
             resp.sendError(HttpServletResponse.SC_BAD_REQUEST);
+            return;
         }
 
         if (isIncorrectCorrectParameter(name)) {
@@ -97,21 +99,17 @@ public class EditSubjectServlet extends HttpServlet {
         }
         if (session.getAttribute(EMPTY_NAME) != null || session.getAttribute(EMPTY_TOPIC) != null
                 || session.getAttribute(EMPTY_DESCRIPTION) != null) {
-            resp.sendRedirect("/subject-after-edit?id="+subject.get().getId());
+            resp.sendRedirect("/subject-after-edit?id=" + subject.get().getId());
             return;
         }
-
         editService.editDescription(subject.get(), description);
         editService.editTopic(subject.get(), topic);
         editService.editName(subject.get(), name);
         editService.editIsVideo(subject.get(), isVideo);
-        resp.sendRedirect("/subject?id="+id);
-
-
-
+        resp.sendRedirect("/subject?id=" + id);
     }
 
-    public void processGetRequest(HttpServletRequest req, HttpServletResponse resp, PrintWriter out, UUID id) throws IOException {
+    public void processGetRequest(HttpServletResponse resp, PrintWriter out, UUID id) throws IOException {
         Optional<Subject> subject = service.findById(id);
         if (subject.isEmpty()) {
             resp.sendError(HttpServletResponse.SC_NOT_FOUND);
@@ -127,33 +125,6 @@ public class EditSubjectServlet extends HttpServlet {
         } catch (TemplateException e) {
             e.printStackTrace();
         }
-
-
     }
 
-    private boolean isIncorrectCorrectParameter(String parameter) {
-        return (parameter == null || parameter.isEmpty());
-    }
-
-    private void invalidateAttributes(HttpSession session, String... attributeNames) {
-        for (String attributeName : attributeNames) {
-            if (session.getAttribute(attributeName) != null) {
-                session.removeAttribute(attributeName);
-            }
-        }
-    }
-
-    private void putCorrectDataToDataModel(String modelKey, String modelValue, Map<String, Object> dataModel) {
-        if (!modelValue.isEmpty()) {
-            dataModel.put(modelKey, modelValue);
-        }
-    }
-
-    private String getAttributeValue(HttpSession session, String attributeName) {
-        String attribute = "";
-        if (session.getAttribute(attributeName) != null) {
-            attribute = (String) session.getAttribute(attributeName);
-        }
-        return attribute;
-    }
 }

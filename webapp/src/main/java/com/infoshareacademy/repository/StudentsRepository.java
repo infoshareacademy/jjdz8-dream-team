@@ -49,9 +49,8 @@ public class StudentsRepository implements Repository {
     public boolean contains(Optional<User> user) {
         if (user.isEmpty()) return false;
         else {
-            if (students.getStudents().contains(user.get())) return true;
+            return students.getStudents().contains(user.get());
         }
-        return false;
     }
 
     @Override

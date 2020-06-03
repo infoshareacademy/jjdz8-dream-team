@@ -24,7 +24,6 @@ public class StudentAccountEditorServlet extends UserEditServlet {
 
     private static final String SESSION_ATTRIBUTE ="studentID";
 
-
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         setSessionAttribute(SESSION_ATTRIBUTE);

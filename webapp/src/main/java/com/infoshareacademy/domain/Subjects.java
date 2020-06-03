@@ -17,9 +17,7 @@ public class Subjects {
 
     public void deleteSubject(Subject subject){
         for (int i =0; i< this.subjectsList.size(); i++){
-            if (this.subjectsList.get(i).getId().equals(subject.getId())) {
-                this.subjectsList.remove(i);
-            }
+            if (this.subjectsList.get(i).getId().equals(subject.getId())) this.subjectsList.remove(i);
         }
     }
 }

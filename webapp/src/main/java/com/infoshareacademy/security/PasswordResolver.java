@@ -14,7 +14,6 @@ public class PasswordResolver {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
         return null;
     }
 

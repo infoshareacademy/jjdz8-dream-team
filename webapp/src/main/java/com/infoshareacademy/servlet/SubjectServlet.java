@@ -25,17 +25,18 @@ public class SubjectServlet extends HttpServlet {
 
     @Inject
     private SubjectService service;
+
     @Inject
     private TemplateProvider provider;
 
-    private static final String SESSION_ATTRIBUTE ="teacherID";
+    private static final String SESSION_ATTRIBUTE = "teacherID";
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html;charset=UTF-8");
         PrintWriter out = resp.getWriter();
         HttpSession session = req.getSession(false);
-        if (!isValidSession(session,SESSION_ATTRIBUTE)) {
+        if (!isValidSession(session, SESSION_ATTRIBUTE)) {
             out.write(ERROR_MESSAGE);
             return;
         }
@@ -51,7 +52,7 @@ public class SubjectServlet extends HttpServlet {
 
         HttpSession session = req.getSession(false);
         if (!isValidSession(session, SESSION_ATTRIBUTE)) {
-            out.write(ERROR_MESSAGE);
+            resp.sendError(HttpServletResponse.SC_BAD_REQUEST, "please login first");
             return;
         }
 
@@ -86,7 +87,7 @@ public class SubjectServlet extends HttpServlet {
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession(false);
         if (!isValidSession(session, SESSION_ATTRIBUTE)) {
-            resp.getWriter().write(ERROR_MESSAGE);
+            resp.sendError(HttpServletResponse.SC_BAD_REQUEST, "please login first");
             return;
         }
 

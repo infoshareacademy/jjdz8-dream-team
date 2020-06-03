@@ -1,7 +1,6 @@
 package com.infoshareacademy.service;
 
 import com.infoshareacademy.domain.User;
-import com.infoshareacademy.repository.Repository;
 
 import javax.ejb.Local;
 import java.util.Optional;

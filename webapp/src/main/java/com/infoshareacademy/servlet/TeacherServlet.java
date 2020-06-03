@@ -5,7 +5,6 @@ import com.infoshareacademy.domain.User;
 import com.infoshareacademy.freemarker.TemplateProvider;
 import com.infoshareacademy.repository.SubjectRepositoryInterface;
 import com.infoshareacademy.service.Service;
-import com.infoshareacademy.service.TeacherService;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 
@@ -20,14 +19,11 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.*;
-import java.util.logging.Logger;
 
-import static com.infoshareacademy.servlet.HelperForServlets.ERROR_MESSAGE;
 import static com.infoshareacademy.servlet.HelperForServlets.isValidSession;
 
 @WebServlet("/teacher")
 public class TeacherServlet extends HttpServlet {
-
 
     @Inject
     TemplateProvider provider;
@@ -39,8 +35,6 @@ public class TeacherServlet extends HttpServlet {
     @Inject
     private SubjectRepositoryInterface subjectRepository;
 
-    private static final Logger logger = Logger.getLogger(TeacherServlet.class.getName());
-
     private static final String SESSION_ATTRIBUTE ="teacherID";
 
     @Override
@@ -49,13 +43,13 @@ public class TeacherServlet extends HttpServlet {
         PrintWriter printWriter = resp.getWriter();
         HttpSession session = req.getSession(false);
 
-        Template template = provider.getTemplate(getServletContext(), "teacher-account-data-form.ftlh");
+        Template template = provider.getTemplate(getServletContext(), "teacher-account-data-form-before-edit-new.ftlh");
         Map<String, Object> dataModel = new HashMap<>();
 
         if (!isValidSession(session, SESSION_ATTRIBUTE)) {
             dataModel.put("message","please login first");
         } else {
-            UUID id = (UUID) session.getAttribute("id");
+            UUID id = (UUID) session.getAttribute(SESSION_ATTRIBUTE);
             Optional<User> user = service.findById(id);
             List<Subject> subjects;
             if (user.isEmpty()) {
@@ -99,7 +93,7 @@ public class TeacherServlet extends HttpServlet {
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession(false);
         if (session == null) {
-            resp.getWriter().write(ERROR_MESSAGE);
+            resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             return;
         }
         String id = req.getParameter("id");

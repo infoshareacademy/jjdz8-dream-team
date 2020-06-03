@@ -3,7 +3,7 @@
 
 <#macro home>
 <!DOCTYPE html>
-    <html lang="en" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html"
+    <html lang="pl" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html"
           xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
 <#include "headhtml.ftlh">
     <body>

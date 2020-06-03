@@ -26,7 +26,7 @@ public class TeacherAccountEditorServlet extends UserEditServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         setSessionAttribute(SESSION_ATTRIBUTE);
-        setTemplateFile("teacher-account-data-after-edit.ftlh");
+        setTemplateFile("teacher-account-data-after-edit-new.ftlh");
         doGetMethod(req, resp, userService);
     }
 

@@ -65,7 +65,6 @@ public class AddSubjectServlet extends HttpServlet {
         String description = req.getParameter("description");
         boolean isVideo = Boolean.parseBoolean(req.getParameter("isVideo"));
         UUID teacherId = (UUID) session.getAttribute(SESSION_ATTRIBUTE);
-        System.out.println(teacherId);
 
         if (isIncorrectCorrectParameter(name)) {
             session.setAttribute(EMPTY_NAME, "Name cannot be empty");
@@ -82,10 +81,6 @@ public class AddSubjectServlet extends HttpServlet {
         } else {
             session.setAttribute("description", description);
         }
-
-        System.out.println(session.getAttribute(EMPTY_DESCRIPTION));
-        System.out.println(session.getAttribute(EMPTY_NAME));
-        System.out.println(session.getAttribute(EMPTY_TOPIC));
 
         if (session.getAttribute(EMPTY_NAME) != null || session.getAttribute(EMPTY_TOPIC) != null
                 || session.getAttribute(EMPTY_DESCRIPTION) != null) {
@@ -111,8 +106,7 @@ public class AddSubjectServlet extends HttpServlet {
             dataModel.put("message", getAttributeValue(session, LOGIN_ERROR));
         } else {
 
-            findCorrectUser(session, SESSION_ATTRIBUTE).ifPresent(user -> dataModel.put("user", user));
-
+            findCorrectUser(session).ifPresent(user -> dataModel.put("user", user));
             putCorrectDataToDataModel(EMPTY_NAME, getAttributeValue(session, EMPTY_NAME), dataModel);
             putCorrectDataToDataModel("name", getAttributeValue(session, "name"), dataModel);
             putCorrectDataToDataModel(EMPTY_TOPIC, getAttributeValue(session, EMPTY_TOPIC), dataModel);
@@ -129,30 +123,8 @@ public class AddSubjectServlet extends HttpServlet {
         invalidateAttributes(session, EMPTY_NAME, EMPTY_TOPIC, EMPTY_DESCRIPTION, "name", "description", "topic");
     }
 
-    private void invalidateAttributes(HttpSession session, String... attributeNames) {
-        for (String attributeName : attributeNames) {
-            if (session.getAttribute(attributeName) != null) {
-                session.removeAttribute(attributeName);
-            }
-        }
-    }
-
-    private Optional<User> findCorrectUser(HttpSession session, String attribute) {
-        UUID id = (UUID) session.getAttribute(attribute);
+    private Optional<User> findCorrectUser(HttpSession session) {
+        UUID id = (UUID) session.getAttribute(SESSION_ATTRIBUTE);
         return userService.findById(id);
-    }
-
-    private void putCorrectDataToDataModel(String modelKey, String modelValue, Map<String, Object> dataModel) {
-        if (!modelValue.isEmpty()) {
-            dataModel.put(modelKey, modelValue);
-        }
-    }
-
-    private String getAttributeValue(HttpSession session, String attributeName) {
-        String attribute = "";
-        if (session.getAttribute(attributeName) != null) {
-            attribute = (String) session.getAttribute(attributeName);
-        }
-        return attribute;
     }
 }

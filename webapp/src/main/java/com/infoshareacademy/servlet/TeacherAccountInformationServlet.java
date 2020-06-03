@@ -5,7 +5,6 @@ import com.infoshareacademy.domain.User;
 import com.infoshareacademy.freemarker.TemplateProvider;
 import com.infoshareacademy.service.Service;
 import com.infoshareacademy.service.SubjectService;
-import com.infoshareacademy.service.TeacherService;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 
@@ -32,7 +31,7 @@ public class TeacherAccountInformationServlet extends HttpServlet {
 
     @Inject
     @Named("TeacherService")
-    Service service;
+    private Service service;
 
     private static final String SESSION_ATTRIBUTE = "teacherID";
 
@@ -65,7 +64,6 @@ public class TeacherAccountInformationServlet extends HttpServlet {
                 dataModel.put("subjects", subjects);
             }
         }
-
         try {
             template.process(dataModel, printWriter);
             resp.setStatus(HttpServletResponse.SC_ACCEPTED);

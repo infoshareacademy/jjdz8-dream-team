@@ -55,11 +55,16 @@ public abstract class UserEditServlet extends HttpServlet {
         Map<String, Object> dataModel = new HashMap<>();
 
         HttpSession session = req.getSession(false);
-        if (session == null || session.getAttribute(sessionAttribute) == null) {
-            dataModel.put("message", getAttributeValue(session, LOGIN_ERROR));
+        if (!isValidSession(session, sessionAttribute)) {
+            session.setAttribute(LOGIN_ERROR, "you have to login first");
+            return;
         }
-        Optional<User> user = findCorrectUser(session,sessionAttribute,userService);
-        user.ifPresent(value -> dataModel.put("user", value));
+
+        Optional<User> user = findCorrectUser(session, sessionAttribute, userService);
+        user.ifPresentOrElse(value -> dataModel.put("user", value),
+                () -> {
+                    resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+                });
 
         putCorrectDataToDataModel("nickName", getAttributeValue(session, "nickName"), dataModel);
         putCorrectDataToDataModel("email", getAttributeValue(session, "email"), dataModel);
@@ -80,8 +85,8 @@ public abstract class UserEditServlet extends HttpServlet {
 
     protected void doPostMethod(HttpServletRequest req, HttpServletResponse resp, Service userService, EditService editService) throws ServletException, IOException {
         resp.setContentType("text/html;charset=UTF-8");
-        HttpSession session = req.getSession(false);
 
+        HttpSession session = req.getSession(false);
         if (!isValidSession(session, sessionAttribute)) {
             session.setAttribute(LOGIN_ERROR, "you have to login first");
             return;
@@ -93,6 +98,7 @@ public abstract class UserEditServlet extends HttpServlet {
             return;
         }
         processPostRequest(req, user.get(), editService, userService);
+
         if (session.getAttribute(EMPTY_NICKNAME) != null || session.getAttribute(EMPTY_EMAIL) != null
                 || session.getAttribute(WRONG_PASSWORD) != null || session.getAttribute(WRONG_PASSWORD_FORMAT) != null) {
             resp.sendRedirect(redirectAfterInCorrectForm);
@@ -118,12 +124,12 @@ public abstract class UserEditServlet extends HttpServlet {
         if (isIncorrectCorrectParameter(email)) {
             session.setAttribute(EMPTY_EMAIL, "email cannot be empty");
             return;
-        }else session.setAttribute("email", email);
+        } else session.setAttribute("email", email);
 
         if (isIncorrectCorrectParameter(oldPassword) || !userService.isCorrectPassword(user, oldPassword)) {
             session.setAttribute(WRONG_PASSWORD, "wrong password");
             return;
-        } else if (isIncorrectCorrectParameter(newPassword)){
+        } else if (isIncorrectCorrectParameter(newPassword)) {
             userEditService.editNickname(user, nickName);
             userEditService.editEmail(user, email);
         }

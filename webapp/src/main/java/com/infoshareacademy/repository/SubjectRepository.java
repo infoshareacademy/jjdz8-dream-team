@@ -15,7 +15,7 @@ import java.util.UUID;
 @RequestScoped
 public class SubjectRepository implements SubjectRepositoryInterface {
 
-    private  Subjects subjects = JsonReader.create(new Subjects(), FileNames.SUBJECTS_JSON);
+    private final Subjects subjects = JsonReader.create(new Subjects(), FileNames.SUBJECTS_JSON);
 
     @Override
     public void add(Subject subject) {

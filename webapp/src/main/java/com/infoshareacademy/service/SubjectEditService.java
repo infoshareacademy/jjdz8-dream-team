@@ -21,24 +21,24 @@ public class SubjectEditService {
     }
 
     public void editName(Subject subject, String newName) {
-            subject = repository.findById(subject.getId()).get();
-            subject.setName(newName);
-            repository.updateSubjectName(subject);
+        subject = repository.findById(subject.getId()).get();
+        subject.setName(newName);
+        repository.updateSubjectName(subject);
     }
 
     public void editTopic(Subject subject, String newTopic) {
-            subject = repository.findById(subject.getId()).get();
-            subject.setTopic(newTopic);
-            repository.updateSubjectTopic(subject);
+        subject = repository.findById(subject.getId()).get();
+        subject.setTopic(newTopic);
+        repository.updateSubjectTopic(subject);
     }
 
     public void editDescription(Subject subject, String description) {
-            subject = repository.findById(subject.getId()).get();
-            subject.setDescription(description);
-            repository.updateSubjectDescription(subject);
+        subject = repository.findById(subject.getId()).get();
+        subject.setDescription(description);
+        repository.updateSubjectDescription(subject);
     }
 
-    public void editIsVideo(Subject subject, String isVideo){
+    public void editIsVideo(Subject subject, String isVideo) {
         boolean newIsVideo = Boolean.valueOf(isVideo);
         subject.setVideo(newIsVideo);
         repository.updateSubjectIsVideo(subject);

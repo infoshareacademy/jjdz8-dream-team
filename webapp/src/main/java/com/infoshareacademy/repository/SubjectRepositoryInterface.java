@@ -11,14 +11,23 @@ import java.util.UUID;
 public interface SubjectRepositoryInterface {
 
     void add(Subject subject);
+
     void delete(Subject subject);
+
     boolean contains(Optional<Subject> subject);
+
     Optional<Subject> findById(UUID id);
+
     List<Subject> findByName(String name);
+
     List<Subject> findByTopic(String topic);
+
     List<Subject> findAllSubjectForTeacher(UUID id);
+
     void updateSubjectName(Subject subject);
+
     void updateSubjectTopic(Subject subject);
+
     void updateSubjectDescription(Subject subject);
 
     void updateSubjectIsVideo(Subject subject);

@@ -5,8 +5,7 @@ import java.util.Map;
 
 public class HelperForServlets {
 
-    public static final String ERROR_MESSAGE ="please login first";
-
+    public static final String ERROR_MESSAGE = "please login first";
 
     public static boolean isIncorrectCorrectParameter(String parameter) {
         return (parameter == null || parameter.isEmpty());

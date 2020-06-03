@@ -1,9 +1,5 @@
 package com.infoshareacademy.domain;
 
-import com.infoshareacademy.fileOperations.FileNames;
-import com.infoshareacademy.fileOperations.JsonReader;
-
-import javax.enterprise.context.RequestScoped;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -22,9 +18,7 @@ public class Teachers {
 
     public void deleteTeacher(UUID id){
         for (int i =0; i< teachersList.size(); i++){
-            if (this.teachersList.get(i).getId().equals(id)) {
-                this.teachersList.remove(i);
-            }
+            if (this.teachersList.get(i).getId().equals(id)) this.teachersList.remove(i);
         }
     }
 }

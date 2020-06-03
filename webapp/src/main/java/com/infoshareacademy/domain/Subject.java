@@ -1,6 +1,5 @@
 package com.infoshareacademy.domain;
 
-import java.util.Arrays;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -18,7 +17,7 @@ public class Subject {
 
     private boolean isVideo;
 
-    public Subject(){
+    public Subject() {
         this.id = UUID.randomUUID();
     }
 

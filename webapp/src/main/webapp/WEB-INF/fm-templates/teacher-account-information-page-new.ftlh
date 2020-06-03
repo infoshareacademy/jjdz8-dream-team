@@ -21,7 +21,7 @@
         <div class="col-md-6">
             <#include "information-about-user-form-read-only.ftlh">
             <br>
-            <a href="/teacher-account-information"><input class="btn btn-primary" type="button"
+            <a href="/teacher"><input class="btn btn-primary" type="button"
                                                           value="edit account"></a>
         </div>
 

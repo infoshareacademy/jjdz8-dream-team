@@ -30,7 +30,7 @@ public class StudentServlet extends HttpServlet {
     @Inject
     private TemplateProvider provider;
 
-    private static final String SESSION_ATTRIBUTE ="studentID";
+    private static final String SESSION_ATTRIBUTE = "studentID";
 
 
     @Override
@@ -48,7 +48,6 @@ public class StudentServlet extends HttpServlet {
         }
 
         UUID id = (UUID) session.getAttribute(SESSION_ATTRIBUTE);
-        System.out.println(service.findById(id));
         service.findById(id).ifPresentOrElse(user -> dataModel.put("user", user),
                 () -> dataModel.put("errorMessage", ERROR_MESSAGE));
 
@@ -78,7 +77,6 @@ public class StudentServlet extends HttpServlet {
 
         HttpSession session = req.getSession(true);
         session.setAttribute(SESSION_ATTRIBUTE, user.get().getId());
-        System.out.println(user.get().getId());
         resp.sendRedirect("/student");
 
     }

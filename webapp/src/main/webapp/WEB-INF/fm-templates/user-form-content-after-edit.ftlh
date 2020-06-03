@@ -11,7 +11,7 @@
         <label for="inputEmail4">Email</label>
         <#if emptyEmail ??><p style="color: crimson">nickname cannot be empty</p>
             <input type="email" class="form-control" id="inputEmail4" name="email" placeholder="enter email">
-        <#elseif email ??> <input type="email" class="form-control" id="inputEmail4" name="email" value="${email}" ><br/><br/>
+        <#elseif email ??> <input type="text" class="form-control" id="inputEmail4" name="email" value="${email}" ><br/><br/>
         </#if>
     </div>
 </div>

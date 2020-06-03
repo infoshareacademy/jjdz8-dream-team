@@ -8,7 +8,7 @@ import javax.inject.Named;
 
 @RequestScoped
 @Named("TeacherEditService")
-public class TeacherEditService  extends UserEditService{
+public class TeacherEditService extends UserEditService {
 
     @Inject
     public TeacherEditService(TeachersRepository repository) {

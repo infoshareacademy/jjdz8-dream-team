@@ -1,10 +1,7 @@
 package com.infoshareacademy.servlet;
 
-import com.infoshareacademy.domain.Subject;
-import com.infoshareacademy.domain.User;
 import com.infoshareacademy.freemarker.TemplateProvider;
 import com.infoshareacademy.service.Service;
-import com.infoshareacademy.service.SubjectEditService;
 import com.infoshareacademy.service.SubjectService;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
@@ -21,10 +18,9 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Optional;
 import java.util.UUID;
 
-import static com.infoshareacademy.servlet.HelperForServlets.isValidSession;
+import static com.infoshareacademy.servlet.HelperForServlets.*;
 
 @WebServlet("/subject-after-edit")
 public class SubjectAfterEditServlet extends HttpServlet {
@@ -38,10 +34,6 @@ public class SubjectAfterEditServlet extends HttpServlet {
     @Inject
     @Named("TeacherService")
     Service userService;
-
-    @Inject
-    private SubjectEditService editService;
-
 
     public static final String EMPTY_NAME = "emptyName";
 
@@ -71,9 +63,10 @@ public class SubjectAfterEditServlet extends HttpServlet {
             dataModel.put("message", getAttributeValue(session, LOGIN_ERROR));
 
         } else {
-
-            service.findById(UUID.fromString(id)).ifPresent(subject -> dataModel.put("subject", subject));
-
+            service.findById(UUID.fromString(id)).ifPresentOrElse(subject -> dataModel.put("subject", subject),
+                    () -> {
+                        resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+                    });
             putCorrectDataToDataModel(EMPTY_NAME, getAttributeValue(session, EMPTY_NAME), dataModel);
             putCorrectDataToDataModel("name", getAttributeValue(session, "name"), dataModel);
             putCorrectDataToDataModel(EMPTY_TOPIC, getAttributeValue(session, EMPTY_TOPIC), dataModel);
@@ -96,25 +89,6 @@ public class SubjectAfterEditServlet extends HttpServlet {
                 session.removeAttribute(attributeName);
             }
         }
-    }
-
-    private Optional<Subject> findCorrectSubject(HttpSession session, String attribute) {
-        UUID id = (UUID) session.getAttribute(attribute);
-        return service.findById(id);
-    }
-
-    private void putCorrectDataToDataModel(String modelKey, String modelValue, Map<String, Object> dataModel) {
-        if (!modelValue.isEmpty()) {
-            dataModel.put(modelKey, modelValue);
-        }
-    }
-
-    private String getAttributeValue(HttpSession session, String attributeName) {
-        String attribute = "";
-        if (session.getAttribute(attributeName) != null) {
-            attribute = (String) session.getAttribute(attributeName);
-        }
-        return attribute;
     }
 
 }
