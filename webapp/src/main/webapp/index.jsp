@@ -1,56 +1,54 @@
-
-<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+         pageEncoding="UTF-8" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="description" content="E-learning web app" />
-        <title>E-learning web app by Dream Team</title>
-        <link
-                rel="stylesheet"
-                href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-                integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
-                crossorigin="anonymous"
-        />
-        <link href="styles.css" rel="stylesheet" />
-    </head>
-    <body>
-    <jsp:include page="menu.html"/>
-    <jsp:include page="headerJambutron.html"/>
-    <main role="main">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <h3 class="display-5">Nasze usługi</h3>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-4">
-                    <h3>Sesje</h3>
-                    <p>
-                        Donec id elit non mi porta gravida at eget metus. Fusce dapibus,
-                        tellus ac cursus commodo, tortor mauris condimentum nibh, ut
-                        fermentum massa justo sit amet risus. Etiam porta sem malesuada
-                        magna mollis euismod. Donec sed odio dui.
-                    </p>
-                </div>
-                <div class="col-md-4">
-                    <h3>Druk</h3>
-                    <p>
-                        Donec id elit non mi porta gravida at eget metus. Fusce dapibus,
-                        tellus ac cursus commodo, tortor mauris condimentum nibh, ut
-                        fermentum massa justo sit amet risus. Etiam porta sem malesuada
-                        magna mollis euismod. Donec sed odio dui.
-                    </p>
-                </div>
-                <div class="col-md-4">
-                    <h3>Wydarzenia</h3>
-                    <p>
-                        Donec sed odio dui. Cras justo odio, dapibus ac facilisis in,
-                        egestas eget quam. Vestibulum id ligula porta felis euismod
-                        semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris
-                        condimentum nibh, ut fermentum massa justo sit amet risus.
-                    </p>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="description" content="E-learning web app"/>
+    <br>
+    <title>E-learning web app by Dream Team</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js">
+    </script>
+    <link href="styles.css" rel="stylesheet"/>
+    <link href="form.css" rel="stylesheet"/>
+</head>
+
+<body>
+<jsp:include page="menu-logIn.jsp"/>
+<main>
+    <div class="container">
+        <div class="jumpotron"> <h2>Aplikacja Internetowa Drem-Team</h2></div>
+        <div class="carousel slide center" id="mycarousel" data-ride="carousel">
+                <ol class="carousel-indicators">
+                    <li data-target="#mycarousel" data-slide="0" class="active"></li>
+                    <li data-target="#mycarousel" data-slide="1"></li>
+                </ol>
+                <div class="carousel-inner img-fluid">
+                    <div class="item active img-fluid">
+                        <img src="jpg/77522.jpg" alt="">
+                        <!-- Opis slajdu -->
+                        <div class="carousel-caption">
+                            <h3>"KAŻDA PORAŻKA JEST SZANSĄ, ŻEBY SPRÓBOWAĆ JESZCZE RAZ.</h3>
+                            <H2>TYLKO MĄDRZEJ."</H2>
+                            <p>HENRY FORD</p>
+                        </div>
+                    </div>
+                    <div class="item img-fluid">
+                        <img src="jpg/pexels-1786955.jpg    " alt="">
+                            <!-- Opis slajdu -->
+                            <div class="carousel-caption">
+                                <h3>"JESTLI JEST CIĘZKO, TO ZNACZY, ŻE IDZIESZ W DOBRYM KIERUNKU." </h3>
+                            </div>
+                        </div>
+                    </a>
+                    <a class="right carousel-control" href="#mycarousel" data-slide="next">
+                        <span class="glyphicon glyphicon-chevron-right"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
                 </div>
             </div>
         </div>
@@ -59,6 +57,10 @@
             <p>E-learning web app - all rights reserved;-)</p>
         </footer>
     <jsp:include page="jsScripts.html"/>
+    </div>
+</main>
 
     </body>
+</body>
+<jsp:include page="footer.jsp"/>
 </html>

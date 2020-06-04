@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <head>
+        <meta charset="UTF-8">
+        <title>Title</title>
+        <script
+                src="https://code.jquery.com/jquery-3.5.0.js"
+                integrity="sha256-r/AaFHrszJtwpe+tHyNi/XCfMxYpbsRg2Uqn0x3s2zc="
+                crossorigin="anonymous"></script>
+        <link
+                rel="stylesheet"
+                href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+                integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+                crossorigin="anonymous"
+        />
+        <link href="styles.css" rel="stylesheet"/>
+        <link href="../../styles-to-teacher-account-info-page.css">
+</head>
+<body>
+<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+    <a class="navbar-brand logo" href="index.html">E-learning</a>
+    <button
+            class="navbar-toggler"
+            type="button"
+            data-toggle="collapse"
+            data-target="#navigation"
+    >
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navigation">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="index.jsp">Main</a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="temporary-login.html">login</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="add-new-user-k.jsp">Add user</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="search.jsp">Search</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="ratings.jsp">Ratings</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="contact.jsp">Contact</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/logout">Logout</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+<header class="jumbotron">
+    <div class="container">
+        <div class="form-group col-md-6">
+            <h5 class="display-5">E-learning web app by Dream Team!</h5>
+            <p>
+                E-learning
+            </p>
+        </div>
+    </div>
+</header>
+<main role="main">
+    <div class="container">
+    <div class="card">
+        <div class="card-header">
+            Add subject
+        </div>
+        <form method="post" action="http://localhost:8080/add-subject">
+                <div class="form-group col-md-6">
+                    <label>name</label>
+                    <input type="text" class="form-control"  name="name">
+                </div>
+                <div class="form-group col-md-6">
+                    <label>topic</label>
+                    <input type="text" class="form-control"  name="topic">
+                </div>
+            <div class="form-group col-md-6">
+             <textarea typeof="text" name="description">range description</textarea>
+         </div>
+            <div class="form-group col-md-6">
+                <p>video materials</p>
+            <select id="isVideo" name="isVideo">
+                <option value="true">yes</option>
+                <option value="false">no</option>
+            </select>
+            </div>
+            <div class="form-group col-md-6">
+            <input class="btn btn-primary" type="submit" name="save" value="save"/><br/><br/>
+            </div>
+        </form>
+    </div>
+    </div>
+</main>
+</body>
+</html>

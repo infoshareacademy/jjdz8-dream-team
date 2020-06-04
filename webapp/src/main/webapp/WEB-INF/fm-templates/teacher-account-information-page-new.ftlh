@@ -53,7 +53,7 @@
             </table>
         </#if>
         <br>
-        <a href="../../add-subject.html">
+        <a href="../../add-subject-k.html">
             <input class="btn btn-primary" type="button" value="add new subject"/>
         </a>
     </#if>

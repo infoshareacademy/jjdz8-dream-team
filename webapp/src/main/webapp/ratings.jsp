@@ -13,73 +13,10 @@
 </head>
 
 <body>
-<jsp:include page="menu.html"/>
-<header>
-    <h1>Ratings</h1>
-    <p>
-        Use bellow form.
-    </p>
-</header>
+<jsp:include page="menu.jsp"/>
 <main>
-    <form method="post" action="/user" class="contact-from">
-        <div class="form">
-            <label for="nickname">Nickname:</label>
-            <input type="text" name="name" id="nickname" required />
-        </div>
-        <div class="form">
-            <label for="email">Email:</label>
-            <input type="email" name="email" id="email" required />
-        </div>
-        <div class="form">
-            <label for="services">User type:</label>
-            <select id="services">
-                <option value="teacher">Teacher</option>
-                <option value="student">Student</option>
-            </select>
-        </div>
-        <div class="form">
-            <label for="description">Massage:</label>
-            <textarea name="description"></textarea>
-        </div>
-        <div class="form">
-            <button type="submit">
-                Create account
-            </button>
-        </div>
-    </form>
-    <div>
-        <div>
-            <p>
-                Donec id elit non mi porta gravida at eget metus. Fusce dapibus,
-                tellus ac cursus commodo, tortor mauris condimentum nibh, ut
-                fermentum massa justo sit amet risus.
-            </p>
-            <a href="tel:111222333">
-                Call us
-            </a>
-        </div>
-        <div>
-            <p>
-                Donec id elit non mi porta gravida at eget metus. Fusce dapibus,
-                tellus ac cursus commodo, tortor mauris condimentum nibh, ut
-                fermentum massa justo sit amet risus.
-            </p>
-            <a href="mailto:some@email.com">
-                Write email
-            </a>
-        </div>
-        <div>
-            <p>
-                Donec id elit non mi porta gravida at eget metus. Fusce dapibus,
-                tellus ac cursus commodo, tortor mauris condimentum nibh, ut
-                fermentum massa justo sit amet risus.
-            </p>
-            <a href="https://facebook.com/company"> Facebook</a>
-        </div>
-    </div>
+    <jsp:include page="ratings-form.jsp"/>
 </main>
-<footer>
-    <p>E-learning web app - all rights reserved;-)</p>
-</footer>
+<jsp:include page="footer.jsp"/>
 </body>
 </html>
