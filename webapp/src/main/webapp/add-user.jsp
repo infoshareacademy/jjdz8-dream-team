@@ -14,6 +14,7 @@
 
     <body>
     <jsp:include page="menu.jsp"/>
+
         <header>
             <h1>Add an user</h1>
             <p>
@@ -78,8 +79,8 @@
                 </div>
             </div>
         </main>
-        <footer>
-            <p>E-learning web app - all rights reserved;-)</p>
-        </footer>
+    <footer class="container">
+        <p>E-learning web app - all rights reserved;-)</p>
+    </footer>
     </body>
 </html>

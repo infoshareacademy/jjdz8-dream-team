@@ -1,0 +1,63 @@
+body {
+    background-color: #f6f6f6;
+
+}
+
+main {
+    height: 90vh;
+    background-color: #f6f6f6;
+    padding: 20px;
+}
+
+footer {
+    margin-top: 10vh;
+    border-top: 2px solid black;
+    padding-top: 2vh;
+
+}
+
+.logo {
+    opacity: 1;
+    text-transform: lowercase;
+}
+
+.logo::first-letter {
+    text-transform: uppercase;
+}
+
+.logo:hover {
+    opacity: 0.8;
+    transition: opacity 0.1s ease-in-out;
+}
+
+#dropdown-menu {
+    text-align: left;
+    text-decoration: none;
+    padding: 30px;
+}
+
+.bg-jumpers {
+    background-color: black !important;
+
+}
+
+a {
+    color: white;
+    text-decoration: none;
+    font-size: 14px;
+
+}
+
+a:hover {
+    text-decoration: none;
+    color: rgb(158, 190, 190);
+    background-color: #2F3336;
+}
+
+.title {
+    padding: 30px;
+}
+#input-group
+{
+    padding: 20px;
+}
