@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @RequestScoped
 public class SubjectRepository implements SubjectRepositoryInterface {
@@ -52,6 +53,24 @@ public class SubjectRepository implements SubjectRepositoryInterface {
                 suitableSubjects.add(s);
         });
         return suitableSubjects;
+    }
+
+    @Override
+    public List<Subject> searchByName(String namePart){
+        return subjects.getSubjects().stream().filter(s->s.getName().contains(namePart))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<Subject> searchByTopic(String topicPart) {
+        return subjects.getSubjects().stream().filter(s->s.getTopic().contains(topicPart))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<Subject> searchByDescription(String description) {
+        return subjects.getSubjects().stream().filter(s->s.getDescription().contains(description))
+                .collect(Collectors.toList());
     }
 
     @Override

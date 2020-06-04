@@ -19,6 +19,18 @@ public class SubjectService {
         return repository.findAll();
     }
 
+    public List<Subject> searchByName(String namePart){
+        return repository.searchByName(namePart);
+    }
+
+    public List<Subject> searchByTopic(String topicPart){
+        return repository.searchByTopic(topicPart);
+    }
+
+    public List<Subject> searchByDescription(String description){
+        return repository.searchByDescription(description);
+    }
+
     public Optional<Subject> findById(UUID id) {
         return repository.findById(id);
     }

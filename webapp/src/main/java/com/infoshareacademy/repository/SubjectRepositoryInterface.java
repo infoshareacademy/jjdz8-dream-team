@@ -22,6 +22,10 @@ public interface SubjectRepositoryInterface {
 
     List<Subject> findByName(String name);
 
+    List<Subject> searchByName(String namePart);
+
+    List<Subject> searchByDescription(String description);
+
     List<Subject> findByTopic(String topic);
 
     List<Subject> findAllSubjectForTeacher(UUID id);
@@ -33,4 +37,6 @@ public interface SubjectRepositoryInterface {
     void updateSubjectDescription(Subject subject);
 
     void updateSubjectIsVideo(Subject subject);
+
+    List<Subject> searchByTopic(String topicPart);
 }

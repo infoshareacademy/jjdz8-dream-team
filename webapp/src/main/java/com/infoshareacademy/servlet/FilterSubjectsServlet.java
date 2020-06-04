@@ -34,6 +34,7 @@ public class FilterSubjectsServlet extends HttpServlet {
         PrintWriter printWriter = resp.getWriter();
 
         String filter = req.getParameter("filter");
+        String value = req.getParameter("value");
         if (HelperForServlets.isIncorrectCorrectParameter(filter)) {
             resp.sendError(HttpServletResponse.SC_BAD_REQUEST);
             return;
@@ -42,15 +43,45 @@ public class FilterSubjectsServlet extends HttpServlet {
         Map<String, Object> dataModel = new HashMap<>();
         List<Subject> subjects;
 
+        if (filter.equals("name")) {
+            subjects = service.searchByName(value);
+            System.out.println(subjects);
+            dataModel.put("subjects", subjects);
+            if (subjects == null || subjects.size() == 0) {
+                dataModel.put("message", "no subjects found");
+            }
+        }
+
+        if (filter.equals("topic")) {
+            subjects = service.searchByTopic(value);
+            System.out.println(subjects);
+            dataModel.put("subjects", subjects);
+            if (subjects == null || subjects.size() == 0) {
+                dataModel.put("message", "no subjects found");
+            }
+        }
+
+        if (filter.equals("rangeDescription")) {
+            subjects = service.searchByDescription(value);
+            System.out.println(subjects);
+            dataModel.put("subjects", subjects);
+            if (subjects == null || subjects.size() == 0) {
+                dataModel.put("message", "no subjects found");
+            }
+        }
+
         if (filter.equals("all")) {
             subjects = service.findAll();
             dataModel.put("subjects",subjects);
+            if (subjects == null || subjects.size() == 0) {
+                dataModel.put("message", "no subjects found");
+            }
         }
-      /*  if (subjects == null || subjects.size() == 0) {
-            dataModel.put("message", "no subjects found");
-        } else {
-            dataModel.put("subjects", subjects);
+      /*  if (filter.equals("name")){
+            subjects=service.searchByName(filter);
+            dataModel.put("subjects",subjects);
         }*/
+
         try {
             template.process(dataModel, printWriter);
             resp.setStatus(HttpServletResponse.SC_ACCEPTED);
@@ -59,4 +90,43 @@ public class FilterSubjectsServlet extends HttpServlet {
         }
     }
 
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        resp.setContentType("text/html;charset=UTF-8");
+        String filter = req.getParameter("filter");
+        String input = req.getParameter("input");
+
+        if (HelperForServlets.isIncorrectCorrectParameter(filter)) {
+            resp.sendError(HttpServletResponse.SC_BAD_REQUEST);
+            return;
+        }
+
+        switch (filter) {
+            case "name": {
+                resp.sendRedirect("/filter-subjects?filter=name&value=" + input);
+                break;
+            }
+            case "topic": {
+                resp.sendRedirect("/filter-subjects?filter=topic&value=" + input);
+                break;
+            }
+            case "rangeDescription":{
+                resp.sendRedirect("/filter-subjects?filter=rangeDescription&value=" + input);
+                break;
+            }
+            case "nickName" : {
+                resp.sendRedirect("/filter-subjects?filter=teacherNickname&value=" + input);
+                break;
+            }
+            case "ranking" :{
+                resp.sendRedirect("/filter-subjects?filter=ranking");
+                break;
+            }
+            case "all" :{
+                resp.sendRedirect("/filter-subjects?filter=all");
+                break;
+            }
+
+        }
+    }
 }
