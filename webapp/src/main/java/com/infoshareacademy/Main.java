@@ -7,7 +7,7 @@ import com.infoshareacademy.security.PasswordResolver;
 
 public class Main {
     public static void main(String[] args) {
-
+        System.out.println(PasswordResolver.passwordHashing("Kamila90@"));
     }
 }
 

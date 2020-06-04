@@ -1,12 +1,17 @@
+body {
+    background-color: #f6f6f6;
+
+}
+
 main {
-    min-height: 90vh;
-    padding-bottom: 10%;
+    height: 85vh;
+    background-color: #f6f6f6;
 }
 
 footer {
-    margin-top: 2vh;
-    border-top: 2px solid black;
+    margin-top: 5vh;
     padding-top: 2vh;
+
 }
 
 .logo {
@@ -21,4 +26,61 @@ footer {
 .logo:hover {
     opacity: 0.8;
     transition: opacity 0.1s ease-in-out;
+}
+
+#dropdown-menu {
+    text-align: left;
+    text-decoration: none;
+    padding: 30px;
+}
+
+.bg-jumpers {
+    background-color: #2F3336 !important;
+
+
+
+}
+a:hover {
+    text-decoration: none;
+    color: rgb(158, 190, 190);
+    background-color: #2F3336;
+}
+
+.title {
+    padding: 20px;
+}
+#input-group
+{
+    padding: 20px;
+}
+#zegar {
+    border-top: 2px solid black;
+    font-size: 20px;
+    float: left;
+}
+
+#podpis {
+    font-size: 20px;
+    border-top: 2px solid black;
+
+}
+slide {
+    opacity: 0;
+    z-index: 0;
+    position: relative;
+    transition:2s all;
+}
+.slide .title {
+    left: -2rem;
+    opacity: 0;
+}
+
+/* poprzez dodatkową klasę zmieniam właściwości elementu i jego dzieci */
+.slide.active {
+    opacity: 1;
+    z-index: 1;
+}
+.slide.active .title {
+    left: 0;
+    opacity: 1;
 }

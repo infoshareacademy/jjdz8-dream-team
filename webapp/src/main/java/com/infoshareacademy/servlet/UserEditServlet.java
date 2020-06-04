@@ -118,18 +118,16 @@ public abstract class UserEditServlet extends HttpServlet {
 
         if (isIncorrectCorrectParameter(nickName)) {
             session.setAttribute(EMPTY_NICKNAME, "nickName cannot be empty");
-            return;
         } else session.setAttribute("nickName", nickName);
 
         if (isIncorrectCorrectParameter(email)) {
             session.setAttribute(EMPTY_EMAIL, "email cannot be empty");
-            return;
         } else session.setAttribute("email", email);
 
         if (isIncorrectCorrectParameter(oldPassword) || !userService.isCorrectPassword(user, oldPassword)) {
             session.setAttribute(WRONG_PASSWORD, "wrong password");
             return;
-        } else if (isIncorrectCorrectParameter(newPassword)) {
+        } else if (isIncorrectCorrectParameter(newPassword) && !email.isEmpty() && !nickName.isEmpty()) {
             userEditService.editNickname(user, nickName);
             userEditService.editEmail(user, email);
         }

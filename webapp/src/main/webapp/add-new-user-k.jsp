@@ -39,7 +39,7 @@
                 </div>
                 <div class="form">
                     <label for="description">Massage:</label>
-                    <textarea name="description"></textarea>
+                    <textarea id="description" name="description"></textarea>
                 </div>
                 <div class="form">
                     <button type="submit">
