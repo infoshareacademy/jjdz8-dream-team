@@ -9,8 +9,7 @@
                 <input type="submit" class="fadeIn bg-jumpers" value="Log In">
             </form>
 
-            <!-- Remind Passowrd -->
-            <div id="formFooter">
+                <div id="formFooter">
                 <a class="underlineHover" href="#">Forgot Password?</a>
             </div>
 

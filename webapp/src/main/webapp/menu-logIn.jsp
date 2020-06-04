@@ -22,12 +22,12 @@
                         <a href="#" class="navbar-brand">Dream Team E-Learning </a>
                     </div>
                     <ul class="nav navbar-nav">
-                        <li class="active"><a href="index.jsp">Home</a></li>
-                        <li><a href="#contact">Nasze projekty</a></li>
-                        <li><a href="#contact">Wyszukiwanie</a></li>
-                        <li><a href="#contact">Nasza Skuteczność</a></li>
-                        <li><a href="#contact">Kontakt</a></li>
-                        <li><a href="#service">Service</a></li>
+                        <li class="active"><a href="index.jsp" class="glyphicon glyphicon-home active"> Home</a></li>
+                        <li><a href="#contact" class="glyphicon glyphicon-file"> Projekty</a></li>
+                        <li><a href="#contact" class="glyphicon glyphicon-file"> Wyszukiwanie</a></li>
+                        <li><a href="#contact" class="glyphicon glyphicon-thumbs-up"> Skuteczność</a></li>
+                        <li><a href="contact.jsp" class=" glyphicon glyphicon-phone-alt"> Kontakt</a></li>
+                        <li><a href="#service" class="glyphicon glyphicon-wrench"> Service</a></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <li><a href="logout.jsp"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>

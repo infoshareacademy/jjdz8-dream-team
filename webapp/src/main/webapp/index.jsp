@@ -18,7 +18,7 @@
 </head>
 
 <body>
-<jsp:include page="menu1.jsp"/>
+<jsp:include page="menu-logIn.jsp"/>
 <main>
     <div class="container">
         <div class="jumpotron"> <h2>Aplikacja Internetowa Drem-Team</h2></div>

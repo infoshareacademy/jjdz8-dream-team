@@ -16,7 +16,7 @@
     <link href="logout.css" rel="stylesheet"/>
 </head>
 <body>
-<jsp:include page="menu1.jsp"/>
+<jsp:include page="menu-logIn.jsp"/>
 <main>
 <jsp:include page="logout-form.jsp"/>
 </main>

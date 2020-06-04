@@ -15,7 +15,7 @@
 </head>
 
 <body>
-<jsp:include page="menu1.jsp"/>
+<jsp:include page="menu-logIn.jsp"/>
 <main>
     <jsp:include page="newAccount-form.jsp"/>
 </main>
