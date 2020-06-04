@@ -29,7 +29,6 @@ public class SearchSubject extends HttpServlet {
         Template template = provider.getTemplate(getServletContext(), "search-page.ftlh");
         Map<String, Object> dataModel = new HashMap<>();
 
-
         try {
             template.process(dataModel, printWriter);
             resp.setStatus(HttpServletResponse.SC_ACCEPTED);

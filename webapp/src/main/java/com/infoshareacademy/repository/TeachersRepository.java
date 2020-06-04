@@ -10,8 +10,11 @@ import com.infoshareacademy.security.PasswordResolver;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
+import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @RequestScoped
 @Named("TeachersRepository")
@@ -25,6 +28,12 @@ public class TeachersRepository implements Repository {
         JsonSaver.createJson(teachers, FileNames.TEACHERS_JSON);
     }
 
+    @Override
+    public List<User> findUsersWithNicknameContains(String part) {
+        return teachers.getTeachers().stream()
+                .filter(teacher -> teacher.getNickName().toLowerCase().contains(part.toLowerCase()))
+                .collect(Collectors.toList());
+    }
     @Override
     public Optional<User> findByID(UUID id) {
         return Optional.ofNullable(teachers.getTeachers().stream().filter(t -> t.getId().equals(id)).findFirst().orElse(null));

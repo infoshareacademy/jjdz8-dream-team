@@ -19,6 +19,8 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.*;
 
+import static com.infoshareacademy.servlet.HelperForServlets.isIncorrectCorrectParameter;
+
 @WebServlet("/subject-details")
 public class SubjectDetailsServlet extends HttpServlet {
 
@@ -37,23 +39,30 @@ public class SubjectDetailsServlet extends HttpServlet {
         resp.setContentType("text/html;charset=UTF-8");
         PrintWriter printWriter = resp.getWriter();
         String id = req.getParameter("id");
-        if (HelperForServlets.isIncorrectCorrectParameter(id)) {
+        String teacherId = req.getParameter("teacherId");
+
+        if (isIncorrectCorrectParameter(id) && isIncorrectCorrectParameter(teacherId)) {
             resp.sendError(HttpServletResponse.SC_BAD_REQUEST);
             return;
         }
         Template template = provider.getTemplate(getServletContext(), "subject-details-after-searching.ftlh");
         Map<String, Object> dataModel = new HashMap<>();
 
-        service.findById(UUID.fromString(id)).ifPresentOrElse(subject -> {
-                    dataModel.put("subject", subject);
-                    System.out.println(subject.getTeacherId());
-                    Optional<User> teacher = userService.findById(subject.getTeacherId());
-                    System.out.println(teacher);
-                    teacher.ifPresent(user -> dataModel.put("user", user));
-                    dataModel.put("isVideo", String.valueOf(subject.isVideo()));
-                },
-                () -> dataModel.put("message", "something goes wrong"));
-
+        if (!isIncorrectCorrectParameter(id)) {
+            service.findById(UUID.fromString(id)).ifPresentOrElse(subject -> {
+                        dataModel.put("subject", subject);
+                        System.out.println(subject.getTeacherId());
+                        Optional<User> teacher = userService.findById(subject.getTeacherId());
+                        teacher.ifPresent(user -> dataModel.put("user", user));
+                        dataModel.put("isVideo", String.valueOf(subject.isVideo()));
+                    },
+                    () -> dataModel.put("message", "something goes wrong"));
+        } else if (!isIncorrectCorrectParameter(teacherId)) {
+            List<Subject> subjects = service.findAllSubjectsForTeacher(UUID.fromString(teacherId));
+            if (subjects != null && subjects.size() > 0) {
+                dataModel.put("subjects", subjects);
+            }
+        }
         try {
             template.process(dataModel, printWriter);
             resp.setStatus(HttpServletResponse.SC_ACCEPTED);

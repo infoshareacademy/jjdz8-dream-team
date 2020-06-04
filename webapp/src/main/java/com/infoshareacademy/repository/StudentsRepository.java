@@ -8,8 +8,10 @@ import com.infoshareacademy.security.PasswordResolver;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @RequestScoped
 @Named("StudentsRepository")
@@ -22,7 +24,12 @@ public class StudentsRepository implements Repository {
         students.addStudent((Student) user);
         JsonSaver.createJson(students, FileNames.SUBJECTS_JSON);
     }
-
+    @Override
+    public List<User> findUsersWithNicknameContains(String part) {
+        return students.getStudents().stream()
+                .filter(student -> student.getNickName().contains(part))
+                .collect(Collectors.toList());
+    }
     @Override
     public Optional<User> findByID(UUID id) {
         return Optional.ofNullable(students.getStudents().stream().filter(t -> t.getId().equals(id)).findFirst().orElse(null));

@@ -3,6 +3,7 @@ package com.infoshareacademy.service;
 import com.infoshareacademy.domain.User;
 import com.infoshareacademy.repository.Repository;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -22,6 +23,11 @@ public abstract class UserService implements Service {
     @Override
     public Optional<User> findById(UUID id) {
         return repository.findByID(id);
+    }
+
+    @Override
+    public List<User> findUserByPartOfNickname(String part){
+        return repository.findUsersWithNicknameContains(part);
     }
 
     @Override

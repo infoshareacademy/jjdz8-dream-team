@@ -1,8 +1,10 @@
 package com.infoshareacademy.repository;
 
+import com.infoshareacademy.domain.Teacher;
 import com.infoshareacademy.domain.User;
 
 import javax.ejb.Local;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -10,6 +12,8 @@ import java.util.UUID;
 public interface Repository {
 
     void addUser(User user);
+
+    List<User> findUsersWithNicknameContains(String part);
 
     Optional<User> findByID(UUID id);
 

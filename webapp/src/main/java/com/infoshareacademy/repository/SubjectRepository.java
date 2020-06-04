@@ -49,7 +49,7 @@ public class SubjectRepository implements SubjectRepositoryInterface {
     public List<Subject> findByName(String name) {
         List<Subject> suitableSubjects = new ArrayList<>();
         subjects.getSubjects().forEach(s -> {
-            if (s.getName().equalsIgnoreCase(name))
+            if (s.getName().toLowerCase().equalsIgnoreCase(name.toLowerCase()))
                 suitableSubjects.add(s);
         });
         return suitableSubjects;
@@ -57,19 +57,20 @@ public class SubjectRepository implements SubjectRepositoryInterface {
 
     @Override
     public List<Subject> searchByName(String namePart){
-        return subjects.getSubjects().stream().filter(s->s.getName().contains(namePart))
+
+        return subjects.getSubjects().stream().filter(s->s.getName().toLowerCase().contains(namePart.toLowerCase()))
                 .collect(Collectors.toList());
     }
 
     @Override
     public List<Subject> searchByTopic(String topicPart) {
-        return subjects.getSubjects().stream().filter(s->s.getTopic().contains(topicPart))
+        return subjects.getSubjects().stream().filter(s->s.getTopic().toLowerCase().contains(topicPart.toLowerCase()))
                 .collect(Collectors.toList());
     }
 
     @Override
     public List<Subject> searchByDescription(String description) {
-        return subjects.getSubjects().stream().filter(s->s.getDescription().contains(description))
+        return subjects.getSubjects().stream().filter(s->s.getDescription().toLowerCase().contains(description.toLowerCase()))
                 .collect(Collectors.toList());
     }
 

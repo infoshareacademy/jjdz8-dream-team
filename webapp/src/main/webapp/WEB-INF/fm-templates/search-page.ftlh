@@ -6,33 +6,24 @@
             <#if message ??>
                 <p>${message}</p>
             </#if>
-            <form method="post" action="/filter-subjects">
                 <div class="col-xs-8 col-xs-offset-2">
-                    <div class="input-group">
-                        <div class="form-group col-md-6">
-                            <p>Search by</p>
-                            <select id="filter" name="filter">
+                    <nav class="navbar navbar-light bg-light">
+                        <form class="form-inline" method="post" action="/filter-subjects">
+                            <label for="filter">search by   </label>
+                             <select class="form-control form-control-lg" id="filter" name="filter">
                                 <option value="name">subject name</option>
                                 <option value="all">all subjects</option>
                                 <option value="topic">subject topic</option>
                                 <option value="rangeDescription">subject range description</option>
                                 <option value="nickName">teacher nickname</option>
-                                <option value="ranking">subjects ranking</option>
                             </select>
-                        </div>
-                        <div class="form-group col-md-6">
-                            <input type="text" class="form-control" name="input" placeholder="Search term...">
-                            <span class="input-group-btn">
-                    <button class="btn btn-default" type="submit"><span
-                                class="glyphicon glyphicon-search"></span></button>
-                </span>
-                        </div>
+                                <input class="form-control mr-sm-2" type="search" placeholder="Search" name="input" aria-label="Search">
+                                <button class="btn btn-secondary" type="submit">Search</button>
+                            </form>
+                        </nav>
                     </div>
                 </div>
-            </form>
         </div>
-
-    </div>
 
 </#macro>
 
