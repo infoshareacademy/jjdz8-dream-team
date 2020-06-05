@@ -13,24 +13,28 @@
         <#if subject??>
             <div class="row">
                 <div class="col-md-6">
-                    <div class="form">
-                        <div class="form-group col-md-6">
-                            name: <input type="text" name="name" value="${subject.name}" disabled><br/><br/>
-                        </div>
+                    <form>
+                        <div class="form">
 
-                        <div class="form-group col-md-6">
-                            topic: <input type="text" name="topic" value="${subject.topic}" disabled><br/><br/>
+                            <div class="form-group col-md-6">
+                                <label for="name">nazwa</label><br>
+                                <input id="name" type="text" name="name" value="${subject.name}" disabled><br/><br/>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="topic">temat</label><br>
+                                <input id="topic" type="text" name="topic" value="${subject.topic}" disabled><br/><br/>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="description">opis</label><br>
+                                <textarea id="description" name="description"
+                                          disabled>${subject.description} </textarea><br/><br/>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="isVideo">materiały wideo</label><br>
+                                <input id="isVideo" type="text" name="isVideo" value="${isVideo}" disabled><br/><br/>
+                            </div>
                         </div>
-
-                        <div class="form-group col-md-6">
-                            description: <textarea name="description"
-                                                   disabled>${subject.description} </textarea><br/><br/>
-                        </div>
-
-                        <div class="form-group col-md-6">
-                            video lessons: <input type="text" name="isVideo" value="${isVideo}" disabled><br/><br/>
-                        </div>
-                    </div>
+                    </form>
                 </div>
                 <div class="col-md-6">
                     <#include "user-card-with-picture.ftlh">

@@ -9,10 +9,10 @@
                 <#if message ??>
                     <h1>You have to login or registry first</h1>
                     <a href="http://localhost:8080/chooseWhoIsLogin.jsp">
-                        <input type="button" value="login"/>
+                        <input type="button" class="btn btn-secondary" value="login"/>
                     </a>
                     <a href="http://localhost:8080/add-user.jsp">
-                        <input type="button" value="registry"/>
+                        <input type="button" class="btn btn-secondary" value="registry"/>
                     </a>
                 </#if>
                 <#if user ?? >
@@ -21,7 +21,7 @@
             <div class="col-md-6">
                 <#include "information-about-user-form-read-only.ftlh">
                 <br>
-                <a href="/student-account-information-servlet"><input class="btn btn-primary" type="button"
+                <a href="/student-account-information-servlet"><input class="btn btn-secondary type="button"
                                                                       value="edit account"></a>
             </div>
             </#if>

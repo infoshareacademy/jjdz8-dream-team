@@ -9,10 +9,10 @@
                 <#if message ??>
                     <h1>You have to login or registry first</h1>
                     <a href="http://localhost:8080/chooseWhoIsLogin.jsp">
-                        <input type="button" value="login"/>
+                        <input type="button" class="btn btn-secondary" value="login"/>
                     </a>
                     <a href="http://localhost:8080/add-user.jsp">
-                        <input type="button" value="registry"/>
+                        <input type="button" class="btn btn-secondary" value="registry"/>
                     </a>
                 </#if>
             </div>
@@ -38,7 +38,7 @@
                         </div>
                         <input type="hidden" name="id" value="${subject.id}"/><br/><br/>
                         <div class="form-group col-md-6">
-                            <input class="btn btn-primary" type="submit" name="save" value="save"/><br/><br/>
+                            <input class="btn btn-secondary" type="submit" name="save" value="save"/><br/><br/>
                         </div>
                     </form>
 

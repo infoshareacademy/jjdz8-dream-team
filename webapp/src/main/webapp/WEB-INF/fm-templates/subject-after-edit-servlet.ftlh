@@ -59,7 +59,7 @@
                     </div>
                     <input type="hidden" name="id" value="${subject.id}"/><br/><br/>
                     <div class="form-group col-md-6">
-                        <input class="btn btn-primary" type="submit" name="save" value="save"/><br/><br/>
+                        <input class="btn btn-secondary" type="submit" name="save" value="save"/><br/><br/>
                     </div>
                 </form>
             </div>

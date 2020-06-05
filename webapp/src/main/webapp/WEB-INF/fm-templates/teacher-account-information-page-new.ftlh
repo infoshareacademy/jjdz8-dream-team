@@ -21,7 +21,7 @@
         <div class="col-md-6">
             <#include "information-about-user-form-read-only.ftlh">
             <br>
-            <a href="/teacher"><input class="btn btn-primary" type="button"
+            <a href="/teacher"><input class="btn btn-secondary" type="button"
                                                           value="edit account"></a>
         </div>
 
@@ -43,7 +43,7 @@
                             <td>${subject.name}</td>
                             <td>
                                 <a href="http://localhost:8080/subject?id=${subject.id}">
-                                    <input class="btn btn-primary" type="button" value="show details"/>
+                                    <input class="btn btn-secondary" type="button" value="show details"/>
                                 </a>
                             </td>
                             </tbody>
@@ -54,7 +54,7 @@
         </#if>
         <br>
         <a href="../../add-subject-k.html">
-            <input class="btn btn-primary" type="button" value="add new subject"/>
+            <input class="btn btn-secondary" type="button" value="add new subject"/>
         </a>
     </#if>
 </#macro>

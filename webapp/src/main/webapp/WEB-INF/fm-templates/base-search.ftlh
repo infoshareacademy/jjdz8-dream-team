@@ -14,10 +14,10 @@
             <#if message ??>
                 <h1>You have to login or registry first</h1>
                 <a href="http://localhost:8080/logout.jsp">
-                    <input type="button" value="login"/>
+                    <input type="button" class="btn btn-secondary" value="login"/>
                 </a>
                 <a href="http://localhost:8080/newAccount.jsp">
-                    <input type="button" value="registry"/>
+                    <input type="button" class="btn btn-secondary" value="registry"/>
                 </a>
             <#else>
                 <@content/>

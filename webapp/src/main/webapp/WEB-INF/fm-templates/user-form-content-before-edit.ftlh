@@ -32,4 +32,4 @@
                    placeholder="Password" >
         </div>
     </div>
-    <input class="btn btn-primary" type="submit" name="save" value="edit"/><br/><br/>
+    <input class="btn btn-secondary" type="submit" name="save" value="edit"/><br/><br/>

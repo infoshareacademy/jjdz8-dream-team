@@ -43,4 +43,4 @@
         </#if>
     </div>
 </div>
-<button type="submit" class="btn btn-primary">edit</button>
+<button type="submit" class="btn btn-secondary">edit</button>
