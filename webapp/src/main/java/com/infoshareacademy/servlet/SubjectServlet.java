@@ -35,13 +35,29 @@ public class SubjectServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html;charset=UTF-8");
         PrintWriter out = resp.getWriter();
+        String id = req.getParameter("id");
+
+        Template template = provider.getTemplate(getServletContext(), "subject-information-page-new.ftlh");
+        Map<String, Object> dataModel = new HashMap<>();
         HttpSession session = req.getSession(false);
         if (!isValidSession(session, SESSION_ATTRIBUTE)) {
-            out.write(ERROR_MESSAGE);
-            return;
+            dataModel.put("message", ERROR_MESSAGE);
+        } else {
+            /*processRequest(resp, out, UUID.fromString(id));*/
+            Optional<Subject> subject = service.findById(UUID.fromString(id));
+            if (subject.isEmpty()) {
+                resp.sendError(HttpServletResponse.SC_NOT_FOUND);
+                return;
+            }
+            dataModel.put("subject", subject.get());
+            dataModel.put("isVideo", String.valueOf(subject.get().isVideo()));
         }
-        String id = req.getParameter("id");
-        processRequest(resp, out, UUID.fromString(id));
+        try {
+            template.process(dataModel, out);
+            resp.setStatus(HttpServletResponse.SC_ACCEPTED);
+        } catch (TemplateException e) {
+            e.printStackTrace();
+        }
         req.getSession().setAttribute("subjectId", UUID.fromString(id));
     }
 

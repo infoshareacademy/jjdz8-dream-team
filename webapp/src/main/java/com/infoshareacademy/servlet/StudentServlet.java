@@ -44,13 +44,11 @@ public class StudentServlet extends HttpServlet {
         HttpSession session = req.getSession(false);
         if (!isValidSession(session, SESSION_ATTRIBUTE)) {
             dataModel.put("message", ERROR_MESSAGE);
-            return;
+        }else {
+            UUID id = (UUID) session.getAttribute(SESSION_ATTRIBUTE);
+            service.findById(id).ifPresentOrElse(user -> dataModel.put("user", user),
+                    () -> dataModel.put("message", ERROR_MESSAGE));
         }
-
-        UUID id = (UUID) session.getAttribute(SESSION_ATTRIBUTE);
-        service.findById(id).ifPresentOrElse(user -> dataModel.put("user", user),
-                () -> dataModel.put("errorMessage", ERROR_MESSAGE));
-
         try {
             template.process(dataModel, printWriter);
             resp.setStatus(HttpServletResponse.SC_ACCEPTED);

@@ -11,7 +11,17 @@
  <#include "headerJambutron.ftlh">
     <main role="main">
         <div class="container">
-         <@content/>
+            <#if message ??>
+                <h1>You have to login or registry first</h1>
+                <a href="http://localhost:8080/logout.jsp">
+                    <input type="button" value="login"/>
+                </a>
+                <a href="http://localhost:8080/newAccount.jsp">
+                    <input type="button" value="registry"/>
+                </a>
+          <#else>
+              <@content/>
+            </#if>
         </div>
     </main>
     <#include "jsScripts.ftlh">

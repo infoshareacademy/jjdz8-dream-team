@@ -57,22 +57,22 @@ public abstract class UserEditServlet extends HttpServlet {
         HttpSession session = req.getSession(false);
         if (!isValidSession(session, sessionAttribute)) {
             session.setAttribute(LOGIN_ERROR, "you have to login first");
-            return;
+            dataModel.put("message", ERROR_MESSAGE);
+        } else {
+
+            Optional<User> user = findCorrectUser(session, sessionAttribute, userService);
+            user.ifPresentOrElse(value -> dataModel.put("user", value),
+                    () -> {
+                        resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+                    });
+
+            putCorrectDataToDataModel("nickName", getAttributeValue(session, "nickName"), dataModel);
+            putCorrectDataToDataModel("email", getAttributeValue(session, "email"), dataModel);
+            putCorrectDataToDataModel(EMPTY_NICKNAME, getAttributeValue(session, EMPTY_NICKNAME), dataModel);
+            putCorrectDataToDataModel(EMPTY_EMAIL, getAttributeValue(session, EMPTY_EMAIL), dataModel);
+            putCorrectDataToDataModel(WRONG_PASSWORD, getAttributeValue(session, WRONG_PASSWORD), dataModel);
+            putCorrectDataToDataModel(WRONG_PASSWORD_FORMAT, getAttributeValue(session, WRONG_PASSWORD_FORMAT), dataModel);
         }
-
-        Optional<User> user = findCorrectUser(session, sessionAttribute, userService);
-        user.ifPresentOrElse(value -> dataModel.put("user", value),
-                () -> {
-                    resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-                });
-
-        putCorrectDataToDataModel("nickName", getAttributeValue(session, "nickName"), dataModel);
-        putCorrectDataToDataModel("email", getAttributeValue(session, "email"), dataModel);
-        putCorrectDataToDataModel(EMPTY_NICKNAME, getAttributeValue(session, EMPTY_NICKNAME), dataModel);
-        putCorrectDataToDataModel(EMPTY_EMAIL, getAttributeValue(session, EMPTY_EMAIL), dataModel);
-        putCorrectDataToDataModel(WRONG_PASSWORD, getAttributeValue(session, WRONG_PASSWORD), dataModel);
-        putCorrectDataToDataModel(WRONG_PASSWORD_FORMAT, getAttributeValue(session, WRONG_PASSWORD_FORMAT), dataModel);
-
         try {
             template.process(dataModel, printWriter);
             resp.setStatus(HttpServletResponse.SC_ACCEPTED);

@@ -35,7 +35,7 @@ public class TeacherServlet extends HttpServlet {
     @Inject
     private SubjectRepositoryInterface subjectRepository;
 
-    private static final String SESSION_ATTRIBUTE ="teacherID";
+    private static final String SESSION_ATTRIBUTE = "teacherID";
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -47,7 +47,7 @@ public class TeacherServlet extends HttpServlet {
         Map<String, Object> dataModel = new HashMap<>();
 
         if (!isValidSession(session, SESSION_ATTRIBUTE)) {
-            dataModel.put("message","please login first");
+            dataModel.put("message", "please login first");
         } else {
             UUID id = (UUID) session.getAttribute(SESSION_ATTRIBUTE);
             Optional<User> user = service.findById(id);
@@ -73,20 +73,25 @@ public class TeacherServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html;charset=UTF-8");
-
+        String loginUser = req.getParameter("user");
         String nickName = req.getParameter("nickName");
-        if (nickName == null || nickName.isEmpty()) {
-            resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-            return;
+
+        if (loginUser.equals("teacher")) {
+            if (nickName == null || nickName.isEmpty()) {
+                resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+                return;
+            }
+            Optional<User> user = service.findByNickName(nickName);
+            if (user.isEmpty()) {
+                resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+                return;
+            }
+            HttpSession session = req.getSession(true);
+            session.setAttribute(SESSION_ATTRIBUTE, user.get().getId());
+            resp.sendRedirect("/teacher-account-information");
+        } else if (loginUser.equals("student")) {
+            req.getRequestDispatcher("/student").forward(req, resp);
         }
-        Optional<User> user = service.findByNickName(nickName);
-        if (user.isEmpty()) {
-            resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-            return;
-        }
-        HttpSession session = req.getSession(true);
-        session.setAttribute(SESSION_ATTRIBUTE, user.get().getId());
-        resp.sendRedirect("/teacher-account-information");
     }
 
     @Override

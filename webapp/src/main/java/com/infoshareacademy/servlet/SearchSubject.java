@@ -10,10 +10,15 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Map;
+
+import static com.infoshareacademy.servlet.HelperForServlets.ERROR_MESSAGE;
+import static com.infoshareacademy.servlet.HelperForServlets.isValidSession;
+import static com.infoshareacademy.servlet.UserEditServlet.LOGIN_ERROR;
 
 @WebServlet("/search")
 public class SearchSubject extends HttpServlet {
@@ -29,6 +34,11 @@ public class SearchSubject extends HttpServlet {
         Template template = provider.getTemplate(getServletContext(), "search-page.ftlh");
         Map<String, Object> dataModel = new HashMap<>();
 
+        HttpSession session = req.getSession(false);
+        if (!isValidSession(session, "studentID") && !isValidSession(session,"teacherID")) {
+            session.setAttribute(LOGIN_ERROR, "you have to login first");
+            dataModel.put("message", ERROR_MESSAGE);
+        }
         try {
             template.process(dataModel, printWriter);
             resp.setStatus(HttpServletResponse.SC_ACCEPTED);

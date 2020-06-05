@@ -6,15 +6,15 @@
         </div>
         <div class="row">
             <div class="col-md-4">
-                <#if message ??>
+            <#--    <#if message ??>
                     <h1>You have to login or registry first</h1>
-                    <a href="http://localhost:8080/chooseWhoIsLogin.jsp">
+                    <a href="http://localhost:8080/logout-form.jsp">
                         <input type="button" value="login"/>
                     </a>
                     <a href="http://localhost:8080/add-user.jsp">
                         <input type="button" value="registry"/>
                     </a>
-                </#if>
+                </#if>-->
                 <#if user ?? >
                <#include "user-card-with-picture.ftlh">
             </div>

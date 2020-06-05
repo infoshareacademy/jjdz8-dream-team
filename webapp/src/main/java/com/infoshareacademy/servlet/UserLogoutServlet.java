@@ -17,6 +17,7 @@ public class UserLogoutServlet extends HttpServlet {
         resp.setContentType("text/html,charset=UTF8");
 
         HttpSession session = req.getSession();
+
         session.invalidate();
 
         resp.sendRedirect("../../page-after-logout.jsp");
