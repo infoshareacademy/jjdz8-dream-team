@@ -1,4 +1,4 @@
-package com.infoshareacademy.servlet;
+package com.infoshareacademy.servlet.subjects;
 
 import com.infoshareacademy.domain.Subject;
 import com.infoshareacademy.freemarker.TemplateProvider;

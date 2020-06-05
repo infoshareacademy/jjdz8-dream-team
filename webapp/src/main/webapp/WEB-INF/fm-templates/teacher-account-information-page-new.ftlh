@@ -23,6 +23,9 @@
             <br>
             <a href="/teacher"><input class="btn btn-secondary" type="button"
                                                           value="edit account"></a>
+            <a href="../../add-subject-k.html">
+                <input class="btn btn-secondary" type="button" value="add new subject"/>
+            </a>
         </div>
 
         </div>
@@ -53,9 +56,7 @@
             </table>
         </#if>
         <br>
-        <a href="../../add-subject-k.html">
-            <input class="btn btn-secondary" type="button" value="add new subject"/>
-        </a>
+
     </#if>
 </#macro>
 

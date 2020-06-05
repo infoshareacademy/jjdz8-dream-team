@@ -1,13 +1,10 @@
-package com.infoshareacademy.servlet;
+package com.infoshareacademy.servlet.subjects;
 
-import com.infoshareacademy.domain.User;
 import com.infoshareacademy.freemarker.TemplateProvider;
-import com.infoshareacademy.service.Service;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 
 import javax.inject.Inject;
-import javax.inject.Named;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -18,37 +15,29 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.UUID;
 
-import static com.infoshareacademy.servlet.HelperForServlets.*;
+import static com.infoshareacademy.servlet.HelperForServlets.ERROR_MESSAGE;
+import static com.infoshareacademy.servlet.HelperForServlets.isValidSession;
+import static com.infoshareacademy.servlet.users.UserEditServlet.LOGIN_ERROR;
 
-@WebServlet("/student-account-information-servlet")
-public class StudentAccountInformationServlet extends HttpServlet {
-
-    @Inject
-    @Named("StudentService")
-    private Service service;
+@WebServlet("/search")
+public class SearchSubject extends HttpServlet {
 
     @Inject
-    private TemplateProvider provider;
-
-    private static final String SESSION_ATTRIBUTE = "studentID";
+    TemplateProvider provider;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html;charset=UTF-8");
         PrintWriter printWriter = resp.getWriter();
 
-        Template template = provider.getTemplate(getServletContext(), "student-account-data-form-new.ftlh");
+        Template template = provider.getTemplate(getServletContext(), "search-page.ftlh");
         Map<String, Object> dataModel = new HashMap<>();
 
         HttpSession session = req.getSession(false);
-        if (!isValidSession(session, SESSION_ATTRIBUTE)) {
+        if (!isValidSession(session, "studentID") && !isValidSession(session,"teacherID")) {
+            session.setAttribute(LOGIN_ERROR, "you have to login first");
             dataModel.put("message", ERROR_MESSAGE);
-        } else {
-            UUID id = (UUID) session.getAttribute(SESSION_ATTRIBUTE);
-            service.findById(id).ifPresentOrElse(user -> dataModel.put("user", user),
-                    () -> dataModel.put("errorMessage", ERROR_MESSAGE));
         }
         try {
             template.process(dataModel, printWriter);
@@ -57,5 +46,4 @@ public class StudentAccountInformationServlet extends HttpServlet {
             e.printStackTrace();
         }
     }
-
 }

@@ -24,7 +24,6 @@
                     <ul class="nav navbar-nav">
                         <li class="active"><a href="index.jsp" class="glyphicon glyphicon-home active"> Home</a></li>
                         <li><a href="#contact" class="glyphicon glyphicon-file"> Projekty</a></li>
-                        <li><a href="#contact" class="glyphicon glyphicon-search"> Wyszukiwanie</a></li>
                         <li><a href="#contact" class="glyphicon glyphicon-thumbs-up"> Skuteczność</a></li>
                         <li><a href="contact.jsp" class=" glyphicon glyphicon-phone-alt"> Kontakt</a></li>
                         <li><a href="service-form.jsp" class="glyphicon glyphicon-wrench"> Service</a></li>

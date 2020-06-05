@@ -36,8 +36,6 @@
             </div>
 
         </div>
-
-
         <div class="col-md 4">
             <a href="/teacher-account-information"> <input class="btn btn-secondary" type="button"
                                                            value="Back to account data"/></a><br>
@@ -52,7 +50,6 @@
                 Delete subject
             </button>
         </div>
-
 
         <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
              aria-hidden="true">

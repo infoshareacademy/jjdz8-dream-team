@@ -1,4 +1,4 @@
-package com.infoshareacademy.servlet;
+package com.infoshareacademy.servlet.users;
 
 import com.infoshareacademy.domain.Subject;
 import com.infoshareacademy.domain.User;

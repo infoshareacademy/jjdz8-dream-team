@@ -1,4 +1,4 @@
-package com.infoshareacademy.servlet;
+package com.infoshareacademy.servlet.users;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

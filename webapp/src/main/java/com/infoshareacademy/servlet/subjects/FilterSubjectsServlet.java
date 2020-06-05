@@ -1,9 +1,10 @@
-package com.infoshareacademy.servlet;
+package com.infoshareacademy.servlet.subjects;
 
 import com.infoshareacademy.domain.Subject;
 import com.infoshareacademy.domain.User;
 import com.infoshareacademy.freemarker.TemplateProvider;
 import com.infoshareacademy.service.SearchService;
+import com.infoshareacademy.servlet.HelperForServlets;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 

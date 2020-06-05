@@ -1,8 +1,9 @@
-package com.infoshareacademy.servlet;
+package com.infoshareacademy.servlet.subjects;
 
 import com.infoshareacademy.freemarker.TemplateProvider;
 import com.infoshareacademy.service.Service;
 import com.infoshareacademy.service.SubjectService;
+import com.infoshareacademy.servlet.HelperForServlets;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 

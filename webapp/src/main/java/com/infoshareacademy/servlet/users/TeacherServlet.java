@@ -1,7 +1,9 @@
-package com.infoshareacademy.servlet;
+package com.infoshareacademy.servlet.users;
 
+import com.infoshareacademy.domain.Subject;
 import com.infoshareacademy.domain.User;
 import com.infoshareacademy.freemarker.TemplateProvider;
+import com.infoshareacademy.repository.SubjectRepositoryInterface;
 import com.infoshareacademy.service.Service;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
@@ -18,36 +20,47 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.*;
 
-import static com.infoshareacademy.servlet.HelperForServlets.*;
+import static com.infoshareacademy.servlet.HelperForServlets.isValidSession;
 
-@WebServlet("/student")
-public class StudentServlet extends HttpServlet {
+@WebServlet("/teacher")
+public class TeacherServlet extends HttpServlet {
 
     @Inject
-    @Named("StudentService")
+    TemplateProvider provider;
+
+    @Inject
+    @Named("TeacherService")
     private Service service;
 
     @Inject
-    private TemplateProvider provider;
+    private SubjectRepositoryInterface subjectRepository;
 
-    private static final String SESSION_ATTRIBUTE = "studentID";
-
+    private static final String SESSION_ATTRIBUTE = "teacherID";
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html;charset=UTF-8");
         PrintWriter printWriter = resp.getWriter();
+        HttpSession session = req.getSession(false);
 
-        Template template = provider.getTemplate(getServletContext(), "student-account-information-page-new.ftlh");
+        Template template = provider.getTemplate(getServletContext(), "teacher-account-data-form-before-edit-new.ftlh");
         Map<String, Object> dataModel = new HashMap<>();
 
-        HttpSession session = req.getSession(false);
         if (!isValidSession(session, SESSION_ATTRIBUTE)) {
-            dataModel.put("message", ERROR_MESSAGE);
-        }else {
+            dataModel.put("message", "please login first");
+        } else {
             UUID id = (UUID) session.getAttribute(SESSION_ATTRIBUTE);
-            service.findById(id).ifPresentOrElse(user -> dataModel.put("user", user),
-                    () -> dataModel.put("message", ERROR_MESSAGE));
+            Optional<User> user = service.findById(id);
+            List<Subject> subjects;
+            if (user.isEmpty()) {
+                resp.sendError(HttpServletResponse.SC_BAD_REQUEST);
+                return;
+            }
+            subjects = subjectRepository.findAllSubjectForTeacher(user.get().getId());
+            dataModel.put("user", user.get());
+            if (subjects.size() > 0) {
+                dataModel.put("subjects", subjects);
+            }
         }
         try {
             template.process(dataModel, printWriter);
@@ -60,34 +73,36 @@ public class StudentServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html;charset=UTF-8");
+        String loginUser = req.getParameter("user");
         String nickName = req.getParameter("nickName");
 
-        if (isIncorrectCorrectParameter(nickName)) {
-            resp.sendError(HttpServletResponse.SC_BAD_REQUEST, "student not exist");
-            return;
+        if (loginUser.equals("teacher")) {
+            if (nickName == null || nickName.isEmpty()) {
+                resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+                return;
+            }
+            Optional<User> user = service.findByNickName(nickName);
+            if (user.isEmpty()) {
+                resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+                return;
+            }
+            HttpSession session = req.getSession(true);
+            session.setAttribute(SESSION_ATTRIBUTE, user.get().getId());
+            resp.sendRedirect("/teacher-account-information");
+        } else if (loginUser.equals("student")) {
+            req.getRequestDispatcher("/student").forward(req, resp);
         }
-        Optional<User> user = service.findByNickName(nickName);
-
-        if (user.isEmpty()) {
-            resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-            return;
-        }
-
-        HttpSession session = req.getSession(true);
-        session.setAttribute(SESSION_ATTRIBUTE, user.get().getId());
-        resp.sendRedirect("/student");
-
     }
 
     @Override
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession(false);
-        if (!isValidSession(session, SESSION_ATTRIBUTE)) {
-            resp.getWriter().write(ERROR_MESSAGE);
+        if (session == null) {
+            resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             return;
         }
         String id = req.getParameter("id");
-        if (isIncorrectCorrectParameter(id)) {
+        if (id == null || id.isEmpty()) {
             resp.setStatus(HttpServletResponse.SC_NOT_FOUND);
             return;
         }
