@@ -10,9 +10,8 @@
             content="Search subject or teacher"
     />
     <title>Add-user</title>
-<%--    <link href="styles.css" rel="stylesheet"/>--%>
-<%--    <link href="form.css" rel="stylesheet"/>--%>
-<%--    <link href="search.css" rel="stylesheet"/>--%>
+    <link href="styles.css" rel="stylesheet" />
+    <link href="form.css" rel="stylesheet" />
 </head>
 
 <body>

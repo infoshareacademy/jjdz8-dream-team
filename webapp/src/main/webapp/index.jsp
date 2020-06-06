@@ -52,9 +52,15 @@
                 </div>
             </div>
         </div>
+    </main>
+        <footer class="container">
+            <p>E-learning web app - all rights reserved;-)</p>
+        </footer>
+    <jsp:include page="jsScripts.html"/>
     </div>
 </main>
 
+    </body>
 </body>
 <jsp:include page="footer.jsp"/>
 </html>

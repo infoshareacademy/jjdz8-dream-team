@@ -24,14 +24,13 @@
                     <ul class="nav navbar-nav">
                         <li class="active"><a href="index.jsp" class="glyphicon glyphicon-home active"> Home</a></li>
                         <li><a href="#contact" class="glyphicon glyphicon-file"> Projekty</a></li>
-                        <li><a href="#contact" class="glyphicon glyphicon-search"> Wyszukiwanie</a></li>
                         <li><a href="#contact" class="glyphicon glyphicon-thumbs-up"> Skuteczność</a></li>
                         <li><a href="contact.jsp" class=" glyphicon glyphicon-phone-alt"> Kontakt</a></li>
                         <li><a href="service-form.jsp" class="glyphicon glyphicon-wrench"> Service</a></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="logout.jsp"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-                        <li><a href="newAccount.jsp"><span class="glyphicon glyphicon-user"></span> Signup</a></li>
+                        <li><a href="logout.jsp"><span class="glyphicon glyphicon-log-in"></span> Zaloguj</a></li>
+                        <li><a href="newAccount.jsp"><span class="glyphicon glyphicon-user"></span> Zerejestruj </a></li>
                     </ul>
                 </div>
             </nav>
