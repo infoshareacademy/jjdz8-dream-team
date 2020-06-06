@@ -1,0 +1,12 @@
+{
+  "subjectsList": [
+    {
+      "id": "a20b3fab-6ab2-4549-8ac0-e29c7762598b",
+      "teacherId": "9cc7bfcf-79c3-498f-a846-2562c6f016ae",
+      "name": "polish language",
+      "topic": "vocabulary",
+      "description": "advanced level",
+      "isVideo": true
+    }
+  ]
+}

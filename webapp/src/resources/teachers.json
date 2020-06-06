@@ -1,0 +1,22 @@
+{
+  "teachersList": [
+    {
+      "password": "90a28456d65ca0c40abb0c83f5d27fa9",
+      "id": "346fbfff-bd21-4ca1-a622-47c985ce3bf7",
+      "nickName": "Magdalena",
+      "email": "magda@magda"
+    },
+    {
+      "password": "90a28456d65ca0c40abb0c83f5d27fa9",
+      "id": "9cc7bfcf-79c3-498f-a846-2562c6f016ae",
+      "nickName": "Daniel",
+      "email": "daniel@daniel"
+    },
+    {
+      "password": "90a28456d65ca0c40abb0c83f5d27fa9",
+      "id": "f88c452c-a4c9-4ac0-804f-eceb8b5dfab0",
+      "nickName": "Marek",
+      "email": "magdalena@magdalena"
+    }
+  ]
+}

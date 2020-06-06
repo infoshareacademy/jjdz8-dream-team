@@ -22,6 +22,7 @@ public class StudentsRepository implements Repository {
     @Override
     public void addUser(User user) {
         students.addStudent((Student) user);
+
         JsonSaver.createJson(students, FileNames.SUBJECTS_JSON);
     }
     @Override
