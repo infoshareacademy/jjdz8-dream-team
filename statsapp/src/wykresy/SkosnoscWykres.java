@@ -1,4 +1,4 @@
-package com.infoshareacademy.KasiaWykresy.src.Wykresy;
+package wykresy;
 
 import javafx.application.Application;
 import javafx.embed.swing.SwingFXUtils;
@@ -17,15 +17,12 @@ import java.io.File;
 import java.io.IOException;
 
 
-import static com.infoshareacademy.KasiaWykresy.src.Wykresy.VarWykres.mean;
-
-
-public class OdchylenieSWykres extends Application {
+public class SkosnoscWykres extends Application {
     public void saveAsPng(BarChart bar) {
         WritableImage image = bar.snapshot(new SnapshotParameters(), null);
 
 
-        File file = new File("chart4.png");
+        File file = new File("chart5.png");
 
         try {
             ImageIO.write(SwingFXUtils.fromFXImage(image, null), "png", file);
@@ -33,25 +30,55 @@ public class OdchylenieSWykres extends Application {
 
         }
     }
+    public static double skew (double [] data) {
+        int i, n = data.length;
 
-    public static double stddev(double []a){
-        return  Math.sqrt(var(a));
 
-    }
-    public static double var(double []a){
-        double avg=mean(a);
-        double sum=0.0;
-        for (int i = 0; i <a.length ; i++) {
-            sum+=(a[i]-avg)*(a[i]-avg);
+        double d, avg = 0.0;
+        int count = 0;
+
+        for (i=0; i<n; i++) {
+            d = data [i];
+            if (d != 0) {
+                avg =  (avg+ d);
+                count ++;
+            }
         }
-        return sum/(a.length-1);
+
+        if (count < 3)
+            return 0;
+
+        avg = avg / count;
+
+        double stdev = 0.;
+        for (i=0; i<n; i++) {
+            d = data [i];
+            if (d != 0) {
+                d = d - avg;
+                stdev = stdev + d * d;
+            }
+        }
+
+        stdev = Math.sqrt (stdev / (count - 1));
+
+        if (stdev == 0.)
+            return 0;
+        double skew = 0.;
+        for (i=0; i<n; i++) {
+            d = data [i];
+            if (d != 0) {
+                d = d - avg;
+                d = d / stdev;
+                skew = skew + d * d * d;
+            }
+        }
+
+        return skew * count / ((count - 1) * (count - 2));
     }
 
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-
-
 
 
         String Nick1 = "Kasia";
@@ -65,24 +92,25 @@ public class OdchylenieSWykres extends Application {
         double maxiNumbers5[]=new double[]{2.5,2.5,2.5};
 
         CategoryAxis xaxis= new CategoryAxis();
-        NumberAxis yaxis = new NumberAxis(1,12,1);
-        xaxis.setLabel("Odcylenie Standardowe");
-        yaxis.setLabel("Odchylenie Standardowe");
 
+        NumberAxis yaxis = new NumberAxis(0.001,6,1.5);
+        xaxis.setLabel("Skosnosc");
+        yaxis.setLabel("Skosnosc");
+        //Configuring BarChart
         BarChart<String,Float> bar = new BarChart(xaxis,yaxis);
-        bar.setTitle("Odchylenie standardowe");
-        double maxAll=stddev(maxiNumbers1);
-        double maxAll2=stddev(maxiNumbers2);
-        double maxAll3=stddev(maxiNumbers3);
-        double maxAll4=stddev(maxiNumbers4);
+        bar.setTitle("Skosnosc");
+        double maxAll=skew(maxiNumbers1);
+        double maxAll2=skew(maxiNumbers2);
+        double maxAll3=skew(maxiNumbers3);
+        double maxAll4=skew(maxiNumbers4);
 
         XYChart.Series<String,Float> series = new XYChart.Series<>();
         series.getData().add(new XYChart.Data(Nick1,maxAll));
 
         series.getData().add(new XYChart.Data(Nick2,maxAll2));
+        series.getData().add(new XYChart.Data(Nick4,maxAll3));
+        series.getData().add(new XYChart.Data(Nick3,maxAll4));
 
-        series.getData().add(new XYChart.Data(Nick3,maxAll3));
-        series.getData().add(new XYChart.Data(Nick4,maxAll4));
 
 
         bar.getData().add(series);
@@ -92,9 +120,9 @@ public class OdchylenieSWykres extends Application {
         root.getChildren().add(bar);
         Scene scene = new Scene(root,600,400);
         primaryStage.setScene(scene);
-        primaryStage.setTitle("Odchylenie Standardowe");
+        primaryStage.setTitle("Skosnosc");
         primaryStage.show();
-        scene.getStylesheets().add(getClass().getResource("chart5.css").toExternalForm());
+        scene.getStylesheets().add(getClass().getResource("chart6.css").toExternalForm());
         saveAsPng(bar);
     }
     public static void main(String[] args) {

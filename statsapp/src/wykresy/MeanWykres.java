@@ -1,4 +1,5 @@
-package com.infoshareacademy.KasiaWykresy.src.Wykresy;
+package wykresy;
+
 
 import javafx.application.Application;
 import javafx.embed.swing.SwingFXUtils;
@@ -12,20 +13,23 @@ import javafx.scene.chart.XYChart;
 import javafx.scene.image.WritableImage;
 import javafx.stage.Stage;
 
-
 import javax.imageio.ImageIO;
 import java.io.File;
 import java.io.IOException;
-import java.util.Arrays;
 
 
-
-public class MedianaWykres extends Application {
+public class MeanWykres extends Application {
+    public static double mean(double []a){
+        double sum=0.0;
+        for (int i = 0; i <a.length ; i++) {
+            sum=sum+a[i];}
+        return sum/a.length;
+    }
     public void saveAsPng(BarChart bar) {
         WritableImage image = bar.snapshot(new SnapshotParameters(), null);
 
 
-        File file = new File("chart3.png");
+        File file = new File("chart2.png");
 
         try {
             ImageIO.write(SwingFXUtils.fromFXImage(image, null), "png", file);
@@ -33,55 +37,38 @@ public class MedianaWykres extends Application {
 
         }
     }
-    public static long median(double[]a)
-    {
-        Arrays.sort(a);
-        int middle = a.length / 2;
-        try{
-            if (a.length % 2 == 0)
 
-            {
-                double left = a[middle - 1];
-                double right = a[middle];
-
-                return (long) ((left + right) / 2);}
-
-            else{
-                return (long) a[middle];}}
-        catch (ArrayIndexOutOfBoundsException e){
-            return 0;
-        }}
     @Override
     public void start(Stage primaryStage) throws Exception {
 
 
+        String Nick1 = "Basia";
+        String Nick2 = "Kasia";
 
-
-        String Nick1 = "Kasia";
-        String Nick2 = "Basia";
         String Nick3 = "Konrad";
         String Nick4= "Antek";
         double   maxiNumbers1[]=new double[]{5.0,4.0,6.0,2.5,3.5} ;
         double   maxiNumbers2[]= new double[]{5.0,6.0,6.0,2.5,3.5};
-        double maxiNumbers3[]=new double[]{4.0,4.0,4.0,4.0,4.0,4.0};
+        double maxiNumbers3[]=new double[]{4.0,4.0,4.0,4.0,4.0,4.0,5.0};
         double maxiNumbers4[]=new double[]{2.0,2.0,2.0,2.0,2.0,2.0};
         double maxiNumbers5[]=new double[]{2.5,2.5,2.5};
-        //Configuring category and NumberAxis
+
         CategoryAxis xaxis= new CategoryAxis();
         NumberAxis yaxis = new NumberAxis(1,12,1);
-        xaxis.setLabel("Mediana");
-        yaxis.setLabel("Mediana");
-        //Configuring BarChart
+        xaxis.setLabel("Srednia ocen");
+        yaxis.setLabel("Srednia ocen");
+
         BarChart<String,Float> bar = new BarChart(xaxis,yaxis);
-        bar.setTitle("Mediana");
-        double maxAll=median(maxiNumbers1);
-        double maxAll2=median(maxiNumbers2);
-        double maxAll3=median(maxiNumbers3);
-        double maxAll4=median(maxiNumbers4);
+        bar.setTitle("Wykres srednich ocen");
+        double maxAll=mean(maxiNumbers1);
+        double maxAll2=mean(maxiNumbers2);
+        double maxAll3=mean(maxiNumbers3);
+        double maxAll4=mean(maxiNumbers4);
 
         XYChart.Series<String,Float> series = new XYChart.Series<>();
-        series.getData().add(new XYChart.Data(Nick1,maxAll));
+        //series.getData().add(new XYChart.Data(Euro,mean(maxiNumbers1)));
 
+        series.getData().add(new XYChart.Data(Nick1,maxAll));
         series.getData().add(new XYChart.Data(Nick2,maxAll2));
         series.getData().add(new XYChart.Data(Nick3,maxAll3));
         series.getData().add(new XYChart.Data(Nick4,maxAll4));
@@ -94,11 +81,15 @@ public class MedianaWykres extends Application {
         root.getChildren().add(bar);
         Scene scene = new Scene(root,600,400);
         primaryStage.setScene(scene);
-        primaryStage.setTitle("Mediana");
+        primaryStage.setTitle("Srednie oceny");
         primaryStage.show();
         scene.getStylesheets().add(getClass().getResource("chart4.css").toExternalForm());
-        saveAsPng(bar);
-    }
+        saveAsPng(bar);}
+
     public static void main(String[] args) {
         launch(args);
     }}
+
+
+
+

@@ -1,4 +1,4 @@
-package com.infoshareacademy.KasiaWykresy.src.Wykresy;
+package wykresy;
 
 import javafx.application.Application;
 import javafx.embed.swing.SwingFXUtils;

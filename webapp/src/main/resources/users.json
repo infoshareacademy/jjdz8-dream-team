@@ -1,0 +1,24 @@
+{
+  "users": [
+    {
+      "name": "Patryk",
+      "grade": 5.0
+    },
+    {
+      "name": "Ela",
+      "grade": 4.0
+    },
+    {
+      "name": "Marek",
+      "grade": 6.0
+    },
+    {
+      "name": "Agnieszka",
+      "grade": 4.0
+    },
+    {
+      "name": "Konrad",
+      "grade": 4.0
+    }
+  ]
+}

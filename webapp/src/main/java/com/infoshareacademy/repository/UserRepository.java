@@ -1,4 +1,10 @@
 package com.infoshareacademy.repository;
 
-public class UserRepository {
+import com.infoshareacademy.domain.Users;
+
+public interface UserRepository {
+
+    Users getUsers();
+
+    void saveUsers(Users users);
 }
