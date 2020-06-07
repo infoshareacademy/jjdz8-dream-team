@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+         pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,7 +15,7 @@
 </head>
 
 <body>
-<jsp:include page="menu.jsp"/>
+<jsp:include page="menu-logIn.jsp"/>
 <main>
     <jsp:include page="ratings-form.jsp"/>
 </main>
