@@ -21,46 +21,40 @@
 <jsp:include page="menu-logIn.jsp"/>
 <main>
     <div class="container">
-        <div class="jumpotron"> <h2>Aplikacja Internetowa Drem-Team</h2></div>
+        <div class="jumpotron"><h2>Aplikacja Internetowa Drem-Team</h2></div>
         <div class="carousel slide center" id="mycarousel" data-ride="carousel">
-                <ol class="carousel-indicators">
-                    <li data-target="#mycarousel" data-slide="0" class="active"></li>
-                    <li data-target="#mycarousel" data-slide="1"></li>
-                </ol>
-                <div class="carousel-inner img-fluid">
-                    <div class="item active img-fluid">
-                        <img src="jpg/77522.jpg" alt="">
-                        <!-- Opis slajdu -->
-                        <div class="carousel-caption">
-                            <h3>"KAŻDA PORAŻKA JEST SZANSĄ, ŻEBY SPRÓBOWAĆ JESZCZE RAZ.</h3>
-                            <H2>TYLKO MĄDRZEJ."</H2>
-                            <p>HENRY FORD</p>
-                        </div>
+            <ol class="carousel-indicators">
+                <li data-target="#mycarousel" data-slide="0" class="active"></li>
+                <li data-target="#mycarousel" data-slide="1"></li>
+            </ol>
+            <div class="carousel-inner img-fluid">
+                <div class="item active img-fluid">
+                    <img src="jpg/77522.jpg" alt="">
+                    <!-- Opis slajdu -->
+                    <div class="carousel-caption">
+                        <h3>"KAŻDA PORAŻKA JEST SZANSĄ, ŻEBY SPRÓBOWAĆ JESZCZE RAZ.</h3>
+                        <H2>TYLKO MĄDRZEJ."</H2>
+                        <p>HENRY FORD</p>
                     </div>
-                    <div class="item img-fluid">
-                        <img src="jpg/pexels-1786955.jpg    " alt="">
-                            <!-- Opis slajdu -->
-                            <div class="carousel-caption">
-                                <h3>"JESTLI JEST CIĘZKO, TO ZNACZY, ŻE IDZIESZ W DOBRYM KIERUNKU." </h3>
-                            </div>
-                        </div>
-                    </a>
-                    <a class="right carousel-control" href="#mycarousel" data-slide="next">
-                        <span class="glyphicon glyphicon-chevron-right"></span>
-                        <span class="sr-only">Previous</span>
-                    </a>
                 </div>
+                <div class="item img-fluid">
+                    <img src="jpg/pexels-1786955.jpg    " alt="">
+                    <!-- Opis slajdu -->
+                    <div class="carousel-caption">
+                        <h3>"JESTLI JEST CIĘZKO, TO ZNACZY, ŻE IDZIESZ W DOBRYM KIERUNKU." </h3>
+                    </div>
+                </div>
+                </a>
+                <a class="right carousel-control" href="#mycarousel" data-slide="next">
+                    <span class="glyphicon glyphicon-chevron-right"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
             </div>
         </div>
-    </main>
-        <footer class="container">
-            <p>E-learning web app - all rights reserved;-)</p>
-        </footer>
-    <jsp:include page="jsScripts.html"/>
     </div>
 </main>
-
-    </body>
+</footer>
+<jsp:include page="jsScripts.html"/>
 </body>
 <jsp:include page="footer.jsp"/>
 </html>

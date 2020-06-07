@@ -25,7 +25,7 @@
                         <li><a href="index.jsp" class="glyphicon glyphicon-home active"> Home</a></li>
                         <li><a href="#contact"class="glyphicon glyphicon-file"> Projekty</a></li>
                         <li><a href="#contact"class="glyphicon glyphicon-search"> Wyszukiwanie</a></li>
-                        <li><a href="#contact" class="glyphicon glyphicon-thumbs-up"> Skuteczność</a></li>
+                        <li><a href="ratings.jsp" class="glyphicon glyphicon-thumbs-up"> Skuteczność</a></li>
                         <li><a href="contact.jsp" class=" glyphicon glyphicon-phone-alt "> Kontakt</a></li>
                         <li><a href="#service" class="glyphicon glyphicon-wrench"> Edycja</a></li>
                     </ul>
