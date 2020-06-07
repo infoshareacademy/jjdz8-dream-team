@@ -26,7 +26,6 @@ import static com.infoshareacademy.servlet.HelperForServlets.*;
 public class StudentAccountInformationServlet extends HttpServlet {
 
     @Inject
-    @Named("StudentService")
     private Service service;
 
     @Inject

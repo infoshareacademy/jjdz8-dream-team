@@ -33,7 +33,6 @@ public class SubjectAfterEditServlet extends HttpServlet {
     SubjectService service;
 
     @Inject
-    @Named("TeacherService")
     Service userService;
 
     public static final String EMPTY_NAME = "emptyName";

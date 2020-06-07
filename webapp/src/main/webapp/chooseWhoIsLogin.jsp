@@ -19,9 +19,9 @@
     <div class="row">
         <div class="col-md-6">
             <div class="form">
-                <form method="post" action="http://localhost:8080/teacher">
+                <form method="post" action="http://localhost:8080/login">
                     NickName: <input type="text" name="nickName"/><br/><br/>
-                    <input type="submit" name="login" value="login as teacher"/><br/><br/>
+                    <input type="submit" name="login" value="login"/><br/><br/>
                 </form>
             </div>
         </div>

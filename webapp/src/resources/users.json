@@ -1,0 +1,41 @@
+{
+  "userList": [
+    {
+      "password": "90a28456d65ca0c40abb0c83f5d27fa9",
+      "id": "1cb6cf95-c7c7-4f6d-bc5b-41061983fbaa",
+      "nickName": "maciej",
+      "email": "maciej@gmail.com",
+      "role": "TEACHER",
+      "aboutMe": "i\u0027m teacher",
+      "dateOfRegistration": {
+        "year": 2020,
+        "month": 6,
+        "day": 7
+      }
+    },
+    {
+      "password": "90a28456d65ca0c40abb0c83f5d27fa9",
+      "id": "d4003969-ad9c-46d7-bef3-4cb9c7e3548a",
+      "nickName": "damian",
+      "email": "damian@gmail.com",
+      "role": "STUDENT",
+      "dateOfRegistration": {
+        "year": 2020,
+        "month": 6,
+        "day": 7
+      }
+    },
+    {
+      "password": "90a28456d65ca0c40abb0c83f5d27fa9",
+      "id": "f5f01f51-6793-4549-b0e8-b7cfca59010d",
+      "nickName": "marek",
+      "email": "marek@gmail.com",
+      "role": "STUDENT",
+      "dateOfRegistration": {
+        "year": 2020,
+        "month": 6,
+        "day": 7
+      }
+    }
+  ]
+}

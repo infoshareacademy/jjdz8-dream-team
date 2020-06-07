@@ -1,10 +1,11 @@
 package com.infoshareacademy.domain;
 
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotNull;
+import javax.annotation.security.DeclareRoles;
+import java.time.LocalDate;
 import java.util.Objects;
 import java.util.UUID;
 
+@DeclareRoles({"Administrator","teacher","student"})
 public class User {
 
     private String password;
@@ -15,6 +16,36 @@ public class User {
 
     private String email;
 
+    private ROLE role;
+
+    private String aboutMe;
+
+    private LocalDate dateOfRegistration;
+
+    public String getAboutMe() {
+        return aboutMe;
+    }
+
+    public void setAboutMe(String aboutMe) {
+        this.aboutMe = aboutMe;
+    }
+
+    public LocalDate getDateOfRegistration() {
+        return dateOfRegistration;
+    }
+
+    public void setId(UUID id) {
+        this.id = id;
+    }
+
+    public ROLE getRole() {
+        return role;
+    }
+
+    public void setRole(ROLE role) {
+        this.role = role;
+    }
+
     public String getEmail() {
         return email;
     }
@@ -23,12 +54,9 @@ public class User {
         this.email = email;
     }
 
-    public User(){
-
-    }
-    public User(String nickName) {
+    public User() {
         this.id = UUID.randomUUID();
-        this.nickName = nickName;
+        this.dateOfRegistration = LocalDate.now();
     }
 
     public UUID getId() {

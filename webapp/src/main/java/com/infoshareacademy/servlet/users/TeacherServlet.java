@@ -29,7 +29,6 @@ public class TeacherServlet extends HttpServlet {
     TemplateProvider provider;
 
     @Inject
-    @Named("TeacherService")
     private Service service;
 
     @Inject

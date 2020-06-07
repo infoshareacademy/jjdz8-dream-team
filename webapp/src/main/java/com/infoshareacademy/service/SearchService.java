@@ -1,7 +1,7 @@
 package com.infoshareacademy.service;
 
 import com.infoshareacademy.domain.Subject;
-import com.infoshareacademy.domain.Teacher;
+/*import com.infoshareacademy.domain.Teacher;*/
 import com.infoshareacademy.domain.User;
 
 import javax.enterprise.context.RequestScoped;
@@ -15,7 +15,7 @@ import java.util.List;
 @RequestScoped
 public class SearchService {
 
-    @Inject
+  /*  @Inject
     private SubjectService subjectService;
 
     @Inject
@@ -72,5 +72,5 @@ public class SearchService {
 
     public List<User> findSuitableTeachers (String partOfNickname) {
         return service.findUserByPartOfNickname(partOfNickname);
-    }
+    }*/
 }
