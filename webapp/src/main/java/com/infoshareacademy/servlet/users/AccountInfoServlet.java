@@ -1,5 +1,7 @@
 package com.infoshareacademy.servlet.users;
 
+
+import com.infoshareacademy.domain.ROLE;
 import com.infoshareacademy.domain.Subject;
 import com.infoshareacademy.domain.User;
 import com.infoshareacademy.freemarker.TemplateProvider;
@@ -9,7 +11,6 @@ import freemarker.template.Template;
 import freemarker.template.TemplateException;
 
 import javax.inject.Inject;
-import javax.inject.Named;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -20,8 +21,10 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.*;
 
-@WebServlet("/teacher-account-information")
-public class TeacherAccountInformationServlet extends HttpServlet {
+import static com.infoshareacademy.servlet.users.UserLoginServlet.ATTRIBUTE_NAME;
+
+@WebServlet("/account-info")
+public class AccountInfoServlet extends HttpServlet {
 
     @Inject
     private SubjectService subjectService;
@@ -32,35 +35,37 @@ public class TeacherAccountInformationServlet extends HttpServlet {
     @Inject
     private Service service;
 
-    private static final String SESSION_ATTRIBUTE = "teacherID";
-
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html;charset=UTF-8");
         PrintWriter printWriter = resp.getWriter();
 
-        Template template = provider.getTemplate(getServletContext(), "teacher-account-information-page-new.ftlh");
+        Template template = provider.getTemplate(getServletContext(), "user-account-information-page.ftlh");
         Map<String, Object> dataModel = new HashMap<>();
 
         HttpSession session = req.getSession(false);
         UUID id;
         Optional<User> user;
 
-        if (session == null || session.getAttribute(SESSION_ATTRIBUTE) == null) {
+        if (session == null || session.getAttribute(ATTRIBUTE_NAME) == null) {
             dataModel.put("message", "please login first");
         } else {
-            id = (UUID) session.getAttribute(SESSION_ATTRIBUTE);
+            id = (UUID) session.getAttribute(ATTRIBUTE_NAME);
             user = service.findById(id);
-            List<Subject> subjects;
             if (user.isEmpty()) {
                 resp.sendError(HttpServletResponse.SC_BAD_REQUEST);
                 return;
             }
-            subjects = subjectService.findAllSubjectsForTeacher(user.get().getId());
-            subjects.forEach(e -> System.out.println(e.getName()));
             dataModel.put("user", user.get());
-            if (subjects.size() > 0) {
-                dataModel.put("subjects", subjects);
+            System.out.println(user.get().getRole());
+            if (user.get().getRole().equals(ROLE.TEACHER)) {
+                List<Subject> subjects;
+                subjects = subjectService.findAllSubjectsForTeacher(user.get().getId());
+                subjects.forEach(e -> System.out.println(e.getName()));
+
+                if (subjects.size() > 0) {
+                    dataModel.put("subjects", subjects);
+                }
             }
         }
         try {

@@ -31,7 +31,6 @@ public class SubjectDetailsServlet extends HttpServlet {
     private SubjectService service;
 
     @Inject
-    @Named("TeacherService")
     private Service userService;
 
     @Override

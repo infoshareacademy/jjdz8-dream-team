@@ -14,11 +14,9 @@ import java.io.IOException;
 public class TeacherAccountEditorServlet extends UserEditServlet {
 
     @Inject
-    @Named("TeacherEditService")
     private EditService userEditService;
 
     @Inject
-    @Named("TeacherService")
     private Service userService;
 
     private static final String SESSION_ATTRIBUTE ="teacherID";
