@@ -2,7 +2,7 @@
   "subjectsList": [
     {
       "id": "08b71e73-4dec-4edd-a1f2-844f253b40bd",
-      "teacherId": "1cb6cf95-c7c7-4f6d-bc5b-41061983fbaa",
+      "teacherId": "b308a80c-517a-46d0-a0dd-186165835fac",
       "name": "srodowisko",
       "topic": "zasoby wodne",
       "description": "zasoby wodne w Polsce(rzeki,jeziora)",
@@ -10,7 +10,7 @@
     },
     {
       "id": "5283943a-ca95-4f09-b0ec-faecd0a00bc1",
-      "teacherId": "1cb6cf95-c7c7-4f6d-bc5b-41061983fbaa",
+      "teacherId": "b308a80c-517a-46d0-a0dd-186165835fac",
       "name": "chemia",
       "topic": "chemia nieorganiczna",
       "description": "metale, niemetale, kwasy, zasady, sole - powtórka (klasa2 liceum)",

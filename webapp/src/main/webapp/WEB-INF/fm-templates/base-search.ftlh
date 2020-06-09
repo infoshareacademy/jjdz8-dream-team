@@ -13,12 +13,12 @@
     <main role="main">
         <div class="container">
             <#if message ??>
-                <h1>You have to login or registry first</h1>
-                <a href="http://localhost:8080/logout.jsp">
-                    <input type="button" class="btn btn-secondary" value="login"/>
+                <h1>zaloguj się bądź zarejestruj by uzyskać dostęp</h1>
+                <a href="../../login.jsp">
+                    <input type="button" class="btn btn-secondary" value="zaloguj"/>
                 </a>
                 <a href="http://localhost:8080/newAccount.jsp">
-                    <input type="button" class="btn btn-secondary" value="registry"/>
+                    <input type="button" class="btn btn-secondary" value="zarejestruj"/>
                 </a>
             <#else>
                 <@content/>

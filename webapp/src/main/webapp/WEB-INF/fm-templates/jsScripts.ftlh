@@ -19,4 +19,4 @@
         integrity="sha256-r/AaFHrszJtwpe+tHyNi/XCfMxYpbsRg2Uqn0x3s2zc="
         crossorigin="anonymous"></script>
 <script src="../../delete-subject.js"></script>
-<script src="../../delete-teacher.js"></script>
+<script src="../../delete-user.js"></script>

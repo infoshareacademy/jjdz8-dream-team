@@ -97,4 +97,16 @@ public class UserRepository implements Repository {
 
         return false;
     }
+
+    @Override
+    public boolean nickNameAlreadyExist(String nickname) {
+        Optional<User> user = users.getUserList().stream().filter(u ->u.getNickName().equals(nickname) ).findFirst();
+        return user.isPresent();
+    }
+
+    @Override
+    public boolean emailAlreadyExist(String email) {
+        Optional<User> user = users.getUserList().stream().filter(u ->u.getEmail().equals(email) ).findFirst();
+        return user.isPresent();
+    }
 }

@@ -7,9 +7,11 @@ import com.infoshareacademy.service.EditService;
 import com.infoshareacademy.service.Service;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
+import org.apache.commons.lang.StringUtils;
 
 import javax.inject.Inject;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -23,11 +25,19 @@ import java.util.UUID;
 
 import static com.infoshareacademy.servlet.HelperForServlets.*;
 import static com.infoshareacademy.servlet.HelperForServlets.isIncorrectCorrectParameter;
+import static com.infoshareacademy.servlet.users.UserLoginServlet.ATTRIBUTE_NAME;
 
-public abstract class UserEditServlet extends HttpServlet {
+@WebServlet("/edit-user-account")
+public class EditUserAccountServlet extends HttpServlet {
 
     @Inject
     private TemplateProvider provider;
+
+    @Inject
+    private Service service;
+
+    @Inject
+    private EditService editService;
 
     public static final String EMPTY_NICKNAME = "emptyNickname";
 
@@ -39,28 +49,22 @@ public abstract class UserEditServlet extends HttpServlet {
 
     public static final String LOGIN_ERROR = "loginError";
 
-    private String redirectAfterInCorrectForm;
 
-    private String redirectAfterCorrectForm;
-
-    private String templateFile;
-
-    private String sessionAttribute;
-
-    protected void doGetMethod(HttpServletRequest req, HttpServletResponse resp, Service userService) throws ServletException, IOException {
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html;charset=UTF-8");
         PrintWriter printWriter = resp.getWriter();
 
-        Template template = provider.getTemplate(getServletContext(), templateFile);
+        Template template = provider.getTemplate(getServletContext(), "user-account-data-after-edit.ftlh");
         Map<String, Object> dataModel = new HashMap<>();
 
         HttpSession session = req.getSession(false);
-        if (!isValidSession(session, sessionAttribute)) {
+        if (!isValidSession(session, ATTRIBUTE_NAME)) {
             session.setAttribute(LOGIN_ERROR, "you have to login first");
             dataModel.put("message", ERROR_MESSAGE);
         } else {
 
-            Optional<User> user = findCorrectUser(session, sessionAttribute, userService);
+            Optional<User> user = service.findById((UUID) session.getAttribute(ATTRIBUTE_NAME));
             user.ifPresentOrElse(value -> dataModel.put("user", value),
                     () -> {
                         resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
@@ -82,30 +86,31 @@ public abstract class UserEditServlet extends HttpServlet {
         invalidateAttributes(session, EMPTY_NICKNAME, EMPTY_EMAIL, WRONG_PASSWORD_FORMAT, WRONG_PASSWORD);
     }
 
-
-    protected void doPostMethod(HttpServletRequest req, HttpServletResponse resp, Service userService, EditService editService) throws ServletException, IOException {
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html;charset=UTF-8");
 
         HttpSession session = req.getSession(false);
-        if (!isValidSession(session, sessionAttribute)) {
+        if (!isValidSession(session, ATTRIBUTE_NAME)) {
             session.setAttribute(LOGIN_ERROR, "you have to login first");
             return;
         }
 
-        Optional<User> user = findCorrectUser(req.getSession(), sessionAttribute, userService);
+        Optional<User> user = service.findById((UUID) session.getAttribute(ATTRIBUTE_NAME));
         if (user.isEmpty()) {
             resp.sendError(HttpServletResponse.SC_BAD_REQUEST, "Something goes wrong");
             return;
         }
-        processPostRequest(req, user.get(), editService, userService);
+        processPostRequest(req, user.get(), editService, service);
 
-        if (session.getAttribute(EMPTY_NICKNAME) != null || session.getAttribute(EMPTY_EMAIL) != null
+        if (session.getAttribute(EMPTY_NICKNAME) != null  || session.getAttribute(EMPTY_EMAIL) != null
                 || session.getAttribute(WRONG_PASSWORD) != null || session.getAttribute(WRONG_PASSWORD_FORMAT) != null) {
-            resp.sendRedirect(redirectAfterInCorrectForm);
+            resp.sendRedirect("/edit-user-account");
             return;
         }
-        resp.sendRedirect(redirectAfterCorrectForm);
+        resp.sendRedirect("/account-info");
     }
+
 
     private void processPostRequest(HttpServletRequest req, User user, EditService userEditService, Service userService) throws ServletException, IOException {
         String nickName = req.getParameter("nickName");
@@ -116,25 +121,29 @@ public abstract class UserEditServlet extends HttpServlet {
 
         HttpSession session = req.getSession(false);
 
-        if (isIncorrectCorrectParameter(nickName)) {
+        if (StringUtils.isEmpty(nickName)) {
             session.setAttribute(EMPTY_NICKNAME, "nickName cannot be empty");
-        } else session.setAttribute("nickName", nickName);
+        }
+        if (service.nicknameAlreadyExist(nickName)){
+            session.setAttribute("nickNameExist", nickName);
+        }
+        else session.setAttribute("nickName", nickName);
 
-        if (isIncorrectCorrectParameter(email)) {
+        if (StringUtils.isEmpty(email)) {
             session.setAttribute(EMPTY_EMAIL, "email cannot be empty");
         } else session.setAttribute("email", email);
 
-        if (isIncorrectCorrectParameter(oldPassword) || !userService.isCorrectPassword(user, oldPassword)) {
+        if (StringUtils.isEmpty(oldPassword) || !userService.isCorrectPassword(user, oldPassword)) {
             session.setAttribute(WRONG_PASSWORD, "wrong password");
             return;
-        } else if (isIncorrectCorrectParameter(newPassword) && !email.isEmpty() && !nickName.isEmpty()) {
+        } else if (StringUtils.isEmpty(newPassword) && !email.isEmpty() && !nickName.isEmpty()) {
             userEditService.editNickname(user, nickName);
             userEditService.editEmail(user, email);
         }
-        if (isIncorrectCorrectParameter(newPassword)) return;
+ /*       if (isIncorrectCorrectParameter(newPassword)) return;*/
 
-        if (!isIncorrectCorrectParameter(newPassword) && PasswordResolver.isCorrectPasswordFormat(newPassword)
-                && !isIncorrectCorrectParameter(repeatedPassword) && newPassword.equals(repeatedPassword)) {
+        if (!StringUtils.isEmpty(newPassword) && PasswordResolver.isCorrectPasswordFormat(newPassword)
+                && !StringUtils.isEmpty(repeatedPassword) && newPassword.equals(repeatedPassword)) {
             userEditService.editNickname(user, nickName);
             userEditService.editEmail(user, email);
             userEditService.editPassword(user, PasswordResolver.passwordHashing(newPassword));
@@ -143,24 +152,4 @@ public abstract class UserEditServlet extends HttpServlet {
         }
     }
 
-    private Optional<User> findCorrectUser(HttpSession session, String attribute, Service userService) {
-        UUID id = (UUID) session.getAttribute(attribute);
-        return userService.findById(id);
-    }
-
-    public void setRedirectAfterInCorrectForm(String redirectAfterInCorrectForm) {
-        this.redirectAfterInCorrectForm = redirectAfterInCorrectForm;
-    }
-
-    public void setRedirectAfterCorrectForm(String redirectAfterCorrectForm) {
-        this.redirectAfterCorrectForm = redirectAfterCorrectForm;
-    }
-
-    public void setTemplateFile(String templateFile) {
-        this.templateFile = templateFile;
-    }
-
-    public void setSessionAttribute(String sessionAttribute) {
-        this.sessionAttribute = sessionAttribute;
-    }
 }

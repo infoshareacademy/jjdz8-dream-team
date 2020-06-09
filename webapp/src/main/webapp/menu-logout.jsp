@@ -30,7 +30,7 @@
                         <li><a href="#service" class="glyphicon glyphicon-wrench"> Edycja</a></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="logout.jsp"><span class="glyphicon glyphicon-off"></span> Logout</a></li>
+                        <li><a href="login.jsp"><span class="glyphicon glyphicon-off"></span> Logout</a></li>
                     </ul>
                 </div>
             </nav>

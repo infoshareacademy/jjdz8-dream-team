@@ -21,8 +21,8 @@
     <div class="container">
         <div class="row">
             <div class="align-self-center">
-                <h3 class="display-5">you account was safety delete. <br>
-                    It was pleasure to meet you. See you next Time</h3>
+                <h3 class="display-5">Twoje konto zostało usunięte<br>
+                    Naprawdę miło było Cię poznać. Do następnego!</h3>
             </div>
         </div>
     </div>
