@@ -19,6 +19,7 @@ import java.util.*;
 
 import static com.infoshareacademy.servlet.HelperForServlets.*;
 import static com.infoshareacademy.servlet.HelperForServlets.isValidSession;
+import static com.infoshareacademy.servlet.users.UserLoginServlet.ATTRIBUTE_NAME;
 
 @WebServlet("/subject")
 public class SubjectServlet extends HttpServlet {
@@ -40,7 +41,7 @@ public class SubjectServlet extends HttpServlet {
         Template template = provider.getTemplate(getServletContext(), "subject-information-page-new.ftlh");
         Map<String, Object> dataModel = new HashMap<>();
         HttpSession session = req.getSession(false);
-        if (!isValidSession(session, SESSION_ATTRIBUTE)) {
+        if (!isValidSession(session, ATTRIBUTE_NAME)) {
             dataModel.put("message", ERROR_MESSAGE);
         } else {
             /*processRequest(resp, out, UUID.fromString(id));*/
@@ -67,7 +68,7 @@ public class SubjectServlet extends HttpServlet {
         PrintWriter out = resp.getWriter();
 
         HttpSession session = req.getSession(false);
-        if (!isValidSession(session, SESSION_ATTRIBUTE)) {
+        if (!isValidSession(session, ATTRIBUTE_NAME)) {
             resp.sendError(HttpServletResponse.SC_BAD_REQUEST, "please login first");
             return;
         }
@@ -90,7 +91,9 @@ public class SubjectServlet extends HttpServlet {
         Template template = provider.getTemplate(getServletContext(), "subject-information-page-new.ftlh");
         Map<String, Object> dataModel = new HashMap<>();
         dataModel.put("subject", subject.get());
-        dataModel.put("isVideo", String.valueOf(subject.get().isVideo()));
+        if (subject.get().isVideo()) {
+            dataModel.put("isVideo", "tak");
+        } else dataModel.put("isVideo", "nie");
         try {
             template.process(dataModel, out);
             resp.setStatus(HttpServletResponse.SC_ACCEPTED);
@@ -102,7 +105,7 @@ public class SubjectServlet extends HttpServlet {
     @Override
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession(false);
-        if (!isValidSession(session, SESSION_ATTRIBUTE)) {
+        if (!isValidSession(session, ATTRIBUTE_NAME)) {
             resp.sendError(HttpServletResponse.SC_BAD_REQUEST, "please login first");
             return;
         }

@@ -2,16 +2,21 @@
     <div class="form-group col-md-6">
         <label for="inputEmail4">nickname</label>
         <#if emptyNickname ??><p style="color: crimson">nickname cannot be empty</p>
-            <input type="text" class="form-control" id="inputEmail4" name="nickName" placeholder="enter nickname"><br/><br/>
-            <br/><br/>
-        <#elseif nickName ??> <input type="text" class="form-control" id="inputEmail4" name="nickName" value="${nickName}" ><br/><br/>
+            <input type="text" class="form-control" id="inputEmail4" name="nickName" placeholder="enter nickname">
+        <#elseif nickNameExist ??><p style="color: crimson">użytkownik o podanym nickname już istnieje </p>
+            <input type="text" class="form-control" id="inputEmail4" name="nickName" placeholder="enter nickname">
+        <#elseif nickName ??> <input type="text" class="form-control" id="inputEmail4" name="nickName" value="${nickName}" >
         </#if>
     </div>
+</div>
+<div class="form-row">
     <div class="form-group col-md-6">
         <label for="inputEmail4">Email</label>
         <#if emptyEmail ??><p style="color: crimson">nickname cannot be empty</p>
             <input type="email" class="form-control" id="inputEmail4" name="email" placeholder="enter email">
-        <#elseif email ??> <input type="text" class="form-control" id="inputEmail4" name="email" value="${email}" ><br/><br/>
+        <#elseif emailExist ??><p style="color: crimson">użytkownik o podanym adresie email już istnieje</p>
+            <input type="email" class="form-control" id="inputEmail4" name="email" placeholder="enter email">
+        <#elseif email ??> <input type="text" class="form-control" id="inputEmail4" name="email" value="${email}" >
         </#if>
     </div>
 </div>
@@ -44,3 +49,6 @@
 
 </div>
 <button type="submit" class="btn btn-secondary">edit</button>
+<a href="/account-info">
+    <input class="btn btn-secondary" type="button" value="cofnij">
+</a>

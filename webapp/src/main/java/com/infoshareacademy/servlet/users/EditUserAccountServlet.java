@@ -72,6 +72,8 @@ public class EditUserAccountServlet extends HttpServlet {
 
             putCorrectDataToDataModel("nickName", getAttributeValue(session, "nickName"), dataModel);
             putCorrectDataToDataModel("email", getAttributeValue(session, "email"), dataModel);
+            putCorrectDataToDataModel("nickNameExist", getAttributeValue(session,"nickNameExist"), dataModel);
+            putCorrectDataToDataModel("emailExist", getAttributeValue(session,"emailExist"), dataModel);
             putCorrectDataToDataModel(EMPTY_NICKNAME, getAttributeValue(session, EMPTY_NICKNAME), dataModel);
             putCorrectDataToDataModel(EMPTY_EMAIL, getAttributeValue(session, EMPTY_EMAIL), dataModel);
             putCorrectDataToDataModel(WRONG_PASSWORD, getAttributeValue(session, WRONG_PASSWORD), dataModel);
@@ -83,7 +85,7 @@ public class EditUserAccountServlet extends HttpServlet {
         } catch (TemplateException e) {
             e.printStackTrace();
         }
-        invalidateAttributes(session, EMPTY_NICKNAME, EMPTY_EMAIL, WRONG_PASSWORD_FORMAT, WRONG_PASSWORD);
+        invalidateAttributes(session, EMPTY_NICKNAME, EMPTY_EMAIL, WRONG_PASSWORD_FORMAT, WRONG_PASSWORD,"emailExist","nickNameExist");
     }
 
     @Override
@@ -104,7 +106,8 @@ public class EditUserAccountServlet extends HttpServlet {
         processPostRequest(req, user.get(), editService, service);
 
         if (session.getAttribute(EMPTY_NICKNAME) != null  || session.getAttribute(EMPTY_EMAIL) != null
-                || session.getAttribute(WRONG_PASSWORD) != null || session.getAttribute(WRONG_PASSWORD_FORMAT) != null) {
+                || session.getAttribute(WRONG_PASSWORD) != null || session.getAttribute(WRONG_PASSWORD_FORMAT) != null
+        || session.getAttribute("nickNameExist") !=null || session.getAttribute("emailExist")!=null) {
             resp.sendRedirect("/edit-user-account");
             return;
         }
@@ -120,30 +123,35 @@ public class EditUserAccountServlet extends HttpServlet {
         String repeatedPassword = req.getParameter("repeatedPassword");
 
         HttpSession session = req.getSession(false);
+        UUID id = (UUID) session.getAttribute(ATTRIBUTE_NAME);
 
         if (StringUtils.isEmpty(nickName)) {
             session.setAttribute(EMPTY_NICKNAME, "nickName cannot be empty");
         }
-        if (service.nicknameAlreadyExist(nickName)){
+        if (service.nicknameAlreadyExist(nickName,id)){
             session.setAttribute("nickNameExist", nickName);
         }
         else session.setAttribute("nickName", nickName);
 
         if (StringUtils.isEmpty(email)) {
             session.setAttribute(EMPTY_EMAIL, "email cannot be empty");
-        } else session.setAttribute("email", email);
+        }
+        if (service.emailAlreadyExist(email,id)){
+            session.setAttribute("emailExist",email);
+        }
+        else session.setAttribute("email", email);
 
         if (StringUtils.isEmpty(oldPassword) || !userService.isCorrectPassword(user, oldPassword)) {
             session.setAttribute(WRONG_PASSWORD, "wrong password");
             return;
-        } else if (StringUtils.isEmpty(newPassword) && !email.isEmpty() && !nickName.isEmpty()) {
+        } else if (StringUtils.isEmpty(newPassword) && !email.isEmpty() && !nickName.isEmpty()
+        && !service.nicknameAlreadyExist(nickName,id) && !service.emailAlreadyExist(email,id)) {
             userEditService.editNickname(user, nickName);
             userEditService.editEmail(user, email);
+            return;
         }
- /*       if (isIncorrectCorrectParameter(newPassword)) return;*/
-
-        if (!StringUtils.isEmpty(newPassword) && PasswordResolver.isCorrectPasswordFormat(newPassword)
-                && !StringUtils.isEmpty(repeatedPassword) && newPassword.equals(repeatedPassword)) {
+        if (StringUtils.isEmpty(newPassword)) {return;}
+        if (PasswordResolver.isCorrectPasswordFormat(newPassword) && newPassword.equals(repeatedPassword)){
             userEditService.editNickname(user, nickName);
             userEditService.editEmail(user, email);
             userEditService.editPassword(user, PasswordResolver.passwordHashing(newPassword));

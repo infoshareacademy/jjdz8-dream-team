@@ -22,6 +22,7 @@ import java.util.Map;
 import java.util.UUID;
 
 import static com.infoshareacademy.servlet.HelperForServlets.*;
+import static com.infoshareacademy.servlet.users.UserLoginServlet.ATTRIBUTE_NAME;
 
 @WebServlet("/subject-after-edit")
 public class SubjectAfterEditServlet extends HttpServlet {
@@ -43,7 +44,6 @@ public class SubjectAfterEditServlet extends HttpServlet {
 
     public static final String LOGIN_ERROR = "loginError";
 
-    private static final String SESSION_ATTRIBUTE = "teacherID";
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -59,7 +59,7 @@ public class SubjectAfterEditServlet extends HttpServlet {
         Map<String, Object> dataModel = new HashMap<>();
 
         HttpSession session = req.getSession(false);
-        if (!isValidSession(session, SESSION_ATTRIBUTE)) {
+        if (!isValidSession(session, ATTRIBUTE_NAME)) {
             dataModel.put("message", getAttributeValue(session, LOGIN_ERROR));
 
         } else {

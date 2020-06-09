@@ -24,6 +24,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 import static com.infoshareacademy.servlet.HelperForServlets.*;
+import static com.infoshareacademy.servlet.users.UserLoginServlet.ATTRIBUTE_NAME;
 import static com.infoshareacademy.validation.ParameterValidator.isIncorrectCorrectParameter;
 
 @WebServlet("/add-subject")
@@ -54,7 +55,7 @@ public class AddSubjectServlet extends HttpServlet {
         PrintWriter printWriter = resp.getWriter();
 
         HttpSession session = req.getSession(false);
-        if (!isValidSession(session, SESSION_ATTRIBUTE)) {
+        if (!isValidSession(session, ATTRIBUTE_NAME)) {
             String errorMassage = "Please login first";
             printWriter.write(errorMassage);
             return;
@@ -89,7 +90,7 @@ public class AddSubjectServlet extends HttpServlet {
 
         Subject subject = service.createSubject(name, topic, description, isVideo, teacherId);
         service.addNewSubject(subject);
-        resp.sendRedirect("/teacher-account-information");
+        resp.sendRedirect("/user-account-information-page.ftlh");
     }
 
     @Override

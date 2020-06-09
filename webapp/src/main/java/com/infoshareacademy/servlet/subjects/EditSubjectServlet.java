@@ -22,6 +22,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 import static com.infoshareacademy.servlet.HelperForServlets.*;
+import static com.infoshareacademy.servlet.users.UserLoginServlet.ATTRIBUTE_NAME;
 
 @WebServlet("/edit-subject")
 public class EditSubjectServlet extends HttpServlet {
@@ -50,7 +51,7 @@ public class EditSubjectServlet extends HttpServlet {
         PrintWriter out = resp.getWriter();
 
         HttpSession session = req.getSession(false);
-        if (!isValidSession(session, SESSION_ATTRIBUTE)) {
+        if (!isValidSession(session, ATTRIBUTE_NAME)) {
             resp.getWriter().write(ERROR_MESSAGE);
             return;
         }

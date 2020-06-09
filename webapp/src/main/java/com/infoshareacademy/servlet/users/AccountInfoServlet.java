@@ -62,9 +62,8 @@ public class AccountInfoServlet extends HttpServlet {
                 dataModel.put("roleTeacher", "TEACHER");
                 List<Subject> subjects;
                 subjects = subjectService.findAllSubjectsForTeacher(user.get().getId());
-                subjects.forEach(e -> System.out.println(e.getName()));
 
-                if (subjects.size() > 0) {
+                if (subjects!= null && subjects.size() > 0) {
                     dataModel.put("subjects", subjects);
                 }
             }

@@ -20,7 +20,8 @@ public interface Service {
 
     boolean isCorrectPassword(User user, String oldPassword);
 
-    public boolean nicknameAlreadyExist(String nickname);
+    public boolean nicknameAlreadyExist(String nickname, UUID id);
 
-    public boolean emailAlreadyExist(String email);
+    public boolean emailAlreadyExist(String email, UUID id);
+
 }

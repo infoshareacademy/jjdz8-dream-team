@@ -3,7 +3,7 @@
 <head>
     <head>
         <meta charset="UTF-8">
-        <title>Title</title>
+        <title>E-learning app</title>
         <script
                 src="https://code.jquery.com/jquery-3.5.0.js"
                 integrity="sha256-r/AaFHrszJtwpe+tHyNi/XCfMxYpbsRg2Uqn0x3s2zc="
@@ -16,11 +16,13 @@
         />
         <link href="styles.css" rel="stylesheet"/>
         <link href="../../styles-to-teacher-account-info-page.css">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+              integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+              crossorigin="anonymous">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js">
         </script>
-</head>
+    </head>
 <body>
 <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
     <div class="container-fluid">
@@ -29,14 +31,14 @@
         </div>
         <ul class="nav navbar-nav">
             <li><a href="index.jsp" class="glyphicon glyphicon-home active"> Home</a></li>
-            <li><a href="#contact"class="glyphicon glyphicon-file"> Projekty</a></li>
-            <li><a href="/search"class="glyphicon glyphicon-search"> Wyszukiwanie</a></li>
+            <li><a href="#contact" class="glyphicon glyphicon-file"> Projekty</a></li>
+            <li><a href="/search" class="glyphicon glyphicon-search"> Wyszukiwanie</a></li>
             <li><a href="#contact" class="glyphicon glyphicon-thumbs-up"> Skuteczność</a></li>
             <li><a href="contact.jsp" class=" glyphicon glyphicon-phone-alt "> Kontakt</a></li>
             <li><a href="/user-to-edit" class="glyphicon glyphicon-wrench"> Edycja</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
-            <li><a href="/logout"><span class="glyphicon glyphicon-off"></span> Logout</a></li>
+            <li><a href="/logout"><span class="glyphicon glyphicon-off"></span> Wyloguj</a></li>
         </ul>
     </div>
 </nav>
@@ -52,35 +54,41 @@
 </header>
 <main role="main">
     <div class="container">
-    <div class="card">
-        <div class="card-header">
-            dodaj przedmiot
-        </div>
-        <form method="post" action="http://localhost:8080/add-subject">
+        <div class="card">
+            <div class="card-header">
+                dodaj przedmiot
+            </div>
+            <form method="post" action="http://localhost:8080/add-subject">
                 <div class="form-group col-md-6">
                     <label>nazwa</label>
-                    <input type="text" class="form-control"  name="name">
+                    <input type="text" class="form-control" name="name">
                 </div>
                 <div class="form-group col-md-6">
                     <label>temat</label>
-                    <input type="text" class="form-control"  name="topic">
+                    <input type="text" class="form-control" name="topic">
                 </div>
-            <div class="form-group col-md-6">
-                <label for="description">opis</label><br>
-             <textarea id="description" typeof="text" name="description">range description</textarea>
-         </div>
-            <div class="form-group col-md-6">
-                <p>materiały wideo</p>
-            <select id="isVideo" name="isVideo">
-                <option value="true">tak</option>
-                <option value="false">nie</option>
-            </select>
-            </div>
-            <div class="form-group col-md-6">
-            <input class="btn btn-secondary" type="submit" name="save" value="zapisz"/><br/><br/>
-            </div>
-        </form>
-    </div>
+                <div class="form-group col-md-6">
+                    <label for="description">opis</label><br>
+                    <textarea id="description" typeof="text" name="description">range description</textarea>
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <p>materiały wideo</p>
+                        <select id="isVideo" name="isVideo">
+                            <option value="true">tak</option>
+                            <option value="false">nie</option>
+                        </select>
+
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label>link do wideo</label>
+                        <input type="text" class="form-control" name="videoLink">
+                    </div>
+                </div>
+
+                <input class="btn btn-secondary" type="submit" name="save" value="zapisz"/><br/><br/>
+            </form>
+        </div>
     </div>
 </main>
 </body>
