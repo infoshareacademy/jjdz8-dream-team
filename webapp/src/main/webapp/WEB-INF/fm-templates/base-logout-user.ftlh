@@ -3,13 +3,13 @@
 </#macro>
 
 <#macro home>
-<!DOCTYPE html>
+    <!DOCTYPE html>
     <html lang="pl" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html"
           xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
-<#include "headhtml.ftlh">
+    <#include "headhtml.ftlh">
     <body>
-    <#include "menuWithLogout.ftlh" >
- <#include "headerJambutron.ftlh">
+    <#include "menu-with-login.ftlh" >
+    <#include "headerJambutron.ftlh">
     <main role="main">
         <div class="container">
             <#if message ??>
@@ -20,8 +20,8 @@
                 <a href="http://localhost:8080/newAccount.jsp">
                     <input type="button" class="btn btn-secondary" value="zarejestruj"/>
                 </a>
-          <#else>
-              <@content/>
+            <#else>
+                <@content/>
             </#if>
         </div>
     </main>

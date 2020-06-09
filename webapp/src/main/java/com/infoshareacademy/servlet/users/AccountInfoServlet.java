@@ -59,6 +59,7 @@ public class AccountInfoServlet extends HttpServlet {
             dataModel.put("user", user.get());
             System.out.println(user.get().getRole());
             if (user.get().getRole().equals(ROLE.TEACHER)) {
+                dataModel.put("roleTeacher", "TEACHER");
                 List<Subject> subjects;
                 subjects = subjectService.findAllSubjectsForTeacher(user.get().getId());
                 subjects.forEach(e -> System.out.println(e.getName()));

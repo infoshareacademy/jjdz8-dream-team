@@ -18,7 +18,7 @@
 <body>
 <jsp:include page="menu-logIn.jsp"/>
 <main>
-<jsp:include page="logout-form.jsp"/>
+<jsp:include page="login-form.jsp"/>
 </main>
 <jsp:include page="footer.jsp"/>
 

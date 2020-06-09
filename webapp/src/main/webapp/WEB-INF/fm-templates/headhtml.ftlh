@@ -1,6 +1,6 @@
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>E-learning app</title>
     <script
             src="https://code.jquery.com/jquery-3.5.0.js"
             integrity="sha256-r/AaFHrszJtwpe+tHyNi/XCfMxYpbsRg2Uqn0x3s2zc="

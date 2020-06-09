@@ -2,17 +2,17 @@
 <#macro content>
     <div class="card">
     <div class="card-header">
-        Login data
+        Dane konta
     </div>
     <div class="row">
     <div class="col-md-4">
     <#if message ??>
-        <h1>You have to login or registry first</h1>
-        <a href="http://localhost:8080/chooseWhoIsLogin.jsp">
-            <input type="button" value="login"/>
+        <h1>zaloguj się bądź zarejestruj by uzyskać dostęp</h1>
+        <a href="../../login.jsp">
+            <input type="button" value="zaloguj"/>
         </a>
         <a href="http://localhost:8080/add-user.jsp">
-            <input type="button" value="registry"/>
+            <input type="button" value="zarejestruj"/>
         </a>
     </#if>
     <#if user ?? >
@@ -21,27 +21,62 @@
         <div class="col-md-6">
             <#include "information-about-user-form-read-only.ftlh">
             <br>
-            <a href="/teacher"><input class="btn btn-secondary" type="button"
-                                      value="edit account"></a>
-            <a href="../../add-subject-k.html">
-                <input class="btn btn-secondary" type="button" value="add new subject"/>
-            </a>
-        </div>
+            <a href="/user"><input class="btn btn-secondary" type="button"
+                                      value="edytuj"></a>
+
+            <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#exampleModal">
+                usuń konto
+            </button>
+            <#if roleTeacher ??>
+                <a href="../../add-subject-k.html">
+                    <input class="btn btn-secondary" type="button" value="add new subject"/>
+                </a>
+            </#if >
 
         </div>
+
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+             aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Usuń konto</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                       Jesteś pewny, że chcesz usunąć konto?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">nie</button>
+                        <button id="delete-user" type="button" value="${user.id}" class="btn btn-primary">
+                            tak
+                        </button>
+
+
+                    </div>
+                </div>
+            </div>
         </div>
+
+
+        </div>
+        </div><br><br>
 
         <#if subjects??>
-            <table class="table table-hover">
+            <div class="alert alert-dark" role="alert">
+                Twoje aktywne przedmioty
+            </div>
+            <table class="table table-bordered table-hover " >
+                <thead class="thead-dark">
                 <tr>
-                    <th scope="col">subject name</th>
-                    <th scope="col">edit</th>
+                    <th scope="col">nazwa przedmiotu</th>
+                    <th scope="col"></th>
                 </tr>
+                </thead>
                 <#list subjects as subject>
                     <#if subject??>
-                        <thead>
-
-                        </thead>
                         <tbody>
                         <td>${subject.name}</td>
                         <td>
@@ -50,7 +85,6 @@
                             </a>
                         </td>
                         </tbody>
-
                     </#if>
                 </#list>
             </table>

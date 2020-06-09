@@ -31,4 +31,8 @@ public interface Repository {
     void updateEmail(UUID id, String email);
 
     boolean isCorrectPassword(User user, String password);
+
+    boolean nickNameAlreadyExist(String nickname);
+
+    boolean emailAlreadyExist(String email);
 }

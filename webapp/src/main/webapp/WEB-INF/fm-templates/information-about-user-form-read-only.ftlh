@@ -6,7 +6,7 @@
                    placeholder="${user.nickName}" disabled>
         </div>
         <div class="form-group col-md-6">
-            <label for="inputEmail4">Email</label>
+            <label for="inputEmail4">email</label>
             <input type="email" class="form-control" id="inputEmail4" name="email"
                    placeholder="${user.email}" disabled>
         </div>
@@ -14,9 +14,9 @@
     <div class="form-row">
 
         <div class="form-group col-md-6">
-            <label for="inputPassword4">Password</label>
+            <label for="inputPassword4">hasło</label>
             <input type="password" class="form-control" id="inputPassword4" name="password"
-                   placeholder="Password" disabled>
+                   placeholder="hasło" disabled>
         </div>
     </div>
 </form>

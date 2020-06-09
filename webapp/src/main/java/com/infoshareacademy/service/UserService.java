@@ -41,4 +41,14 @@ public class UserService implements Service {
         return repository.isCorrectPassword(user, password);
     }
 
+    @Override
+    public boolean nicknameAlreadyExist(String nickname) {
+        return repository.nickNameAlreadyExist(nickname);
+    }
+
+    @Override
+    public boolean emailAlreadyExist(String email) {
+        return repository.emailAlreadyExist(email);
+    }
+
 }

@@ -18,7 +18,6 @@ import java.util.Map;
 
 import static com.infoshareacademy.servlet.HelperForServlets.ERROR_MESSAGE;
 import static com.infoshareacademy.servlet.HelperForServlets.isValidSession;
-import static com.infoshareacademy.servlet.users.UserEditServlet.LOGIN_ERROR;
 
 @WebServlet("/search")
 public class SearchSubject extends HttpServlet {
@@ -36,7 +35,6 @@ public class SearchSubject extends HttpServlet {
 
         HttpSession session = req.getSession(false);
         if (!isValidSession(session, "studentID") && !isValidSession(session,"teacherID")) {
-            session.setAttribute(LOGIN_ERROR, "you have to login first");
             dataModel.put("message", ERROR_MESSAGE);
         }
         try {

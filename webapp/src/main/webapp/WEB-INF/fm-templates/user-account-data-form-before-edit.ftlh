@@ -9,18 +9,18 @@
                 <#if message ??>
                     <h1>You have to login or registry first</h1>
                     <a href="http://localhost:8080/chooseWhoIsLogin.jsp">
-                        <input type="button" class="btn btn-secondary" value="login"/>
+                        <input type="button" value="login"/>
                     </a>
                     <a href="http://localhost:8080/add-user.jsp">
-                        <input type="button" class="btn btn-secondary" value="registry"/>
+                        <input type="button" value="registry"/>
                     </a>
                 </#if>
                 <#if user ?? >
-              <#include "user-card-with-picture.ftlh">
+                <#include "user-card-with-picture.ftlh">
             </div>
             <div class="col-md-6">
-                <form method="post" action="http://localhost:8080/edit-student-account">
-             <#include "user-form-content-before-edit.ftlh">
+                <form method="post" action="http://localhost:8080/edit-user-account">
+                    <#include "user-form-content-before-edit.ftlh">
                 </form>
             </div>
             </#if>

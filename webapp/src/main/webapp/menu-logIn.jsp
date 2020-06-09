@@ -29,7 +29,7 @@
                         <li><a href="service-form.jsp" class="glyphicon glyphicon-wrench"> Service</a></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="logout.jsp"><span class="glyphicon glyphicon-log-in"></span> Zaloguj</a></li>
+                        <li><a href="login.jsp"><span class="glyphicon glyphicon-log-in"></span> Zaloguj</a></li>
                         <li><a href="newAccount.jsp"><span class="glyphicon glyphicon-user"></span> Zarejestruj </a></li>
                     </ul>
                 </div>

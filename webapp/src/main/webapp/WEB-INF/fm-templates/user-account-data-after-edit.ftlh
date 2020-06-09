@@ -19,16 +19,18 @@
                 <#include "user-card-with-picture.ftlh">
             </div>
             <div class="col-md-6">
-                <#include "information-about-user-form-read-only.ftlh">
-                <br>
-                <a href="/student-account-information-servlet"><input class="btn btn-secondary type="button"
-                                                                      value="edit account"></a>
+                <form  method="post" action="http://localhost:8080/edit-user-account">
+                    <#include "user-form-content-after-edit.ftlh">
+                </form>
             </div>
             </#if>
         </div>
     </div>
-
     </div>
 </#macro>
 
 <@home/>
+
+
+
+
