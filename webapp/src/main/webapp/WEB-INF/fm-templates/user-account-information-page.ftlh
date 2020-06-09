@@ -29,7 +29,7 @@
             </button>
             <#if roleTeacher ??>
                 <a href="../../add-subject-k.html">
-                    <input class="btn btn-secondary" type="button" value="add new subject"/>
+                    <input class="btn btn-secondary" type="button" value="dodaj nowy przedmiot"/>
                 </a>
             </#if >
 

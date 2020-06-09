@@ -42,13 +42,13 @@ public class UserService implements Service {
     }
 
     @Override
-    public boolean nicknameAlreadyExist(String nickname) {
-        return repository.nickNameAlreadyExist(nickname);
+    public boolean nicknameAlreadyExist(String nickname,UUID id) {
+        return repository.nickNameAlreadyExist(nickname, id);
     }
 
     @Override
-    public boolean emailAlreadyExist(String email) {
-        return repository.emailAlreadyExist(email);
+    public boolean emailAlreadyExist(String email, UUID id) {
+        return repository.emailAlreadyExist(email, id);
     }
 
 }

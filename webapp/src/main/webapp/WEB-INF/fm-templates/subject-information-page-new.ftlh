@@ -5,35 +5,43 @@
         Dane przedmiotu
     </div>
     <#if subject??>
-        <div class="row">
+
         <div class="col-md 6">
-        <form>
-            <div class="form">
-            <div class="form-group col-md-6">
-                <label for="name">nazwa</label><br>
-                <input id="name" type="text" name="name" value="${subject.name}" disabled><br/><br/>
-            </div>
-
-            <div class="form-group col-md-6">
-                <label for="topic">temat</label><br>
-                <input id="topic" type="text" name="topic" value="${subject.topic}" disabled><br/><br/>
-            </div>
-
-            <div class="form-group col-md-6">
-                <label for="description">opis</label><br>
-                <textarea id="description" name="description"
-                          disabled>${subject.description} </textarea><br/><br/>
-            </div>
-            <div class="form-group col-md-6">
-                <label for="isVideo">materiały wideo</label><br>
-                <p id="isVideo">Is video: "${isVideo}" </p>
-            </div>
+            <form>
+                <div class="form">
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="name">nazwa</label><br>
+                            <input id="name" type="text" name="name" value="${subject.name}" disabled><br/><br/>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="topic">temat</label><br>
+                            <input id="topic" type="text" name="topic" value="${subject.topic}" disabled><br/><br/>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="description">opis</label><br>
+                            <textarea id="description" name="description"
+                                      disabled>${subject.description} </textarea><br/><br/>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="isVideo">materiały wideo</label><br>
+                            <p id="isVideo">załączono materiały wideo: "${isVideo}" </p>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="videoLink">temat</label><br>
+                            <input id="videoLink" type="text" name="videoLink" value="tu bedzie link do wideo" disabled><br/><br/>
+                        </div>
+                    </div>
+                </div>
+            </form>
         </div>
-        </form>
+        <div class="col-md 6">
+            <img src="../../grafika.jpg">
         </div>
-            <div class="col-md 6">
-                <img src="../../grafika.jpg">
-            </div>
 
         </div>
         <div class="col-md 4">

@@ -32,7 +32,7 @@ public interface Repository {
 
     boolean isCorrectPassword(User user, String password);
 
-    boolean nickNameAlreadyExist(String nickname);
+    boolean nickNameAlreadyExist(String nickname, UUID id);
 
-    boolean emailAlreadyExist(String email);
+    boolean emailAlreadyExist(String email, UUID id);
 }

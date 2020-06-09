@@ -18,6 +18,7 @@ import java.util.Map;
 
 import static com.infoshareacademy.servlet.HelperForServlets.ERROR_MESSAGE;
 import static com.infoshareacademy.servlet.HelperForServlets.isValidSession;
+import static com.infoshareacademy.servlet.users.UserLoginServlet.ATTRIBUTE_NAME;
 
 @WebServlet("/search")
 public class SearchSubject extends HttpServlet {
@@ -34,7 +35,7 @@ public class SearchSubject extends HttpServlet {
         Map<String, Object> dataModel = new HashMap<>();
 
         HttpSession session = req.getSession(false);
-        if (!isValidSession(session, "studentID") && !isValidSession(session,"teacherID")) {
+        if (!isValidSession(session,ATTRIBUTE_NAME)) {
             dataModel.put("message", ERROR_MESSAGE);
         }
         try {
