@@ -1,73 +1,60 @@
-<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+         pageEncoding="UTF-8" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="description" content="E-learning web app" />
-        <title>E-learning web app by Dream Team</title>
-        <link href="styles.css" rel="stylesheet" />
-    </head>
-    <body>
-        <nav>
-            <a class="logo" href="index.jsp">E-learning by Dream Team</a>
-            <div>
-                <ul>
-                    <li>
-                        <a href="index.jsp">Main</a>
-                    </li>
-                    <li>
-                        <a href="add-user.html">Add-user</a>
-                    </li>
-                    <li>
-                        <a href="edit-user.html">Edit user</a>
-                    </li>
-                    <li>
-                        <a href="search.html">Search</a>
-                    </li>
-                    <li>
-                        <a href="ratings.html">Ratings</a>
-                    </li>
-                    <li>
-                        <a href="contact.html">Contact</a>
-                    </li>
-                </ul>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="description" content="E-learning web app"/>
+    <br>
+    <title>E-learning web app by Dream Team</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js">
+    </script>
+    <link href="styles.css" rel="stylesheet"/>
+    <link href="form.css" rel="stylesheet"/>
+</head>
+
+<body>
+<jsp:include page="menu-logIn.jsp"/>
+<main>
+    <div class="container">
+        <div class="jumpotron"><h2>Aplikacja Internetowa Drem-Team</h2></div>
+        <div class="carousel slide center" id="mycarousel" data-ride="carousel">
+            <ol class="carousel-indicators">
+                <li data-target="#mycarousel" data-slide="0" class="active"></li>
+                <li data-target="#mycarousel" data-slide="1"></li>
+            </ol>
+            <div class="carousel-inner img-fluid">
+                <div class="item active img-fluid">
+                    <img src="jpg/77522.jpg" alt="">
+                    <!-- Opis slajdu -->
+                    <div class="carousel-caption">
+                        <h3>"KAŻDA PORAŻKA JEST SZANSĄ, ŻEBY SPRÓBOWAĆ JESZCZE RAZ.</h3>
+                        <H2>TYLKO MĄDRZEJ."</H2>
+                        <p>HENRY FORD</p>
+                    </div>
+                </div>
+                <div class="item img-fluid">
+                    <img src="jpg/pexels-1786955.jpg    " alt="">
+                    <!-- Opis slajdu -->
+                    <div class="carousel-caption">
+                        <h3>"JESTLI JEST CIĘZKO, TO ZNACZY, ŻE IDZIESZ W DOBRYM KIERUNKU." </h3>
+                    </div>
+                </div>
+                </a>
+                <a class="right carousel-control" href="#mycarousel" data-slide="next">
+                    <span class="glyphicon glyphicon-chevron-right"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
             </div>
-        </nav>
-        <header>
-            <h1>E-learning web app by Dream Team!</h1>
-            <p>
-                Header content.
-            </p>
-        </header>
-        <main>
-            <h2>Subjects</h2>
-            <section>
-                <div>
-                    <h3>Maths</h3>
-                    <p>
-                        Learn more.
-                    </p>
-                </div>
-            </section>
-            <section>
-                <div>
-                    <h3>Geography</h3>
-                    <p>
-                        Learn more.
-                    </p>
-                </div>
-            </section>
-            <section>
-                <div>
-                    <h3>Physics</h3>
-                    <p>
-                        Learn more.
-                    </p>
-                </div>
-            </section>
-        </main>
-        <footer>
-            <p>E-learning web app - all rights reserved;-)</p>
-        </footer>
-    </body>
+        </div>
+    </div>
+</main>
+</footer>
+<jsp:include page="jsScripts.html"/>
+</body>
+<jsp:include page="footer.jsp"/>
 </html>

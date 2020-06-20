@@ -1,0 +1,60 @@
+{
+  "subjectsList": [
+    {
+      "id": "08b71e73-4dec-4edd-a1f2-844f253b40bd",
+      "teacherId": "b308a80c-517a-46d0-a0dd-186165835fac",
+      "name": "srodowisko",
+      "topic": "zasoby wodne",
+      "description": "zasoby wodne w Polsce(rzeki,jeziora)",
+      "isVideo": true
+    },
+    {
+      "id": "5283943a-ca95-4f09-b0ec-faecd0a00bc1",
+      "teacherId": "b308a80c-517a-46d0-a0dd-186165835fac",
+      "name": "chemia",
+      "topic": "chemia nieorganiczna",
+      "description": "metale, niemetale, kwasy, zasady, sole - powtórka (klasa2 liceum)",
+      "isVideo": false
+    },
+    {
+      "id": "08b71e73-4dec-4edd-a1f2-844f253b40bd",
+      "teacherId": "9cc7bfcf-79c3-498f-a846-2562c6f016ae",
+      "name": "biologia",
+      "topic": "stawonogi",
+      "description": "uklad pokarmowy, rozrodczy, nerwowy",
+      "isVideo": true
+    },
+    {
+      "id": "08b71e73-4dec-4edd-a1f2-844f253b50bd",
+      "teacherId": "9cc7bfcf-79c3-498f-a846-2562c6f016ae",
+      "name": "jezyk niemiecki",
+      "topic": "gramatyka",
+      "description": "gramatyka na poziomie A i A1 - podstawy",
+      "isVideo": true
+    },
+    {
+      "id": "08b71e45-4dec-4edd-b2f2-844f253b40bd",
+      "teacherId": "9cc7bfcf-79c3-498f-a846-2562c6f016ae",
+      "name": "jezyk angielski",
+      "topic": "gramatyka i słowka",
+      "description": "wakacje za granica - przydatne zwroty",
+      "isVideo": true
+    },
+    {
+      "id": "ca5ca086-e4d2-464f-97e2-a20afac08012",
+      "teacherId": "346fbfff-bd21-4ca1-a622-47c985ce3bf7",
+      "name": "geografia",
+      "topic": "zasoby wodne",
+      "description": "zasoby wodne w polsce",
+      "isVideo": true
+    },
+    {
+      "id": "70e941e1-363a-4f9a-a79b-926522a04780",
+      "teacherId": "346fbfff-bd21-4ca1-a622-47c985ce3bf7",
+      "name": "srodowisko",
+      "topic": "zanieczyszczenia",
+      "description": "zanieczyszczenia wod",
+      "isVideo": true
+    }
+  ]
+}
