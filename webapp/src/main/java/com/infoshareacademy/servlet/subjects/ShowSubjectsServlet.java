@@ -1,5 +1,4 @@
-package com.infoshareacademy.servlet.users;
-
+package com.infoshareacademy.servlet.subjects;
 
 import com.infoshareacademy.domain.ROLE;
 import com.infoshareacademy.domain.Subject;
@@ -9,7 +8,6 @@ import com.infoshareacademy.repository.SubjectRepositoryInterface;
 import com.infoshareacademy.service.Service;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
-import org.apache.commons.lang.StringUtils;
 
 import javax.inject.Inject;
 import javax.servlet.ServletException;
@@ -25,8 +23,8 @@ import java.util.*;
 import static com.infoshareacademy.servlet.HelperForServlets.isValidSession;
 import static com.infoshareacademy.servlet.users.UserLoginServlet.SESSION_MARK;
 
-@WebServlet("/user")
-public class UserServlet extends HttpServlet {
+@WebServlet("/show-subjects")
+public class ShowSubjectsServlet extends HttpServlet {
 
     @Inject
     TemplateProvider provider;
@@ -43,31 +41,27 @@ public class UserServlet extends HttpServlet {
         PrintWriter printWriter = resp.getWriter();
         HttpSession session = req.getSession(false);
 
-        Template template = provider.getTemplate(getServletContext(), "user-account-data-form-before-edit.ftlh");
+        Template template = provider.getTemplate(getServletContext(), "show-all-teacher-subjects.ftlh");
         Map<String, Object> dataModel = new HashMap<>();
 
 
         if (!isValidSession(session, SESSION_MARK)) {
             dataModel.put("message", "please login first");
         } else {
-
             Optional<User> user = service.findById((UUID) session.getAttribute(SESSION_MARK));
-            user.ifPresentOrElse(value -> {
-                        dataModel.put("user", value);
-                        if (value.getRole().equals(ROLE.TEACHER)) dataModel.put("roleTeacher", "TEACHER");
+            user.ifPresentOrElse(u -> {
+                        dataModel.put("user", u);
+                        if (u.getRole().equals(ROLE.TEACHER)) {
+                            dataModel.put("roleTeacher", "TEACHER");
+                            List<Subject> subjects;
+                            subjects = subjectRepository.findAllSubjectForTeacher(u.getId());
+
+                            if (subjects.size() > 0) {
+                                dataModel.put("subjects", subjects);
+                            }
+                        }
                     },
-                    () -> {
-                        resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-                    });
-
-            if (user.get().getRole().equals(ROLE.TEACHER)) {
-                List<Subject> subjects;
-                subjects = subjectRepository.findAllSubjectForTeacher(user.get().getId());
-
-                if (subjects.size() > 0) {
-                    dataModel.put("subjects", subjects);
-                }
-            }
+                    () -> resp.setStatus(HttpServletResponse.SC_BAD_REQUEST));
         }
         try {
             template.process(dataModel, printWriter);
@@ -75,26 +69,7 @@ public class UserServlet extends HttpServlet {
         } catch (TemplateException e) {
             e.printStackTrace();
         }
-    }
 
-    @Override
-    protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        HttpSession session = req.getSession(false);
-        if (session == null || session.getAttribute(SESSION_MARK) == null) {
-            resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-            return;
-        }
-        String id = req.getParameter("id");
-        if (StringUtils.isEmpty(id)) {
-            resp.setStatus(HttpServletResponse.SC_NOT_FOUND);
-            return;
-        }
-        Optional<User> user = service.findById(UUID.fromString(id));
-        if (user.isEmpty()) {
-            resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-            return;
-        }
-        service.delete(user.get());
-        req.getSession(false).invalidate();
     }
 }
+

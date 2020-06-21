@@ -19,13 +19,10 @@
                 <#include "user-card-with-picture.ftlh">
             </div>
             <div class="col-md-6">
-                <form  method="post" action="http://localhost:8080/edit-user-account">
-                    <#include "user-form-content-after-edit.ftlh">
-                </form>
+                <#include "user-form-content-after-edit.ftlh">
             </div>
             </#if>
         </div>
-    </div>
     </div>
 </#macro>
 

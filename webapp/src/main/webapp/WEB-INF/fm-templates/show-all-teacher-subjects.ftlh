@@ -1,0 +1,72 @@
+<#include "base-login-user.ftlh">
+<#macro content>
+    <div class="row">
+    <div class="col-md-12">
+    <#if message ??>
+        <h1>zaloguj się bądź zarejestruj by uzyskać dostęp</h1>
+        <a href="../../login.jsp">
+            <input type="button" value="zaloguj"/>
+        </a>
+        <a href="http://localhost:8080/add-user.jsp">
+            <input type="button" value="zarejestruj"/>
+        </a>
+    </#if>
+    <#if user ?? >
+        <#if subjects??>
+            <div class="alert alert-dark" role="alert">
+                Twoje aktywne przedmioty
+            </div>
+            <table class="table table-bordered table-hover ">
+                <thead class="thead-dark">
+                <tr>
+                    <th scope="col">nazwa przedmiotu</th>
+                    <th scope="col"></th>
+                </tr>
+                </thead>
+                <#list subjects as subject>
+                    <#if subject??>
+                        <tbody>
+                        <td>${subject.name}</td>
+                        <td>
+                            <a href="http://localhost:8080/subject?id=${subject.id}">
+                                <input class="btn btn-secondary" type="button" value="pokaż szczegóły"/>
+                            </a>
+                            <button type="button" class="btn btn-danger" data-toggle="modal"
+                                    data-target="#subjectModal">
+                                usuń przedmiot
+                            </button>
+                            <div class="modal fade" id="subjectModal" tabindex="-1" role="dialog"
+                                 aria-labelledby="exampleModalLabel"
+                                 aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">usuń przedmiot</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            Jesteś pewny, że chcesz usunąć ten przedmiot: ${subject.name}?
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">nie
+                                            </button>
+                                            <button id="delete-subject" type="button" value="${subject.id}"
+                                                    class="btn btn-primary">
+                                                tak
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                        </tbody>
+                    </#if>
+                </#list>
+            </table>
+        </#if>
+        <br>
+    </#if>
+</#macro>
+<@home/>

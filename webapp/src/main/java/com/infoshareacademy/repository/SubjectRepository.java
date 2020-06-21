@@ -86,43 +86,57 @@ public class SubjectRepository implements SubjectRepositoryInterface {
 
     @Override
     public List<Subject> findAllSubjectForTeacher(UUID id) {
-        List<Subject> suitableSubjects = new ArrayList<>();
-        subjects.getSubjects().forEach(s -> {
-            if (s.getTeacherId().equals(id))
-                suitableSubjects.add(s);
-        });
-        return suitableSubjects;
+        return subjects.getSubjects().stream().filter(s->s.getTeacherId().equals(id))
+                .collect(Collectors.toList());
     }
 
     @Override
     public void updateSubjectName(Subject subject) {
-        subjects.getSubjects().forEach(s -> {
-            if (s.getId().equals(subject.getId())) s.setName(subject.getName());
-        });
+        subjects.getSubjects()
+                .stream()
+                .filter(s -> s.getId().equals(subject.getId()) )
+                .findFirst()
+                .ifPresent(s->s.setName(subject.getName()));
         JsonSaver.createJson(subjects, FileNames.SUBJECTS_JSON);
     }
 
     @Override
     public void updateSubjectTopic(Subject subject) {
-        subjects.getSubjects().forEach(s -> {
-            if (s.getId().equals(subject.getId())) s.setTopic(subject.getTopic());
-        });
+        subjects.getSubjects()
+                .stream()
+                .filter(s -> s.getId().equals(subject.getId()) )
+                .findFirst()
+                .ifPresent(s->s.setTopic(subject.getTopic()));
         JsonSaver.createJson(subjects, FileNames.SUBJECTS_JSON);
     }
 
     @Override
     public void updateSubjectDescription(Subject subject) {
-        subjects.getSubjects().forEach(s -> {
-            if (s.getId().equals(subject.getId())) s.setDescription(subject.getDescription());
-        });
+        subjects.getSubjects()
+                .stream()
+                .filter(s -> s.getId().equals(subject.getId()) )
+                .findFirst()
+                .ifPresent(s->s.setDescription(subject.getDescription()));
         JsonSaver.createJson(subjects, FileNames.SUBJECTS_JSON);
     }
 
     @Override
     public void updateSubjectIsVideo(Subject subject) {
-        subjects.getSubjects().forEach(s -> {
-            if (s.getId().equals(subject.getId())) s.setVideo(subject.isVideo());
-        });
+        subjects.getSubjects()
+                .stream()
+                .filter(s -> s.getId().equals(subject.getId()) )
+                .findFirst()
+                .ifPresent(s->s.setVideo(subject.isVideo()));
+        JsonSaver.createJson(subjects, FileNames.SUBJECTS_JSON);
+    }
+
+    @Override
+    public void updateSubjectVideoLink(Subject subject) {
+        subjects.getSubjects()
+                .stream()
+                .filter(s -> s.getId().equals(subject.getId()) )
+                .findFirst()
+                .ifPresent(s->s.setVideoLink(subject.getVideoLink()));
         JsonSaver.createJson(subjects, FileNames.SUBJECTS_JSON);
     }
 }

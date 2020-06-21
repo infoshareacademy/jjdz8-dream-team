@@ -21,7 +21,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.*;
 
-import static com.infoshareacademy.servlet.users.UserLoginServlet.ATTRIBUTE_NAME;
+import static com.infoshareacademy.servlet.users.UserLoginServlet.SESSION_MARK;
 
 @WebServlet("/account-info")
 public class AccountInfoServlet extends HttpServlet {
@@ -44,29 +44,25 @@ public class AccountInfoServlet extends HttpServlet {
         Map<String, Object> dataModel = new HashMap<>();
 
         HttpSession session = req.getSession(false);
-        UUID id;
-        Optional<User> user;
-
-        if (session == null || session.getAttribute(ATTRIBUTE_NAME) == null) {
+        if (session == null || session.getAttribute(SESSION_MARK) == null) {
             dataModel.put("message", "please login first");
         } else {
-            id = (UUID) session.getAttribute(ATTRIBUTE_NAME);
-            user = service.findById(id);
-            if (user.isEmpty()) {
-                resp.sendError(HttpServletResponse.SC_BAD_REQUEST);
-                return;
-            }
-            dataModel.put("user", user.get());
-            System.out.println(user.get().getRole());
-            if (user.get().getRole().equals(ROLE.TEACHER)) {
-                dataModel.put("roleTeacher", "TEACHER");
-                List<Subject> subjects;
-                subjects = subjectService.findAllSubjectsForTeacher(user.get().getId());
-
-                if (subjects!= null && subjects.size() > 0) {
-                    dataModel.put("subjects", subjects);
+            UUID id = (UUID) session.getAttribute(SESSION_MARK);
+            service.findById(id).ifPresentOrElse(u -> {
+                dataModel.put("user", u);
+                if (u.getRole().equals(ROLE.TEACHER)) {
+                    dataModel.put("roleTeacher", "TEACHER");
+                    Optional<List<Subject>> subjects;
+                    subjects = subjectService.findAllSubjectsForTeacher(u.getId());
+                    subjects.ifPresent(subjectList -> dataModel.put("subjects", subjectList));
                 }
-            }
+            }, () -> {
+                try {
+                    resp.sendError(HttpServletResponse.SC_BAD_REQUEST);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            });
         }
         try {
             template.process(dataModel, printWriter);

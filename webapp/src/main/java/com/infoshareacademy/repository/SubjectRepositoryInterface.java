@@ -39,4 +39,6 @@ public interface SubjectRepositoryInterface {
     void updateSubjectIsVideo(Subject subject);
 
     List<Subject> searchByTopic(String topicPart);
+
+    void updateSubjectVideoLink(Subject subject);
 }

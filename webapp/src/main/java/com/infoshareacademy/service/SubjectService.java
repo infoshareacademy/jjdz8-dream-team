@@ -39,13 +39,14 @@ public class SubjectService {
         repository.delete(subject);
     }
 
-    public Subject createSubject(String name, String topic, String description, boolean isVideo, UUID teacherId) {
+    public Subject createSubject(String name, String topic, String description, boolean isVideo, UUID teacherId,String videoLink) {
         Subject subject = new Subject();
         subject.setName(name);
         subject.setTeacherId(teacherId);
         subject.setTopic(topic);
         subject.setDescription(description);
         subject.setVideo(isVideo);
+        subject.setVideoLink(videoLink);
         return subject;
     }
 
@@ -53,7 +54,7 @@ public class SubjectService {
         repository.add(subject);
     }
 
-    public List<Subject> findAllSubjectsForTeacher(UUID teacherId) {
-        return repository.findAllSubjectForTeacher(teacherId);
+    public Optional<List<Subject>> findAllSubjectsForTeacher(UUID teacherId) {
+        return Optional.ofNullable(repository.findAllSubjectForTeacher(teacherId));
     }
 }

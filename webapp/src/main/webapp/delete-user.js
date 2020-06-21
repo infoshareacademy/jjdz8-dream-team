@@ -5,7 +5,7 @@ $("#delete-user").each(function () {
             "url": '/user?id='+id,
             "method": 'DELETE',
             "success": function () {
-                 location.replace("/page-after-delete-account.jsp");
+                 location.replace("/logout");
             }
         })
     });

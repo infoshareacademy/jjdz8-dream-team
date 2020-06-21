@@ -20,8 +20,26 @@
                 <a href="http://localhost:8080/newAccount.jsp">
                     <input type="button" class="btn btn-secondary" value="zarejestruj"/>
                 </a>
-          <#else>
-              <@content/>
+          <#elseif user ??>
+              <div class="row">
+                  <div class="col-md-3">
+                      <div class="list-group">
+                          <a href="/account-info" class="list-group-item list-group-item-action">Twoje konto</a>
+                          <a href="/user" class="list-group-item list-group-item-action">Edytuj dane</a>
+                          <a href="/edit-password" class="list-group-item list-group-item-action">Zmień hasło</a>
+                          <#if roleTeacher ??>
+                          <a href="../../add-subject-k.html" class="list-group-item list-group-item-action">Dodaj przedmiot</a>
+                          <a href="/show-subjects" class="list-group-item list-group-item-action">Pokaż moje przedmioty</a>
+                          </#if>
+                          <a href="" class="list-group-item list-group-item-action" data-toggle="modal" data-target="#exampleModal" >Usuń konto</a>
+                        <#include "modal-to-delete-user.ftlh">
+                      </div>
+                  </div>
+                  <div class="col-md-9">
+                      <@content/>
+                  </div>
+              </div>
+
             </#if>
         </div>
     </main>

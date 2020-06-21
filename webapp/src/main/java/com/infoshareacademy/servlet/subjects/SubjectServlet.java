@@ -1,7 +1,10 @@
 package com.infoshareacademy.servlet.subjects;
 
+import com.infoshareacademy.domain.ROLE;
 import com.infoshareacademy.domain.Subject;
+import com.infoshareacademy.domain.User;
 import com.infoshareacademy.freemarker.TemplateProvider;
+import com.infoshareacademy.service.Service;
 import com.infoshareacademy.service.SubjectService;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
@@ -19,7 +22,8 @@ import java.util.*;
 
 import static com.infoshareacademy.servlet.HelperForServlets.*;
 import static com.infoshareacademy.servlet.HelperForServlets.isValidSession;
-import static com.infoshareacademy.servlet.users.UserLoginServlet.ATTRIBUTE_NAME;
+import static com.infoshareacademy.servlet.subjects.EditSubjectServlet.EMPTY_FORM_PARAMETER;
+import static com.infoshareacademy.servlet.users.UserLoginServlet.SESSION_MARK;
 
 @WebServlet("/subject")
 public class SubjectServlet extends HttpServlet {
@@ -30,7 +34,9 @@ public class SubjectServlet extends HttpServlet {
     @Inject
     private TemplateProvider provider;
 
-    private static final String SESSION_ATTRIBUTE = "teacherID";
+    @Inject
+    private Service userService;
+
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -41,10 +47,14 @@ public class SubjectServlet extends HttpServlet {
         Template template = provider.getTemplate(getServletContext(), "subject-information-page-new.ftlh");
         Map<String, Object> dataModel = new HashMap<>();
         HttpSession session = req.getSession(false);
-        if (!isValidSession(session, ATTRIBUTE_NAME)) {
+        if (!isValidSession(session, SESSION_MARK)) {
             dataModel.put("message", ERROR_MESSAGE);
         } else {
-            /*processRequest(resp, out, UUID.fromString(id));*/
+            Optional<User> user = userService.findById((UUID) session.getAttribute(SESSION_MARK));
+            user.ifPresentOrElse(u -> dataModel.put("user", u),
+                    () -> {
+                        resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+                    });
             Optional<Subject> subject = service.findById(UUID.fromString(id));
             if (subject.isEmpty()) {
                 resp.sendError(HttpServletResponse.SC_NOT_FOUND);
@@ -68,7 +78,7 @@ public class SubjectServlet extends HttpServlet {
         PrintWriter out = resp.getWriter();
 
         HttpSession session = req.getSession(false);
-        if (!isValidSession(session, ATTRIBUTE_NAME)) {
+        if (!isValidSession(session, SESSION_MARK)) {
             resp.sendError(HttpServletResponse.SC_BAD_REQUEST, "please login first");
             return;
         }
@@ -78,11 +88,11 @@ public class SubjectServlet extends HttpServlet {
             resp.sendError(HttpServletResponse.SC_BAD_REQUEST, "something goes wrong");
             return;
         }
-        processRequest(resp, out, UUID.fromString(id));
+        processRequest(resp, out, UUID.fromString(id),session);
 
     }
 
-    public void processRequest(HttpServletResponse resp, PrintWriter out, UUID id) throws IOException {
+    public void processRequest(HttpServletResponse resp, PrintWriter out, UUID id, HttpSession session) throws IOException {
         Optional<Subject> subject = service.findById(id);
         if (subject.isEmpty()) {
             resp.sendError(HttpServletResponse.SC_NOT_FOUND);
@@ -90,6 +100,18 @@ public class SubjectServlet extends HttpServlet {
         }
         Template template = provider.getTemplate(getServletContext(), "subject-information-page-new.ftlh");
         Map<String, Object> dataModel = new HashMap<>();
+        Optional<User> user = userService.findById((UUID) session.getAttribute(SESSION_MARK));
+        user.ifPresentOrElse(value -> {
+                    dataModel.put("user", value);
+                    if (value.getRole().equals(ROLE.TEACHER)) dataModel.put("roleTeacher", "TEACHER");
+                },
+                () -> {
+                    resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+                });
+
+        if (session.getAttribute(EMPTY_FORM_PARAMETER)!= null) {
+            dataModel.put(EMPTY_FORM_PARAMETER, EMPTY_FORM_PARAMETER);
+        }
         dataModel.put("subject", subject.get());
         if (subject.get().isVideo()) {
             dataModel.put("isVideo", "tak");
@@ -100,12 +122,14 @@ public class SubjectServlet extends HttpServlet {
         } catch (TemplateException e) {
             e.printStackTrace();
         }
+
+        session.removeAttribute(EMPTY_FORM_PARAMETER);
     }
 
     @Override
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession(false);
-        if (!isValidSession(session, ATTRIBUTE_NAME)) {
+        if (!isValidSession(session, SESSION_MARK)) {
             resp.sendError(HttpServletResponse.SC_BAD_REQUEST, "please login first");
             return;
         }

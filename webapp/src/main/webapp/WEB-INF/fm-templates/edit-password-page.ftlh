@@ -1,5 +1,25 @@
 <#include "base-login-user.ftlh">
 <#macro content>
+    <#if inCorrectPassword ??>
+        <div class="col-md-12">
+            <div class="alert alert-danger" role="alert">
+                ${inCorrectPassword}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        </div>
+    </#if>
+    <#if correctPassword ??>
+        <div class="col-md-12">
+            <div class="alert alert-success" role="alert">
+                ${correctPassword}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        </div>
+    </#if>
     <div class="card">
         <div class="card-header">
             Login data
@@ -18,11 +38,13 @@
                 <#if user ?? >
                 <#include "user-card-with-picture.ftlh">
             </div>
+
             <div class="col-md-6">
-                <#include "user-form-content-before-edit.ftlh">
+                <#include "edit-password-form.ftlh">
             </div>
-            </#if>
         </div>
+        </#if>
+    </div>
     </div>
 </#macro>
 

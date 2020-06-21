@@ -10,9 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.util.Optional;
 
 @WebServlet("/login")
 public class UserLoginServlet extends HttpServlet {
@@ -20,7 +18,7 @@ public class UserLoginServlet extends HttpServlet {
     @Inject
     private Service service;
 
-    public static final String ATTRIBUTE_NAME = "userId";
+    public static final String SESSION_MARK = "userId";
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -32,13 +30,15 @@ public class UserLoginServlet extends HttpServlet {
             return;
         }
 
-        Optional<User> user = service.findByNickName(nickName);
-        if (user.isEmpty()) {
-            resp.setStatus(HttpServletResponse.SC_NOT_FOUND);
-            return;
-        }
-        HttpSession session = req.getSession(true);
-        session.setAttribute(ATTRIBUTE_NAME, user.get().getId());
-        resp.sendRedirect("/account-info");
+        service.findByNickName(nickName).
+                ifPresentOrElse(u -> {
+                            req.getSession(true).setAttribute(SESSION_MARK, u.getId());
+                            try {
+                                resp.sendRedirect("/account-info");
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                        },
+                        () -> resp.setStatus(HttpServletResponse.SC_NOT_FOUND));
     }
 }
