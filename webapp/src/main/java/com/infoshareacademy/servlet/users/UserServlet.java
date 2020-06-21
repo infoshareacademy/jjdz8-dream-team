@@ -1,6 +1,5 @@
 package com.infoshareacademy.servlet.users;
 
-
 import com.infoshareacademy.domain.Role;
 import com.infoshareacademy.domain.Subject;
 import com.infoshareacademy.domain.User;

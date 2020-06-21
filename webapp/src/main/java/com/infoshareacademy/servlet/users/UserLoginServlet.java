@@ -40,5 +40,6 @@ public class UserLoginServlet extends HttpServlet {
         HttpSession session = req.getSession(true);
         session.setAttribute(ATTRIBUTE_NAME, user.get().getId());
         resp.sendRedirect("/account-info");
+
     }
 }

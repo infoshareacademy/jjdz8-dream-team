@@ -1,16 +1,12 @@
 package com.infoshareacademy.servlet.users;
 
 import com.infoshareacademy.domain.Role;
-import com.infoshareacademy.domain.Subject;
 import com.infoshareacademy.domain.User;
 import com.infoshareacademy.freemarker.TemplateProvider;
-import com.infoshareacademy.security.PasswordResolver;
 import com.infoshareacademy.service.RoleService;
-import com.infoshareacademy.service.Service;
 import com.infoshareacademy.service.UserService;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
-import org.apache.commons.lang.StringUtils;
 
 import javax.inject.Inject;
 import javax.servlet.ServletException;
@@ -23,10 +19,8 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.UUID;
 
 import static com.infoshareacademy.servlet.HelperForServlets.*;
-import static com.infoshareacademy.servlet.users.UserLoginServlet.ATTRIBUTE_NAME;
 import static com.infoshareacademy.validation.ParameterValidator.isIncorrectCorrectParameter;
 
 @WebServlet("/add-user")
@@ -49,21 +43,12 @@ public class AddUserAccountServlet extends HttpServlet {
 
     public static final String EMPTY_WHOYOUARE = "emptyWhoYouAre";
 
-    //public static final String LOGIN_ERROR = "loginError";
-
-    //private static final String SESSION_ATTRIBUTE = "userID";
-
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html;charset=UTF-8");
         PrintWriter printWriter = resp.getWriter();
 
         HttpSession session = req.getSession(true);
-//        if (!isValidSession(session, ATTRIBUTE_NAME)) {
-//            String errorMassage = "Please login first";
-//            printWriter.write(errorMassage);
-//            return;
-//        }
 
         String nickName = req.getParameter("nickName");
         String email = req.getParameter("email");
@@ -97,15 +82,6 @@ public class AddUserAccountServlet extends HttpServlet {
             return;
         }
 
-//        if (StringUtils.isEmpty(password)) {return;}
-//        if (PasswordResolver.isCorrectPasswordFormat(password) && password.equals(password)){
-//            userEditService.editNickname(user, nickName);
-//            userEditService.editEmail(user, email);
-//            userEditService.editPassword(user, PasswordResolver.passwordHashing(newPassword));
-//        } else {
-//            session.setAttribute(WRONG_PASSWORD_FORMAT, "wrong password format");
-//        }
-
         Role role = roleService.roleFromString(whoIAm);
 
         User user = userService.createUser(nickName, email, password, role);
@@ -122,9 +98,6 @@ public class AddUserAccountServlet extends HttpServlet {
         Map<String, Object> dataModel = new HashMap<>();
 
         HttpSession session = req.getSession(true);
-//        if (!isValidSession(session, SESSION_ATTRIBUTE)) {
-//            dataModel.put("message", getAttributeValue(session, LOGIN_ERROR));
-//        } else {
 
             putCorrectDataToDataModel(EMPTY_NICKNAME, getAttributeValue(session, EMPTY_NICKNAME), dataModel);
             putCorrectDataToDataModel("nickName", getAttributeValue(session, "nickName"), dataModel);
@@ -134,7 +107,7 @@ public class AddUserAccountServlet extends HttpServlet {
             putCorrectDataToDataModel("password", getAttributeValue(session, "password"), dataModel);
             putCorrectDataToDataModel(EMPTY_WHOYOUARE, getAttributeValue(session, EMPTY_WHOYOUARE), dataModel);
             putCorrectDataToDataModel("whoIAm", getAttributeValue(session, "whoIAm"), dataModel);
-        //}
+
         try {
             template.process(dataModel, printWriter);
             resp.setStatus(HttpServletResponse.SC_ACCEPTED);
