@@ -2,6 +2,7 @@ package com.infoshareacademy.service;
 
 import com.infoshareacademy.domain.User;
 import com.infoshareacademy.repository.Repository;
+import com.infoshareacademy.security.PasswordResolver;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
@@ -14,7 +15,8 @@ public class UserEditService implements EditService {
 
     @Override
     public void editPassword(User user, String newPassword) {
-        repository.updateUserPassword(user.getId(), newPassword);
+        String hashPass = PasswordResolver.passwordHashing(newPassword);
+        repository.updateUserPassword(user.getId(), hashPass);
     }
 
     @Override

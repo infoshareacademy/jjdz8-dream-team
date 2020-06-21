@@ -18,12 +18,12 @@ import java.util.Map;
 
 import static com.infoshareacademy.servlet.HelperForServlets.ERROR_MESSAGE;
 import static com.infoshareacademy.servlet.HelperForServlets.isValidSession;
-import static com.infoshareacademy.servlet.users.UserLoginServlet.ATTRIBUTE_NAME;
+import static com.infoshareacademy.servlet.users.UserLoginServlet.SESSION_MARK;
 
 @WebServlet("/search")
 public class SearchSubject extends HttpServlet {
 
-    @Inject
+  /*  @Inject
     TemplateProvider provider;
 
     @Override
@@ -35,7 +35,7 @@ public class SearchSubject extends HttpServlet {
         Map<String, Object> dataModel = new HashMap<>();
 
         HttpSession session = req.getSession(false);
-        if (!isValidSession(session,ATTRIBUTE_NAME)) {
+        if (!isValidSession(session, SESSION_MARK)) {
             dataModel.put("message", ERROR_MESSAGE);
         }
         try {
@@ -44,5 +44,5 @@ public class SearchSubject extends HttpServlet {
         } catch (TemplateException e) {
             e.printStackTrace();
         }
-    }
+    }*/
 }

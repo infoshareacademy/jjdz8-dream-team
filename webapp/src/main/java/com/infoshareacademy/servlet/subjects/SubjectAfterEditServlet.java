@@ -8,7 +8,6 @@ import freemarker.template.Template;
 import freemarker.template.TemplateException;
 
 import javax.inject.Inject;
-import javax.inject.Named;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -22,7 +21,7 @@ import java.util.Map;
 import java.util.UUID;
 
 import static com.infoshareacademy.servlet.HelperForServlets.*;
-import static com.infoshareacademy.servlet.users.UserLoginServlet.ATTRIBUTE_NAME;
+import static com.infoshareacademy.servlet.users.UserLoginServlet.SESSION_MARK;
 
 @WebServlet("/subject-after-edit")
 public class SubjectAfterEditServlet extends HttpServlet {
@@ -59,7 +58,7 @@ public class SubjectAfterEditServlet extends HttpServlet {
         Map<String, Object> dataModel = new HashMap<>();
 
         HttpSession session = req.getSession(false);
-        if (!isValidSession(session, ATTRIBUTE_NAME)) {
+        if (!isValidSession(session, SESSION_MARK)) {
             dataModel.put("message", getAttributeValue(session, LOGIN_ERROR));
 
         } else {

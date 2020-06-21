@@ -1,5 +1,6 @@
 package com.infoshareacademy.servlet.users;
 
+import com.infoshareacademy.domain.ROLE;
 import com.infoshareacademy.domain.User;
 import com.infoshareacademy.freemarker.TemplateProvider;
 import com.infoshareacademy.security.PasswordResolver;
@@ -24,8 +25,8 @@ import java.util.Optional;
 import java.util.UUID;
 
 import static com.infoshareacademy.servlet.HelperForServlets.*;
-import static com.infoshareacademy.servlet.HelperForServlets.isIncorrectCorrectParameter;
-import static com.infoshareacademy.servlet.users.UserLoginServlet.ATTRIBUTE_NAME;
+import static com.infoshareacademy.servlet.users.UserLoginServlet.SESSION_MARK;
+import static com.infoshareacademy.validation.UserValidator.*;
 
 @WebServlet("/edit-user-account")
 public class EditUserAccountServlet extends HttpServlet {
@@ -49,6 +50,8 @@ public class EditUserAccountServlet extends HttpServlet {
 
     public static final String LOGIN_ERROR = "loginError";
 
+    public static final String WRONG_OLD_PASSWORD = "wrongOldPassword";
+
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -59,25 +62,25 @@ public class EditUserAccountServlet extends HttpServlet {
         Map<String, Object> dataModel = new HashMap<>();
 
         HttpSession session = req.getSession(false);
-        if (!isValidSession(session, ATTRIBUTE_NAME)) {
-            session.setAttribute(LOGIN_ERROR, "you have to login first");
+        if (!isValidSession(session, SESSION_MARK)) {
             dataModel.put("message", ERROR_MESSAGE);
         } else {
-
-            Optional<User> user = service.findById((UUID) session.getAttribute(ATTRIBUTE_NAME));
-            user.ifPresentOrElse(value -> dataModel.put("user", value),
+            Optional<User> user = service.findById((UUID) session.getAttribute(SESSION_MARK));
+            user.ifPresentOrElse(value -> {
+                dataModel.put("user", value);
+                if (value.getRole().equals(ROLE.TEACHER)) dataModel.put("roleTeacher", "TEACHER");
+                },
                     () -> {
                         resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
                     });
 
             putCorrectDataToDataModel("nickName", getAttributeValue(session, "nickName"), dataModel);
             putCorrectDataToDataModel("email", getAttributeValue(session, "email"), dataModel);
-            putCorrectDataToDataModel("nickNameExist", getAttributeValue(session,"nickNameExist"), dataModel);
-            putCorrectDataToDataModel("emailExist", getAttributeValue(session,"emailExist"), dataModel);
+            putCorrectDataToDataModel("nickNameExist", getAttributeValue(session, "nickNameExist"), dataModel);
+            putCorrectDataToDataModel("emailExist", getAttributeValue(session, "emailExist"), dataModel);
             putCorrectDataToDataModel(EMPTY_NICKNAME, getAttributeValue(session, EMPTY_NICKNAME), dataModel);
             putCorrectDataToDataModel(EMPTY_EMAIL, getAttributeValue(session, EMPTY_EMAIL), dataModel);
             putCorrectDataToDataModel(WRONG_PASSWORD, getAttributeValue(session, WRONG_PASSWORD), dataModel);
-            putCorrectDataToDataModel(WRONG_PASSWORD_FORMAT, getAttributeValue(session, WRONG_PASSWORD_FORMAT), dataModel);
         }
         try {
             template.process(dataModel, printWriter);
@@ -85,7 +88,7 @@ public class EditUserAccountServlet extends HttpServlet {
         } catch (TemplateException e) {
             e.printStackTrace();
         }
-        invalidateAttributes(session, EMPTY_NICKNAME, EMPTY_EMAIL, WRONG_PASSWORD_FORMAT, WRONG_PASSWORD,"emailExist","nickNameExist");
+        invalidateAttributes(session, EMPTY_NICKNAME, EMPTY_EMAIL, WRONG_PASSWORD_FORMAT, WRONG_PASSWORD, "emailExist", "nickNameExist");
     }
 
     @Override
@@ -93,70 +96,40 @@ public class EditUserAccountServlet extends HttpServlet {
         resp.setContentType("text/html;charset=UTF-8");
 
         HttpSession session = req.getSession(false);
-        if (!isValidSession(session, ATTRIBUTE_NAME)) {
+        if (!isValidSession(session, SESSION_MARK)) {
             session.setAttribute(LOGIN_ERROR, "you have to login first");
             return;
         }
 
-        Optional<User> user = service.findById((UUID) session.getAttribute(ATTRIBUTE_NAME));
+        Optional<User> user = service.findById((UUID) session.getAttribute(SESSION_MARK));
         if (user.isEmpty()) {
             resp.sendError(HttpServletResponse.SC_BAD_REQUEST, "Something goes wrong");
             return;
         }
-        processPostRequest(req, user.get(), editService, service);
 
-        if (session.getAttribute(EMPTY_NICKNAME) != null  || session.getAttribute(EMPTY_EMAIL) != null
-                || session.getAttribute(WRONG_PASSWORD) != null || session.getAttribute(WRONG_PASSWORD_FORMAT) != null
-        || session.getAttribute("nickNameExist") !=null || session.getAttribute("emailExist")!=null) {
+
+        if (session.getAttribute(EMPTY_NICKNAME) != null || session.getAttribute(EMPTY_EMAIL) != null
+                || session.getAttribute(WRONG_PASSWORD) != null || session.getAttribute("nickNameExist") != null || session.getAttribute("emailExist") != null) {
             resp.sendRedirect("/edit-user-account");
             return;
         }
+
         resp.sendRedirect("/account-info");
     }
 
 
-    private void processPostRequest(HttpServletRequest req, User user, EditService userEditService, Service userService) throws ServletException, IOException {
+    private void processPostRequest(HttpServletRequest req, User user) throws ServletException, IOException {
         String nickName = req.getParameter("nickName");
         String email = req.getParameter("email");
-        String oldPassword = req.getParameter("oldPassword");
-        String newPassword = req.getParameter("newPassword");
-        String repeatedPassword = req.getParameter("repeatedPassword");
 
         HttpSession session = req.getSession(false);
-        UUID id = (UUID) session.getAttribute(ATTRIBUTE_NAME);
 
-        if (StringUtils.isEmpty(nickName)) {
-            session.setAttribute(EMPTY_NICKNAME, "nickName cannot be empty");
-        }
-        if (service.nicknameAlreadyExist(nickName,id)){
-            session.setAttribute("nickNameExist", nickName);
-        }
-        else session.setAttribute("nickName", nickName);
+        boolean isCorrectNickName = isCorrectNickname(nickName, session, service);
+        boolean isCorrectEmail = isCorrectEmail(email, session, service);
 
-        if (StringUtils.isEmpty(email)) {
-            session.setAttribute(EMPTY_EMAIL, "email cannot be empty");
-        }
-        if (service.emailAlreadyExist(email,id)){
-            session.setAttribute("emailExist",email);
-        }
-        else session.setAttribute("email", email);
-
-        if (StringUtils.isEmpty(oldPassword) || !userService.isCorrectPassword(user, oldPassword)) {
-            session.setAttribute(WRONG_PASSWORD, "wrong password");
-            return;
-        } else if (StringUtils.isEmpty(newPassword) && !email.isEmpty() && !nickName.isEmpty()
-        && !service.nicknameAlreadyExist(nickName,id) && !service.emailAlreadyExist(email,id)) {
-            userEditService.editNickname(user, nickName);
-            userEditService.editEmail(user, email);
-            return;
-        }
-        if (StringUtils.isEmpty(newPassword)) {return;}
-        if (PasswordResolver.isCorrectPasswordFormat(newPassword) && newPassword.equals(repeatedPassword)){
-            userEditService.editNickname(user, nickName);
-            userEditService.editEmail(user, email);
-            userEditService.editPassword(user, PasswordResolver.passwordHashing(newPassword));
-        } else {
-            session.setAttribute(WRONG_PASSWORD_FORMAT, "wrong password format");
+        if (isCorrectNickName && isCorrectEmail) {
+            editService.editNickname(user, nickName);
+            editService.editEmail(user, email);
         }
     }
 

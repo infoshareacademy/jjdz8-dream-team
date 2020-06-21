@@ -23,7 +23,7 @@ import java.util.Map;
 @WebServlet("/filter-subjects")
 public class FilterSubjectsServlet extends HttpServlet {
 
- /*   @Inject
+   /* @Inject
     private TemplateProvider provider;
 
     @Inject

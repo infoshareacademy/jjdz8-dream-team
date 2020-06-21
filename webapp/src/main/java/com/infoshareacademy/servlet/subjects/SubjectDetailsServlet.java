@@ -57,10 +57,8 @@ public class SubjectDetailsServlet extends HttpServlet {
                     },
                     () -> dataModel.put("message", "something goes wrong"));
         } else if (!isIncorrectCorrectParameter(teacherId)) {
-            List<Subject> subjects = service.findAllSubjectsForTeacher(UUID.fromString(teacherId));
-            if (subjects != null && subjects.size() > 0) {
-                dataModel.put("subjects", subjects);
-            }
+            Optional<List<Subject>> subjects = service.findAllSubjectsForTeacher(UUID.fromString(teacherId));
+            subjects.ifPresent(subjectList -> dataModel.put("subjects", subjectList));
         }
         try {
             template.process(dataModel, printWriter);

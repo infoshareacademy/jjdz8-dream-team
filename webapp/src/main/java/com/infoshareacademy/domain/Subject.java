@@ -17,6 +17,8 @@ public class Subject {
 
     private boolean isVideo;
 
+    private String videoLink;
+
     public Subject() {
         this.id = UUID.randomUUID();
     }
@@ -94,5 +96,13 @@ public class Subject {
                 ", description='" + description + '\'' +
                 ", isVideo=" + isVideo +
                 '}';
+    }
+
+    public String getVideoLink() {
+        return videoLink;
+    }
+
+    public void setVideoLink(String videoLink) {
+        this.videoLink = videoLink;
     }
 }
