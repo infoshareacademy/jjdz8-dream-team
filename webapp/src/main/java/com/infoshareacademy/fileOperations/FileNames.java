@@ -1,9 +1,7 @@
 package com.infoshareacademy.fileOperations;
 
 public class FileNames {
-
-    //private static final String ROOT_PATH = "/home/dawid/Documents/Kursy/Java_project_isa/jjdz8-dream-team/webapp/src/resources/";
-    private static final String ROOT_PATH = "/home/dawid/IdeaProjects/jjdz8-dream-team/webapp/src/resources/";
+    private static final String ROOT_PATH = "/home/dawid/IdeaProjects/jjdz8-dream-team/webapp/src/main/resources/";
 
     public static final String SUBJECTS_JSON = ROOT_PATH + "subjects.json";
 
