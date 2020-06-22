@@ -29,7 +29,7 @@
             </ol>
             <div class="carousel-inner img-fluid">
                 <div class="item active img-fluid">
-                    <img src="jpg/77522.jpg" alt="">
+                    <img src="../jpg/77522.jpg" alt="">
                     <!-- Opis slajdu -->
                     <div class="carousel-caption">
                         <h3>"KAŻDA PORAŻKA JEST SZANSĄ, ŻEBY SPRÓBOWAĆ JESZCZE RAZ.</h3>
@@ -38,7 +38,7 @@
                     </div>
                 </div>
                 <div class="item img-fluid">
-                    <img src="jpg/pexels-1786955.jpg    " alt="">
+                    <img src="../jpg/pexels-1786955.jpg    " alt="">
                     <!-- Opis slajdu -->
                     <div class="carousel-caption">
                         <h3>"JESTLI JEST CIĘZKO, TO ZNACZY, ŻE IDZIESZ W DOBRYM KIERUNKU." </h3>

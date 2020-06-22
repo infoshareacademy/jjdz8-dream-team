@@ -8,7 +8,7 @@
     <div class="col-md-4">
     <#if message ??>
         <h1>zaloguj się bądź zarejestruj by uzyskać dostęp</h1>
-        <a href="../../login.jsp">
+        <a href="../../html_js_css_Jsp_files/login.jsp">
             <input type="button" value="zaloguj"/>
         </a>
         <a href="http://localhost:8080/add-user.jsp">
