@@ -36,6 +36,30 @@
         "month": 6,
         "day": 8
       }
+    },
+    {
+      "password": "202cb962ac59075b964b07152d234b70",
+      "id": "5e97b6cd-84d1-417c-83d1-39057d183367",
+      "nickName": "Piotr",
+      "email": "piotr@wp.pl",
+      "role": "TEACHER",
+      "dateOfRegistration": {
+        "year": 2020,
+        "month": 6,
+        "day": 22
+      }
+    },
+    {
+      "password": "706f0a2f93cf7e44d454ee5e0aef2ccf",
+      "id": "044d7a5b-277d-4c89-a927-8386d6ba4ee6",
+      "nickName": "Wladimir",
+      "email": "cccp@mir.ru",
+      "role": "STUDENT",
+      "dateOfRegistration": {
+        "year": 2020,
+        "month": 6,
+        "day": 22
+      }
     }
   ]
 }
