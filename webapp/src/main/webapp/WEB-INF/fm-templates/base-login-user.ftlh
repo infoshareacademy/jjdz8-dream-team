@@ -14,7 +14,7 @@
         <div class="container">
             <#if message ??>
                 <h1>zaloguj się bądź zarejestruj by uzyskać dostęp</h1>
-                <a href="../../login.jsp">
+                <a href="../../html_js_css_Jsp_files/login.jsp">
                     <input type="button" class="btn btn-secondary" value="zaloguj"/>
                 </a>
                 <a href="http://localhost:8080/newAccount.jsp">
@@ -28,7 +28,7 @@
                           <a href="/user" class="list-group-item list-group-item-action">Edytuj dane</a>
                           <a href="/edit-password" class="list-group-item list-group-item-action">Zmień hasło</a>
                           <#if roleTeacher ??>
-                          <a href="../../add-subject-k.html" class="list-group-item list-group-item-action">Dodaj przedmiot</a>
+                          <a href="../../html_js_css_Jsp_files/add-subject-k.html" class="list-group-item list-group-item-action">Dodaj przedmiot</a>
                           <a href="/show-subjects" class="list-group-item list-group-item-action">Pokaż moje przedmioty</a>
                           </#if>
                           <a href="" class="list-group-item list-group-item-action" data-toggle="modal" data-target="#exampleModal" >Usuń konto</a>

@@ -5,10 +5,13 @@ import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "users")
 public class User {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -28,6 +31,9 @@ public class User {
     @Column(name = "date_of_registration")
     @CreationTimestamp
     private LocalDate dateOfRegistration;
+
+    @OneToMany(mappedBy = "user")
+    private Set<Subject> subjects = new HashSet<>();
 
     public Long getId() {
         return id;
@@ -73,7 +79,11 @@ public class User {
         return dateOfRegistration;
     }
 
-    public void setDateOfRegistration(LocalDate dateOfRegistration) {
-        this.dateOfRegistration = dateOfRegistration;
+    public Set<Subject> getSubjects() {
+        return subjects;
+    }
+
+    public void setSubjects(Set<Subject> subjects) {
+        this.subjects = subjects;
     }
 }
