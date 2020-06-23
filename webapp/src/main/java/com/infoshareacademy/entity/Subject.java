@@ -5,8 +5,29 @@ import org.hibernate.annotations.CreationTimestamp;
 import javax.persistence.*;
 import java.time.LocalDate;
 
+import static com.infoshareacademy.entity.SubjectColumn.*;
+import static com.infoshareacademy.entity.SubjectQuery.*;
+
 @Entity
 @Table(name = "subjects")
+@NamedQueries({
+        @NamedQuery(
+                name = FIND_BY_NAME_QUERY,
+                query = "SELECT s from Subject s where s.name = :" + NAME
+        ),
+        @NamedQuery(
+                name = FIND_BY_TOPIC_QUERY,
+                query = "SELECT s from Subject s where s.topic = :" + TOPIC
+        ),
+        @NamedQuery(
+                name = FIND_BY_DESCRIPTION_QUERY,
+                query = "SELECT s from Subject s where s.description = :" + DESCRIPTION
+        ),
+        @NamedQuery(
+                name = FIND_BY_IS_VIDEO_QUERY,
+                query = "SELECT s from Subject s where s.isVideo = :" + IS_VIDEO
+        )
+})
 public class Subject {
 
     @Id

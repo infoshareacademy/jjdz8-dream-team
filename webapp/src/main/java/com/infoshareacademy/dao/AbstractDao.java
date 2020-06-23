@@ -5,6 +5,7 @@ import javax.ejb.Stateless;
 import javax.enterprise.context.RequestScoped;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.util.List;
 
 public abstract class AbstractDao<T> implements Dao<T> {
     @PersistenceContext
@@ -24,4 +25,5 @@ public abstract class AbstractDao<T> implements Dao<T> {
     public void delete(T t) {
         entityManager.remove(t);
     }
+
 }
