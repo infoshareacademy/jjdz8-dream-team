@@ -35,4 +35,22 @@ public interface Repository {
     boolean nickNameAlreadyExist(String nickname, UUID id);
 
     boolean emailAlreadyExist(String email, UUID id);
+
+    enum UserColumn {
+
+        EMAIL("userEmail"),
+
+        NICKNAME("userNickName");
+
+        private final String name;
+
+        private UserColumn(String s) {
+            this.name = s;
+        }
+
+        @Override
+        public String toString() {
+            return this.name;
+        }
+    }
 }

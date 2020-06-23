@@ -14,4 +14,6 @@ public interface Dao <T>{
     Optional<T> findById(long id);
 
     List<T> findAll();
+
+    List<T> createNamedQuery(String nameOfNamedQuery,String column, String value);
 }

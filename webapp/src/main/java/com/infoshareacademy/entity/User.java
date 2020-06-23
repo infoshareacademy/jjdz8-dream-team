@@ -10,6 +10,16 @@ import java.util.Set;
 
 @Entity
 @Table(name = "users")
+@NamedQueries({
+        @NamedQuery(
+                name = UserQuery.FIND_BY_EMAIL_QUERY,
+                query = "SELECT u from User u where u.email = :" + UserColumn.EMAIL
+        ),
+        @NamedQuery(
+                name = UserQuery.FIND_BY_NICKNAME_QUERY,
+                query = "SELECT u from User u where u.nickName = :" + UserColumn.NICKNAME
+        )
+})
 public class User {
 
     @Id
