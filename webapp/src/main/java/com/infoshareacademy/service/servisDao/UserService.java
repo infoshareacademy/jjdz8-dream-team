@@ -12,8 +12,10 @@ import javax.transaction.Transactional;
 
 @ApplicationScoped
 public class UserService {
+
  @Inject
     private Dao<User> userDao;
+
 @Transactional
     public void createUser() {
         User user = new User();
