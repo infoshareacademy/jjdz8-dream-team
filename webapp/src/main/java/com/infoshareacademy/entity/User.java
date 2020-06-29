@@ -8,16 +8,21 @@ import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
+import static com.infoshareacademy.entity.UserColumn.*;
+import static com.infoshareacademy.entity.UserColumn.EMAIL;
+import static com.infoshareacademy.entity.UserQuery.FIND_BY_EMAIL_QUERY;
+import static com.infoshareacademy.entity.UserQuery.FIND_BY_NICKNAME_QUERY;
+
 @Entity
 @Table(name = "users")
 @NamedQueries({
         @NamedQuery(
-                name = UserQuery.FIND_BY_EMAIL_QUERY,
-                query = "SELECT u from User u where u.email = :" + UserColumn.EMAIL
+                name = FIND_BY_EMAIL_QUERY,
+                query = "SELECT u from User u where u.email = :" + EMAIL
         ),
         @NamedQuery(
-                name = UserQuery.FIND_BY_NICKNAME_QUERY,
-                query = "SELECT u from User u where u.nickName = :" + UserColumn.NICKNAME
+                name = FIND_BY_NICKNAME_QUERY,
+                query = "SELECT u from User u where u.nickName = :" + NICKNAME
         )
 })
 public class User {

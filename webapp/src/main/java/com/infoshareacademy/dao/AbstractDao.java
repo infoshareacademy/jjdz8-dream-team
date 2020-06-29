@@ -1,13 +1,10 @@
 package com.infoshareacademy.dao;
 
-import javax.ejb.EJB;
-import javax.ejb.Stateless;
-import javax.enterprise.context.RequestScoped;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import java.util.List;
 
 public abstract class AbstractDao<T> implements Dao<T> {
+
     @PersistenceContext
     EntityManager entityManager;
 
