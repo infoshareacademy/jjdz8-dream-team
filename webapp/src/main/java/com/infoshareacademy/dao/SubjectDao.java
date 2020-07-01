@@ -21,9 +21,18 @@ public class SubjectDao extends AbstractDao<Subject> {
     }
 
     @Override
-    public List<Subject> createNamedQuery(String nameOfNamedQuery, String column, String value) {
+    public Optional<Subject> createNamedQuery(String nameOfNamedQuery, String column, String value) {
+        Query query = entityManager.createNamedQuery(nameOfNamedQuery, Subject.class);
+        query.setParameter(column, value);
+        return Optional.of((Subject) query.getSingleResult());
+    }
+
+    @Override
+    public List<Subject> createNamedQueryForList(String nameOfNamedQuery, String column, String value) {
         Query query = entityManager.createNamedQuery(nameOfNamedQuery, Subject.class);
         query.setParameter(column, value);
         return query.getResultList();
     }
+
+
 }

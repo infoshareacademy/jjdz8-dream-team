@@ -16,5 +16,7 @@ public interface Dao <T>{
 
     List<T> findAll();
 
-    List<T> createNamedQuery(String nameOfNamedQuery,String column, String value);
+    Optional<T> createNamedQuery(String nameOfNamedQuery,String column, String value);
+
+    List<T> createNamedQueryForList(String nameOfNamedQuery,String column, String value);
 }

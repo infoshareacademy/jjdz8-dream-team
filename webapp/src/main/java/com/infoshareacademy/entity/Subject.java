@@ -26,6 +26,10 @@ import static com.infoshareacademy.entity.SubjectQuery.*;
         @NamedQuery(
                 name = FIND_BY_IS_VIDEO_QUERY,
                 query = "SELECT s from Subject s where s.isVideo = :" + IS_VIDEO
+        ),
+        @NamedQuery(
+                name = FIND_BY_USER_ID,
+                query = "SELECT s from Subject s where s.user = :" + SUBJECT_USER
         )
 })
 public class Subject {
@@ -53,7 +57,7 @@ public class Subject {
     @CreationTimestamp
     private LocalDate dateOfCreation;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_ID")
     private User user;
 

@@ -4,6 +4,8 @@ import com.infoshareacademy.domain.Role;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
@@ -32,15 +34,21 @@ public class User {
     private Long id;
 
     @Basic
+    @NotNull
     private String nickName;
 
     @Basic
+    @NotNull
+    @Email
     private String email;
 
     @Basic
+    @Enumerated(EnumType.STRING)
+    @NotNull
     private Role role;
 
     @Basic
+    @NotNull
     private String password;
 
     @Column(name = "date_of_registration")
@@ -101,4 +109,5 @@ public class User {
     public void setSubjects(Set<Subject> subjects) {
         this.subjects = subjects;
     }
+
 }
