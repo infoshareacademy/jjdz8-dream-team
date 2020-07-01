@@ -9,4 +9,6 @@ public class SubjectQuery {
     public static final String FIND_BY_DESCRIPTION_QUERY = "Subject.findByDescription";
 
     public static final String FIND_BY_IS_VIDEO_QUERY = "Subject.findByIsVideo";
+
+    public static final String FIND_BY_USER_ID = "Subject.findByUserId";
 }

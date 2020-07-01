@@ -8,6 +8,7 @@ import com.infoshareacademy.entity.User;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.transaction.Transactional;
+import java.util.List;
 
 @ApplicationScoped
 public class SubjectService {
@@ -23,6 +24,9 @@ public class SubjectService {
     subject.setDescription("dla klas podstawowych");
     subject.setVideo(true);
     subject.setVideoLink("google.com");
+    subjectDao.save(subject);
     }
 
+    @Transactional
+    public List<Subject> findSubjectsForUser(long userID);
 }

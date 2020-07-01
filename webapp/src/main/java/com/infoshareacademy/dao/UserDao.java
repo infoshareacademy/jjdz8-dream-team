@@ -1,5 +1,6 @@
 package com.infoshareacademy.dao;
 
+import com.infoshareacademy.entity.Subject;
 import com.infoshareacademy.entity.User;
 
 import javax.enterprise.context.RequestScoped;
@@ -20,9 +21,21 @@ public class UserDao extends AbstractDao<User> {
         return entityManager.createQuery("SELECT u FROM User u", User.class).getResultList();
     }
 
-    @Override
+  /*  @Override
     public List<User> createNamedQuery(String nameOfNamedQuery, String column, String value) {
+        return null;
+    }*/
+
+    @Override
+    public Optional<User> createNamedQuery(String nameOfNamedQuery, String column, String value) {
         Query query = entityManager.createNamedQuery(nameOfNamedQuery, User.class);
+        query.setParameter(column, value);
+        return Optional.of((User) query.getSingleResult());
+    }
+
+    @Override
+    public List<User> createNamedQueryForList(String nameOfNamedQuery, String column, String value) {
+        Query query = entityManager.createNamedQuery(nameOfNamedQuery, Subject.class);
         query.setParameter(column, value);
         return query.getResultList();
     }

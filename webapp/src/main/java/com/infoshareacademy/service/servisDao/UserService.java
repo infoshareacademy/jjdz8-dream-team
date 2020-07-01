@@ -3,12 +3,13 @@ package com.infoshareacademy.service.servisDao;
 import com.infoshareacademy.dao.Dao;
 import com.infoshareacademy.domain.Role;
 import com.infoshareacademy.entity.User;
+import com.infoshareacademy.entity.UserQuery;
 
 
-import javax.ejb.TransactionAttribute;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.transaction.Transactional;
+import java.util.Optional;
 
 @ApplicationScoped
 public class UserService {
@@ -24,5 +25,20 @@ public class UserService {
         user.setPassword("123");
         user.setRole(Role.ADMINISTRATOR);
         userDao.save(user);
+    }
+
+    @Transactional
+    public Optional<User> findByNickname(String nickName){
+    return userDao.createNamedQuery(UserQuery.FIND_BY_NICKNAME_QUERY,"userNickName", nickName);
+    }
+
+    @Transactional
+    public Optional<User> findByEmail(String email) {
+    return userDao.createNamedQuery(UserQuery.FIND_BY_EMAIL_QUERY,"userEmail", email);
+    }
+
+    @Transactional
+    public Optional<Optional<User>> findById(long id) {
+    return Optional.of(userDao.findById(id));
     }
 }
