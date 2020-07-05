@@ -7,7 +7,7 @@
             data-target="#navigation"
     >
         <span class="navbar-toggler-icon"></span>
-    </button>
+    </button>git
     <div class="collapse navbar-collapse" id="navigation">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active">

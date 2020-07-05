@@ -1,0 +1,33 @@
+version: "3.7"
+services:
+  app:
+    container_name: "DreamTeamApp"
+    image: "jboss/wildfly"
+    environment:
+      - WILDFLY_USER=admin
+      - WILDFLY_PASSWORD=admin
+      - MYSQL_DATABASE=dataBaseElearning
+      - MYSQL_USER=root
+      - MYSQL_PASSWORD=root
+      #      - DB_NAME=dataBaseElearning
+      #      - DB_USER=root
+      #      - DB_PASS=root
+      - DB_URI=jdbc:mysql://0.0.0.0:3307/dataBaseElearning
+    depends_on:
+      - db
+    links:
+      - db:mysql-DreamTeamAppDC
+    ports:
+      - "9990:9990" # admin console
+      - "8080:8080" # app
+
+  db:
+    container_name: mysql-DreamTeamAppDC
+    image: "mysql:latest"
+    environment:
+      - MYSQL_DATABASE=dataBaseElearning
+      - MYSQL_USER=root
+      - MYSQL_PASSWORD=root
+      - MYSQL_ROOT_PASSWORD=root
+    ports:
+      - "3307:3307"
