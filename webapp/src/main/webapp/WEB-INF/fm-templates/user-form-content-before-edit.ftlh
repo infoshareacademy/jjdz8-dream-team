@@ -1,4 +1,4 @@
-<form method="post" action="http://localhost:8080/edit-user-account">
+<form id="user-form">
     <div class="form-row">
         <div class="form-group col-md-6">
             <label for="inputEmail4">nickname</label>

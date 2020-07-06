@@ -20,3 +20,4 @@
         crossorigin="anonymous"></script>
 <script src="../../html_js_css_Jsp_files/delete-subject.js"></script>
 <script src="../../html_js_css_Jsp_files/delete-user.js"></script>
+<script src="../../html_js_css_Jsp_files/put-user.js"></script>

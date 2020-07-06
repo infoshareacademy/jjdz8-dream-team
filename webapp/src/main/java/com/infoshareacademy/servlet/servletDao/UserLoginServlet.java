@@ -2,7 +2,6 @@ package com.infoshareacademy.servlet.servletDao;
 
 import com.infoshareacademy.freemarker.TemplateProvider;
 import com.infoshareacademy.service.servisDao.LoginService;
-import com.infoshareacademy.service.servisDao.UserService;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 import org.apache.commons.lang.StringUtils;
@@ -67,13 +66,13 @@ public class UserLoginServlet extends HttpServlet {
 
         if(service.isCorrectPasswordForUser(nickName,password)) {
             resp.setStatus(HttpServletResponse.SC_FOUND);
-            Cookie cookie = new Cookie("nickName", nickName);
             session.setAttribute("login", nickName);
             session.setMaxInactiveInterval(900);
-            resp.addCookie(cookie);
             resp.sendRedirect("/account-info");
+
         } else {
             session.setAttribute("incorrect","incorrect");
+            LOGGER.info("incorrect login data for user"+nickName);
             resp.sendRedirect("/login");
         }
     }

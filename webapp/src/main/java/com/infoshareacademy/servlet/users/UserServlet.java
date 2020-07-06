@@ -23,7 +23,6 @@ import java.io.PrintWriter;
 import java.util.*;
 
 import static com.infoshareacademy.servlet.HelperForServlets.isValidSession;
-import static com.infoshareacademy.servlet.users.UserLoginServlet.SESSION_MARK;
 
 @WebServlet("/haha")
 public class UserServlet extends HttpServlet {

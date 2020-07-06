@@ -26,7 +26,6 @@ import java.util.Optional;
 import java.util.UUID;
 
 import static com.infoshareacademy.servlet.HelperForServlets.*;
-import static com.infoshareacademy.servlet.users.UserLoginServlet.SESSION_MARK;
 
 @WebServlet("/edit-subject")
 public class EditSubjectServlet extends HttpServlet {
@@ -53,12 +52,12 @@ public class EditSubjectServlet extends HttpServlet {
     private static final String SESSION_ATTRIBUTE = "teacherID";
 
 
-    @Override
+/*    @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html;charset=UTF-8");
         PrintWriter out = resp.getWriter();
-
-        HttpSession session = req.getSession(false);
+    }*/
+/*        HttpSession session = req.getSession(false);
         if (!isValidSession(session, SESSION_MARK)) {
             resp.getWriter().write(ERROR_MESSAGE);
             return;
@@ -66,11 +65,11 @@ public class EditSubjectServlet extends HttpServlet {
         System.out.println(session.getAttribute(SESSION_MARK));
 
         String id = req.getParameter("id");
-        if (!StringUtils.isEmpty(id) ) processGetRequest(resp, out, UUID.fromString(id),session);
+        if (!StringUtils.isEmpty(id) ) processGetRequest(resp, out, UUID.fromString(id),session);*/
     }
 
 
-    @Override
+/*    @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html;charset=UTF-8");
         HttpSession session = req.getSession(false);
@@ -103,7 +102,7 @@ public class EditSubjectServlet extends HttpServlet {
             session.setAttribute(EMPTY_FORM_PARAMETER, "true");
         }
 
-        resp.sendRedirect("/subject?id=" + id);
+        resp.sendRedirect("/subject?id=" + id);*/
           /*  session.setAttribute("name", name);
         }
         if (isIncorrectCorrectParameter(topic)) {
@@ -121,9 +120,9 @@ public class EditSubjectServlet extends HttpServlet {
             resp.sendRedirect("/subject-after-edit?id=" + subject.get().getId());
             return;*/
 
-    }
+  /*  }*/
 
-    public void processGetRequest(HttpServletResponse resp, PrintWriter out, UUID id, HttpSession session) throws IOException {
+/*    public void processGetRequest(HttpServletResponse resp, PrintWriter out, UUID id, HttpSession session) throws IOException {
         Optional<Subject> subject = service.findById(id);
         if (subject.isEmpty()) {
             resp.sendError(HttpServletResponse.SC_NOT_FOUND);
@@ -150,6 +149,6 @@ public class EditSubjectServlet extends HttpServlet {
         } catch (TemplateException e) {
             e.printStackTrace();
         }
-    }
+    }*/
 
-}
+

@@ -8,7 +8,6 @@ import javax.servlet.http.HttpSession;
 import java.util.UUID;
 
 import static com.infoshareacademy.servlet.users.EditUserAccountServlet.*;
-import static com.infoshareacademy.servlet.users.UserLoginServlet.SESSION_MARK;
 
 public class UserValidator {
 
@@ -17,11 +16,11 @@ public class UserValidator {
             session.setAttribute(EMPTY_NICKNAME, "nickName cannot be empty");
             return false;
         }
-        if (service.nicknameAlreadyExist(nickName,(UUID) session.getAttribute(SESSION_MARK))){
+/*        if (service.nicknameAlreadyExist(nickName,(UUID) session.getAttribute(SESSION_MARK))){
             session.setAttribute("nickNameExist", nickName);
             return false;
         }
-        else session.setAttribute("nickName", nickName);
+        else session.setAttribute("nickName", nickName);*/
 
         return true;
     }
@@ -31,11 +30,11 @@ public class UserValidator {
             session.setAttribute(EMPTY_EMAIL, "email cannot be empty");
             return false;
         }
-        if (service.emailAlreadyExist(email,(UUID)session.getAttribute(SESSION_MARK))){
+     /*   if (service.emailAlreadyExist(email,(UUID)session.getAttribute(SESSION_MARK))){
             session.setAttribute("emailExist",email);
             return false;
         }
-        else session.setAttribute("email", email);
+        else session.setAttribute("email", email);*/
         return true;
     }
 

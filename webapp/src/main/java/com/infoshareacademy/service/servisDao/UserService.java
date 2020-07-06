@@ -45,4 +45,22 @@ public class UserService {
     public Optional<Optional<User>> findById(long id) {
     return Optional.of(userDao.findById(id));
     }
+
+    @Transactional
+    public boolean isNickNameUnique(String nickName){
+        return true;
+    }
+
+    @Transactional
+    public boolean isEmailUnique(String nickName){
+        return true;
+    }
+
+    @Transactional
+    public void editUserNickNameAndEmail(Long id, String nickName, String email) {
+        findById(id).ifPresent(user -> {
+            user.get().setEmail(email);
+            user.get().setNickName(nickName);
+        });
+    }
 }

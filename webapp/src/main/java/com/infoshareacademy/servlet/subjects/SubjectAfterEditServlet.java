@@ -21,7 +21,6 @@ import java.util.Map;
 import java.util.UUID;
 
 import static com.infoshareacademy.servlet.HelperForServlets.*;
-import static com.infoshareacademy.servlet.users.UserLoginServlet.SESSION_MARK;
 
 @WebServlet("/subject-after-edit")
 public class SubjectAfterEditServlet extends HttpServlet {
