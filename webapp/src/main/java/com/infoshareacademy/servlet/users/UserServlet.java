@@ -25,7 +25,7 @@ import java.util.*;
 import static com.infoshareacademy.servlet.HelperForServlets.isValidSession;
 import static com.infoshareacademy.servlet.users.UserLoginServlet.SESSION_MARK;
 
-@WebServlet("/user")
+@WebServlet("/haha")
 public class UserServlet extends HttpServlet {
 
     @Inject
@@ -37,7 +37,7 @@ public class UserServlet extends HttpServlet {
     @Inject
     private SubjectRepositoryInterface subjectRepository;
 
-    @Override
+  /*  @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html;charset=UTF-8");
         PrintWriter printWriter = resp.getWriter();
@@ -96,5 +96,5 @@ public class UserServlet extends HttpServlet {
         }
         service.delete(user.get());
         req.getSession(false).invalidate();
-    }
+    }*/
 }

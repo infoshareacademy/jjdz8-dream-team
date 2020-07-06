@@ -18,5 +18,5 @@ public interface Dao <T>{
 
     Optional<T> createNamedQuery(String nameOfNamedQuery,String column, String value);
 
-    List<T> createNamedQueryForList(String nameOfNamedQuery,String column, String value);
+   Optional< List<T>> createNamedQueryForList(String nameOfNamedQuery,String column, String value);
 }

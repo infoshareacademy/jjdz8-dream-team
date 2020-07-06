@@ -38,7 +38,7 @@ public class SubjectServlet extends HttpServlet {
     private Service userService;
 
 
-    @Override
+ /*   @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html;charset=UTF-8");
         PrintWriter out = resp.getWriter();
@@ -145,5 +145,5 @@ public class SubjectServlet extends HttpServlet {
             return;
         }
         service.delete(subject.get());
-    }
+    }*/
 }

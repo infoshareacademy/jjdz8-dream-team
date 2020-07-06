@@ -33,7 +33,7 @@ public class SubjectDetailsServlet extends HttpServlet {
     @Inject
     private Service userService;
 
-    @Override
+   /* @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html;charset=UTF-8");
         PrintWriter printWriter = resp.getWriter();
@@ -67,5 +67,5 @@ public class SubjectDetailsServlet extends HttpServlet {
             e.printStackTrace();
         }
 
-    }
+    }*/
 }

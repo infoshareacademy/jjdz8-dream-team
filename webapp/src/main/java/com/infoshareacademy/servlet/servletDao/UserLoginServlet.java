@@ -1,44 +1,80 @@
 package com.infoshareacademy.servlet.servletDao;
 
+import com.infoshareacademy.freemarker.TemplateProvider;
+import com.infoshareacademy.service.servisDao.LoginService;
 import com.infoshareacademy.service.servisDao.UserService;
+import freemarker.template.Template;
+import freemarker.template.TemplateException;
 import org.apache.commons.lang.StringUtils;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.inject.Inject;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.*;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.HashMap;
+import java.util.Map;
 
 @WebServlet("/login")
 public class UserLoginServlet extends HttpServlet {
 
-    @Inject
-    UserService service;
+    private static Logger LOGGER = LogManager.getLogger(UserLoginServlet.class.getName());
 
-    public static final String SESSION_MARK = "userId";
+    @Inject
+    LoginService service;
+
+    @Inject
+    private TemplateProvider provider;
+
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        resp.setContentType("text/html;charset=UTF-8");
+        PrintWriter printWriter = resp.getWriter();
+        String message = (String) req.getSession().getAttribute("incorrect");
+        System.out.println(message);
+
+        Template template = provider.getTemplate(getServletContext(), "login.ftlh");
+        Map<String, Object> dataModel = new HashMap<>();
+        if (!StringUtils.isEmpty(message)){
+            dataModel.put("incorrect", "incorrect");
+            req.getSession().invalidate();
+        }
+
+        try {
+            template.process(dataModel, printWriter);
+            resp.setStatus(HttpServletResponse.SC_ACCEPTED);
+        } catch (TemplateException e) {
+            e.printStackTrace();
+        }
+    }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html;charset=UTF-8");
         String nickName = req.getParameter("nickName");
+        String password = req.getParameter("password");
 
-        if (StringUtils.isEmpty(nickName)) {
-            resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+        HttpSession session = req.getSession();
+
+        if (StringUtils.isEmpty(nickName) || StringUtils.isEmpty(password)) {
+            session.setAttribute("incorrect","incorrect");
+            resp.sendRedirect("/login");
             return;
         }
 
-
-        service.findByNickname(nickName).
-                ifPresentOrElse(u -> {
-                            req.getSession(true).setAttribute(SESSION_MARK, u.getId());
-                            try {
-                                resp.sendRedirect("/account-info");
-                            } catch (IOException e) {
-                                e.printStackTrace();
-                            }
-                        },
-                        () -> resp.setStatus(HttpServletResponse.SC_NOT_FOUND));
+        if(service.isCorrectPasswordForUser(nickName,password)) {
+            resp.setStatus(HttpServletResponse.SC_FOUND);
+            Cookie cookie = new Cookie("nickName", nickName);
+            session.setAttribute("login", nickName);
+            session.setMaxInactiveInterval(900);
+            resp.addCookie(cookie);
+            resp.sendRedirect("/account-info");
+        } else {
+            session.setAttribute("incorrect","incorrect");
+            resp.sendRedirect("/login");
+        }
     }
 }

@@ -53,7 +53,7 @@ public class EditUserAccountServlet extends HttpServlet {
     public static final String WRONG_OLD_PASSWORD = "wrongOldPassword";
 
 
-    @Override
+/*    @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html;charset=UTF-8");
         PrintWriter printWriter = resp.getWriter();
@@ -131,6 +131,6 @@ public class EditUserAccountServlet extends HttpServlet {
             editService.editNickname(user, nickName);
             editService.editEmail(user, email);
         }
-    }
+    }*/
 
 }

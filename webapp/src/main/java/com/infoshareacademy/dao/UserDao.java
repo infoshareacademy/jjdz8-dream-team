@@ -4,6 +4,7 @@ import com.infoshareacademy.entity.Subject;
 import com.infoshareacademy.entity.User;
 
 import javax.enterprise.context.RequestScoped;
+import javax.persistence.NoResultException;
 import javax.persistence.Query;
 import java.util.List;
 import java.util.Optional;
@@ -30,13 +31,19 @@ public class UserDao extends AbstractDao<User> {
     public Optional<User> createNamedQuery(String nameOfNamedQuery, String column, String value) {
         Query query = entityManager.createNamedQuery(nameOfNamedQuery, User.class);
         query.setParameter(column, value);
+        try {
+            query.getSingleResult();
+        } catch (NoResultException e) {
+            return Optional.ofNullable(null);
+        }
+
         return Optional.of((User) query.getSingleResult());
     }
 
     @Override
-    public List<User> createNamedQueryForList(String nameOfNamedQuery, String column, String value) {
-        Query query = entityManager.createNamedQuery(nameOfNamedQuery, Subject.class);
+    public Optional<List<User>> createNamedQueryForList(String nameOfNamedQuery, String column, String value) {
+        Query query = entityManager.createNamedQuery(nameOfNamedQuery, User.class);
         query.setParameter(column, value);
-        return query.getResultList();
+        return Optional.of(query.getResultList());
     }
 }
