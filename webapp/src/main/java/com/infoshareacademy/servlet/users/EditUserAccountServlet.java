@@ -25,7 +25,6 @@ import java.util.Optional;
 import java.util.UUID;
 
 import static com.infoshareacademy.servlet.HelperForServlets.*;
-import static com.infoshareacademy.servlet.users.UserLoginServlet.SESSION_MARK;
 import static com.infoshareacademy.validation.UserValidator.*;
 
 @WebServlet("/edit-user-account")

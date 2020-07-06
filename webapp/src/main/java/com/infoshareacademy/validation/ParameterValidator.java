@@ -10,7 +10,6 @@ import java.util.UUID;
 
 import static com.infoshareacademy.servlet.users.EditUserAccountServlet.EMPTY_EMAIL;
 import static com.infoshareacademy.servlet.users.EditUserAccountServlet.EMPTY_NICKNAME;
-import static com.infoshareacademy.servlet.users.UserLoginServlet.SESSION_MARK;
 
 
 public class ParameterValidator {

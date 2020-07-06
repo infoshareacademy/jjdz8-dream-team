@@ -24,7 +24,6 @@ import java.util.Optional;
 import java.util.UUID;
 
 import static com.infoshareacademy.servlet.HelperForServlets.*;
-import static com.infoshareacademy.servlet.users.UserLoginServlet.SESSION_MARK;
 import static com.infoshareacademy.validation.ParameterValidator.isIncorrectCorrectParameter;
 
 @WebServlet("/add-subject")
@@ -49,7 +48,7 @@ public class AddSubjectServlet extends HttpServlet {
 
     private static final String SESSION_ATTRIBUTE = "teacherID";
 
-    @Override
+   /* @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html;charset=UTF-8");
         PrintWriter printWriter = resp.getWriter();
@@ -128,5 +127,5 @@ public class AddSubjectServlet extends HttpServlet {
             e.printStackTrace();
         }
         invalidateAttributes(session, EMPTY_NAME, EMPTY_TOPIC, EMPTY_DESCRIPTION, "name", "description", "topic");
-    }
+    }*/
 }

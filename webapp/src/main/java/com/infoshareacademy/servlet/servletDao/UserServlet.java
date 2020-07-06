@@ -2,11 +2,14 @@ package com.infoshareacademy.servlet.servletDao;
 
 
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.infoshareacademy.entity.User;
+import com.infoshareacademy.freemarker.TemplateCreator;
 import com.infoshareacademy.freemarker.TemplateProvider;
 import com.infoshareacademy.service.servisDao.UserService;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
+import org.apache.commons.lang.StringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -21,13 +24,15 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+import static com.infoshareacademy.resolver.InputResolver.inputStreamToString;
+
 @WebServlet("/user")
 public class UserServlet extends HttpServlet {
 
     private static Logger LOGGER = LogManager.getLogger(AccountInfoServlet.class.getName());
 
     @Inject
-    UserService userService;
+    UserService service;
 
     @Inject
     TemplateProvider provider;
@@ -36,56 +41,36 @@ public class UserServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html;charset=UTF-8");
         PrintWriter printWriter = resp.getWriter();
-        HttpSession session = req.getSession(false);
 
-        Template template = provider.getTemplate(getServletContext(), "user-account-data-form-before-edit.ftlh");
         Map<String, Object> dataModel = new HashMap<>();
 
-        Cookie[] cookies = req.getCookies();
+        HttpSession session = req.getSession();
+        String loginUser =(String) session.getAttribute("login");
 
-        Optional<Cookie> cookie = List.of(cookies)
-                .stream()
-                .filter(c -> c.getName().equals("nickname"))
-                .findFirst();
-
-        if (cookie.isPresent()) {
-            Optional<User> user = userService.findByNickname(cookie.get().getValue());
+        if (!StringUtils.isEmpty(loginUser)) {
+            Optional<User> user = service.findByNickname(loginUser);
             user.ifPresent(u->dataModel.put("user", u));
+            TemplateCreator.createTemplate(dataModel,"user-account-data-form-before-edit.ftlh",resp,provider,getServletContext());
         } else {
             LOGGER.info("forbidden, user not login");
-        }
-
-/*        if (!isValidSession(session, SESSION_MARK)) {
-            dataModel.put("message", "please login first");
-        } else {
-
-            Optional<User> user = service.findById((UUID) session.getAttribute(SESSION_MARK));
-            user.ifPresentOrElse(value -> {
-                        dataModel.put("user", value);
-                        if (value.getRole().equals(ROLE.TEACHER)) dataModel.put("roleTeacher", "TEACHER");
-                    },
-                    () -> {
-                        resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-                    });
-
-            if (user.get().getRole().equals(ROLE.TEACHER)) {
-                List<Subject> subjects;
-                subjects = subjectRepository.findAllSubjectForTeacher(user.get().getId());
-
-                if (subjects.size() > 0) {
-                    dataModel.put("subjects", subjects);
-                }
-            }*/
-
-        try {
-            template.process(dataModel, printWriter);
-            resp.setStatus(HttpServletResponse.SC_ACCEPTED);
-        } catch (TemplateException e) {
-            e.printStackTrace();
+            resp.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+            dataModel.put("message","unauthorised");
+            TemplateCreator.createTemplate(dataModel,"home-page.ftlh",resp,provider,getServletContext());
         }
     }
 
-/*    @Override
+    @Override
+    protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String body = inputStreamToString(req.getInputStream());
+        ObjectMapper mapper = new ObjectMapper();
+        User user = mapper.readValue(body, User.class);
+        if (user != null) {
+            if (!StringUtils.isEmpty(user.getEmail()) && !StringUtils.isEmpty(user.getNickName())) {
+            }
+        }
+    }
+
+    /*    @Override
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession(false);
         if (session == null || session.getAttribute(SESSION_MARK) == null) {

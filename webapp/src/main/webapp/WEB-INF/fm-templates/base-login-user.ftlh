@@ -27,7 +27,7 @@
                           <a href="/account-info" class="list-group-item list-group-item-action">Twoje konto</a>
                           <a href="/user" class="list-group-item list-group-item-action">Edytuj dane</a>
                           <a href="/edit-password" class="list-group-item list-group-item-action">Zmień hasło</a>
-                          <#if roleTeacher ??>
+                          <#if user.role == "TEACHER">
                           <a href="../../html_js_css_Jsp_files/add-subject-k.html" class="list-group-item list-group-item-action">Dodaj przedmiot</a>
                           <a href="/show-subjects" class="list-group-item list-group-item-action">Pokaż moje przedmioty</a>
                           </#if>

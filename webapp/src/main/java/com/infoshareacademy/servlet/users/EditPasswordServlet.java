@@ -25,7 +25,6 @@ import java.util.UUID;
 
 import static com.infoshareacademy.servlet.HelperForServlets.ERROR_MESSAGE;
 import static com.infoshareacademy.servlet.HelperForServlets.isValidSession;
-import static com.infoshareacademy.servlet.users.UserLoginServlet.SESSION_MARK;
 
 @WebServlet("/edit-password")
 public class EditPasswordServlet extends HttpServlet {

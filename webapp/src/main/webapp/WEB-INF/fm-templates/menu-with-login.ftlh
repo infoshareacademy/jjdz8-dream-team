@@ -10,7 +10,8 @@
             <li><a href="contact.jsp" class=" glyphicon glyphicon-phone-alt "> Kontakt</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
-            <li><a href="../../html_js_css_Jsp_files/login.jsp"><span class="glyphicon glyphicon-off"></span> zaloguj</a></li>
+            <li><a href="/login"><span class="glyphicon glyphicon-log-in"></span> Zaloguj</a></li>
+            <li><a href="/add-user"><span class="glyphicon glyphicon-user"></span> Zarejestruj </a></li>
         </ul>
     </div>
 </nav>
