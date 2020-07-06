@@ -13,12 +13,12 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js">
     </script>
-    <link href="styles.css" rel="stylesheet"/>
-    <link href="form.css" rel="stylesheet"/>
+    <link href="html_js_css_Jsp_files/styles.css" rel="stylesheet"/>
+    <link href="html_js_css_Jsp_files/form.css" rel="stylesheet"/>
 </head>
 
 <body>
-<jsp:include page="menu-logIn.jsp"/>
+<jsp:include page="html_js_css_Jsp_files/menu-logIn.jsp"/>
 <main>
     <div class="container">
         <div class="jumpotron"><h2>Aplikacja Internetowa Drem-Team</h2></div>
@@ -29,7 +29,7 @@
             </ol>
             <div class="carousel-inner img-fluid">
                 <div class="item active img-fluid">
-                    <img src="../jpg/77522.jpg" alt="">
+                    <img src="jpg/77522.jpg" alt="">
                     <!-- Opis slajdu -->
                     <div class="carousel-caption">
                         <h3>"KAŻDA PORAŻKA JEST SZANSĄ, ŻEBY SPRÓBOWAĆ JESZCZE RAZ.</h3>
@@ -38,7 +38,7 @@
                     </div>
                 </div>
                 <div class="item img-fluid">
-                    <img src="../jpg/pexels-1786955.jpg    " alt="">
+                    <img src="jpg/pexels-1786955.jpg    " alt="">
                     <!-- Opis slajdu -->
                     <div class="carousel-caption">
                         <h3>"JESTLI JEST CIĘZKO, TO ZNACZY, ŻE IDZIESZ W DOBRYM KIERUNKU." </h3>
@@ -54,7 +54,7 @@
     </div>
 </main>
 </footer>
-<jsp:include page="jsScripts.html"/>
+<jsp:include page="html_js_css_Jsp_files/jsScripts.html"/>
 </body>
-<jsp:include page="footer.jsp"/>
+<jsp:include page="html_js_css_Jsp_files/footer.jsp"/>
 </html>

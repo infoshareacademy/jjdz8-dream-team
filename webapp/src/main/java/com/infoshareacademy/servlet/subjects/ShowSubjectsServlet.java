@@ -34,7 +34,7 @@ public class ShowSubjectsServlet extends HttpServlet {
 
     @Inject
     private SubjectRepositoryInterface subjectRepository;
-
+/*
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html;charset=UTF-8");
@@ -70,6 +70,6 @@ public class ShowSubjectsServlet extends HttpServlet {
             e.printStackTrace();
         }
 
-    }
+    }*/
 }
 

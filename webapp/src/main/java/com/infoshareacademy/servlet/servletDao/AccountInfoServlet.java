@@ -3,20 +3,20 @@ package com.infoshareacademy.servlet.servletDao;
 
 import com.infoshareacademy.domain.ROLE;
 import com.infoshareacademy.domain.Subject;
+import com.infoshareacademy.entity.User;
 import com.infoshareacademy.freemarker.TemplateProvider;
 import com.infoshareacademy.service.Service;
 import com.infoshareacademy.service.SubjectService;
 import com.infoshareacademy.service.servisDao.UserService;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.inject.Inject;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import javax.servlet.http.*;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.*;
@@ -25,6 +25,8 @@ import static com.infoshareacademy.servlet.users.UserLoginServlet.SESSION_MARK;
 
 @WebServlet("/account-info")
 public class AccountInfoServlet extends HttpServlet {
+
+    private static Logger LOGGER = LogManager.getLogger(AccountInfoServlet.class.getName());
 
     @Inject
     private SubjectService subjectService;
@@ -43,32 +45,25 @@ public class AccountInfoServlet extends HttpServlet {
         Template template = provider.getTemplate(getServletContext(), "user-account-information-page.ftlh");
         Map<String, Object> dataModel = new HashMap<>();
 
-        HttpSession session = req.getSession(false);
-        if (session == null || session.getAttribute(SESSION_MARK) == null) {
-            dataModel.put("message", "please login first");
+        Cookie[] cookies = req.getCookies();
+
+        Optional<Cookie> cookie = List.of(cookies)
+                .stream()
+                .filter(c -> c.getName().equals("nickname"))
+                .findFirst();
+
+        if (cookie.isPresent()) {
+            Optional<User> user = service.findByNickname(cookie.get().getValue());
+            user.ifPresent(u->dataModel.put("user", u));
         } else {
-            long id = (Long) session.getAttribute(SESSION_MARK);
-            service.findById(id).ifPresentOrElse(u -> {
-                dataModel.put("user", u);
-                if (u.get().getRole().equals(ROLE.TEACHER)) {
-                    dataModel.put("roleTeacher", "TEACHER");
-                    Optional<Set<Subject>> subjects;
-                    subjects = Optional.of(u.get().getSubjects());
-                    subjects.ifPresent(subjectList -> dataModel.put("subjects", subjectList));
-                }
-            }, () -> {
-                try {
-                    resp.sendError(HttpServletResponse.SC_BAD_REQUEST);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            });
+            LOGGER.info("forbidden, user not login");
         }
+
         try {
             template.process(dataModel, printWriter);
             resp.setStatus(HttpServletResponse.SC_ACCEPTED);
         } catch (TemplateException e) {
-            e.printStackTrace();
+            LOGGER.info(e.getLocalizedMessage());
         }
 
     }

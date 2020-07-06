@@ -4,6 +4,7 @@ import com.infoshareacademy.dao.Dao;
 import com.infoshareacademy.domain.Role;
 import com.infoshareacademy.entity.User;
 import com.infoshareacademy.entity.UserQuery;
+import com.infoshareacademy.security.PasswordResolver;
 
 
 import javax.enterprise.context.ApplicationScoped;
@@ -17,13 +18,16 @@ public class UserService {
  @Inject
     private Dao<User> userDao;
 
-@Transactional
-    public void createUser() {
+
+    @Transactional
+    public void createUser(String nickname, String email, String password, String role) {
+        RoleService service = new RoleService();
+        Role userRole = service.returnCorrectRole(role);
         User user = new User();
-        user.setNickName("Adam");
-        user.setEmail("email@email.com");
-        user.setPassword("123");
-        user.setRole(Role.ADMINISTRATOR);
+        user.setNickName(nickname);
+        user.setEmail(email);
+        user.setPassword(PasswordResolver.passwordHashing(password));
+        user.setRole(userRole);
         userDao.save(user);
     }
 

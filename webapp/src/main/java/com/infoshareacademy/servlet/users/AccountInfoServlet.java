@@ -23,7 +23,7 @@ import java.util.*;
 
 import static com.infoshareacademy.servlet.users.UserLoginServlet.SESSION_MARK;
 
-@WebServlet("/account-info")
+@WebServlet("/a")
 public class AccountInfoServlet extends HttpServlet {
 
     @Inject
@@ -35,7 +35,7 @@ public class AccountInfoServlet extends HttpServlet {
     @Inject
     private Service service;
 
-    @Override
+   /* @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html;charset=UTF-8");
         PrintWriter printWriter = resp.getWriter();
@@ -53,8 +53,8 @@ public class AccountInfoServlet extends HttpServlet {
                 if (u.getRole().equals(ROLE.TEACHER)) {
                     dataModel.put("roleTeacher", "TEACHER");
                     Optional<List<Subject>> subjects;
-                    subjects = subjectService.findAllSubjectsForTeacher(u.getId());
-                    subjects.ifPresent(subjectList -> dataModel.put("subjects", subjectList));
+                 *//*   subjects = subjectService.findAllSubjectsForTeacher(u.getId());
+                    subjects.ifPresent(subjectList -> dataModel.put("subjects", subjectList));*//*
                 }
             }, () -> {
                 try {
@@ -71,5 +71,5 @@ public class AccountInfoServlet extends HttpServlet {
             e.printStackTrace();
         }
 
-    }
+    }*/
 }

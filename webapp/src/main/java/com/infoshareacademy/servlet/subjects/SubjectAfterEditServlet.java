@@ -44,7 +44,7 @@ public class SubjectAfterEditServlet extends HttpServlet {
     public static final String LOGIN_ERROR = "loginError";
 
 
-    @Override
+   /* @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html;charset=UTF-8");
         PrintWriter printWriter = resp.getWriter();
@@ -88,6 +88,6 @@ public class SubjectAfterEditServlet extends HttpServlet {
                 session.removeAttribute(attributeName);
             }
         }
-    }
+    }*/
 
 }

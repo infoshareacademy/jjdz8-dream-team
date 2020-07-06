@@ -15,18 +15,18 @@ public class UserEditService implements EditService {
 
     @Override
     public void editPassword(User user, String newPassword) {
-        String hashPass = PasswordResolver.passwordHashing(newPassword);
-        repository.updateUserPassword(user.getId(), hashPass);
+      /*  String hashPass = PasswordResolver.passwordHashing(newPassword);
+        repository.updateUserPassword(user.getId(), hashPass);*/
     }
 
     @Override
     public void editNickname(User user, String newNickname) {
-        repository.updateNickname(user.getId(), newNickname);
+     /*   repository.updateNickname(user.getId(), newNickname);*/
     }
 
     @Override
     public void editEmail(User user, String email) {
-        repository.updateEmail(user.getId(), email);
+     /*   repository.updateEmail(user.getId(), email);*/
     }
 
 }

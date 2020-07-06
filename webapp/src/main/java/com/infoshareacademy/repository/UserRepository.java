@@ -49,7 +49,7 @@ public class UserRepository implements Repository {
 
     @Override
     public void deleteUser(User user) {
-        users.deleteUser(user.getId());
+       /* users.deleteUser(user.getId());*/
         JsonSaver.createJson(users, FileNames.USERS_JSON);
     }
 

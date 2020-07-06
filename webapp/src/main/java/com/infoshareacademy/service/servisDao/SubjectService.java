@@ -27,6 +27,6 @@ public class SubjectService {
     subjectDao.save(subject);
     }
 
-    @Transactional
-    public List<Subject> findSubjectsForUser(long userID);
+   /* @Transactional
+    public List<Subject> findSubjectsForUser(long userID);*/
 }
