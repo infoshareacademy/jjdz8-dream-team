@@ -28,8 +28,8 @@
                           <a href="/user" class="list-group-item list-group-item-action">Edytuj dane</a>
                           <a href="/edit-user" class="list-group-item list-group-item-action">Zmień hasło</a>
                           <#if user.role == "TEACHER">
-                          <a href="../../html_js_css_Jsp_files/add-subject-k.html" class="list-group-item list-group-item-action">Dodaj przedmiot</a>
-                          <a href="/show-subjects" class="list-group-item list-group-item-action">Pokaż moje przedmioty</a>
+                          <a href="/add-subject" class="list-group-item list-group-item-action">Dodaj przedmiot</a>
+                          <a href="/subjects" class="list-group-item list-group-item-action">Pokaż moje przedmioty</a>
                           </#if>
                           <a href="" class="list-group-item list-group-item-action" data-toggle="modal" data-target="#exampleModal" >Usuń konto</a>
                         <#include "modal-to-delete-user.ftlh">

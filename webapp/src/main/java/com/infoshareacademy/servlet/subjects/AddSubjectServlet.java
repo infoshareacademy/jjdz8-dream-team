@@ -26,7 +26,7 @@ import java.util.UUID;
 import static com.infoshareacademy.servlet.HelperForServlets.*;
 import static com.infoshareacademy.validation.ParameterValidator.isIncorrectCorrectParameter;
 
-@WebServlet("/add-subject")
+@WebServlet("/add")
 public class AddSubjectServlet extends HttpServlet {
 
     @Inject

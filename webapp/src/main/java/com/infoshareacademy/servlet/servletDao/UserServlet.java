@@ -44,8 +44,14 @@ public class UserServlet extends HttpServlet {
         HttpSession session = req.getSession();
         String loginUser = (String) session.getAttribute("login");
         String incorrectParameters = (String) session.getAttribute("exist");
+        session.removeAttribute("exist");
         String emptyParameters = (String) session.getAttribute("empty");
+        session.removeAttribute("empty");
         String incorrectPassword = (String) session.getAttribute("incorrectPassword");
+        session.removeAttribute("incorrectPassword");
+        String correctPassword = (String) session.getAttribute("correctPassword");
+        session.removeAttribute("correctPassword");
+
 
         if (!StringUtils.isEmpty(loginUser)) {
             Optional<User> user = service.findByNickname(loginUser);
@@ -59,6 +65,9 @@ public class UserServlet extends HttpServlet {
             }
             if(!StringUtils.isEmpty(incorrectPassword)) {
                 dataModel.put("incorrectPassword", "true");
+            }
+            if(!StringUtils.isEmpty(correctPassword)) {
+                dataModel.put("correctPassword", "true");
             }
             if (requestURI.equals("/user")){
                 TemplateCreator.createTemplate(dataModel, "user-account-data-form-before-edit.ftlh", resp, provider, getServletContext());
@@ -82,6 +91,7 @@ public class UserServlet extends HttpServlet {
         ObjectMapper mapper = new ObjectMapper();
         UserDto user = mapper.readValue(body, UserDto.class);
 
+        HttpSession session = req.getSession();
 
         if (user != null) {
             String email = user.getEmail();
@@ -91,23 +101,25 @@ public class UserServlet extends HttpServlet {
             String repeatedPassword = user.getRepeatedPassword();
             Long id = user.getId();
 
+
             if (!StringUtils.isEmpty(email) && !StringUtils.isEmpty(nickName)) {
                 if (!service.emailAlreadyExist(email,id) && !service.nickNameAlreadyExist(nickName, id)) {
                     service.editUserNickNameAndEmail(id, nickName, email);
                 } else {
-                    req.getSession().setAttribute("exist", "true");
+                    session.setAttribute("exist", "true");
                 }
             }
             if (!StringUtils.isEmpty(password) && !StringUtils.isEmpty(newPassword) && !StringUtils.isEmpty(repeatedPassword)){
                 System.out.println(service.isCorrectPassword(password,id));
                 if(service.isCorrectPassword(password,id) && newPassword.equals(repeatedPassword)){
-                    service.editUserPassword(id,password);
+                    service.editUserPassword(id,newPassword);
+                    session.setAttribute("correctPassword","true");
                 }else {
-                    req.getSession().setAttribute("incorrectPassword", "true");
+                    session.setAttribute("incorrectPassword", "true");
                 }
             }
             else {
-                req.getSession().setAttribute("empty", "true");
+                session.setAttribute("empty", "true");
             }
         }
     }

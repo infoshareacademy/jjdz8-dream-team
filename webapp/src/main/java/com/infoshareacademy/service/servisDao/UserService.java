@@ -3,6 +3,7 @@ package com.infoshareacademy.service.servisDao;
 import com.infoshareacademy.dao.Dao;
 import com.infoshareacademy.dao.UserExtendDao;
 import com.infoshareacademy.domain.Role;
+import com.infoshareacademy.entity.Subject;
 import com.infoshareacademy.entity.User;
 import com.infoshareacademy.entity.UserColumn;
 import com.infoshareacademy.entity.UserQuery;
@@ -12,8 +13,10 @@ import com.infoshareacademy.security.PasswordResolver;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.transaction.Transactional;
+import java.nio.file.LinkOption;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @ApplicationScoped
 public class UserService {
@@ -85,6 +88,11 @@ public class UserService {
 
     @Transactional
     public void editUserPassword(Long id, String password) {
-        findById(id).ifPresent(user -> user.get().setPassword(password));
+        findById(id).ifPresent(user -> user.get().setPassword(PasswordResolver.passwordHashing(password)));
     }
+
+   /* @Transactional
+    public Optional<Set<Subject>> findUserSubjects(Long id) {
+        return userExtendDao.findUserSubjects(id);
+    }*/
 }

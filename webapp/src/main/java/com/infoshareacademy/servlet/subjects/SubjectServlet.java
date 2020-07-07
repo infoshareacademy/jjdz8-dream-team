@@ -24,7 +24,7 @@ import static com.infoshareacademy.servlet.HelperForServlets.*;
 import static com.infoshareacademy.servlet.HelperForServlets.isValidSession;
 import static com.infoshareacademy.servlet.subjects.EditSubjectServlet.EMPTY_FORM_PARAMETER;
 
-@WebServlet("/subject")
+@WebServlet("/s")
 public class SubjectServlet extends HttpServlet {
 
     @Inject
