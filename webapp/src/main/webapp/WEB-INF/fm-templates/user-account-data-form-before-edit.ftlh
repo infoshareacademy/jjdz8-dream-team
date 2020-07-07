@@ -1,5 +1,10 @@
 <#include "base-login-user.ftlh">
 <#macro content>
+    <#if incorrectParameters ??>
+        <div class="alert alert-danger" role="alert">
+            Zostawiłeś puste pole lub twój nickname lub email nie są unikalne. Spróbuj jeszcze raz...
+        </div>
+    </#if>
     <div class="card">
         <div class="card-header">
             Login data
@@ -15,6 +20,7 @@
                         <input type="button" value="registry"/>
                     </a>
                 </#if>
+
                 <#if user ?? >
                 <#include "user-card-with-picture.ftlh">
             </div>
