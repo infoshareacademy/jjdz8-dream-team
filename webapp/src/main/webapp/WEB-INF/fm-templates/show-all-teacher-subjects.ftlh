@@ -11,8 +11,7 @@
             <input type="button" value="zarejestruj"/>
         </a>
     </#if>
-    <#if user ?? >
-        <#if subjects??>
+        <#if user.subjects ??>
             <div class="alert alert-dark" role="alert">
                 Twoje aktywne przedmioty
             </div>
@@ -23,7 +22,7 @@
                     <th scope="col"></th>
                 </tr>
                 </thead>
-                <#list subjects as subject>
+                <#list user.subjects as subject>
                     <#if subject??>
                         <tbody>
                         <td>${subject.name}</td>
@@ -67,6 +66,5 @@
             </table>
         </#if>
         <br>
-    </#if>
 </#macro>
 <@home/>

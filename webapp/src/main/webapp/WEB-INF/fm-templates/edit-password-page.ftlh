@@ -1,6 +1,16 @@
 <#include "base-login-user.ftlh">
 <#macro content>
-    <#if inCorrectPassword ??>
+    <#if correctPassword ??>
+        <div class="col-md-12">
+            <div class="alert alert-info" role="alert">
+                Twoje hasło zostało poprawnie zmienione!
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        </div>
+    </#if>
+    <#if incorrectPassword ??>
         <div class="col-md-12">
             <div class="alert alert-danger" role="alert">
                 Nieprawidłowe hasło!
@@ -14,16 +24,6 @@
         <div class="col-md-12">
             <div class="alert alert-danger" role="alert">
                 Przy zmianie hasła wszystkie pola muszą zostać uzupełnione
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-        </div>
-    </#if>
-    <#if correctPassword ??>
-        <div class="col-md-12">
-            <div class="alert alert-success" role="alert">
-                ${correctPassword}
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>

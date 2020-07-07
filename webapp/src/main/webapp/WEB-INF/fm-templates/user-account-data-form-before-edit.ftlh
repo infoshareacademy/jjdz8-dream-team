@@ -2,7 +2,12 @@
 <#macro content>
     <#if incorrectParameters ??>
         <div class="alert alert-danger" role="alert">
-            Zostawiłeś puste pole lub twój nickname lub email nie są unikalne. Spróbuj jeszcze raz...
+            Twój nickname lub email nie są unikalne. Spróbuj jeszcze raz...
+        </div>
+    </#if>
+    <#if emptyParameters ??>
+        <div class="alert alert-danger" role="alert">
+            Zostawiłeś puste pole. Spróbuj jeszcze raz...
         </div>
     </#if>
     <div class="card">

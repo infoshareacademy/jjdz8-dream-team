@@ -4,6 +4,7 @@ import com.infoshareacademy.domain.Role;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
+import javax.transaction.Transactional;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
@@ -55,7 +56,7 @@ public class User {
     @CreationTimestamp
     private LocalDate dateOfRegistration;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
     private Set<Subject> subjects = new HashSet<>();
 
     public Long getId() {

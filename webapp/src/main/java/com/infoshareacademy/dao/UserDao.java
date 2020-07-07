@@ -8,6 +8,9 @@ import javax.persistence.NoResultException;
 import javax.persistence.Query;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 @RequestScoped
 public class UserDao extends AbstractDao<User> implements UserExtendDao {
@@ -64,12 +67,11 @@ public class UserDao extends AbstractDao<User> implements UserExtendDao {
         Query query =  entityManager.createQuery("SELECT u.nickName FROM User u where u.id <> : userId", String.class);
         query.setParameter("userId", id);
         try {
-            query.getResultList();
+            return Optional.ofNullable(query.getResultList());
         }catch (NoResultException e){
             return Optional.empty();
         }
 
-        return Optional.of(query.getResultList());
     }
 
     @Override
@@ -77,17 +79,15 @@ public class UserDao extends AbstractDao<User> implements UserExtendDao {
         Query query =  entityManager.createQuery("SELECT u.email FROM User u where u.id <> : userId", String.class);
         query.setParameter("userId", id);
         try {
-            query.getResultList();
+            return Optional.ofNullable(query.getResultList());
         }catch (NoResultException e){
             return Optional.empty();
         }
-
-        return Optional.of(query.getResultList());
     }
 
     @Override
     public Optional<String> findPassword(Long id) {
-        Query query = entityManager.createQuery("SELECT u.email FROM User u where u.id = : userId", String.class);
+        Query query = entityManager.createQuery("SELECT u.password FROM User u where u.id = : userId", String.class);
         query.setParameter("userId", id);
         String password;
         try {
@@ -95,7 +95,18 @@ public class UserDao extends AbstractDao<User> implements UserExtendDao {
         }catch (NoResultException e) {
             return Optional.empty();
         }
-
         return Optional.of(password);
+    }
+
+    public Optional<Set<Subject>> findSubjectsForUser(long id){
+        Query query = entityManager.createQuery("SELECT s from Subject s where s.user.id = : userId", String.class);
+        query.setParameter("userId", id);
+        Optional<Set<Subject>> subjects;
+
+        try {
+            return (Optional<Set<Subject>>) query.getResultList().stream().collect(Collectors.toSet());
+        } catch (NoResultException e) {
+            return Optional.empty();
+        }
     }
 }
