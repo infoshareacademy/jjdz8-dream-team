@@ -4,8 +4,8 @@ $("#user-form").submit(function(event){
     var $form = $(this);
     var userId = $form.find('input[name="id"]').val();
     var userNickName = $form.find('input[name="nickName"]').val();
-    var url = 'http://localhost:8080/user';
     var userEmail = $form.find('input[name="email"]').val();
+    var url = 'http://localhost:8080/user';
 
     $.ajax({
         type : 'PUT',

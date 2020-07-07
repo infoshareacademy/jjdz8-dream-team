@@ -1,9 +1,9 @@
-<form method="post" action="http://localhost:8080/edit-password">
+<form id="user-edit-form">
     <div class="form-row">
 
         <div class="form-group col-md-6">
             <label for="oldPassword">wprowadź stare hasło</label>
-            <input type="password" class="form-control" id="oldPassword" name="oldPassword">
+            <input type="password" class="form-control" id="oldPassword" name="password">
         </div>
         <div class="form-group col-md-6">
             <label for="newPassword">podaj nowe hasło</label>
@@ -14,5 +14,6 @@
             <input type="password" class="form-control" id="repeatedPassword" name="repeatedPassword">
         </div>
     </div>
+    <input type="hidden" name="id" value="${user.id}">
     <input class="btn btn-secondary" type="submit" name="save" value="zatwierdź"/><br/><br/>
 </form>

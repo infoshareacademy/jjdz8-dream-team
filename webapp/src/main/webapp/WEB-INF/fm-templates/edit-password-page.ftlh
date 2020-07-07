@@ -3,7 +3,17 @@
     <#if inCorrectPassword ??>
         <div class="col-md-12">
             <div class="alert alert-danger" role="alert">
-                ${inCorrectPassword}
+                Nieprawidłowe hasło!
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        </div>
+    </#if>
+    <#if emptyParameters ??>
+        <div class="col-md-12">
+            <div class="alert alert-danger" role="alert">
+                Przy zmianie hasła wszystkie pola muszą zostać uzupełnione
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>

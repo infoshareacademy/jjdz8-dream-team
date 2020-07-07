@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RequestScoped
-public class UserDao extends AbstractDao<User> {
+public class UserDao extends AbstractDao<User> implements UserExtendDao {
 
     @Override
     public Optional<User> findById(long id) {
@@ -34,7 +34,7 @@ public class UserDao extends AbstractDao<User> {
         try {
             query.getSingleResult();
         } catch (NoResultException e) {
-            return Optional.ofNullable(null);
+            return Optional.empty();
         }
 
         return Optional.of((User) query.getSingleResult());
@@ -45,5 +45,57 @@ public class UserDao extends AbstractDao<User> {
         Query query = entityManager.createNamedQuery(nameOfNamedQuery, User.class);
         query.setParameter(column, value);
         return Optional.of(query.getResultList());
+    }
+
+/*    @Override
+    public Optional<List<String>> createNamedQueryForListForOneColumn(String column) {
+        Query query =  entityManager.createQuery("SELECT u.nickName FROM User u", User.class);
+        try {
+            query.getResultList();
+        }catch (NoResultException e){
+            return Optional.empty();
+        }
+
+        return Optional.of(query.getResultList());
+    }*/
+
+    @Override
+    public Optional<List<String>> findAllNickNames(Long id) {
+        Query query =  entityManager.createQuery("SELECT u.nickName FROM User u where u.id <> : userId", String.class);
+        query.setParameter("userId", id);
+        try {
+            query.getResultList();
+        }catch (NoResultException e){
+            return Optional.empty();
+        }
+
+        return Optional.of(query.getResultList());
+    }
+
+    @Override
+    public Optional<List<String>> findAllEmails(Long id) {
+        Query query =  entityManager.createQuery("SELECT u.email FROM User u where u.id <> : userId", String.class);
+        query.setParameter("userId", id);
+        try {
+            query.getResultList();
+        }catch (NoResultException e){
+            return Optional.empty();
+        }
+
+        return Optional.of(query.getResultList());
+    }
+
+    @Override
+    public Optional<String> findPassword(Long id) {
+        Query query = entityManager.createQuery("SELECT u.email FROM User u where u.id = : userId", String.class);
+        query.setParameter("userId", id);
+        String password;
+        try {
+            password = (String) query.getSingleResult();
+        }catch (NoResultException e) {
+            return Optional.empty();
+        }
+
+        return Optional.of(password);
     }
 }
