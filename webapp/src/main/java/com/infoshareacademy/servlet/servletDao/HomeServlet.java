@@ -5,16 +5,14 @@ import com.infoshareacademy.entity.User;
 import com.infoshareacademy.freemarker.TemplateProvider;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
+import org.apache.commons.lang.StringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import javax.inject.Inject;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.*;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
@@ -35,9 +33,16 @@ public class HomeServlet extends HttpServlet {
         resp.setContentType("text/html;charset=UTF-8");
         PrintWriter printWriter = resp.getWriter();
 
+        HttpSession session = req.getSession();
+
         Template template = provider.getTemplate(getServletContext(), "home-page.ftlh");
         Map<String, Object> dataModel = new HashMap<>();
 
+        String anAuthorizedAccess =(String) session.getAttribute("message");
+
+        if (!StringUtils.isEmpty(anAuthorizedAccess)){
+            dataModel.put("message", anAuthorizedAccess);
+        }
         try {
             template.process(dataModel, printWriter);
             resp.setStatus(HttpServletResponse.SC_ACCEPTED);

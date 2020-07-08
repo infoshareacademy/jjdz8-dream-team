@@ -8,6 +8,7 @@ import com.infoshareacademy.freemarker.TemplateCreator;
 import com.infoshareacademy.freemarker.TemplateProvider;
 import com.infoshareacademy.service.servisDao.UserService;
 import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang.math.NumberUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -17,6 +18,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
@@ -124,24 +126,31 @@ public class UserServlet extends HttpServlet {
         }
     }
 
-    /*    @Override
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        HttpSession session = req.getSession(false);
-        if (session == null || session.getAttribute(SESSION_MARK) == null) {
-            resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+        HttpSession session = req.getSession();
+        String loginUser = (String) session.getAttribute("login");
+
+        if(StringUtils.isEmpty(loginUser)) {
+            LOGGER.info("aunauthorized " + LocalDateTime.now());
+            resp.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+            session.setAttribute("message","unAuthorized");
+            resp.sendRedirect("/home");
             return;
         }
+
         String id = req.getParameter("id");
-        if (StringUtils.isEmpty(id)) {
+        if (StringUtils.isEmpty(id) || !NumberUtils.isNumber(id)) {
             resp.setStatus(HttpServletResponse.SC_NOT_FOUND);
             return;
         }
-        Optional<User> user = service.findById(UUID.fromString(id));
+        Optional<User> user = service.findById(Long.valueOf(id));
         if (user.isEmpty()) {
-            resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            resp.setStatus(HttpServletResponse.SC_NOT_ACCEPTABLE);
             return;
         }
-        service.delete(user.get());
+
+        System.out.println(user.get());
+        service.deleteUser(Long.valueOf(id));
         req.getSession(false).invalidate();
-    }*/
+    }
 }

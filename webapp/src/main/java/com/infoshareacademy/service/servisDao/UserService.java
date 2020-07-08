@@ -50,8 +50,8 @@ public class UserService {
     }
 
     @Transactional
-    public Optional<Optional<User>> findById(long id) {
-        return Optional.of(userDao.findById(id));
+    public Optional<User> findById(long id) {
+        return userDao.findById(id);
     }
 
     @Transactional
@@ -81,18 +81,19 @@ public class UserService {
     @Transactional
     public void editUserNickNameAndEmail(Long id, String nickName, String email) {
         findById(id).ifPresent(user -> {
-            user.get().setEmail(email);
-            user.get().setNickName(nickName);
+            user.setEmail(email);
+            user.setNickName(nickName);
         });
     }
 
     @Transactional
     public void editUserPassword(Long id, String password) {
-        findById(id).ifPresent(user -> user.get().setPassword(PasswordResolver.passwordHashing(password)));
+        findById(id).ifPresent(user -> user.setPassword(PasswordResolver.passwordHashing(password)));
     }
 
-   /* @Transactional
-    public Optional<Set<Subject>> findUserSubjects(Long id) {
-        return userExtendDao.findUserSubjects(id);
-    }*/
+    @Transactional
+    public void deleteUser(Long id){
+        Optional<User> user = findById(id);
+        user.ifPresent(u -> userDao.delete(u) );
+    }
 }
