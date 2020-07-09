@@ -31,16 +31,16 @@
                                 <input class="btn btn-secondary" type="button" value="pokaż szczegóły"/>
                             </a>
                             <button type="button" class="btn btn-danger" data-toggle="modal"
-                                    data-target="#subjectModal">
-                                usuń przedmiot
+                                    data-target="#subjectModal${subject.id}">
+                                usuń przedmiot ${subject.name}
                             </button>
-                            <div class="modal fade" id="subjectModal" tabindex="-1" role="dialog"
-                                 aria-labelledby="exampleModalLabel"
+                            <div class="modal fade" id="subjectModal${subject.id}" tabindex="-1" role="dialog"
+                                 aria-labelledby="#exampleModalLabel${subject.id}"
                                  aria-hidden="true">
                                 <div class="modal-dialog" role="document">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel">usuń przedmiot</h5>
+                                            <h5 class="modal-title" id="exampleModalLabel${subject.id}">usuń przedmiot</h5>
                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                 <span aria-hidden="true">&times;</span>
                                             </button>
@@ -51,8 +51,8 @@
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">nie
                                             </button>
-                                            <button id="delete-subject" type="button" value="${subject.id}"
-                                                    class="btn btn-primary">
+                                            <button  type="button" value="${subject.id}"
+                                                    class="delete-subject btn btn-primary" >
                                                 tak
                                             </button>
                                         </div>

@@ -1,12 +1,12 @@
-$("#delete-subject").each(function () {
+$(".delete-subject").each(function () {
     $(this).on('click', function () {
-        const id = $('#delete-subject').val();
+        const id = $(".delete-subject").val();
         $.ajax({
-            "url": '/subject?id='+id,
+            "url": '/subjects?id='+id,
             "method": 'DELETE',
             "success": function () {
                 console.log('succes');
-                location.replace("/show-subjects");
+                location.replace("/subjects");
             }
         })
     });

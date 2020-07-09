@@ -36,6 +36,16 @@ public class SubjectService {
         user.get().setSubjects(Set.of(subject));
     }
 
+    @Transactional
+    public Optional<Subject> findById(long id) {
+        return subjectDao.findById(id);
+    }
+
+    @Transactional
+    public void deleteSubject(Long id){
+        Optional<Subject> subject = findById(id);
+        subject.ifPresent(s -> subjectDao.delete(s) );
+    }
    /* @Transactional
     public List<Subject> findSubjectsForUser(long userID);*/
 }

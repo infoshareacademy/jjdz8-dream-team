@@ -56,7 +56,7 @@ public class User {
     @CreationTimestamp
     private LocalDate dateOfRegistration;
 
-    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade = CascadeType.REFRESH)
     private Set<Subject> subjects = new HashSet<>();
 
     public Long getId() {

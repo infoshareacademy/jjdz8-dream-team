@@ -57,7 +57,7 @@ public class Subject {
     @CreationTimestamp
     private LocalDate dateOfCreation;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne()
     @JoinColumn(name = "user_ID")
     private User user;
 
