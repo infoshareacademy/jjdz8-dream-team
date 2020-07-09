@@ -1,11 +1,10 @@
 package com.infoshareacademy.servlet.servletDao;
 
-import com.infoshareacademy.domain.Role;
-import com.infoshareacademy.entity.User;
 import com.infoshareacademy.freemarker.TemplateProvider;
 import com.infoshareacademy.service.servisDao.UserService;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
+import org.apache.commons.lang.StringUtils;
 
 import javax.inject.Inject;
 import javax.servlet.ServletException;
@@ -17,7 +16,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static com.infoshareacademy.servlet.HelperForServlets.*;
-import static com.infoshareacademy.validation.ParameterValidator.isIncorrectCorrectParameter;
 
 @WebServlet("/add-user")
 public class AddUserServlet extends HttpServlet {
@@ -32,7 +30,13 @@ public class AddUserServlet extends HttpServlet {
 
     public static final String EMPTY_EMAIL = "emptyEmail";
 
-    public static final String EMPTY_PASSWORD = "emptyPassword";
+    public static final String INCORRECT_PASSWORD = "incorrectPassword";
+
+    public static final String EMAIL_EXIST = "emailExist";
+
+    public static final String NICKNAME_EXIST = "nickNameExist";
+
+    public static final String INCORRECT_FORM = "incorrectForm";
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -43,18 +47,20 @@ public class AddUserServlet extends HttpServlet {
         Template template = provider.getTemplate(getServletContext(), "add-user.ftlh");
         Map<String, Object> dataModel = new HashMap<>();
 
-        if (session.getAttribute("incorrectForm") != null) {
+        if (session.getAttribute(INCORRECT_FORM) != null) {
             putCorrectDataToDataModel(EMPTY_NICKNAME, getAttributeValue(session, EMPTY_NICKNAME), dataModel);
             putCorrectDataToDataModel("nickName", getAttributeValue(session, "nickName"), dataModel);
             putCorrectDataToDataModel(EMPTY_EMAIL, getAttributeValue(session, EMPTY_EMAIL), dataModel);
             putCorrectDataToDataModel("email", getAttributeValue(session, "email"), dataModel);
-            putCorrectDataToDataModel(EMPTY_PASSWORD, getAttributeValue(session, EMPTY_PASSWORD), dataModel);
-            putCorrectDataToDataModel("incorrectForm","coś poszło nie tak", dataModel);
+            putCorrectDataToDataModel(INCORRECT_PASSWORD, getAttributeValue(session, INCORRECT_PASSWORD), dataModel);
+            putCorrectDataToDataModel(EMAIL_EXIST, getAttributeValue(session, EMAIL_EXIST), dataModel);
+            putCorrectDataToDataModel(NICKNAME_EXIST, getAttributeValue(session, NICKNAME_EXIST), dataModel);
+            putCorrectDataToDataModel(INCORRECT_FORM, getAttributeValue(session, INCORRECT_FORM), dataModel);
 
             invalidateAttributes(session,
-                    EMPTY_NICKNAME, EMPTY_EMAIL, EMPTY_PASSWORD,
+                    EMPTY_NICKNAME, EMPTY_EMAIL, INCORRECT_PASSWORD, EMAIL_EXIST, NICKNAME_EXIST,
                     "nickName", "email");
-            req.getSession().removeAttribute("incorrectForm");
+            req.getSession().removeAttribute(INCORRECT_FORM);
 
         }
         try {
@@ -66,51 +72,55 @@ public class AddUserServlet extends HttpServlet {
 
     }
 
-        @Override
-        protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-            resp.setContentType("text/html;charset=UTF-8");
-            PrintWriter printWriter = resp.getWriter();
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        resp.setContentType("text/html;charset=UTF-8");
 
-            HttpSession session = req.getSession(true);
+        HttpSession session = req.getSession(true);
 
-            String nickName = req.getParameter("nickName");
-            String email = req.getParameter("email");
-            String password = req.getParameter("password");
-            String repeatedPassword = req.getParameter("repeatedPassword");
-            String role = req.getParameter("role");
+        String nickName = req.getParameter("nickName");
+        String email = req.getParameter("email");
+        String password = req.getParameter("password");
+        String repeatedPassword = req.getParameter("repeatedPassword");
+        String role = req.getParameter("role");
 
-            if (isIncorrectCorrectParameter(nickName)) {
-                session.setAttribute(EMPTY_NICKNAME, "Nickname cannot be empty");
-            } else {
-                session.setAttribute("nickName", nickName);
-            }
-            if (isIncorrectCorrectParameter(email)) {
-                session.setAttribute(EMPTY_EMAIL, "Email cannot be empty");
-            } else {
-                session.setAttribute("email", email);
-            }
-            if (isIncorrectCorrectParameter(password) || isIncorrectCorrectParameter(repeatedPassword) || !password.equals(repeatedPassword)) {
-                session.setAttribute(EMPTY_PASSWORD, "Password cannot be empty");
-            } else {
-                session.setAttribute("password", password);
-            }
-
-
-            if (session.getAttribute(EMPTY_NICKNAME) != null || session.getAttribute(EMPTY_PASSWORD) != null
-                    || session.getAttribute(EMPTY_EMAIL) != null) {
-                session.setAttribute("incorrectForm", "incorrectForm");
-                resp.sendRedirect("/add-user");
-                return;
-            }
-
-            userService.createUser(nickName,email,password,role);
-            resp.setStatus(HttpServletResponse.SC_CREATED);
-
-            Cookie cookie = new Cookie("nickname", nickName);
-            resp.addCookie(cookie);
-     /*       session.setAttribute("user", nickName );*/
-            resp.sendRedirect("/account-info");
+        if (StringUtils.isEmpty(nickName)) {
+            session.setAttribute(EMPTY_NICKNAME, "Nickname cannot be empty");
+        } else {
+            System.out.println("nickname istnieje "+userService.nickNameAlreadyExist(nickName,0L));
+            if (userService.nickNameAlreadyExist(nickName, 0L)) {
+                session.setAttribute(NICKNAME_EXIST, "true");
+            } else session.setAttribute("nickName", nickName);
         }
+        if (StringUtils.isEmpty(email)) {
+            session.setAttribute(EMPTY_EMAIL, "Email cannot be empty");
+        } else {
+            System.out.println("email istnieje "+userService.emailAlreadyExist(email,0L));
+            if (userService.emailAlreadyExist(email, 0L)) {
+                session.setAttribute(EMAIL_EXIST, "true");
+            } else session.setAttribute("email", email);
+        }
+        if (StringUtils.isEmpty(password) || StringUtils.isEmpty(repeatedPassword) || !password.equals(repeatedPassword)) {
+            session.setAttribute(INCORRECT_PASSWORD, "Password cannot be empty");
+        } else {
+            session.setAttribute("password", password);
+        }
+
+
+        if (session.getAttribute(EMPTY_NICKNAME) != null || session.getAttribute(INCORRECT_PASSWORD) != null
+                || session.getAttribute(EMPTY_EMAIL) != null || session.getAttribute(EMAIL_EXIST) != null || session.getAttribute(NICKNAME_EXIST) != null) {
+            session.setAttribute(INCORRECT_FORM, INCORRECT_FORM);
+            resp.sendRedirect("/add-user");
+            return;
+        }
+
+        userService.createUser(nickName, email, password, role);
+        resp.setStatus(HttpServletResponse.SC_CREATED);
+
+        session.setAttribute("login", nickName);
+        session.setMaxInactiveInterval(900);
+        resp.sendRedirect("/account-info");
+    }
 
 
 }

@@ -67,7 +67,7 @@ public class UserLoginServlet extends HttpServlet {
         if(service.isCorrectPasswordForUser(nickName,password)) {
             resp.setStatus(HttpServletResponse.SC_FOUND);
             session.setAttribute("login", nickName);
-            session.setMaxInactiveInterval(900);
+          /*  session.setMaxInactiveInterval(900);*/
             resp.sendRedirect("/account-info");
 
         } else {

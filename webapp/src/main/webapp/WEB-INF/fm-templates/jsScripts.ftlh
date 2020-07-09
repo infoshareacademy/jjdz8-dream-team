@@ -18,7 +18,7 @@
 <script src="https://code.jquery.com/jquery-3.5.0.js"
         integrity="sha256-r/AaFHrszJtwpe+tHyNi/XCfMxYpbsRg2Uqn0x3s2zc="
         crossorigin="anonymous"></script>
-<script src="../../html_js_css_Jsp_files/delete-subject.js"></script>
+<script src="../../html_js_css_Jsp_files/DELETE - SUBJECTS.js"></script>
 <script src="../../html_js_css_Jsp_files/delete-user.js"></script>
 <script src="../../html_js_css_Jsp_files/put-user-nickname-email.js"></script>
 <script src="../../html_js_css_Jsp_files/put-password.js"></script>
