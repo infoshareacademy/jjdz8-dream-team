@@ -1,33 +1,35 @@
-version: "3.7"
+version: "3.8"
 services:
   app:
-    container_name: "DreamTeamApp"
-    image: "jboss/wildfly"
+    container_name: "dream_team_app"
+    image: "e_learning:0.1.0"
+    build:
+      context: .
     environment:
       - WILDFLY_USER=admin
       - WILDFLY_PASSWORD=admin
-      - MYSQL_DATABASE=dataBaseElearning
-      - MYSQL_USER=root
-      - MYSQL_PASSWORD=root
-      #      - DB_NAME=dataBaseElearning
-      #      - DB_USER=root
-      #      - DB_PASS=root
-      - DB_URI=jdbc:mysql://0.0.0.0:3307/dataBaseElearning
+      - MYSQL_DATABASE=elearning
+      - MYSQL_USER=user
+      - MYSQL_PASSWORD=password
+      - WAIT_HOSTS=mysql_dream_team_db:33060
+      - WAIT_HOSTS_TIMEOUT=300
+      - WAIT_SLEEP_INTERVAL=15
+      - WAIT_HOST_CONNECT_TIMEOUT=15
+      - DB_URI=jdbc:mysql://mysql_dream_team_db:3306/elearning
     depends_on:
       - db
-    links:
-      - db:mysql-DreamTeamAppDC
     ports:
       - "9990:9990" # admin console
       - "8080:8080" # app
 
   db:
-    container_name: mysql-DreamTeamAppDC
-    image: "mysql:latest"
+    container_name: mysql_dream_team_db
+    image: "mysql:8.0"
     environment:
-      - MYSQL_DATABASE=dataBaseElearning
-      - MYSQL_USER=root
-      - MYSQL_PASSWORD=root
+      - MYSQL_DATABASE=elearning
+      - MYSQL_USER=user
+      - MYSQL_PASSWORD=password
       - MYSQL_ROOT_PASSWORD=root
     ports:
-      - "3307:3307"
+      - "3306:3306"
+      - "33060:33060"
