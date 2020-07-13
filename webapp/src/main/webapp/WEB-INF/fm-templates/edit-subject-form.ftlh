@@ -9,7 +9,7 @@
             </button>
         </div>
     </#if>
-    <#if emptyName ??>
+<#--    <#if emptyName ??>
         <div class="alert alert-danger" role="alert">
             ${emptyName}
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -40,22 +40,22 @@
                 <span aria-hidden="true">&times;</span>
             </button>
         </div>
-    </#if>
+    </#if>-->
     <div class="card">
         <div class="card-header">
             Dane przedmiotu
         </div>
         <br>
             <div class="form col-md-12">
-                <form method="post" action="http://localhost:8080/subject">
+                <form id="edit-subject-form">
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="name">kategoria przedmiotu</label><br>
-                            <input id="name" type="text" name="name" <#if name ??> value="${name}" </#if><br/><br/>
+                            <input id="name" type="text" name="name"  value="${subject.name}"> <br/><br/>
                         </div>
                         <div class="form-group col-md-6">
                             <label for="topic">temat</label><br>
-                            <input id="topic" type="text" name="topic" <#if topic ??> value="${topic}" </#if>><br/>
+                            <input id="topic" type="text" name="topic"  value="${subject.topic}"><br/>
                         </div>
                     </div>
 
@@ -69,19 +69,19 @@
                         </div>
                         <div class="form-group col-md-6">
                             <label for="videoLink">link do wideo materiałów</label><br>
-                            <input id="videoLink" type="text" name="videoLink"
+                            <input id="videoLink" type="text" name="videoLink" <#if subject.videoLink?has_content> value="${subject.videoLink}" </#if>
                                    ><br/>
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="description">Opis przedmiotu</label><br>
-                            <textarea id="description" type="text"
-                                      name="description" <#if description ??> value="${description}" </#if>></textarea><br/>
+                            <textarea id="description"
+                                      name="description" content="${subject.description}" >${subject.description}</textarea><br/>
                         </div>
                     </div>
-                    <input type="hidden" name="id" value="${user.id}"/><br/>
-                    <input type="hidden" name="subjectId" value="${subject.id}"/><br/>
+                    <input type="hidden" name="userId" value="${user.id}"/><br/>
+                    <input type="hidden" name="id" value="${subject.id}"/><br/>
                     <div class="form-group col-md-6">
                         <input class="btn btn-primary" type="submit" name="save" value="zatwierdź"/><br/>
                     </div>

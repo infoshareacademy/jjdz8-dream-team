@@ -22,3 +22,4 @@
 <script src="../../html_js_css_Jsp_files/delete-user.js"></script>
 <script src="../../html_js_css_Jsp_files/put-user-nickname-email.js"></script>
 <script src="../../html_js_css_Jsp_files/put-password.js"></script>
+<script src="../../html_js_css_Jsp_files/PUT_sub.js"></script>

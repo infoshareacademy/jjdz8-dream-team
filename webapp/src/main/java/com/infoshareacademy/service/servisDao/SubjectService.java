@@ -1,5 +1,6 @@
 package com.infoshareacademy.service.servisDao;
 
+import com.infoshareacademy.Dto.SubjectDto;
 import com.infoshareacademy.dao.Dao;
 import com.infoshareacademy.domain.Role;
 import com.infoshareacademy.entity.Subject;
@@ -45,6 +46,21 @@ public class SubjectService {
     public void deleteSubject(Long id){
         Optional<Subject> subject = findById(id);
         subject.ifPresent(s -> subjectDao.delete(s) );
+    }
+
+    @Transactional
+    public void updateSubject(SubjectDto subjectDto) {
+        findById(subjectDto.getId()).ifPresent(subject -> {
+            subject.setVideoLink(subjectDto.getVideoLink());
+            subject.setName(subjectDto.getName());
+            subject.setDescription(subjectDto.getDescription());
+            subject.setVideo(subjectDto.isVideo());
+            subject.setTopic(subjectDto.getTopic());
+            subjectDao.update(subject);
+        });
+    }
+
+    public void editSubjectTopicNameDescription(Long id, String topic, String name, String description) {
     }
    /* @Transactional
     public List<Subject> findSubjectsForUser(long userID);*/

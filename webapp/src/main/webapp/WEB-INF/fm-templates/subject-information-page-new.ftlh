@@ -50,7 +50,7 @@
                 </#if>
                 <div class="form-row">
                     <div class="form-group col-md-6">
-                        <a href="/edit-subject?id=${subject.id}"> <input class="btn btn-primary" type="button"
+                        <a href="/subjects/edit?id=${subject.id}"> <input class="btn btn-primary" type="button"
                                                                          value="edytuj"/></a><br>
                     </div>
                     <br>

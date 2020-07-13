@@ -1,5 +1,8 @@
 package com.infoshareacademy.servlet.servletDao;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.infoshareacademy.Dto.SubjectDto;
+import com.infoshareacademy.Dto.UserDto;
 import com.infoshareacademy.entity.Subject;
 import com.infoshareacademy.entity.User;
 import com.infoshareacademy.freemarker.TemplateCreator;
@@ -24,7 +27,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
-@WebServlet("/subjects")
+import static com.infoshareacademy.resolver.InputResolver.inputStreamToString;
+
+@WebServlet({"/subjects","/subjects/edit"})
 public class SubjectsServlet extends HttpServlet {
 
     private static Logger LOGGER = LogManager.getLogger(AccountInfoServlet.class.getName());
@@ -42,11 +47,13 @@ public class SubjectsServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html;charset=UTF-8");
         String id = req.getParameter("id");
+        System.out.println("my id " + id);
 
         Map<String, Object> dataModel = new HashMap<>();
 
         HttpSession session = req.getSession();
         String loginUser = (String) session.getAttribute("login");
+        String incorrectForm = (String) session.getAttribute("incorrectForm");
 
         if (StringUtils.isEmpty(loginUser)) {
             LOGGER.info("forbidden, user not login");
@@ -59,9 +66,14 @@ public class SubjectsServlet extends HttpServlet {
 
         Optional<User> user = service.findByNickname(loginUser);
         user.ifPresent(u -> dataModel.put("user", u));
+
         if (!StringUtils.isEmpty(id)){
             subjectService.findById(Long.valueOf(id)).ifPresent(subject-> dataModel.put("subject", subject));
-            System.out.println(subjectService.findById(Long.valueOf(id)).get().getVideoLink());
+            if (req.getRequestURI().equals("/subjects/edit")){
+                if (!StringUtils.isEmpty(incorrectForm)) dataModel.put("incorrectForm", "pola nie mogą pozostać puste");
+                TemplateCreator.createTemplate(dataModel,"edit-subject-form.ftlh",resp,provider,getServletContext());
+                return;
+            }
             TemplateCreator.createTemplate(dataModel,"subject-information-page-new.ftlh",resp,provider,getServletContext());
             return;
         }
@@ -94,5 +106,35 @@ public class SubjectsServlet extends HttpServlet {
         }
 
         subjectService.deleteSubject(Long.valueOf(id));
+    }
+
+    @Override
+    protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String body = inputStreamToString(req.getInputStream());
+        ObjectMapper mapper = new ObjectMapper();
+
+        SubjectDto subjectDto = mapper.readValue(body, SubjectDto.class);
+
+        HttpSession session = req.getSession();
+
+        System.out.println(subjectDto.toString());
+        if (subjectDto != null) {
+            String name = subjectDto.getName();
+            String topic = subjectDto.getTopic();
+            String description = subjectDto.getDescription();
+            boolean isVideo = subjectDto.isVideo();
+            String videoLink = subjectDto.getVideoLink();
+            System.out.println(!StringUtils.isEmpty(name) && !StringUtils.isEmpty(topic) && !StringUtils.isEmpty(description));
+            if (!StringUtils.isEmpty(name) && !StringUtils.isEmpty(topic) && !StringUtils.isEmpty(description)){
+                /*if (isVideo && StringUtils.isEmpty(videoLink)) {
+                    session.setAttribute("incorrectForm", "true");
+                    return;
+                }*/
+                System.out.println("edytuje przedmiot");
+                subjectService.updateSubject(subjectDto);
+            } else session.setAttribute("incorrectForm","true");
+
+        }
+
     }
 }
