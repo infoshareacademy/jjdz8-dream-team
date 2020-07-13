@@ -35,11 +35,11 @@
                                   disabled>${subject.description} </textarea><br/><br/>
                     </div>
                 </div>
-                <#if subject.videoLink ??>
+                <#if subject.videoLink?has_content>
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="isVideo">materiały wideo</label><br>
-                            <p id="isVideo">załączono materiały wideo: "${isVideo}" </p>
+                            <p id="isVideo">załączono materiały wideo</p>
                         </div>
                         <div class="form-group col-md-6">
                             <label for="videoLink">link do wideo materiałów</label><br>

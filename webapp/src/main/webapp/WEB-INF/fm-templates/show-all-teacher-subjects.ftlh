@@ -27,7 +27,7 @@
                         <tbody>
                         <td>${subject.name}</td>
                         <td>
-                            <a href="http://localhost:8080/subject?id=${subject.id}">
+                            <a href="http://localhost:8080/subjects?id=${subject.id}">
                                 <input class="btn btn-secondary" type="button" value="pokaż szczegóły"/>
                             </a>
                             <button type="button" class="btn btn-danger" data-toggle="modal"
@@ -51,9 +51,9 @@
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">nie
                                             </button>
-                                            <button  type="button" value="${subject.id}"
+                                            <button id="delete-subject${subject.id}" type="button" value="${subject.id}" name="id"
                                                     class="delete-subject btn btn-primary" >
-                                                tak
+                                                tak ${subject.id}
                                             </button>
                                         </div>
                                     </div>
