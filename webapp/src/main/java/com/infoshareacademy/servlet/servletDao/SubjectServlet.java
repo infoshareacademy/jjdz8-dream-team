@@ -63,6 +63,7 @@ public class SubjectServlet extends HttpServlet {
         String topic = (String) session.getAttribute("topic");
         String name = (String) session.getAttribute("name");
         String description = (String) session.getAttribute("description");
+        String incorrectForm = (String) session.getAttribute("incorrectForm");
 
         if (StringUtils.isEmpty(loginUser)) {
             LOGGER.info("forbidden, user not login");
@@ -75,6 +76,7 @@ public class SubjectServlet extends HttpServlet {
         user.ifPresent(u -> dataModel.put("user", u));
 
         if (!StringUtils.isEmpty(name)) dataModel.put("name", name);
+        if (!StringUtils.isEmpty(incorrectForm)) dataModel.put("incorrectForm", "coś poszło nie tak, spróbuj jeszcze raz");
         if (!StringUtils.isEmpty(topic)) dataModel.put("topic", topic);
         if (!StringUtils.isEmpty(description)) dataModel.put("description", description);
         if (!StringUtils.isEmpty(emptyName)) dataModel.put("emptyName", EMPTY_NAME);
@@ -83,7 +85,9 @@ public class SubjectServlet extends HttpServlet {
         if (!StringUtils.isEmpty(emptyVideoLink)) dataModel.put("emptyVideoLink", EMPTY_VIDEO_LINK);
         TemplateCreator.createTemplate(dataModel, "subject-account-data-form-new.ftlh", resp, provider, getServletContext());
 
-        HelperForServlets.invalidateAttributes(session, EMPTY_DESCRIPTION, EMPTY_TOPIC, EMPTY_VIDEO_LINK, EMPTY_NAME);
+        HelperForServlets.invalidateAttributes(session, EMPTY_DESCRIPTION, EMPTY_TOPIC,
+                EMPTY_VIDEO_LINK, EMPTY_NAME,
+                "name","incorrectForm","topic","description");
     }
 
     @Override

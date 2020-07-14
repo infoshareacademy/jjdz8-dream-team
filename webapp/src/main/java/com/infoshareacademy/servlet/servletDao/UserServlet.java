@@ -107,6 +107,7 @@ public class UserServlet extends HttpServlet {
             if (!StringUtils.isEmpty(email) && !StringUtils.isEmpty(nickName)) {
                 if (!service.emailAlreadyExist(email,id) && !service.nickNameAlreadyExist(nickName, id)) {
                     service.editUserNickNameAndEmail(id, nickName, email);
+                    session.removeAttribute("");
                 } else {
                     session.setAttribute("exist", "true");
                 }

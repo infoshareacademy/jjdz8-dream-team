@@ -33,7 +33,6 @@ public class UserLoginServlet extends HttpServlet {
         resp.setContentType("text/html;charset=UTF-8");
         PrintWriter printWriter = resp.getWriter();
         String message = (String) req.getSession().getAttribute("incorrect");
-        System.out.println(message);
 
         Template template = provider.getTemplate(getServletContext(), "login.ftlh");
         Map<String, Object> dataModel = new HashMap<>();

@@ -47,7 +47,7 @@ public class SubjectsServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html;charset=UTF-8");
         String id = req.getParameter("id");
-        System.out.println("my id " + id);
+
 
         Map<String, Object> dataModel = new HashMap<>();
 
@@ -69,9 +69,10 @@ public class SubjectsServlet extends HttpServlet {
 
         if (!StringUtils.isEmpty(id)){
             subjectService.findById(Long.valueOf(id)).ifPresent(subject-> dataModel.put("subject", subject));
-            if (req.getRequestURI().equals("/subjects/edit")){
+            if (req.getRequestURI().equals("/subjects/edit") || !StringUtils.isEmpty(incorrectForm)){
                 if (!StringUtils.isEmpty(incorrectForm)) dataModel.put("incorrectForm", "pola nie mogą pozostać puste");
                 TemplateCreator.createTemplate(dataModel,"edit-subject-form.ftlh",resp,provider,getServletContext());
+                session.removeAttribute("incorrectForm");
                 return;
             }
             TemplateCreator.createTemplate(dataModel,"subject-information-page-new.ftlh",resp,provider,getServletContext());
@@ -117,24 +118,19 @@ public class SubjectsServlet extends HttpServlet {
 
         HttpSession session = req.getSession();
 
-        System.out.println(subjectDto.toString());
+
         if (subjectDto != null) {
             String name = subjectDto.getName();
             String topic = subjectDto.getTopic();
             String description = subjectDto.getDescription();
-            boolean isVideo = subjectDto.isVideo();
-            String videoLink = subjectDto.getVideoLink();
-            System.out.println(!StringUtils.isEmpty(name) && !StringUtils.isEmpty(topic) && !StringUtils.isEmpty(description));
-            if (!StringUtils.isEmpty(name) && !StringUtils.isEmpty(topic) && !StringUtils.isEmpty(description)){
-                /*if (isVideo && StringUtils.isEmpty(videoLink)) {
-                    session.setAttribute("incorrectForm", "true");
-                    return;
-                }*/
-                System.out.println("edytuje przedmiot");
-                subjectService.updateSubject(subjectDto);
-            } else session.setAttribute("incorrectForm","true");
 
+            if (!StringUtils.isEmpty(name) && !StringUtils.isEmpty(topic) && !StringUtils.isEmpty(description)) {
+                subjectService.updateSubject(subjectDto);
+                return;
+                }
+            }
+            session.setAttribute("incorrectForm","true");
         }
 
     }
-}
+

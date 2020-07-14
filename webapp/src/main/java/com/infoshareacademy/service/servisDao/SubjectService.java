@@ -60,8 +60,4 @@ public class SubjectService {
         });
     }
 
-    public void editSubjectTopicNameDescription(Long id, String topic, String name, String description) {
-    }
-   /* @Transactional
-    public List<Subject> findSubjectsForUser(long userID);*/
 }
