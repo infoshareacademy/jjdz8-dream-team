@@ -2,6 +2,7 @@ package com.infoshareacademy.servlet.servletDao;
 
 import com.infoshareacademy.freemarker.TemplateProvider;
 import com.infoshareacademy.service.servisDao.LoginService;
+import com.infoshareacademy.servlet.users.AttributesNames;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 import org.apache.commons.lang.StringUtils;
@@ -16,6 +17,9 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Map;
+
+import static com.infoshareacademy.servlet.users.AttributesNames.INCORRECT;
+import static com.infoshareacademy.servlet.users.AttributesNames.LOGIN;
 
 @WebServlet("/login")
 public class UserLoginServlet extends HttpServlet {
@@ -32,12 +36,12 @@ public class UserLoginServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html;charset=UTF-8");
         PrintWriter printWriter = resp.getWriter();
-        String message = (String) req.getSession().getAttribute("incorrect");
+        String message = (String) req.getSession().getAttribute(INCORRECT);
 
         Template template = provider.getTemplate(getServletContext(), "login.ftlh");
         Map<String, Object> dataModel = new HashMap<>();
-        if (!StringUtils.isEmpty(message)){
-            dataModel.put("incorrect", "incorrect");
+        if (!StringUtils.isEmpty(message)) {
+            dataModel.put(INCORRECT, INCORRECT);
             req.getSession().invalidate();
         }
 
@@ -58,20 +62,19 @@ public class UserLoginServlet extends HttpServlet {
         HttpSession session = req.getSession();
 
         if (StringUtils.isEmpty(nickName) || StringUtils.isEmpty(password)) {
-            session.setAttribute("incorrect","incorrect");
+            session.setAttribute(INCORRECT, INCORRECT);
             resp.sendRedirect("/login");
             return;
         }
 
-        if(service.isCorrectPasswordForUser(nickName,password)) {
+        if (service.isCorrectPasswordForUser(nickName, password)) {
             resp.setStatus(HttpServletResponse.SC_FOUND);
-            session.setAttribute("login", nickName);
-          /*  session.setMaxInactiveInterval(900);*/
+            session.setAttribute(LOGIN, nickName);
             resp.sendRedirect("/account-info");
 
         } else {
-            session.setAttribute("incorrect","incorrect");
-            LOGGER.info("incorrect login data for user"+nickName);
+            session.setAttribute(INCORRECT, INCORRECT);
+            LOGGER.info("incorrect login data for user" + nickName);
             resp.sendRedirect("/login");
         }
     }

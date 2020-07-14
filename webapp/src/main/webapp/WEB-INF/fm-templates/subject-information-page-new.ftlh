@@ -55,13 +55,7 @@
                     </div>
                     <br>
                 </div>
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <a href="/show-subjects"> <input class="btn btn-secondary" type="button"
-                                                         value="Wróć"/></a><br>
-                    </div>
-                    <br>
-                </div>
+
 
             </form>
         </div>

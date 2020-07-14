@@ -1,8 +1,6 @@
 package com.infoshareacademy.service;
 
-import com.infoshareacademy.domain.Subject;
 /*import com.infoshareacademy.domain.Teacher;*/
-import com.infoshareacademy.domain.User;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;

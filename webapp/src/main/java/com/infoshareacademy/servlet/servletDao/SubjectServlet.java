@@ -76,7 +76,7 @@ public class SubjectServlet extends HttpServlet {
         user.ifPresent(u -> dataModel.put("user", u));
 
         if (!StringUtils.isEmpty(name)) dataModel.put("name", name);
-        if (!StringUtils.isEmpty(incorrectForm)) dataModel.put("incorrectForm", "coś poszło nie tak, spróbuj jeszcze raz");
+        if (!StringUtils.isEmpty(incorrectForm)) dataModel.put("incorrectForm", "incorrectForm");
         if (!StringUtils.isEmpty(topic)) dataModel.put("topic", topic);
         if (!StringUtils.isEmpty(description)) dataModel.put("description", description);
         if (!StringUtils.isEmpty(emptyName)) dataModel.put("emptyName", EMPTY_NAME);

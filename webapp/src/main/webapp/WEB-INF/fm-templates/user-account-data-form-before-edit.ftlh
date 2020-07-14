@@ -3,11 +3,25 @@
     <#if incorrectParameters ??>
         <div class="alert alert-danger" role="alert">
             Twój nickname lub email nie są unikalne. Spróbuj jeszcze raz...
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
         </div>
     </#if>
     <#if emptyParameters ??>
         <div class="alert alert-danger" role="alert">
             Zostawiłeś puste pole. Spróbuj jeszcze raz...
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    </#if>
+    <#if dataAccept ??>
+        <div class="alert alert-primary" role="alert">
+            Twoje dane zostały zaktualizowane
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
         </div>
     </#if>
     <div class="card">

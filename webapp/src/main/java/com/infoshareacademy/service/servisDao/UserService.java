@@ -2,7 +2,7 @@ package com.infoshareacademy.service.servisDao;
 
 import com.infoshareacademy.dao.Dao;
 import com.infoshareacademy.dao.UserExtendDao;
-import com.infoshareacademy.domain.Role;
+import com.infoshareacademy.domain.ROLE;
 import com.infoshareacademy.entity.Subject;
 import com.infoshareacademy.entity.User;
 import com.infoshareacademy.entity.UserColumn;
@@ -13,10 +13,8 @@ import com.infoshareacademy.security.PasswordResolver;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.transaction.Transactional;
-import java.nio.file.LinkOption;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 @ApplicationScoped
 public class UserService {
@@ -30,7 +28,7 @@ public class UserService {
     @Transactional
     public void createUser(String nickname, String email, String password, String role) {
         RoleService service = new RoleService();
-        Role userRole = service.returnCorrectRole(role);
+        ROLE userRole = service.returnCorrectRole(role);
         User user = new User();
         user.setNickName(nickname);
         user.setEmail(email);

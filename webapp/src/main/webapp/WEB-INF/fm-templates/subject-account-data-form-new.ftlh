@@ -2,44 +2,13 @@
 <#macro content>
  <#if incorrectForm ??>
         <div class="alert alert-danger" role="alert">
-            ${incorrectForm}.Spróbuj jeszcze raz
+            Coś poszło nie tak. Spróbuj jeszcze raz
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
         </div>
     </#if>
-<#--    <#if emptyName ??>
-        <div class="alert alert-danger" role="alert">
-            ${emptyName}
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-    </#if>
-    <#if emptyTopic ??>
-        <div class="alert alert-danger" role="alert">
-            ${emptyTopic}
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-    </#if>
-    <#if emptyDescription ??>
-        <div class="alert alert-danger" role="alert">
-            ${emptyDescription}
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-    </#if>
-    <#if emptyVideoLink ??>
-        <div class="alert alert-danger" role="alert">
-            ${emptyVideoLink}
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-    </#if>-->
+
     <div class="card">
         <div class="card-header">
             Dane przedmiotu

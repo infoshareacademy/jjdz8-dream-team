@@ -20,7 +20,7 @@
             </div>
         </div>
     </#if>
-    <#if emptyParameters ??>
+    <#if emptyPassword ??>
         <div class="col-md-12">
             <div class="alert alert-danger" role="alert">
                 Przy zmianie hasła wszystkie pola muszą zostać uzupełnione

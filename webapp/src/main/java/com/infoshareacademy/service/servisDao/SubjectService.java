@@ -2,7 +2,6 @@ package com.infoshareacademy.service.servisDao;
 
 import com.infoshareacademy.Dto.SubjectDto;
 import com.infoshareacademy.dao.Dao;
-import com.infoshareacademy.domain.Role;
 import com.infoshareacademy.entity.Subject;
 import com.infoshareacademy.entity.User;
 
