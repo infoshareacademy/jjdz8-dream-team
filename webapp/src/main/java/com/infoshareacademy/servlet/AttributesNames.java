@@ -1,4 +1,4 @@
-package com.infoshareacademy.servlet.users;
+package com.infoshareacademy.servlet;
 
 public class AttributesNames {
 

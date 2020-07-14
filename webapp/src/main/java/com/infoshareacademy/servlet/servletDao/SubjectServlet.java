@@ -1,6 +1,5 @@
 package com.infoshareacademy.servlet.servletDao;
 
-import com.infoshareacademy.entity.Subject;
 import com.infoshareacademy.entity.User;
 import com.infoshareacademy.freemarker.TemplateCreator;
 import com.infoshareacademy.freemarker.TemplateProvider;

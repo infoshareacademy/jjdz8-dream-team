@@ -2,7 +2,6 @@ package com.infoshareacademy.servlet.servletDao;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.infoshareacademy.Dto.SubjectDto;
-import com.infoshareacademy.Dto.UserDto;
 import com.infoshareacademy.entity.Subject;
 import com.infoshareacademy.entity.User;
 import com.infoshareacademy.freemarker.TemplateCreator;

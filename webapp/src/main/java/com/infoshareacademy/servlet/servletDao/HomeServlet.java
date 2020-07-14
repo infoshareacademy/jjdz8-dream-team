@@ -1,7 +1,6 @@
 package com.infoshareacademy.servlet.servletDao;
 
 
-import com.infoshareacademy.entity.User;
 import com.infoshareacademy.freemarker.TemplateProvider;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
@@ -16,9 +15,7 @@ import javax.servlet.http.*;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 @WebServlet("/home")
 public class HomeServlet extends HttpServlet {

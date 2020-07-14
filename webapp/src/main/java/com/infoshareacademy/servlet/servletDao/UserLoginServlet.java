@@ -2,7 +2,6 @@ package com.infoshareacademy.servlet.servletDao;
 
 import com.infoshareacademy.freemarker.TemplateProvider;
 import com.infoshareacademy.service.servisDao.LoginService;
-import com.infoshareacademy.servlet.users.AttributesNames;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 import org.apache.commons.lang.StringUtils;
@@ -18,8 +17,8 @@ import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.infoshareacademy.servlet.users.AttributesNames.INCORRECT;
-import static com.infoshareacademy.servlet.users.AttributesNames.LOGIN;
+import static com.infoshareacademy.servlet.AttributesNames.INCORRECT;
+import static com.infoshareacademy.servlet.AttributesNames.LOGIN;
 
 @WebServlet("/login")
 public class UserLoginServlet extends HttpServlet {
