@@ -1,10 +1,9 @@
 package com.infoshareacademy.entity;
 
-import com.infoshareacademy.domain.Role;
+import com.infoshareacademy.domain.ROLE;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
-import javax.transaction.Transactional;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
@@ -46,7 +45,7 @@ public class User {
     @Basic
     @Enumerated(EnumType.STRING)
     @NotNull
-    private Role role;
+    private ROLE role;
 
     @Basic
     @NotNull
@@ -83,11 +82,11 @@ public class User {
         this.email = email;
     }
 
-    public Role getRole() {
+    public ROLE getRole() {
         return role;
     }
 
-    public void setRole(Role role) {
+    public void setRole(ROLE role) {
         this.role = role;
     }
 

@@ -35,9 +35,4 @@ public class SubjectDao extends AbstractDao<Subject> {
     }
 
 
-
-/*    @Override
-    public Optional<List<String>> createNamedQueryForListForOneColumn(String column) {
-        return Optional.empty();
-    }*/
 }

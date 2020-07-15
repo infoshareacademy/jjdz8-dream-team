@@ -87,7 +87,6 @@ public class AddUserServlet extends HttpServlet {
         if (StringUtils.isEmpty(nickName)) {
             session.setAttribute(EMPTY_NICKNAME, "Nickname cannot be empty");
         } else {
-            System.out.println("nickname istnieje "+userService.nickNameAlreadyExist(nickName,0L));
             if (userService.nickNameAlreadyExist(nickName, 0L)) {
                 session.setAttribute(NICKNAME_EXIST, "true");
             } else session.setAttribute("nickName", nickName);

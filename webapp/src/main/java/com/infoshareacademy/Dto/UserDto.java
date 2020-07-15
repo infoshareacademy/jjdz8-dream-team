@@ -1,6 +1,6 @@
 package com.infoshareacademy.Dto;
 
-import com.infoshareacademy.domain.Role;
+import com.infoshareacademy.domain.ROLE;
 
 public class UserDto {
 
@@ -10,7 +10,7 @@ public class UserDto {
 
     private String email;
 
-    private Role role;
+    private ROLE role;
 
     private String password;
 
@@ -42,11 +42,11 @@ public class UserDto {
         this.email = email;
     }
 
-    public Role getRole() {
+    public ROLE getRole() {
         return role;
     }
 
-    public void setRole(Role role) {
+    public void setRole(ROLE role) {
         this.role = role;
     }
 

@@ -1,16 +1,11 @@
 package com.infoshareacademy.servlet.servletDao;
 
 
-import com.infoshareacademy.domain.ROLE;
-import com.infoshareacademy.domain.Subject;
 import com.infoshareacademy.entity.User;
 import com.infoshareacademy.freemarker.TemplateCreator;
 import com.infoshareacademy.freemarker.TemplateProvider;
-import com.infoshareacademy.service.Service;
-import com.infoshareacademy.service.SubjectService;
+import com.infoshareacademy.service.servisDao.SubjectService;
 import com.infoshareacademy.service.servisDao.UserService;
-import freemarker.template.Template;
-import freemarker.template.TemplateException;
 import org.apache.commons.lang.StringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

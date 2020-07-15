@@ -17,7 +17,6 @@ import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
@@ -25,7 +24,7 @@ import java.util.Optional;
 
 import static com.infoshareacademy.resolver.InputResolver.inputStreamToString;
 
-@WebServlet({"/user","/edit-user"})
+@WebServlet({"/user", "/edit-user"})
 public class UserServlet extends HttpServlet {
 
     private static Logger LOGGER = LogManager.getLogger(AccountInfoServlet.class.getName());
@@ -47,8 +46,12 @@ public class UserServlet extends HttpServlet {
         String loginUser = (String) session.getAttribute("login");
         String incorrectParameters = (String) session.getAttribute("exist");
         session.removeAttribute("exist");
+        String accept = (String) session.getAttribute("dataAccept");
+        session.removeAttribute("dataAccept");
         String emptyParameters = (String) session.getAttribute("empty");
         session.removeAttribute("empty");
+        String emptyPassword = (String) session.getAttribute("emptyPassword");
+        session.removeAttribute("emptyPassword");
         String incorrectPassword = (String) session.getAttribute("incorrectPassword");
         session.removeAttribute("incorrectPassword");
         String correctPassword = (String) session.getAttribute("correctPassword");
@@ -58,25 +61,30 @@ public class UserServlet extends HttpServlet {
         if (!StringUtils.isEmpty(loginUser)) {
             Optional<User> user = service.findByNickname(loginUser);
             user.ifPresent(u -> dataModel.put("user", u));
+            if (!StringUtils.isEmpty(accept)) dataModel.put("dataAccept", "dataAccept");
 
-            if (!StringUtils.isEmpty(incorrectParameters) ) {
+            if (!StringUtils.isEmpty(incorrectParameters))
                 dataModel.put("incorrectParameters", "true");
-            }
             if (!StringUtils.isEmpty(emptyParameters)) {
                 dataModel.put("emptyParameters", "true");
             }
-            if(!StringUtils.isEmpty(incorrectPassword)) {
+            if (!StringUtils.isEmpty(incorrectPassword)) {
                 dataModel.put("incorrectPassword", "true");
             }
-            if(!StringUtils.isEmpty(correctPassword)) {
+
+            if(!StringUtils.isEmpty(emptyPassword)) {
+                dataModel.put("emptyPassword","emptyPassword");
+            }
+
+            if (!StringUtils.isEmpty(correctPassword)) {
                 dataModel.put("correctPassword", "true");
             }
-            if (requestURI.equals("/user")){
+            if (requestURI.equals("/user")) {
                 TemplateCreator.createTemplate(dataModel, "user-account-data-form-before-edit.ftlh", resp, provider, getServletContext());
                 return;
             }
-            if (requestURI.equals("/edit-user")){
-                TemplateCreator.createTemplate(dataModel,"edit-password-page.ftlh",resp,provider,getServletContext());
+            if (requestURI.equals("/edit-user")) {
+                TemplateCreator.createTemplate(dataModel, "edit-password-page.ftlh", resp, provider, getServletContext());
                 return;
             }
         }
@@ -105,23 +113,27 @@ public class UserServlet extends HttpServlet {
 
 
             if (!StringUtils.isEmpty(email) && !StringUtils.isEmpty(nickName)) {
-                if (!service.emailAlreadyExist(email,id) && !service.nickNameAlreadyExist(nickName, id)) {
+                if (!service.emailAlreadyExist(email, id) && !service.nickNameAlreadyExist(nickName, id)) {
                     service.editUserNickNameAndEmail(id, nickName, email);
+                    session.setAttribute("login", nickName);
+                    session.setAttribute("dataAccept", "true");
+                    return;
                 } else {
                     session.setAttribute("exist", "true");
                 }
+            } else if (StringUtils.isEmpty(email) && StringUtils.isEmpty(nickName)){
+                session.setAttribute("empty", "true");
             }
-            if (!StringUtils.isEmpty(password) && !StringUtils.isEmpty(newPassword) && !StringUtils.isEmpty(repeatedPassword)){
-                System.out.println(service.isCorrectPassword(password,id));
-                if(service.isCorrectPassword(password,id) && newPassword.equals(repeatedPassword)){
-                    service.editUserPassword(id,newPassword);
-                    session.setAttribute("correctPassword","true");
-                }else {
+            if (!StringUtils.isEmpty(password) && !StringUtils.isEmpty(newPassword) && !StringUtils.isEmpty(repeatedPassword)) {
+                if (service.isCorrectPassword(password, id) && newPassword.equals(repeatedPassword)) {
+                    System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+                    service.editUserPassword(id, newPassword);
+                    session.setAttribute("correctPassword", "true");
+                } else {
                     session.setAttribute("incorrectPassword", "true");
                 }
-            }
-            else {
-                session.setAttribute("empty", "true");
+            } else {
+                session.setAttribute("emptyPassword", "true");
             }
         }
     }
@@ -130,10 +142,10 @@ public class UserServlet extends HttpServlet {
         HttpSession session = req.getSession();
         String loginUser = (String) session.getAttribute("login");
 
-        if(StringUtils.isEmpty(loginUser)) {
+        if (StringUtils.isEmpty(loginUser)) {
             LOGGER.info("aunauthorized " + LocalDateTime.now());
             resp.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-            session.setAttribute("message","unAuthorized");
+            session.setAttribute("message", "unAuthorized");
             resp.sendRedirect("/home");
             return;
         }

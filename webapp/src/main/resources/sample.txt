@@ -1,9 +1,0 @@
-#
-#Fri Mar 27 13:14:48 CET 2020
-wartosc\ najwieksza=6.0
-wariancja=0.5
-odchylenie\ standardowe=0.5
-mediana=5
-kurtoza=0.0
-skosnosc=0.0
-moda=5.0

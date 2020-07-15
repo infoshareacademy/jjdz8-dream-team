@@ -1,11 +1,11 @@
 package com.infoshareacademy.servlet.servletDao;
 
-import com.infoshareacademy.entity.Subject;
 import com.infoshareacademy.entity.User;
 import com.infoshareacademy.freemarker.TemplateCreator;
 import com.infoshareacademy.freemarker.TemplateProvider;
 import com.infoshareacademy.service.servisDao.SubjectService;
 import com.infoshareacademy.service.servisDao.UserService;
+import com.infoshareacademy.servlet.HelperForServlets;
 import org.apache.commons.lang.StringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -23,7 +23,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
-@WebServlet({"/subject", "/add-subject"})
+@WebServlet("/add-subject")
 public class SubjectServlet extends HttpServlet {
 
     private static Logger LOGGER = LogManager.getLogger(AccountInfoServlet.class.getName());
@@ -43,6 +43,9 @@ public class SubjectServlet extends HttpServlet {
 
     public static final String EMPTY_DESCRIPTION = "description cannot be empty";
 
+    private static final String EMPTY_VIDEO_LINK = "if you have video materials you have to insert link for them";
+
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html;charset=UTF-8");
@@ -52,6 +55,14 @@ public class SubjectServlet extends HttpServlet {
 
         HttpSession session = req.getSession();
         String loginUser = (String) session.getAttribute("login");
+        String emptyName = (String) session.getAttribute(EMPTY_NAME);
+        String emptyTopic = (String) session.getAttribute(EMPTY_TOPIC);
+        String emptyDescription = (String) session.getAttribute(EMPTY_DESCRIPTION);
+        String emptyVideoLink = (String) session.getAttribute(EMPTY_VIDEO_LINK);
+        String topic = (String) session.getAttribute("topic");
+        String name = (String) session.getAttribute("name");
+        String description = (String) session.getAttribute("description");
+        String incorrectForm = (String) session.getAttribute("incorrectForm");
 
         if (StringUtils.isEmpty(loginUser)) {
             LOGGER.info("forbidden, user not login");
@@ -62,13 +73,20 @@ public class SubjectServlet extends HttpServlet {
         }
         Optional<User> user = service.findByNickname(loginUser);
         user.ifPresent(u -> dataModel.put("user", u));
-        if (requestURI.equals("/subject")) {
-            TemplateCreator.createTemplate(dataModel, "user-account-data-form-before-edit.ftlh", resp, provider, getServletContext());
-            return;
-        }
-        if (requestURI.equals("/add-subject")) {
-            TemplateCreator.createTemplate(dataModel, "subject-account-data-form-new.ftlh", resp, provider, getServletContext());
-        }
+
+        if (!StringUtils.isEmpty(name)) dataModel.put("name", name);
+        if (!StringUtils.isEmpty(incorrectForm)) dataModel.put("incorrectForm", "incorrectForm");
+        if (!StringUtils.isEmpty(topic)) dataModel.put("topic", topic);
+        if (!StringUtils.isEmpty(description)) dataModel.put("description", description);
+        if (!StringUtils.isEmpty(emptyName)) dataModel.put("emptyName", EMPTY_NAME);
+        if (!StringUtils.isEmpty(emptyTopic)) dataModel.put("emptyTopic", EMPTY_TOPIC);
+        if (!StringUtils.isEmpty(emptyDescription)) dataModel.put("emptyDescription", EMPTY_DESCRIPTION);
+        if (!StringUtils.isEmpty(emptyVideoLink)) dataModel.put("emptyVideoLink", EMPTY_VIDEO_LINK);
+        TemplateCreator.createTemplate(dataModel, "subject-account-data-form-new.ftlh", resp, provider, getServletContext());
+
+        HelperForServlets.invalidateAttributes(session, EMPTY_DESCRIPTION, EMPTY_TOPIC,
+                EMPTY_VIDEO_LINK, EMPTY_NAME,
+                "name","incorrectForm","topic","description");
     }
 
     @Override
@@ -100,9 +118,13 @@ public class SubjectServlet extends HttpServlet {
         } else {
             session.setAttribute("description", description);
         }
+        if (isVideo && StringUtils.isEmpty(videoLink)) {
+            session.setAttribute(EMPTY_VIDEO_LINK, EMPTY_VIDEO_LINK);
+        }
 
         if (session.getAttribute(EMPTY_NAME) != null || session.getAttribute(EMPTY_TOPIC) != null
-                || session.getAttribute(EMPTY_DESCRIPTION) != null) {
+                || session.getAttribute(EMPTY_DESCRIPTION) != null || session.getAttribute(EMPTY_VIDEO_LINK) != null) {
+            session.setAttribute("incorrectForm", "true");
             resp.sendRedirect("/add-subject");
             return;
         }
@@ -110,4 +132,6 @@ public class SubjectServlet extends HttpServlet {
         subjectService.createSubject(name, topic, description, videoLink, isVideo, teacherId);
         resp.sendRedirect("/subjects");
     }
+
+
 }
