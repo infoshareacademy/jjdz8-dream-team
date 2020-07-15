@@ -1,38 +1,43 @@
 package com.infoshareacademy.domain;
 
+import com.infoshareacademy.domain.Role;
+import com.infoshareacademy.entity.Subject;
+import org.hibernate.annotations.CreationTimestamp;
+
+import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
-import java.util.Objects;
-import java.util.UUID;
+import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
+
+import static com.infoshareacademy.entity.UserColumn.*;
+import static com.infoshareacademy.entity.UserColumn.EMAIL;
+import static com.infoshareacademy.entity.UserQuery.FIND_BY_EMAIL_QUERY;
+import static com.infoshareacademy.entity.UserQuery.FIND_BY_NICKNAME_QUERY;
 
 public class User {
 
-    private String password;
-
-    private UUID id;
+    private Long id;
 
     private String nickName;
 
     private String email;
 
-    public String getEmail() {
-        return email;
-    }
+    private Role role;
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
+    private String password;
 
-    public User(){
+    private LocalDate dateOfRegistration;
 
-    }
-    public User(String nickName) {
-        this.id = UUID.randomUUID();
-        this.nickName = nickName;
-    }
+    private Set<com.infoshareacademy.entity.Subject> subjects = new HashSet<>();
 
-    public UUID getId() {
+    public Long getId() {
         return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getNickName() {
@@ -43,6 +48,22 @@ public class User {
         this.nickName = nickName;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
+
     public String getPassword() {
         return password;
     }
@@ -51,26 +72,16 @@ public class User {
         this.password = password;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        User user = (User) o;
-        return Objects.equals(getPassword(), user.getPassword()) &&
-                Objects.equals(getId(), user.getId()) &&
-                Objects.equals(getNickName(), user.getNickName());
+    public LocalDate getDateOfRegistration() {
+        return dateOfRegistration;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(getPassword(), getId(), getNickName());
+    public Set<com.infoshareacademy.entity.Subject> getSubjects() {
+        return subjects;
     }
 
-    @Override
-    public String toString() {
-        return "User{" +
-                ", id=" + id +
-                ", nickName='" + nickName + '\'' +
-                '}';
+    public void setSubjects(Set<Subject> subjects) {
+        this.subjects = subjects;
     }
+
 }

@@ -19,4 +19,9 @@ public interface Service {
     void delete(User user);
 
     boolean isCorrectPassword(User user, String oldPassword);
+
+    public boolean nicknameAlreadyExist(String nickname, UUID id);
+
+    public boolean emailAlreadyExist(String email, UUID id);
+
 }

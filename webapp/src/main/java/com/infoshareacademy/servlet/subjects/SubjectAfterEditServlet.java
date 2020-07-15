@@ -8,7 +8,6 @@ import freemarker.template.Template;
 import freemarker.template.TemplateException;
 
 import javax.inject.Inject;
-import javax.inject.Named;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -33,7 +32,6 @@ public class SubjectAfterEditServlet extends HttpServlet {
     SubjectService service;
 
     @Inject
-    @Named("TeacherService")
     Service userService;
 
     public static final String EMPTY_NAME = "emptyName";
@@ -44,9 +42,8 @@ public class SubjectAfterEditServlet extends HttpServlet {
 
     public static final String LOGIN_ERROR = "loginError";
 
-    private static final String SESSION_ATTRIBUTE = "teacherID";
 
-    @Override
+   /* @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html;charset=UTF-8");
         PrintWriter printWriter = resp.getWriter();
@@ -60,7 +57,7 @@ public class SubjectAfterEditServlet extends HttpServlet {
         Map<String, Object> dataModel = new HashMap<>();
 
         HttpSession session = req.getSession(false);
-        if (!isValidSession(session, SESSION_ATTRIBUTE)) {
+        if (!isValidSession(session, SESSION_MARK)) {
             dataModel.put("message", getAttributeValue(session, LOGIN_ERROR));
 
         } else {
@@ -90,6 +87,6 @@ public class SubjectAfterEditServlet extends HttpServlet {
                 session.removeAttribute(attributeName);
             }
         }
-    }
+    }*/
 
 }

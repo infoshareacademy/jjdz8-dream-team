@@ -1,12 +1,11 @@
 package com.infoshareacademy.dao;
 
-import javax.ejb.EJB;
-import javax.ejb.Stateless;
-import javax.enterprise.context.RequestScoped;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 public abstract class AbstractDao<T> implements Dao<T> {
+
     @PersistenceContext
     EntityManager entityManager;
 
@@ -22,6 +21,14 @@ public abstract class AbstractDao<T> implements Dao<T> {
 
     @Override
     public void delete(T t) {
+        System.out.println(t);
         entityManager.remove(t);
+        flashAndClear();
     }
+
+    public void flashAndClear(){
+        entityManager.flush();
+        entityManager.clear();
+    }
+
 }

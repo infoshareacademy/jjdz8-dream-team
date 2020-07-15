@@ -1,6 +1,5 @@
 package com.infoshareacademy.repository;
 
-import com.infoshareacademy.domain.Teacher;
 import com.infoshareacademy.domain.User;
 
 import javax.ejb.Local;
@@ -13,7 +12,7 @@ public interface Repository {
 
     void addUser(User user);
 
-    List<User> findUsersWithNicknameContains(String part);
+    List<User> findUsersWithNicknameContainsOrStartsWith(String part);
 
     Optional<User> findByID(UUID id);
 
@@ -32,4 +31,26 @@ public interface Repository {
     void updateEmail(UUID id, String email);
 
     boolean isCorrectPassword(User user, String password);
+
+    boolean nickNameAlreadyExist(String nickname, UUID id);
+
+    boolean emailAlreadyExist(String email, UUID id);
+
+    enum UserColumn {
+
+        EMAIL("userEmail"),
+
+        NICKNAME("userNickName");
+
+        private final String name;
+
+        private UserColumn(String s) {
+            this.name = s;
+        }
+
+        @Override
+        public String toString() {
+            return this.name;
+        }
+    }
 }

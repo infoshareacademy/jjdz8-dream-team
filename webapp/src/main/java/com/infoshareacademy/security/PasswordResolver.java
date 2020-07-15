@@ -17,7 +17,5 @@ public class PasswordResolver {
         return null;
     }
 
-    public static boolean isCorrectPasswordFormat(String userPassword) {
-        return userPassword.matches("((?=.*[a-z])(?=.*\\d)(?=.*[A-Z])(?=.*[@#$%!]).{8,20})");
-    }
+
 }

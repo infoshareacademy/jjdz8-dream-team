@@ -3,17 +3,18 @@ package com.infoshareacademy.service;
 import com.infoshareacademy.domain.User;
 import com.infoshareacademy.repository.Repository;
 
+import javax.enterprise.context.RequestScoped;
+import javax.inject.Inject;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-public abstract class UserService implements Service {
 
-    private final Repository repository;
+@RequestScoped
+public class UserService implements Service {
 
-    public UserService(Repository repository) {
-        this.repository = repository;
-    }
+    @Inject
+    private Repository repository;
 
     @Override
     public Optional<User> findByNickName(String nickName) {
@@ -27,7 +28,7 @@ public abstract class UserService implements Service {
 
     @Override
     public List<User> findUserByPartOfNickname(String part){
-        return repository.findUsersWithNicknameContains(part);
+        return repository.findUsersWithNicknameContainsOrStartsWith(part);
     }
 
     @Override
@@ -38,6 +39,16 @@ public abstract class UserService implements Service {
     @Override
     public boolean isCorrectPassword(User user, String password) {
         return repository.isCorrectPassword(user, password);
+    }
+
+    @Override
+    public boolean nicknameAlreadyExist(String nickname,UUID id) {
+        return repository.nickNameAlreadyExist(nickname, id);
+    }
+
+    @Override
+    public boolean emailAlreadyExist(String email, UUID id) {
+        return repository.emailAlreadyExist(email, id);
     }
 
 }

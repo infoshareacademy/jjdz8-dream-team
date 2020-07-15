@@ -13,12 +13,12 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js">
     </script>
-    <link href="styles.css" rel="stylesheet"/>
-    <link href="form.css" rel="stylesheet"/>
+    <link href="html_js_css_Jsp_files/styles.css" rel="stylesheet"/>
+    <link href="html_js_css_Jsp_files/form.css" rel="stylesheet"/>
 </head>
 
 <body>
-<jsp:include page="menu-logIn.jsp"/>
+<jsp:include page="html_js_css_Jsp_files/menu-logIn.jsp"/>
 <main>
     <div class="container">
         <div class="jumpotron"><h2>Aplikacja Internetowa Drem-Team</h2></div>
@@ -54,7 +54,7 @@
     </div>
 </main>
 </footer>
-<jsp:include page="jsScripts.html"/>
+<jsp:include page="html_js_css_Jsp_files/jsScripts.html"/>
 </body>
-<jsp:include page="footer.jsp"/>
+<jsp:include page="html_js_css_Jsp_files/footer.jsp"/>
 </html>

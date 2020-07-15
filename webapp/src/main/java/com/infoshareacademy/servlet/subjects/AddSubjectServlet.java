@@ -1,5 +1,6 @@
 package com.infoshareacademy.servlet.subjects;
 
+import com.infoshareacademy.domain.ROLE;
 import com.infoshareacademy.domain.Subject;
 import com.infoshareacademy.domain.User;
 import com.infoshareacademy.freemarker.TemplateProvider;
@@ -9,7 +10,6 @@ import freemarker.template.Template;
 import freemarker.template.TemplateException;
 
 import javax.inject.Inject;
-import javax.inject.Named;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -26,7 +26,7 @@ import java.util.UUID;
 import static com.infoshareacademy.servlet.HelperForServlets.*;
 import static com.infoshareacademy.validation.ParameterValidator.isIncorrectCorrectParameter;
 
-@WebServlet("/add-subject")
+@WebServlet("/add")
 public class AddSubjectServlet extends HttpServlet {
 
     @Inject
@@ -36,7 +36,6 @@ public class AddSubjectServlet extends HttpServlet {
     SubjectService service;
 
     @Inject
-    @Named("TeacherService")
     Service userService;
 
     public static final String EMPTY_NAME = "emptyName";
@@ -49,13 +48,13 @@ public class AddSubjectServlet extends HttpServlet {
 
     private static final String SESSION_ATTRIBUTE = "teacherID";
 
-    @Override
+   /* @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html;charset=UTF-8");
         PrintWriter printWriter = resp.getWriter();
 
         HttpSession session = req.getSession(false);
-        if (!isValidSession(session, SESSION_ATTRIBUTE)) {
+        if (!isValidSession(session, SESSION_MARK)) {
             String errorMassage = "Please login first";
             printWriter.write(errorMassage);
             return;
@@ -64,7 +63,8 @@ public class AddSubjectServlet extends HttpServlet {
         String topic = req.getParameter("topic");
         String description = req.getParameter("description");
         boolean isVideo = Boolean.parseBoolean(req.getParameter("isVideo"));
-        UUID teacherId = (UUID) session.getAttribute(SESSION_ATTRIBUTE);
+        String videoLink = req.getParameter("videoLink");
+        UUID teacherId = (UUID) session.getAttribute(SESSION_MARK);
 
         if (isIncorrectCorrectParameter(name)) {
             session.setAttribute(EMPTY_NAME, "Name cannot be empty");
@@ -88,9 +88,9 @@ public class AddSubjectServlet extends HttpServlet {
             return;
         }
 
-        Subject subject = service.createSubject(name, topic, description, isVideo, teacherId);
+        Subject subject = service.createSubject(name, topic, description, isVideo, teacherId, videoLink);
         service.addNewSubject(subject);
-        resp.sendRedirect("/teacher-account-information");
+        resp.sendRedirect("/show-subjects");
     }
 
     @Override
@@ -102,11 +102,17 @@ public class AddSubjectServlet extends HttpServlet {
         Map<String, Object> dataModel = new HashMap<>();
 
         HttpSession session = req.getSession(false);
-        if (!isValidSession(session, SESSION_ATTRIBUTE)) {
+        if (!isValidSession(session, SESSION_MARK)) {
             dataModel.put("message", getAttributeValue(session, LOGIN_ERROR));
         } else {
-
-            findCorrectUser(session).ifPresent(user -> dataModel.put("user", user));
+            Optional<User> user = userService.findById((UUID) session.getAttribute(SESSION_MARK));
+            user.ifPresentOrElse(value -> {
+                        dataModel.put("user", value);
+                        if (value.getRole().equals(ROLE.TEACHER)) dataModel.put("roleTeacher", "TEACHER");
+                    },
+                    () -> {
+                        resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+                    });
             putCorrectDataToDataModel(EMPTY_NAME, getAttributeValue(session, EMPTY_NAME), dataModel);
             putCorrectDataToDataModel("name", getAttributeValue(session, "name"), dataModel);
             putCorrectDataToDataModel(EMPTY_TOPIC, getAttributeValue(session, EMPTY_TOPIC), dataModel);
@@ -121,10 +127,5 @@ public class AddSubjectServlet extends HttpServlet {
             e.printStackTrace();
         }
         invalidateAttributes(session, EMPTY_NAME, EMPTY_TOPIC, EMPTY_DESCRIPTION, "name", "description", "topic");
-    }
-
-    private Optional<User> findCorrectUser(HttpSession session) {
-        UUID id = (UUID) session.getAttribute(SESSION_ATTRIBUTE);
-        return userService.findById(id);
-    }
+    }*/
 }

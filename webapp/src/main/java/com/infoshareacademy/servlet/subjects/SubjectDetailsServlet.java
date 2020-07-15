@@ -31,10 +31,9 @@ public class SubjectDetailsServlet extends HttpServlet {
     private SubjectService service;
 
     @Inject
-    @Named("TeacherService")
     private Service userService;
 
-    @Override
+   /* @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html;charset=UTF-8");
         PrintWriter printWriter = resp.getWriter();
@@ -58,10 +57,8 @@ public class SubjectDetailsServlet extends HttpServlet {
                     },
                     () -> dataModel.put("message", "something goes wrong"));
         } else if (!isIncorrectCorrectParameter(teacherId)) {
-            List<Subject> subjects = service.findAllSubjectsForTeacher(UUID.fromString(teacherId));
-            if (subjects != null && subjects.size() > 0) {
-                dataModel.put("subjects", subjects);
-            }
+            Optional<List<Subject>> subjects = service.findAllSubjectsForTeacher(UUID.fromString(teacherId));
+            subjects.ifPresent(subjectList -> dataModel.put("subjects", subjectList));
         }
         try {
             template.process(dataModel, printWriter);
@@ -70,5 +67,5 @@ public class SubjectDetailsServlet extends HttpServlet {
             e.printStackTrace();
         }
 
-    }
+    }*/
 }

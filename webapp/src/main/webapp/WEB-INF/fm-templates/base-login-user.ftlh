@@ -1,3 +1,4 @@
+<#ftl encoding="utf-8">
 <#macro content>
 </#macro>
 
@@ -12,15 +13,33 @@
     <main role="main">
         <div class="container">
             <#if message ??>
-                <h1>You have to login or registry first</h1>
-                <a href="http://localhost:8080/logout.jsp">
-                    <input type="button" class="btn btn-secondary" value="login"/>
+                <h1>zaloguj się bądź zarejestruj by uzyskać dostęp</h1>
+                <a href="../../html_js_css_Jsp_files/login.jsp">
+                    <input type="button" class="btn btn-secondary" value="zaloguj"/>
                 </a>
                 <a href="http://localhost:8080/newAccount.jsp">
-                    <input type="button" class="btn btn-secondary" value="registry"/>
+                    <input type="button" class="btn btn-secondary" value="zarejestruj"/>
                 </a>
-          <#else>
-              <@content/>
+          <#elseif user ??>
+              <div class="row">
+                  <div class="col-md-3">
+                      <div class="list-group">
+                          <a href="/account-info" class="list-group-item list-group-item-action">Twoje konto</a>
+                          <a href="/user" class="list-group-item list-group-item-action">Edytuj dane</a>
+                          <a href="/edit-user" class="list-group-item list-group-item-action">Zmień hasło</a>
+                          <#if user.role == "TEACHER">
+                          <a href="/add-subject" class="list-group-item list-group-item-action">Dodaj przedmiot</a>
+                          <a href="/subjects" class="list-group-item list-group-item-action">Pokaż moje przedmioty</a>
+                          </#if>
+                          <a href="" class="list-group-item list-group-item-action" data-toggle="modal" data-target="#exampleModal" >Usuń konto</a>
+                        <#include "modal-to-delete-user.ftlh">
+                      </div>
+                  </div>
+                  <div class="col-md-9">
+                      <@content/>
+                  </div>
+              </div>
+
             </#if>
         </div>
     </main>

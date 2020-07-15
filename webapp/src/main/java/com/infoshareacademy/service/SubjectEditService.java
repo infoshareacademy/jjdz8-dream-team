@@ -43,4 +43,8 @@ public class SubjectEditService {
         subject.setVideo(newIsVideo);
         repository.updateSubjectIsVideo(subject);
     }
+
+    public void editVideoLink(Subject subject, String VideoLink){
+
+    }
 }
