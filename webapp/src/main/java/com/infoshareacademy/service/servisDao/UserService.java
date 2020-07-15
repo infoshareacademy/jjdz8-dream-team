@@ -3,9 +3,7 @@ package com.infoshareacademy.service.servisDao;
 import com.infoshareacademy.dao.Dao;
 import com.infoshareacademy.dao.UserExtendDao;
 import com.infoshareacademy.domain.ROLE;
-import com.infoshareacademy.entity.Subject;
 import com.infoshareacademy.entity.User;
-import com.infoshareacademy.entity.UserColumn;
 import com.infoshareacademy.entity.UserQuery;
 import com.infoshareacademy.security.PasswordResolver;
 
