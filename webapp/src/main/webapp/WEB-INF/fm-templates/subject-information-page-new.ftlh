@@ -43,16 +43,36 @@
                         </div>
                         <div class="form-group col-md-6">
                             <label for="videoLink">link do wideo materiałów</label><br>
-                            <input id="videoLink" type="text" name="videoLink" value="${subject.videoLink}"
-                                   disabled><br/><br/>
+                            <a href="${subject.videoLink}">
+                                <input id="videoLink" type="text" name="videoLink" value="${subject.videoLink}"
+                                       disabled><br/><br/>
+                            </a>
                         </div>
                     </div>
                 </#if>
                 <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <a href="/subjects/edit?id=${subject.id}"> <input class="btn btn-primary" type="button"
-                                                                         value="edytuj"/></a><br>
-                    </div>
+                    <#if afterSearch ??>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <p>dane nauczyciela: nickname ${subject.user.nickName} </p>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <a href="/search?filter=user&input=${subject.user.nickName}"> <input
+                                            class="btn btn-primary" type="button"
+                                            value="pokaż wszystkie przedmioty tego nauczyciela"/></a><br>
+                            </div>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <a href="/search"> <input class="btn btn-primary" type="button"
+                                                      value="wróc do wyszukiwania"/></a><br>
+                        </div>
+                    <#else >
+                        <div class="form-group col-md-6">
+                            <a href="/subjects/edit?id=${subject.id}"> <input class="btn btn-primary" type="button"
+                                                                              value="edytuj"/></a><br>
+                        </div>
+                    </#if>
+
                     <br>
                 </div>
 

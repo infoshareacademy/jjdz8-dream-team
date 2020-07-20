@@ -23,6 +23,11 @@ public class SubjectService {
     Dao<User> userDao;
 
     @Transactional
+    public List<Subject> findAll() {
+        return subjectDao.findAll();
+    }
+
+    @Transactional
     public void createSubject(String name, String topic, String description, String videoLink, boolean isVideo, Long userId) {
         Optional<User> user = userDao.findById(userId);
         Subject subject = new Subject();

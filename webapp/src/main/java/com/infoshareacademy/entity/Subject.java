@@ -16,6 +16,18 @@ import static com.infoshareacademy.entity.SubjectQuery.*;
                 query = "SELECT s from Subject s where s.name = :" + NAME
         ),
         @NamedQuery(
+                name = FIND_BY_NAME_WHERE_NAME_IS_LIKE,
+                query = "SELECT s from Subject s where s.name like :" + NAME
+        ),
+        @NamedQuery(
+                name = FIND_BY_TOPIC_WHERE_TOPIC_IS_LIKE,
+                query = "SELECT s from Subject s where s.topic like :" + TOPIC
+        ),
+        @NamedQuery(
+                name = FIND_BY_DESCRIPTION_WHERE_DESCRIPTION_IS_LIKE,
+                query = "SELECT s from Subject s where s.description like :" + DESCRIPTION
+        ),
+        @NamedQuery(
                 name = FIND_BY_TOPIC_QUERY,
                 query = "SELECT s from Subject s where s.topic = :" + TOPIC
         ),

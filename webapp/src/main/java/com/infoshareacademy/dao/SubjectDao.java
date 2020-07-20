@@ -30,7 +30,7 @@ public class SubjectDao extends AbstractDao<Subject> {
     @Override
     public Optional<List<Subject>> createNamedQueryForList(String nameOfNamedQuery, String column, String value) {
         Query query = entityManager.createNamedQuery(nameOfNamedQuery, Subject.class);
-        query.setParameter(column, value);
+        query.setParameter(column, "%"+ value +"%");
         return Optional.ofNullable(query.getResultList());
     }
 

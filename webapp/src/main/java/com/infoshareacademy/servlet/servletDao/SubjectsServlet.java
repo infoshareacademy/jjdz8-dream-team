@@ -46,6 +46,7 @@ public class SubjectsServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html;charset=UTF-8");
         String id = req.getParameter("id");
+        String afterSearch = req.getParameter("afterSearch");
 
 
         Map<String, Object> dataModel = new HashMap<>();
@@ -74,6 +75,7 @@ public class SubjectsServlet extends HttpServlet {
                 session.removeAttribute("incorrectForm");
                 return;
             }
+            if (!StringUtils.isEmpty(afterSearch)) dataModel.put("afterSearch","true");
             TemplateCreator.createTemplate(dataModel,"subject-information-page-new.ftlh",resp,provider,getServletContext());
             return;
         }
