@@ -17,7 +17,8 @@ public class SubjectDao extends AbstractDao<Subject> {
 
     @Override
     public List<Subject> findAll() {
-        return entityManager.createQuery("SELECT s FROM Subject s", Subject.class).getResultList();
+        return entityManager.createQuery("SELECT s FROM Subject s", Subject.class)
+                .getResultList();
     }
 
     @Override
