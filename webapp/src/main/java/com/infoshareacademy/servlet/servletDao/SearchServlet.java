@@ -8,6 +8,7 @@ import com.infoshareacademy.service.servisDao.UserService;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang.math.NumberUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -58,7 +59,11 @@ public class SearchServlet extends HttpServlet {
 
         String filter = req.getParameter("filter");
         String input = req.getParameter("input");
-
+        String currentPage = req.getParameter("page");
+        Integer page = 0;
+        if (StringUtils.isEmpty(currentPage) || !NumberUtils.isNumber(currentPage)){
+            page = 1;
+        } else page = Integer.valueOf(currentPage);
 
         if (!StringUtils.isEmpty(filter)) {
             switch (filter) {
@@ -67,9 +72,12 @@ public class SearchServlet extends HttpServlet {
                         dataModel.put("searchMessage", "wprowadź co najmniej 3 znaki");
                         break;
                     }
-                    searchService.findBySubjectName(input)
+                    searchService.findBySubjectName(input,10,page*10)
                             .ifPresent(subjects -> {
-                                if (subjects.size() > 0) dataModel.put("subjects", subjects);
+                                if (subjects.size() > 0) {
+                                    dataModel.put("subjects", subjects);
+                                    dataModel.put("totalPages",PagingHelper.calculateTotalPages(Double.valueOf(subjects.size()),10d)) ;
+                                }
                                 else dataModel.put("searchMessage", "brak wyników wyszukiwania do zadancyh parametrów");
                             });
                     break;

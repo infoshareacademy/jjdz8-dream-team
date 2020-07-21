@@ -55,7 +55,7 @@
                 </#list>
             </table>
         </div>
-
+    <#include "pagination.ftlh">
     </#if>
 
 </#macro>

@@ -23,10 +23,10 @@ public class SearchService {
     private Dao<User> userDao;
 
     @Transactional
-    public Optional<List<Subject>> findBySubjectName(String fraze) {
+    public Optional<List<Subject>> findBySubjectName(String fraze, int limit, int offset) {
         return subjectDao
-                .createNamedQueryForList
-                        (SubjectQuery.FIND_BY_NAME_WHERE_NAME_IS_LIKE, SubjectColumn.NAME,fraze);
+                .createNamedQueryForOffSetAndLimit
+                        (SubjectQuery.FIND_BY_NAME_WHERE_NAME_IS_LIKE, SubjectColumn.NAME,fraze, offset,limit);
     }
 
     public Optional<List<Subject>> findBySubjectTopic(String fraze) {
