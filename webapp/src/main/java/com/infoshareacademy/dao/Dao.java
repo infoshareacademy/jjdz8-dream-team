@@ -18,6 +18,8 @@ public interface Dao<T> {
 
     List<T> findAll();
 
+    List<T> findAll(int offset, int limit);
+
     Optional<T> createNamedQuery(String nameOfNamedQuery, String column, String value);
 
     Optional<List<T>> createNamedQueryForList(String nameOfNamedQuery, String column, String value);

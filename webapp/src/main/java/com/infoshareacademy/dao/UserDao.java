@@ -19,7 +19,13 @@ public class UserDao extends AbstractDao<User> implements UserExtendDao {
 
     @Override
     public List<User> findAll() {
-        return entityManager.createQuery("SELECT u FROM User u", User.class).getResultList();
+        return entityManager.createQuery("SELECT u FROM User u", User.class)
+                .getResultList();
+    }
+
+    @Override
+    public List<User> findAll(int offset, int limit) {
+        return null;
     }
 
     @Override

@@ -27,7 +27,7 @@ import static com.infoshareacademy.resolver.InputResolver.inputStreamToString;
 @WebServlet({"/user", "/edit-user"})
 public class UserServlet extends HttpServlet {
 
-    private static Logger LOGGER = LogManager.getLogger(AccountInfoServlet.class.getName());
+    private static Logger LOGGER = LogManager.getLogger(UserServlet.class.getName());
 
     @Inject
     UserService service;

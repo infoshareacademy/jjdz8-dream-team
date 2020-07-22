@@ -23,6 +23,7 @@ public class PageFilter implements Filter {
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         String pageParam = servletRequest.getParameter("page");
+        System.out.println(pageParam);
 
         if (StringUtils.isEmpty(pageParam)) {
             servletRequest.setAttribute("page",page);

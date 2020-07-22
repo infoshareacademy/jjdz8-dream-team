@@ -19,6 +19,15 @@ public class SubjectDao extends AbstractDao<Subject> {
     public List<Subject> findAll() {
         return entityManager.createQuery("SELECT s FROM Subject s", Subject.class)
                 .getResultList();
+
+    }
+
+    @Override
+    public List<Subject> findAll(int offset, int limit) {
+        return entityManager.createQuery("SELECT s FROM Subject s", Subject.class)
+                .setFirstResult(offset)
+                .setMaxResults(limit)
+                .getResultList();
     }
 
     @Override
@@ -31,7 +40,7 @@ public class SubjectDao extends AbstractDao<Subject> {
     @Override
     public Optional<List<Subject>> createNamedQueryForOffSetAndLimit(String nameOfNamedQuery, String column, String value, int offset, int limit){
         Query query = entityManager.createNamedQuery(nameOfNamedQuery, Subject.class);
-        return Optional.of(query.setParameter(column, value)
+        return Optional.of(query.setParameter(column, "%"+value+"%")
                 .setFirstResult(offset)
                 .setMaxResults(limit)
                 .getResultList());
