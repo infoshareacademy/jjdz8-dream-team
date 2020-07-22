@@ -1,6 +1,7 @@
 package com.infoshareacademy.dao;
 
 
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
@@ -30,5 +31,6 @@ public abstract class AbstractDao<T> implements Dao<T> {
         entityManager.flush();
         entityManager.clear();
     }
+
 
 }

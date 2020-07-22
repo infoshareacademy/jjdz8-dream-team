@@ -23,8 +23,8 @@ public class SubjectService {
     Dao<User> userDao;
 
     @Transactional
-    public List<Subject> findAll() {
-        return subjectDao.findAll();
+    public List<Subject> findAll(int offset, int limit) {
+        return subjectDao.findAll(offset,limit);
     }
 
     @Transactional

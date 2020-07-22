@@ -26,7 +26,7 @@ import java.util.Optional;
 @WebServlet("/add-subject")
 public class SubjectServlet extends HttpServlet {
 
-    private static Logger LOGGER = LogManager.getLogger(AccountInfoServlet.class.getName());
+    private static Logger LOGGER = LogManager.getLogger(SubjectServlet.class.getName());
 
     @Inject
     SubjectService subjectService;

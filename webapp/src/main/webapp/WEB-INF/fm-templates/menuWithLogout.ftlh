@@ -4,7 +4,7 @@
             <a href="#" class="navbar-brand">Dream Team E-Learning </a>
         </div>
         <ul class="nav navbar-nav">
-            <li><a href="index.jsp" class="glyphicon glyphicon-home active"> Home</a></li>
+            <li><a href="/account-info" class="glyphicon glyphicon-home active"> Home</a></li>
             <li><a href="#contact" class="glyphicon glyphicon-file"> Projekty</a></li>
             <li><a href="/search" class="glyphicon glyphicon-search"> Wyszukiwanie</a></li>
             <li><a href="#contact" class="glyphicon glyphicon-thumbs-up"> Skuteczność</a></li>

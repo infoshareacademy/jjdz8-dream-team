@@ -3,8 +3,6 @@ package com.infoshareacademy.servlet.servletDao;
 import com.infoshareacademy.entity.Subject;
 import com.infoshareacademy.freemarker.TemplateProvider;
 import com.infoshareacademy.service.servisDao.SearchService;
-import com.infoshareacademy.service.servisDao.SubjectService;
-import com.infoshareacademy.service.servisDao.UserService;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 import org.apache.commons.lang.StringUtils;
@@ -20,9 +18,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+
+import static com.infoshareacademy.resolver.PaginationHelper.*;
 
 @WebServlet("/search")
 public class SearchServlet extends HttpServlet {
@@ -34,12 +32,6 @@ public class SearchServlet extends HttpServlet {
 
     @Inject
     private SearchService searchService;
-
-    @Inject
-    private UserService userService;
-
-    @Inject
-    private SubjectService subjectService;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -58,66 +50,34 @@ public class SearchServlet extends HttpServlet {
 
         String filter = req.getParameter("filter");
         String input = req.getParameter("input");
-
+        String page = String.valueOf(req.getAttribute("page"));
+        int subjectsLimit = 10;
+        int offset = calculateOffset(Integer.parseInt(page), subjectsLimit);
 
         if (!StringUtils.isEmpty(filter)) {
-            switch (filter) {
-                case "name": {
-                    if (StringUtils.isEmpty(input) || input.length() < 3) {
-                        dataModel.put("searchMessage", "wprowadź co najmniej 3 znaki");
-                        break;
-                    }
-                    searchService.findBySubjectName(input)
-                            .ifPresent(subjects -> {
-                                if (subjects.size() > 0) dataModel.put("subjects", subjects);
-                                else dataModel.put("searchMessage", "brak wyników wyszukiwania do zadancyh parametrów");
-                            });
-                    break;
-                }
-                case "topic": {
-                    if (StringUtils.isEmpty(input) || input.length() < 3) {
-                        dataModel.put("searchMessage", "wprowadź co najmniej 3 znaki");
-                        break;
-                    }
-                    searchService.findBySubjectTopic(input)
-                            .ifPresent(subjects -> {
-                                if (subjects.size() > 0) dataModel.put("subjects", subjects);
-                                else dataModel.put("searchMessage", "brak wyników wyszukiwania do zadancyh parametrów");
-                            });
-                    break;
-                }
-                case "description": {
-                    if (StringUtils.isEmpty(input) || input.length() < 3) {
-                        dataModel.put("message", "wprowadź co najmniej 3 znaki");
-                        break;
-                    }
-                    searchService.findBySubjectDescription(input)
-                            .ifPresent(subjects -> {
-                                if (subjects.size() > 0) dataModel.put("subjects", subjects);
-                                else dataModel.put("searchMessage", "brak wyników wyszukiwania do zadancyh parametrów");
-                            });
-                    break;
-                }
-                case "user": {
-                    userService.findByNickname(input).ifPresentOrElse(user -> dataModel.put("subjects", user.getSubjects()),
-                            () -> dataModel.put("searchMessage", "brak wyników wyszukiwania do zadancyh parametrów"));
-                    break;
-                }
-                case "all": {
-                    List<Subject> subjects = subjectService.findAll();
-                    if (subjects != null && subjects.size() > 0) dataModel.put("subjects", subjects);
-                    else dataModel.put("searchMessage", "brak przedmiotów");
-                }
-            }
-        }
+            if (!StringUtils.isEmpty(input) && input.length() >= 3) {
+                Optional<List<Subject>> subjects = searchService.returnSuitableSubjectList(filter, input, subjectsLimit, offset);
+                subjects.ifPresent(s -> {
+                    if (s.size() > 0) {
+                        dataModel.put("subjects", s);
+                        dataModel.put("totalPages", returnPageList(calculateTotalPages(s.size()+1)));
+                        dataModel.put("filter", filter);
+                        dataModel.put("input", input);
+                    } else dataModel.put("searchMessage", "brak wyników wyszukiwania do zadancyh parametrów");
+                });
+            } else dataModel.put("searchMessage", "wprowadź co najmniej 3 znaki");
 
+        }
         try {
             template.process(dataModel, printWriter);
             resp.setStatus(HttpServletResponse.SC_ACCEPTED);
-        } catch (TemplateException e) {
+        } catch (
+                TemplateException e) {
             LOGGER.info(e.getLocalizedMessage());
         }
     }
+
+
 
 
 }

@@ -1,5 +1,6 @@
 package com.infoshareacademy.dao;
 
+import com.infoshareacademy.entity.Subject;
 import com.infoshareacademy.entity.User;
 
 import javax.enterprise.context.RequestScoped;
@@ -18,7 +19,13 @@ public class UserDao extends AbstractDao<User> implements UserExtendDao {
 
     @Override
     public List<User> findAll() {
-        return entityManager.createQuery("SELECT u FROM User u", User.class).getResultList();
+        return entityManager.createQuery("SELECT u FROM User u", User.class)
+                .getResultList();
+    }
+
+    @Override
+    public List<User> findAll(int offset, int limit) {
+        return null;
     }
 
     @Override
@@ -41,6 +48,10 @@ public class UserDao extends AbstractDao<User> implements UserExtendDao {
         return Optional.of(query.getResultList());
     }
 
+    @Override
+    public Optional<List<Subject>> createNamedQueryForOffSetAndLimit(String nameOfNamedQuery, String column, String value, int offset, int limit) {
+        return Optional.empty();
+    }
 
 
     @Override

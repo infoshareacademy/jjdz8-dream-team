@@ -41,6 +41,10 @@ public class UserService {
     }
 
     @Transactional
+    public Optional<User> findByNickname(String nickName, int limit, int offSet) {
+        return userDao.createNamedQuery(UserQuery.FIND_BY_NICKNAME_QUERY, "userNickName", nickName);
+    }
+    @Transactional
     public Optional<User> findByEmail(String email) {
         return userDao.createNamedQuery(UserQuery.FIND_BY_EMAIL_QUERY, "userEmail", email);
     }

@@ -12,13 +12,15 @@
                         <label for="filter">search by </label>
                         <select class="form-control form-control-lg" id="filter" name="filter">
                             <option value="name">subject name</option>
-                            <option value="all">all subjects</option>
                             <option value="topic">subject topic</option>
                             <option value="rangeDescription">subject range description</option>
                         </select>
                         <input class="form-control mr-sm-2" type="search" placeholder="Search" name="input"
                                aria-label="Search">
-                        <button class="btn btn-secondary" type="submit">Search</button>
+                        <button class="btn btn-secondary" type="submit">Search</button></br>
+                        <a href="/search?filter=all&input=all">
+                            <input class="btn btn-secondary" type="button" value="pokaż wszystkie"/>
+                        </a>
                     </form>
                 </nav>
             </div>
@@ -55,7 +57,7 @@
                 </#list>
             </table>
         </div>
-
+    <#include "pagination.ftlh">
     </#if>
 
 </#macro>

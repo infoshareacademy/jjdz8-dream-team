@@ -31,7 +31,7 @@ import static com.infoshareacademy.resolver.InputResolver.inputStreamToString;
 @WebServlet({"/subjects","/subjects/edit"})
 public class SubjectsServlet extends HttpServlet {
 
-    private static Logger LOGGER = LogManager.getLogger(AccountInfoServlet.class.getName());
+    private static Logger LOGGER = LogManager.getLogger(SubjectsServlet.class.getName());
 
     @Inject
     TemplateProvider provider;
