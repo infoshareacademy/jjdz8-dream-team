@@ -1,6 +1,7 @@
 package com.infoshareacademy.servlet.servletDao;
 
 import com.infoshareacademy.entity.User;
+import com.infoshareacademy.fileLoader.FileUploadProcessor;
 import com.infoshareacademy.freemarker.TemplateCreator;
 import com.infoshareacademy.freemarker.TemplateProvider;
 import com.infoshareacademy.service.servisDao.SubjectService;
@@ -12,21 +13,21 @@ import org.apache.logging.log4j.Logger;
 
 import javax.inject.Inject;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import javax.servlet.http.*;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
 @WebServlet("/add-subject")
-public class SubjectServlet extends HttpServlet {
+@MultipartConfig
+public class AddSubjectServlet extends HttpServlet {
 
-    private static Logger LOGGER = LogManager.getLogger(SubjectServlet.class.getName());
+    private static Logger LOGGER = LogManager.getLogger(AddSubjectServlet.class.getName());
 
     @Inject
     SubjectService subjectService;
@@ -36,6 +37,9 @@ public class SubjectServlet extends HttpServlet {
 
     @Inject
     UserService service;
+
+    @Inject
+    private FileUploadProcessor processor;
 
     public static final String EMPTY_NAME = "Name cannot be empty";
 
@@ -99,7 +103,12 @@ public class SubjectServlet extends HttpServlet {
         String description = req.getParameter("description");
         boolean isVideo = Boolean.parseBoolean(req.getParameter("isVideo"));
         String videoLink = req.getParameter("videoLink");
-        Long teacherId = Long.valueOf(req.getParameter("id"));
+        String teacherId = req.getParameter("id");
+        Part document = req.getPart("document");
+
+        Path path = processor.uploadImageFile(document);
+        String documentUrl = "/images/" + path.getFileName();
+        System.out.println(documentUrl);
 
         HttpSession session = req.getSession();
 
@@ -129,7 +138,7 @@ public class SubjectServlet extends HttpServlet {
             return;
         }
 
-        subjectService.createSubject(name, topic, description, videoLink, isVideo, teacherId);
+        subjectService.createSubject(name, topic, description, videoLink, isVideo, Long.valueOf(teacherId), documentUrl);
         resp.sendRedirect("/subjects");
     }
 

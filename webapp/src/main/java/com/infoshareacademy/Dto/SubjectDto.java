@@ -23,6 +23,8 @@ public class SubjectDto {
 
     private String videoLink;
 
+    private String material;
+
     public long getId() {
         return id;
     }
@@ -67,6 +69,13 @@ public class SubjectDto {
         this.videoLink = videoLink;
     }
 
+    public String getMaterial() {
+        return material;
+    }
+
+    public void setMaterial(String material) {
+        this.material = material;
+    }
 
 
     @Override

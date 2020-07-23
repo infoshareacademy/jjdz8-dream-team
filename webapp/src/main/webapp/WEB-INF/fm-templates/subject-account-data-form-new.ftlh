@@ -15,7 +15,7 @@
         </div>
         <br>
             <div class="form col-md-12">
-                <form method="post" action="/add-subject">
+                <form method="post" action="/add-subject" enctype="multipart/form-data">
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <#if emptyName ??><p style="color: red">pole nie może pzostać puste</p></#if>
@@ -51,12 +51,17 @@
                             <textarea id="description" type="text"
                                       name="description" <#if description ??> value="${description}" </#if>></textarea><br/>
                         </div>
+                        <div class="form-group col-md-6">
+                            <label for="pdf">materiały pdf</label><br>
+                            <input id="pdf" type="file" name="document"/><br/><br/>
+                        </div>
                     </div>
                     <input type="hidden" name="id" value="${user.id}"/><br/>
                     <#if subject??><input type="hidden" name="subjectId" value="${subject.id}"/><br/></#if>
                     <div class="form-group col-md-6">
                         <input class="btn btn-primary" type="submit" name="save" value="zatwierdź"/><br/>
                     </div>
+
                 </form>
             </div>
     </div>

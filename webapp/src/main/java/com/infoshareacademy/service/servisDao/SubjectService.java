@@ -28,7 +28,7 @@ public class SubjectService {
     }
 
     @Transactional
-    public void createSubject(String name, String topic, String description, String videoLink, boolean isVideo, Long userId) {
+    public void createSubject(String name, String topic, String description, String videoLink, boolean isVideo, Long userId, String documentUrl) {
         Optional<User> user = userDao.findById(userId);
         Subject subject = new Subject();
         subject.setName(name);
@@ -37,6 +37,7 @@ public class SubjectService {
         subject.setVideo(isVideo);
         subject.setVideoLink(videoLink);
         subject.setUser(user.get());
+        subject.setMaterial(documentUrl);
         subjectDao.save(subject);
         user.get().setSubjects(Set.of(subject));
     }
@@ -56,6 +57,7 @@ public class SubjectService {
     public void updateSubject(SubjectDto subjectDto) {
         findById(subjectDto.getId()).ifPresent(subject -> {
             subject.setVideoLink(subjectDto.getVideoLink());
+            subject.setMaterial(subjectDto.getMaterial());
             subject.setName(subjectDto.getName());
             subject.setDescription(subjectDto.getDescription());
             subject.setVideo(subjectDto.isVideo());

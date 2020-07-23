@@ -65,6 +65,9 @@ public class Subject {
     @Basic
     private String videoLink;
 
+    @Basic
+    private String material;
+
     @Column(name = "date_of_creation")
     @CreationTimestamp
     private LocalDate dateOfCreation;
@@ -127,6 +130,14 @@ public class Subject {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public String getMaterial() {
+        return material;
+    }
+
+    public void setMaterial(String material) {
+        this.material = material;
     }
 }
 

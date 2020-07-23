@@ -49,6 +49,12 @@
                             </a>
                         </div>
                     </div>
+                    <#if subject.material ??>
+                      <a href="/subject/material?id=${subject.id}">
+                          <input type="button" class="btn btn-secondary" value="pokaż materiał">
+                      </a>
+                    </#if>
+
                 </#if>
                 <div class="form-row">
                     <#if afterSearch ??>
