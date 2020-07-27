@@ -44,11 +44,9 @@ public class User {
 
     @Basic
     @Enumerated(EnumType.STRING)
-    @NotNull
     private ROLE role;
 
     @Basic
-    @NotNull
     private String password;
 
     @Column(name = "date_of_registration")
