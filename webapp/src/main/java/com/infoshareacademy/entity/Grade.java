@@ -20,6 +20,18 @@ public class Grade {
     @JoinColumn(name = "user_id")
     private User user;
 
+    public Subject getSubject() {
+        return subject;
+    }
+
+    public void setSubject(Subject subject) {
+        this.subject = subject;
+    }
+
+    @ManyToOne()
+    @JoinColumn(name = "subject_ID")
+    private Subject subject;
+
     public Long getId() {
         return id;
     }

@@ -1,7 +1,9 @@
 package com.infoshareacademy.servlet.servletDao;
 
+import com.infoshareacademy.entity.Subject;
 import com.infoshareacademy.entity.User;
 import com.infoshareacademy.service.servisDao.GradeService;
+import com.infoshareacademy.service.servisDao.SubjectService;
 import com.infoshareacademy.service.servisDao.UserService;
 import org.apache.commons.lang.StringUtils;
 
@@ -23,6 +25,9 @@ public class GradesServlet extends HttpServlet {
     @Inject
     GradeService gradeService;
 
+    @Inject
+    SubjectService subjectService;
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         super.doGet(req, resp);
@@ -34,6 +39,7 @@ public class GradesServlet extends HttpServlet {
 
         String grade = req.getParameter("grade");
         String comment = req.getParameter("comment");
+  /*      String subjectId = req.getParameter("subjectId");*/
 
        /* HttpSession session = req.getSession();
         String anAuthorizedAccess = (String) session.getAttribute("login");
@@ -42,8 +48,9 @@ public class GradesServlet extends HttpServlet {
             resp.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
             return;
         }*/
+        Subject subject = subjectService.findById(1).get();
         userService.findByNickname("kamila")
-                .ifPresent(user->gradeService.saveGrade(comment,Byte.parseByte(grade),user));
+                .ifPresent(user->gradeService.saveGrade(comment,Byte.parseByte(grade),user,subject));
 
     }
 }

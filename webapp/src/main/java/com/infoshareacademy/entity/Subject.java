@@ -4,6 +4,8 @@ import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
 
 import static com.infoshareacademy.entity.SubjectColumn.*;
 import static com.infoshareacademy.entity.SubjectQuery.*;
@@ -72,6 +74,9 @@ public class Subject {
     @ManyToOne()
     @JoinColumn(name = "user_ID")
     private User user;
+
+    @OneToMany(mappedBy = "subject", fetch = FetchType.EAGER, cascade = CascadeType.REFRESH)
+    private Set<Grade> grades = new HashSet<>();
 
     public long getId() {
         return id;
