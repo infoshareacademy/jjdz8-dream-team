@@ -10,30 +10,30 @@
             <div class="modal-body">
                 <form method="post" action="/teacher/grades">
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="1">
+                    <input class="form-check-input" type="checkbox" id="inlineCheckbox1" name="grade" value="1">
                     <label class="form-check-label" for="inlineCheckbox1">1</label>
                 </div>
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="2">
+                    <input class="form-check-input" type="checkbox" id="inlineCheckbox2" name="grade" value="2">
                     <label class="form-check-label" for="inlineCheckbox2">2</label>
                 </div>
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="3" disabled>
-                    <label class="form-check-label" for="inlineCheckbox3">3 (disabled)</label>
+                    <input class="form-check-input" type="checkbox" id="inlineCheckbox3" name="grade" value="3" >
+                    <label class="form-check-label" for="inlineCheckbox3">3</label>
                 </div>
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" id="inlineCheckbox4" value="4" disabled>
-                    <label class="form-check-label" for="inlineCheckbox4">4 (disabled)</label>
+                    <input class="form-check-input" type="checkbox" id="inlineCheckbox4" name="grade" value="4">
+                    <label class="form-check-label" for="inlineCheckbox4">4</label>
                 </div>
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" id="inlineCheckbox5" value="5" disabled>
-                    <label class="form-check-label" for="inlineCheckbox5">5 (disabled)</label>
+                    <input class="form-check-input" type="checkbox" id="inlineCheckbox5" name="grade" value="5">
+                    <label class="form-check-label" for="inlineCheckbox5">5</label>
                 </div>
                 <div class="form-group">
                     <label for="exampleFormControlTextarea1">Wprowadź swój komentarz</label>
                     <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="comment"></textarea>
                 </div>
-                    <button type="submit" class="btn btn-primary">Oceń</button>
+                    <input type="submit" class="btn btn-primary">Oceń</input>
                 </form>
             </div>
             <div class="modal-footer">

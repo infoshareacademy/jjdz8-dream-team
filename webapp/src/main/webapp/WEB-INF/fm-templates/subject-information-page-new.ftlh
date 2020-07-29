@@ -1,6 +1,6 @@
 <#include "base-login-user.ftlh">
 <#macro content>
-    <div class="card">
+    <div class="card" xmlns="http://www.w3.org/1999/html">
     <div class="card-header">
         Dane przedmiotu
     </div>
@@ -52,26 +52,22 @@
                 </#if>
                 <div class="form-row">
                     <#if afterSearch ??>
-                        <div class="form-row">
-                            <div class="form-group col-md-4">
+                            <div class="col-md-6">
                                 <p>dane nauczyciela: nickname ${subject.user.nickName} </p>
                             </div>
-                            <div class="form-group col-md-4">
+                            <div class="col-md-6">
                                 <a href="/search?filter=user&input=${subject.user.nickName}"> <input
                                             class="btn btn-primary" type="button"
                                             value="pokaż wszystkie przedmioty tego nauczyciela"/></a><br>
                             </div>
-                            <div class="form-group col-md-4">
-                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#staticBackdrop">
+                            <div class="col-md-6">
+                                <button type="button" class="btn btn-primary" data-toggle="modal"
+                                        data-target="#staticBackdrop">
                                     Oceń nauczyciela
                                 </button>
                                 <#include "modal-grade.ftlh">
                             </div>
-                        </div>
-                        <div class="form-group col-md-6">
-                            <a href="/search"> <input class="btn btn-primary" type="button"
-                                                      value="wróc do wyszukiwania"/></a><br>
-                        </div>
+
                     <#else >
                         <div class="form-group col-md-6">
                             <a href="/subjects/edit?id=${subject.id}"> <input class="btn btn-primary" type="button"
