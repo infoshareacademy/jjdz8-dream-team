@@ -15,6 +15,7 @@ import com.google.api.services.classroom.ClassroomScopes;
 import com.google.api.services.classroom.model.Course;
 import com.google.api.services.classroom.model.ListCoursesResponse;
 
+import javax.servlet.annotation.WebServlet;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
@@ -23,24 +24,15 @@ import java.security.GeneralSecurityException;
 import java.util.Collections;
 import java.util.List;
 
+
 public class ClassroomQuickStart {
     private static final String APPLICATION_NAME = "Google Classroom API Java Quickstart";
     private static final JsonFactory JSON_FACTORY = JacksonFactory.getDefaultInstance();
     private static final String TOKENS_DIRECTORY_PATH = "tokens";
-
-    /**
-     * Global instance of the scopes required by this quickstart.
-     * If modifying these scopes, delete your previously saved tokens/ folder.
-     */
     private static final List<String> SCOPES = Collections.singletonList(ClassroomScopes.CLASSROOM_COURSES_READONLY);
     private static final String CREDENTIALS_FILE_PATH = "/credentials.json";
 
-    /**
-     * Creates an authorized Credential object.
-     * @param HTTP_TRANSPORT The network HTTP Transport.
-     * @return An authorized Credential object.
-     * @throws IOException If the credentials.json file cannot be found.
-     */
+
     private static Credential getCredentials(final NetHttpTransport HTTP_TRANSPORT) throws IOException {
         // Load client secrets.
         InputStream in = ClassroomQuickStart.class.getResourceAsStream(CREDENTIALS_FILE_PATH);
@@ -55,7 +47,7 @@ public class ClassroomQuickStart {
                 .setDataStoreFactory(new FileDataStoreFactory(new java.io.File(TOKENS_DIRECTORY_PATH)))
                 .setAccessType("offline")
                 .build();
-        LocalServerReceiver receiver = new LocalServerReceiver.Builder().setPort(8888).build();
+        LocalServerReceiver receiver = new LocalServerReceiver.Builder().setPort(8080).build();
         return new AuthorizationCodeInstalledApp(flow, receiver).authorize("user");
     }
 

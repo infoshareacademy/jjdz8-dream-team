@@ -1,4 +1,3 @@
-//google callback. This function will redirect to our login servlet
 function onSignIn(googleUser) {
     const profile = googleUser.getBasicProfile();
     console.log('ID: ' + profile.getId());
@@ -7,8 +6,6 @@ function onSignIn(googleUser) {
     console.log('Email: ' + profile.getEmail());
     console.log('id_token: ' + googleUser.getAuthResponse().id_token);
 
-    //do not post all above info to the server because that is not secure.
-    //just send the id_token
 
     const redirectUrl = 'http://localhost:8080/log';
 

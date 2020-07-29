@@ -19,7 +19,7 @@
 <script>
     //google callback. This function will redirect to our login servlet
     function onSignIn(googleUser) {
-        googleUser.signOut();
+        googleUser.signIn();
         const profile = googleUser.getBasicProfile();
         console.log('ID: ' + profile.getId());
         console.log('Name: ' + profile.getName());
