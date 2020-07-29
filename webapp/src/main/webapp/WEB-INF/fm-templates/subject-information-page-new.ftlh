@@ -53,13 +53,19 @@
                 <div class="form-row">
                     <#if afterSearch ??>
                         <div class="form-row">
-                            <div class="form-group col-md-6">
+                            <div class="form-group col-md-4">
                                 <p>dane nauczyciela: nickname ${subject.user.nickName} </p>
                             </div>
-                            <div class="form-group col-md-6">
+                            <div class="form-group col-md-4">
                                 <a href="/search?filter=user&input=${subject.user.nickName}"> <input
                                             class="btn btn-primary" type="button"
                                             value="pokaż wszystkie przedmioty tego nauczyciela"/></a><br>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#staticBackdrop">
+                                    Oceń nauczyciela
+                                </button>
+                                <#include "modal-grade.ftlh">
                             </div>
                         </div>
                         <div class="form-group col-md-6">
@@ -81,7 +87,6 @@
         </div>
         </div>
     </#if>
-    </div>
 </#macro>
 
 <@home/>

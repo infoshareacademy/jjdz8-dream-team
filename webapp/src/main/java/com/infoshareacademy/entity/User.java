@@ -58,6 +58,9 @@ public class User {
     @OneToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade = CascadeType.REFRESH)
     private Set<Subject> subjects = new HashSet<>();
 
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade = CascadeType.REFRESH)
+    private Set<Grade> grades = new HashSet<>();
+
     public Long getId() {
         return id;
     }
