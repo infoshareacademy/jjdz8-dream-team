@@ -85,6 +85,7 @@ public class SubjectsServlet extends HttpServlet {
 
     @Override
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        resp.setContentType("text/html;charset=UTF-8");
         HttpSession session = req.getSession();
         String loginUser = (String) session.getAttribute("login");
 
@@ -112,6 +113,7 @@ public class SubjectsServlet extends HttpServlet {
 
     @Override
     protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        resp.setContentType("text/html;charset=UTF-8");
         String body = inputStreamToString(req.getInputStream());
         ObjectMapper mapper = new ObjectMapper();
 
