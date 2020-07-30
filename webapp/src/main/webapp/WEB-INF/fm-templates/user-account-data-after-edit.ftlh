@@ -1,5 +1,29 @@
 <#include "base-login-user.ftlh">
 <#macro content>
+    <#if dataAccept ??>
+        <div class="alert alert-success" role="alert">
+            Twoje dane zostały poprawnie zmienione
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    </#if>
+    <#if incorrectParameters ??>
+        <div class="alert alert-danger" role="alert">
+            Podany nickname lub email są zajęte przez innego użytkownika, spróbuj jeszcze raz
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    </#if>
+    <#if emptyParameters ??>
+        <div class="alert alert-danger" role="alert">
+            Pola nie mogą pozostać puste, spróbuj jeszcze raz
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    </#if>
     <div class="card">
         <div class="card-header">
             Dane logowania

@@ -72,15 +72,15 @@ public class UserServlet extends HttpServlet {
                 dataModel.put("incorrectPassword", "true");
             }
 
-            if(!StringUtils.isEmpty(emptyPassword)) {
-                dataModel.put("emptyPassword","emptyPassword");
+            if (!StringUtils.isEmpty(emptyPassword)) {
+                dataModel.put("emptyPassword", "emptyPassword");
             }
 
             if (!StringUtils.isEmpty(correctPassword)) {
                 dataModel.put("correctPassword", "true");
             }
             if (requestURI.equals("/user")) {
-                TemplateCreator.createTemplate(dataModel, "user-account-data-form-before-edit.ftlh", resp, provider, getServletContext());
+                TemplateCreator.createTemplate(dataModel, "user-account-data-after-edit.ftlh", resp, provider, getServletContext());
                 return;
             }
             if (requestURI.equals("/edit-user")) {
@@ -97,6 +97,7 @@ public class UserServlet extends HttpServlet {
 
     @Override
     protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        resp.setContentType("text/html;charset=UTF-8");
         String body = inputStreamToString(req.getInputStream());
         ObjectMapper mapper = new ObjectMapper();
         UserDto user = mapper.readValue(body, UserDto.class);
@@ -111,8 +112,15 @@ public class UserServlet extends HttpServlet {
             String repeatedPassword = user.getRepeatedPassword();
             Long id = user.getId();
 
+            User u = service.findById(id).get();
+            String uNickName = u.getNickName();
+            String uEmail = u.getEmail();
+
 
             if (!StringUtils.isEmpty(email) && !StringUtils.isEmpty(nickName)) {
+                if (uNickName.equals(nickName) && uEmail.equals(email)) {
+                    return;
+                }
                 if (!service.emailAlreadyExist(email, id) && !service.nickNameAlreadyExist(nickName, id)) {
                     service.editUserNickNameAndEmail(id, nickName, email);
                     session.setAttribute("login", nickName);
@@ -121,12 +129,11 @@ public class UserServlet extends HttpServlet {
                 } else {
                     session.setAttribute("exist", "true");
                 }
-            } else if (StringUtils.isEmpty(email) && StringUtils.isEmpty(nickName)){
+            } else if (StringUtils.isEmpty(email) || StringUtils.isEmpty(nickName)) {
                 session.setAttribute("empty", "true");
             }
             if (!StringUtils.isEmpty(password) && !StringUtils.isEmpty(newPassword) && !StringUtils.isEmpty(repeatedPassword)) {
                 if (service.isCorrectPassword(password, id) && newPassword.equals(repeatedPassword)) {
-                    System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
                     service.editUserPassword(id, newPassword);
                     session.setAttribute("correctPassword", "true");
                 } else {

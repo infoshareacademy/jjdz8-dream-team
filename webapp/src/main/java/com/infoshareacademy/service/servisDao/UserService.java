@@ -83,6 +83,7 @@ public class UserService {
         findById(id).ifPresent(user -> {
             user.setEmail(email);
             user.setNickName(nickName);
+            userDao.update(user);
         });
     }
 
