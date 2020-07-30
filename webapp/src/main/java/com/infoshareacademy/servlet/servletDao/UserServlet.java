@@ -110,12 +110,14 @@ public class UserServlet extends HttpServlet {
             String password = user.getPassword();
             String newPassword = user.getNewPassword();
             String repeatedPassword = user.getRepeatedPassword();
+            String role = user.getRole();
             Long id = user.getId();
 
             User u = service.findById(id).get();
             String uNickName = u.getNickName();
             String uEmail = u.getEmail();
 
+            service.editRole(role,id);
 
             if (!StringUtils.isEmpty(email) && !StringUtils.isEmpty(nickName)) {
                 if (uNickName.equals(nickName) && uEmail.equals(email)) {

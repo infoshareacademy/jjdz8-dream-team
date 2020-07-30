@@ -12,7 +12,8 @@
             <li><a href="/user-to-edit" class="glyphicon glyphicon-wrench"> Edycja</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
-            <li><a href="/logout"><span class="glyphicon glyphicon-off"></span> Wyloguj</a></li>
+            <a href="/logout" onclick="signOut();">Wyloguj</a>
         </ul>
     </div>
 </nav>
+

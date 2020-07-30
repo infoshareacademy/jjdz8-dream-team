@@ -24,6 +24,15 @@
             </#if>
         </div>
     </div>
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="role"> ROLA: ${user.role}</label>
+            <select id="role" name="role" class="form-control form-control-lg">
+                <option value="STUDENT">STUDENT</option>
+                <option value="TEACHER">NAUCZYCIEL</option>
+            </select>
+        </div>
+    </div>
     <input type="hidden" name="id" value="${user.id}">
     <button type="submit" class="btn btn-primary">edytuj</button>
     <br><br>

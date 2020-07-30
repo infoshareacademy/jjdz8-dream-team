@@ -1,6 +1,6 @@
 <#include "base-logout-user.ftlh">
 <#macro content>
-    <main>
+    <main xmlns="http://www.w3.org/1999/html">
         <div class="wrapper fadeInDown">
             <div id="formContent">
                 <form method="post" action="/login">
@@ -22,9 +22,15 @@
                                placeholder="Another input placeholder">
                     </div>
                     <br>
-                    <div class="form-row col-md -12">
-                        <button type="submit" class="btn btn-primary">zaloguj</button>
-                    </div>
+                    <div class="row">
+                        <div class="col-md-3">
+                           <button type="submit" class="btn btn-primary">zaloguj</button>
+                        </div>
+                        <div class="col-col-md-3">
+                            <div class="g-signin2" data-onsuccess="onSignIn"></div>
+                        </div>
+                    </div><br>
+
                     <div class="form-row col-md -12">
                         <a class="underlineHover" href="#">zapomniales hasla?</a>
                     </div>

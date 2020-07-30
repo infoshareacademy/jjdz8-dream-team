@@ -10,13 +10,22 @@ public class UserDto {
 
     private String email;
 
-    private ROLE role;
+    private String role;
 
     private String password;
 
     private String newPassword;
 
     private String repeatedPassword;
+
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
 
     public Long getId() {
         return id;
@@ -42,13 +51,6 @@ public class UserDto {
         this.email = email;
     }
 
-    public ROLE getRole() {
-        return role;
-    }
-
-    public void setRole(ROLE role) {
-        this.role = role;
-    }
 
     public String getPassword() {
         return password;
@@ -72,5 +74,18 @@ public class UserDto {
 
     public void setRepeatedPassword(String repeatedPassword) {
         this.repeatedPassword = repeatedPassword;
+    }
+
+    @Override
+    public String toString() {
+        return "UserDto{" +
+                "id=" + id +
+                ", nickName='" + nickName + '\'' +
+                ", email='" + email + '\'' +
+                ", role='" + role + '\'' +
+                ", password='" + password + '\'' +
+                ", newPassword='" + newPassword + '\'' +
+                ", repeatedPassword='" + repeatedPassword + '\'' +
+                '}';
     }
 }

@@ -6,10 +6,12 @@ import com.infoshareacademy.domain.ROLE;
 import com.infoshareacademy.entity.User;
 import com.infoshareacademy.entity.UserQuery;
 import com.infoshareacademy.security.PasswordResolver;
+import org.apache.commons.lang.StringUtils;
 
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
+import javax.management.relation.Role;
 import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
@@ -25,15 +27,18 @@ public class UserService {
 
     @Transactional
     public void createUser(String nickname, String email, String password, String role) {
-        RoleService service = new RoleService();
-        ROLE userRole = service.returnCorrectRole(role);
         User user = new User();
+        if (role == null) user.setRole(ROLE.STUDENT);
+        if (role != null) {
+            RoleService service = new RoleService();
+            ROLE userRole = service.returnCorrectRole(role);
+            user.setRole(userRole);
+        }
         user.setNickName(nickname);
         user.setEmail(email);
         user.setPassword(PasswordResolver.passwordHashing(password));
-        user.setRole(userRole);
         userDao.save(user);
-    }
+}
 
     @Transactional
     public Optional<User> findByNickname(String nickName) {
@@ -44,6 +49,7 @@ public class UserService {
     public Optional<User> findByNickname(String nickName, int limit, int offSet) {
         return userDao.createNamedQuery(UserQuery.FIND_BY_NICKNAME_QUERY, "userNickName", nickName);
     }
+
     @Transactional
     public Optional<User> findByEmail(String email) {
         return userDao.createNamedQuery(UserQuery.FIND_BY_EMAIL_QUERY, "userEmail", email);
@@ -77,6 +83,14 @@ public class UserService {
                 .orElse(false);
 
     }
+    @Transactional
+    public void editRole(String role, Long id){
+        findById(id).ifPresent(user -> {
+            if (role.equals("TEACHER")) user.setRole(ROLE.TEACHER);
+            if (role.equals("STUDENT")) user.setRole(ROLE.STUDENT);
+            userDao.update(user);
+        });
+    }
 
     @Transactional
     public void editUserNickNameAndEmail(Long id, String nickName, String email) {
@@ -93,8 +107,8 @@ public class UserService {
     }
 
     @Transactional
-    public void deleteUser(Long id){
+    public void deleteUser(Long id) {
         Optional<User> user = findById(id);
-        user.ifPresent(u -> userDao.delete(u) );
+        user.ifPresent(u -> userDao.delete(u));
     }
 }
