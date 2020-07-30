@@ -1,4 +1,4 @@
-package com.infoshareacademy.classroom;
+package com.infoshareacademy.google;
 
 import com.google.api.client.googleapis.auth.oauth2.GoogleIdToken;
 import com.infoshareacademy.service.servisDao.UserService;

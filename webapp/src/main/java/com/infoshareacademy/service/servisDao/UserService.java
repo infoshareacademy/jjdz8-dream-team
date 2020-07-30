@@ -83,6 +83,14 @@ public class UserService {
                 .orElse(false);
 
     }
+    @Transactional
+    public void editRole(String role, Long id){
+        findById(id).ifPresent(user -> {
+            if (role.equals("TEACHER")) user.setRole(ROLE.TEACHER);
+            if (role.equals("STUDENT")) user.setRole(ROLE.STUDENT);
+            userDao.update(user);
+        });
+    }
 
     @Transactional
     public void editUserNickNameAndEmail(Long id, String nickName, String email) {
